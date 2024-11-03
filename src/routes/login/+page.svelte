@@ -104,12 +104,14 @@
                 bind:value={v_usuario}
                 placeholder="Email"
                 type="email"
+                required
               />
               <input
                 class="flip-card__input"
                 bind:value={v_password}
                 placeholder="Password"
                 type="password"
+                required
               />
               <button class="flip-card__btn">Ingrese</button>
             </form>
@@ -122,36 +124,42 @@
                 bind:value={v_nombre}
                 placeholder="Name"
                 type="text"
+                required
               />
               <input
                 class="flip-card__input small-input"
                 bind:value={v_apellido}
                 placeholder="Apellido"
                 type="text"
+                required
               />
               <input
                 class="flip-card__input small-input"
                 bind:value={v_documento}
                 placeholder="Documento"
                 type="text"
+                required
               />
               <input
                 class="flip-card__input small-input"
                 bind:value={v_telefono}
                 placeholder="Teléfono"
                 type="tel"
+                required
               />
               <input
                 class="flip-card__input small-input"
                 bind:value={v_email}
                 placeholder="Email"
                 type="email"
+                required
               />
               <input
                 class="flip-card__input small-input"
                 bind:value={v_password}
                 placeholder="Password"
                 type="password"
+                required
               />
               <button class="flip-card__btn small-btn">Confirmar</button>
             </form>
