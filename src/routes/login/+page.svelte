@@ -16,6 +16,9 @@
 
   async function Login() {
     try {
+      var v_usuario = document.getElementById("correo").value;
+      var v_password = document.getElementById("contraseña").value;
+
       const response = await fetch(
         "https://proyectomascotas.onrender.com/login",
         {
@@ -77,6 +80,7 @@
 
       if (response.ok) {
         alert("Registro exitoso. Bienvenido " + v_nombre);
+        window.location.href = "../login/+page.svelte";
       } else {
         alert("Error en el registro");
       }
@@ -100,6 +104,7 @@
             <div class="title">INICIO DE SESION</div>
             <form on:submit|preventDefault={Login} class="flip-card__form">
               <input
+                id="correo"
                 class="flip-card__input"
                 bind:value={v_usuario}
                 placeholder="Email"
@@ -107,6 +112,7 @@
                 required
               />
               <input
+                id="contraseña"
                 class="flip-card__input"
                 bind:value={v_password}
                 placeholder="Password"
