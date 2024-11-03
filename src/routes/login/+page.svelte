@@ -17,7 +17,7 @@
   async function Login() {
     try {
       const response = await fetch(
-        "http://proyectomascotas.onrender.com/login",
+        "https://proyectomascotas.onrender.com/login",
         {
           method: "POST",
           headers: {
@@ -40,6 +40,7 @@
         let miStorage = window.localStorage;
         miStorage.setItem("usuario", JSON.stringify(encontrado));
         alert("Inicio de sesión exitoso. Bienvenido " + name);
+        window.location.href = "../login/+page.svelte";
       } else {
         alert("Error de autenticación");
       }
