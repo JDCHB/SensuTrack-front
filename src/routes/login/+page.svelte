@@ -17,7 +17,8 @@
   async function Login() {
     var v_usuario = document.getElementById("correo").value;
     var v_password = document.getElementById("contraseña").value;
-
+    console.log(v_usuario);
+    console.log(v_password);
     try {
       const response = await fetch(
         "https://proyectomascotas.onrender.com/login",
