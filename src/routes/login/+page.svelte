@@ -15,12 +15,12 @@
   let error = null;
 
   async function Login() {
-    try {
-      var v_usuario = document.getElementById("correo").value;
-      var v_password = document.getElementById("contraseña").value;
+    var v_usuario = document.getElementById("correo").value;
+    var v_password = document.getElementById("contraseña").value;
 
+    try {
       const response = await fetch(
-        "https://proyectomascotas.onrender.com/login",
+        "http://proyectomascotas.onrender.com/login",
         {
           method: "POST",
           headers: {
@@ -45,7 +45,8 @@
         alert("Inicio de sesión exitoso. Bienvenido " + name);
         window.location.href = "../login/+page.svelte";
       } else {
-        alert("Error de autenticación");
+        console.error("Error de autenticación:", data); // Muestra la respuesta del servidor
+        alert("Error de autenticación: " + (data.message || "Datos inválidos"));
       }
     } catch (e) {
       error = e.message;
