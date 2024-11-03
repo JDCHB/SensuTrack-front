@@ -6,12 +6,6 @@
     import Productos from "../../lib/components/Productos.svelte";
     import Servicios from "../../lib/components/Servicios.svelte";
     import "bootstrap-icons/font/bootstrap-icons.css";
-
-    function logout() {
-        // Limpiar los datos de inicio de sesión en el LocalStorage
-        localStorage.clear();
-        window.location.href = "../html/index.html";
-    }
 </script>
 
 <Navbar2></Navbar2>

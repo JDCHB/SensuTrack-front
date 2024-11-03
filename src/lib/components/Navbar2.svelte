@@ -1,3 +1,11 @@
+<script>
+    function logout() {
+        // Limpiar los datos de inicio de sesión en el LocalStorage
+        localStorage.clear();
+        window.location.href = "../html/index.html";
+    }
+</script>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-dark py-4">
     <a class="navbar-brand d-flex align-items-center" href="/">
         <img
@@ -31,8 +39,10 @@
                 <a class="nav-link text-white fw-bold" href="#!">Contact</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white fw-bold" href="/log"
-                    >Log Out<span class="sr-only"></span></a
+                <a
+                    class="nav-link text-white fw-bold"
+                    href="#!"
+                    on:click={logout}>Log Out</a
                 >
             </li>
         </ul>
