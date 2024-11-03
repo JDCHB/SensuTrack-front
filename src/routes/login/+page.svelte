@@ -38,13 +38,10 @@
       console.log(data);
 
       if (response.ok) {
-        let name = data.resultado[0].nombre;
-        let encontrado = { name };
-
         let miStorage = window.localStorage;
         miStorage.setItem("usuario", JSON.stringify(encontrado));
-        alert("Inicio de sesión exitoso. Bienvenido " + name);
-        window.location.href = "/usuario";
+        alert("Inicio de sesión exitoso. Bienvenido a PetTracker");
+        window.location.href = "../../usuario/+page.svelte";
       } else {
         console.error("Error de autenticación:", data); // Muestra la respuesta del servidor
         alert("Error de autenticación: " + (data.message || "Datos inválidos"));
