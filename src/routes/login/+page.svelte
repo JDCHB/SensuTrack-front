@@ -44,7 +44,7 @@
         let miStorage = window.localStorage;
         miStorage.setItem("usuario", JSON.stringify(encontrado));
         alert("Inicio de sesión exitoso. Bienvenido " + name);
-        window.location.href = "../login/+page.svelte";
+        window.location.href = "/usuario";
       } else {
         console.error("Error de autenticación:", data); // Muestra la respuesta del servidor
         alert("Error de autenticación: " + (data.message || "Datos inválidos"));
