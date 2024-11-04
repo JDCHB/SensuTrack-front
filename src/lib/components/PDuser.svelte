@@ -1,7 +1,3 @@
-<script>
-    import Botton from "./componetn1/botton.svelte";
-
-</script>
 <section class="Product">
     <div class="container">
 
@@ -10,7 +6,7 @@
                 <div class="secction-header text-center pb-5">
                     <h2>Productos</h2>
                     <p>
-                        Esta es nuestra linea de Productos, <br> escoge el de tu preferencia
+                        Esto es lo nuevo es nuestra linea de Productos, <br> escoge el de tu preferencia
                     </p>
                 </div>
             </div>
@@ -26,6 +22,7 @@
                         <h5 class="card-title">Collares</h5>
                         <p>Los collares hechos con última tecnología para sentirte seguro</p>
                         <a href="#!" class="btn btn-primary">Saber más</a>
+                        <a href="#!" class="btn btn-">Comprar</a>
                     </div>
                 </div>
             </div>

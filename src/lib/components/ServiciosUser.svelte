@@ -4,27 +4,27 @@
             <div class="col-12 col-md-12 col-lg-4 mb-3">
                 <div class="card text-white text-center bg-car1 pb-2 h-100">
                     <div class="card-body">
-                        <h3 class="card-title">Rastreo a Tiempo Real</h3>
-                        <p class="card-text">Nuestro sistema de rastreo a tiempo real te permite saber donde está tu mascota</p>
-                        <button class="btn bg-primary text-white">Leer más</button>
+                        <h3 class="card-title">Sabes donde Esta Roco</h3>
+                        <p class="card-text">Dale click en Ver Ubicacion para saber donde esta Roco </p>
+                        <button class="btn bg-primary text-white">Ver ubicacion</button>
                     </div>
                 </div>
             </div>
             <div class="col-12 col-md-12 col-lg-4 mb-3">
                 <div class="card text-white text-center bg-car2 pb-2 h-100">
                     <div class="card-body">
-                        <h3 class="card-title">Asignaciones</h3>
-                        <p class="card-text">Nuestro sistema de rastreo a tiempo real te permite saber donde está tu mascota</p>
-                        <button class="btn bg-primary text-white">Leer más</button>
+                        <h3 class="card-title">Chimuelo</h3>
+                        <p class="card-text">Dale click en ver Ubicacion para saber donde esta Roco</p>
+                        <button class="btn bg-primary text-white">Ver Ubicacion</button>
                     </div>
                 </div>
             </div>
             <div class="col-12 col-md-12 col-lg-4 mb-3">
                 <div class="card text-white text-center bg-car3 pb-2 h-100">
                     <div class="card-body">
-                        <h3 class="card-title">Para cualquier tipo de mascotas</h3>
-                        <p class="card-text">Nuestro sistema de rastreo a tiempo real te permite saber donde está tu mascota</p>
-                        <button class="btn bg-primary text-white">Leer más</button>
+                        <h3 class="card-title">Donde esta Susi</h3>
+                        <p class="card-text">Dale click en Ver Ubicacion para saber donde esta Susi</p>
+                        <button class="btn bg-primary text-white">Ver Ubicacion</button>
                     </div>
                 </div>
             </div>
