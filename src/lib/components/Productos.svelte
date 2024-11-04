@@ -1,7 +1,3 @@
-<script>
-    import Botton from "./componetn1/botton.svelte";
-
-</script>
 <section class="Product">
     <div class="container">
 
