@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-dark py-4">
-  <a class="navbar-brand d-flex align-items-center" href="../page.svelte">
+  <a class="navbar-brand d-flex align-items-center" href="/principal">
     <img
       src="/logo.jpg"
       width="56"

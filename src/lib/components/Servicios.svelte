@@ -1,50 +1,59 @@
 <section class="services">
     <div class="container">
         <div class="row">
-            <div class="col-12 col-md-12 col-lg-4 mb-3">
-                <div class="card text-center pb-2 h-100">
-                    <div class="card-img-top bg-car1"></div>
-                    <!-- Contenedor de la imagen -->
-                    <div class="card-body">
-                        <h3 class="card-title">Rastreo a Tiempo Real</h3>
-                        <p class="card-text">
-                            Nuestro sistema de rastreo a tiempo real te permite
-                            saber donde está tu mascota
-                        </p>
-                        <button class="btn bg-primary text-white"
-                            >Leer más</button
-                        >
-                    </div>
+            <div class="col-md-12">
+                <div class="secction-header text-center pb-5">
+                    <h2>INFORMACIÓN GENERAL</h2>
                 </div>
             </div>
-            <div class="col-12 col-md-12 col-lg-4 mb-3">
-                <div class="card text-center pb-2 h-100">
-                    <div class="card-img-top bg-car2"></div>
-                    <!-- Contenedor de la imagen -->
-                    <div class="card-body">
-                        <h3 class="card-title">Asignaciones</h3>
-                        <p class="card-text">
-                            Nuestro sistema de rastreo a tiempo real te permite
-                            saber donde está tu mascota
-                        </p>
-                        <button class="btn bg-primary text-white"
-                            >Leer más</button
-                        >
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-12 col-lg-4 mb-3">
+                    <div class="card text-center pb-2 h-100">
+                        <div class="card-img-top bg-car1"></div>
+                        <!-- Contenedor de la imagen -->
+                        <div class="card-body">
+                            <h3 class="card-title">Rastreo a Tiempo Real</h3>
+                            <p class="card-text">
+                                Nuestro sistema de rastreo a tiempo real te
+                                permite saber donde está tu mascota
+                            </p>
+                            <button class="btn bg-primary text-white"
+                                >Leer más</button
+                            >
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-12 col-md-12 col-lg-4 mb-3">
-                <div class="card text-center pb-2 h-100">
-                    <div class="card-img-top bg-car3"></div>
-                    <!-- Contenedor de la imagen -->
-                    <div class="card-body">
-                        <h3 class="card-title">Para perros y gatos</h3>
-                        <p class="card-text">
-                            Tu perro y gato estaran mas que seguros
-                        </p>
-                        <button class="btn bg-primary text-white"
-                            >Leer más</button
-                        >
+                <div class="col-12 col-md-12 col-lg-4 mb-3">
+                    <div class="card text-center pb-2 h-100">
+                        <div class="card-img-top bg-car2"></div>
+                        <!-- Contenedor de la imagen -->
+                        <div class="card-body">
+                            <h3 class="card-title">Asignaciones</h3>
+                            <p class="card-text">
+                                Nuestro sistema de rastreo a tiempo real te
+                                permite saber donde está tu mascota
+                            </p>
+                            <button class="btn bg-primary text-white"
+                                >Leer más</button
+                            >
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-12 col-lg-4 mb-3">
+                    <div class="card text-center pb-2 h-100">
+                        <div class="card-img-top bg-car3"></div>
+                        <!-- Contenedor de la imagen -->
+                        <div class="card-body">
+                            <h3 class="card-title">Para perros y gatos</h3>
+                            <p class="card-text">
+                                Tu perro y gato estaran mas que seguros
+                            </p>
+                            <button class="btn bg-primary text-white"
+                                >Leer más</button
+                            >
+                        </div>
                     </div>
                 </div>
             </div>
