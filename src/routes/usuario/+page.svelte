@@ -1,5 +1,5 @@
 <script>
-    import Corrousel from "../../lib/components/corrousel.svelte";
+    import Carrousel from "../../lib/components/carrousel.svelte";
     import Footer from "../../lib/components/footer.svelte";
     import NavbarUser from "../../lib/components/NavbarUser.svelte";
     import Servicios from "../../lib/components/Servicios.svelte";
@@ -9,7 +9,7 @@
 
 <NavbarUser></NavbarUser>
 
-<Corrousel></Corrousel>
+<Carrousel></Carrousel>
 <Promociones></Promociones>
 
 <Servicios></Servicios>

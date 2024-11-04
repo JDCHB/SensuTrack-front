@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-dark py-4">
-  <a class="navbar-brand d-flex align-items-center" href="/">
+  <a class="navbar-brand d-flex align-items-center" href="../page.svelte">
     <img
       src="/logo.jpg"
       width="56"
@@ -23,16 +23,16 @@
   <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link text-white fw-bold" href="#!"
+        <a class="nav-link text-white fw-bold" href="/sobre_nosotros"
           >Sobre Nosotros<span class="sr-only"></span></a
         >
       </li>
       <li class="nav-item">
-        <a class="nav-link text-white fw-bold" href="#!">Contact</a>
+        <a class="nav-link text-white fw-bold" href="/contacto">Contactenos</a>
       </li>
       <li class="nav-item">
         <a class="nav-link text-white fw-bold" href="/login"
-          >Log in<span class="sr-only"></span></a
+          >Iniciar Sesion<span class="sr-only"></span></a
         >
       </li>
     </ul>
