@@ -82,7 +82,7 @@
 
       if (response.ok) {
         alert("Registro exitoso. Bienvenido " + v_nombre);
-        window.location.href = "../login/+page.svelte";
+        window.location.href = "/login";
       } else {
         alert("Error en el registro");
       }

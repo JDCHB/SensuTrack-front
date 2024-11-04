@@ -3,7 +3,7 @@
         <div class="col-md-6">
             <div
                 class="contact-section bg-light p-4 rounded"
-                style="margin-top: 10%; margin-bottom: 10%;"
+                style="margin-top: 10%; margin-bottom: 10;"
             >
                 <h2 class="text-center">Formulario de Contacto</h2>
                 <form
