@@ -38,13 +38,13 @@
       console.log(data);
 
       if (response.ok) {
-        let name = data.resultado[0].nombre;
-        let encontrado = { name };
+        let email = data.resultado[0].email;
+        let encontrado = { email };
 
         let miStorage = window.localStorage;
         miStorage.setItem("usuario", JSON.stringify(encontrado));
-        alert("Inicio de sesión exitoso. Bienvenido " + name);
-        window.location.href = "../login/+page.svelte";
+        alert("Inicio de sesión exitoso. Bienvenido " + email);
+        window.location.href = "/usuario";
       } else {
         console.error("Error de autenticación:", data); // Muestra la respuesta del servidor
         alert("Error de autenticación: " + (data.message || "Datos inválidos"));
