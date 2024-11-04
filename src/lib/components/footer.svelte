@@ -1,9 +1,9 @@
 <footer class="bg-dark text-white py-4">
-    <div class="container ">
+    <div class="container">
         <div class="row">
             <div class="col-6 col-md-4">
-                <h3 class="fw-bold">Coding Yaar</h3>
-                <p class="pt-2">321, Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <h3 class="fw-bold">PETTRACKER</h3>
+                <p class="pt-2">Mascota segura, dueño tranquilo.</p>
                 <p class="mb-2">0987654321</p>
                 <p>1234567890</p>
             </div>

@@ -5,15 +5,16 @@
     import NavbarUser from "../../lib/components/NavbarUser.svelte";
     import Productos from "../../lib/components/Productos.svelte";
     import Servicios from "../../lib/components/Servicios.svelte";
+    import Promociones from "../../lib/components/promociones.svelte";
     import "bootstrap-icons/font/bootstrap-icons.css";
 </script>
 
 <NavbarUser></NavbarUser>
 
 <Corrousel></Corrousel>
-<p>USUARIO NUEVO</p>
+<Promociones></Promociones>
+
 <Servicios></Servicios>
 <Icons></Icons>
 
-<Productos></Productos>
 <Footer></Footer>
