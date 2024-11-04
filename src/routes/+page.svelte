@@ -1,31 +1,19 @@
 <script>
-    import Corrousel from "../lib/components/corrousel.svelte";
+    import Carrousel from "../lib/components/carrousel.svelte";
     import Footer from "../lib/components/footer.svelte";
     import Icons from "../lib/components/icons.svelte";
     import Navbar from "../lib/components/Navbar.svelte";
     import Productos from "../lib/components/Productos.svelte";
     import Servicios from "../lib/components/Servicios.svelte";
-    import 'bootstrap-icons/font/bootstrap-icons.css';
-    
+    import "bootstrap-icons/font/bootstrap-icons.css";
 </script>
-<Navbar>
 
-</Navbar>
+<Navbar></Navbar>
 
-<Corrousel>
-    
-</Corrousel>
+<Carrousel></Carrousel>
 
-<Servicios>
+<Servicios></Servicios>
+<Icons></Icons>
 
-</Servicios>
-<Icons>
-
-</Icons>
-
-<Productos>
-
-</Productos>
-<Footer>
-
-</Footer>
+<Productos></Productos>
+<Footer></Footer>
