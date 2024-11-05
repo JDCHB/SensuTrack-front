@@ -27,6 +27,11 @@
           >Sobre Nosotros</a
         >
       </li>
+      <li class="nav-item active">
+        <a class="nav-link text-white fw-bold" href="/preguntas_frecuentes"
+          >Preguntas Frecuentes</a
+        >
+      </li>
       <li class="nav-item">
         <a class="nav-link text-white fw-bold" href="/contacto">Contáctenos</a>
       </li>

@@ -74,7 +74,9 @@
         </h2>
         <p class="lead mb-4">
             Nuestro Collar GPS te ayuda a rastrear a tu mascota en tiempo real y
-            asegurar su seguridad durante los paseos. ¡Compra ahora!
+            asegurar su seguridad durante los paseos. Si no estás completamente
+            satisfecho con tu collar GPS, te devolvemos tu dinero en 30 días.
+            ¡Compra con total confianza y sin riesgos!. ¡Compra ahora!
         </p>
         <a href="login" class="btn btn-warning btn-lg btn-cta">Compra Ahora</a>
     </div>
