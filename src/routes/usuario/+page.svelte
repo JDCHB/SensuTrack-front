@@ -3,14 +3,15 @@
     import Footer from "../../lib/components/footer.svelte";
     import NavbarUser from "../../lib/components/NavbarUser.svelte";
     import Servicios from "../../lib/components/Servicios.svelte";
-    import Promociones from "../../lib/components/promociones.svelte";
+    import Productos from "../../lib/components/Productos.svelte";
+    import Icons from "../../lib/components/icons.svelte";
     import "bootstrap-icons/font/bootstrap-icons.css";
 </script>
 
 <NavbarUser></NavbarUser>
-
 <Carrousel></Carrousel>
-<Promociones></Promociones>
+<Icons></Icons>
+<Productos></Productos>
 
 <Servicios></Servicios>
 
