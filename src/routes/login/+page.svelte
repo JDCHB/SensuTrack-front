@@ -121,7 +121,7 @@
                 type="password"
                 required
               />
-              <button class="flip-card__btn">Ingrese</button>
+              <button class="flip-card__btn">Ingresar</button>
             </form>
           </div>
           <div class="flip-card__back small-card">
@@ -204,7 +204,7 @@
     }
     .card-side::before {
       position: absolute;
-      content: "Log in";
+      content: "Ingresar";
       left: -70px;
       top: 0;
       width: 100px;
@@ -214,7 +214,7 @@
     }
     .card-side::after {
       position: absolute;
-      content: "Sign up";
+      content: "Registrarse";
       left: 70px;
       top: 0;
       width: 100px;

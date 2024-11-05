@@ -16,22 +16,28 @@
                 <ul class="list-unstyled">
                     <li class="py-1">
                         <a href="/" class="text-white text-decoration-none"
-                            >Home</a
+                            >Principal</a
                         >
                     </li>
                     <li class="py-1">
-                        <a href="/" class="text-white text-decoration-none"
-                            >Shorts</a
+                        <a
+                            href="/preguntas_frecuentes"
+                            class="text-white text-decoration-none"
+                            >Preguntas Frecuentes</a
                         >
                     </li>
                     <li class="py-1">
-                        <a href="/" class="text-white text-decoration-none"
-                            >About</a
+                        <a
+                            href="/sobre_nosotros"
+                            class="text-white text-decoration-none"
+                            >Sobre Nosotros</a
                         >
                     </li>
                     <li class="py-1">
-                        <a href="/" class="text-white text-decoration-none"
-                            >Contact</a
+                        <a
+                            href="/contacto"
+                            class="text-white text-decoration-none"
+                            >Contactenos</a
                         >
                     </li>
                 </ul>
@@ -42,13 +48,8 @@
                 <h4 class="fw-bold text-warning">More</h4>
                 <ul class="list-unstyled">
                     <li class="py-1">
-                        <a href="/" class="text-white text-decoration-none"
-                            >Landing Pages</a
-                        >
-                    </li>
-                    <li class="py-1">
-                        <a href="/" class="text-white text-decoration-none"
-                            >FAQs</a
+                        <a href="/login" class="text-white text-decoration-none"
+                            >Iniciar Sesion/Regitrarse</a
                         >
                     </li>
                 </ul>
