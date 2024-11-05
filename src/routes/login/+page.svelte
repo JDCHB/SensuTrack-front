@@ -14,12 +14,32 @@
   let v_estado = true;
   let error = null;
 
+  // Referencias a los contenedores de los loader
+  let loginLoader;
+  let registerLoader;
+
+  // Función para mostrar el loader
+  // Función para mostrar el loader
+  function showLoader(loader) {
+    if (loader) {
+      loader.style.display = "flex";
+    }
+  }
+
+  // Función para ocultar el loader
+  function hideLoader(loader) {
+    if (loader) {
+      loader.style.display = "none";
+    }
+  }
+
   async function Login() {
     var v_usuario = document.getElementById("correo").value;
     var v_password = document.getElementById("contraseña").value;
     console.log(v_usuario);
     console.log(v_password);
     try {
+      showLoader(loginLoader); // Mostrar loader al comenzar el login
       const response = await fetch(
         "https://proyectomascotas.onrender.com/login",
         {
@@ -36,6 +56,8 @@
 
       const data = await response.json();
       console.log(data);
+
+      hideLoader(loginLoader); // Ocultar loader al terminar el login
 
       if (response.ok) {
         let email = data.resultado[0].email;
@@ -57,6 +79,7 @@
 
   async function Register() {
     try {
+      showLoader(registerLoader); // Mostrar loader al comenzar el registro
       const response = await fetch(
         "https://proyectomascotas.onrender.com/create_user",
         {
@@ -79,6 +102,8 @@
 
       const data = await response.json();
       console.log(data);
+
+      hideLoader(registerLoader); // Ocultar loader al terminar el registro
 
       if (response.ok) {
         alert("Registro exitoso. Bienvenido " + v_nombre);
@@ -123,6 +148,9 @@
               />
               <button class="flip-card__btn">Ingresar</button>
             </form>
+            <div class="loader-container" bind:this={loginLoader}>
+              <div class="loader"></div>
+            </div>
           </div>
           <div class="flip-card__back small-card">
             <div class="title small-title">REGISTRO</div>
@@ -171,12 +199,16 @@
               />
               <button class="flip-card__btn small-btn">Confirmar</button>
             </form>
+            <div class="loader-container" bind:this={registerLoader}>
+              <div class="loader"></div>
+            </div>
           </div>
         </div>
       </label>
     </div>
   </div>
   <style>
+    /* Estilos para el loader */
     .wrapper {
       --input-focus: #2d8cf0;
       --font-color: #323232;
@@ -189,6 +221,39 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+    }
+
+    /* Contenedor para el loader */
+    .loader-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
+      display: none; /* Oculto por defecto */
+      justify-content: center;
+      align-items: center;
+      z-index: 100; /* Asegúrate de que esté encima de otros elementos */
+    }
+
+    .loader {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #3498db;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 2s linear infinite;
+    }
+
+    /* Animación de giro del loader */
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
     }
     /* switch card */
     .switch {
