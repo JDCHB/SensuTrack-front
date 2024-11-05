@@ -7,7 +7,7 @@
             >
                 <h2 class="text-center">Formulario de Contacto</h2>
                 <form
-                    action="https://formsubmit.co/turibq123@gmail.com"
+                    action="https://formsubmit.co/PetTracker@gmail.com"
                     method="POST"
                 >
                     <div class="form-group">
