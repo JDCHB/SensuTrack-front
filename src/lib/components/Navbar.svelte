@@ -22,12 +22,12 @@
   </button>
   <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link text-white fw-bold" href="/sobre_nosotros"
           >Sobre Nosotros</a
         >
       </li>
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link text-white fw-bold" href="/preguntas_frecuentes"
           >Preguntas Frecuentes</a
         >
@@ -61,10 +61,6 @@
   .navbar-nav .nav-link:hover {
     color: #ff8c00 !important; /* Color de hover */
     text-decoration: underline; /* Subrayado en hover */
-  }
-
-  .navbar-nav .nav-item.active .nav-link {
-    color: #ff8c00 !important; /* Color destacado para la página activa */
   }
 
   .navbar-toggler {
