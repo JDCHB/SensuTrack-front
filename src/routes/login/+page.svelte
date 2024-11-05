@@ -73,6 +73,7 @@
       }
     } catch (e) {
       error = e.message;
+      hideLoader(loginLoader); // Ocultar loader si ocurre un error
       alert("Error en la solicitud: " + error);
     }
   }
@@ -113,6 +114,7 @@
       }
     } catch (e) {
       error = e.message;
+      hideLoader(registerLoader); // Ocultar loader si ocurre un error
       alert("Error en la solicitud: " + error);
     }
   }
@@ -148,8 +150,21 @@
               />
               <button class="flip-card__btn">Ingresar</button>
             </form>
+            <!-- Loader del login -->
             <div class="loader-container" bind:this={loginLoader}>
-              <div class="loader"></div>
+              <div class="loader-dog-head">
+                <div class="ear left-ear"></div>
+                <div class="ear right-ear"></div>
+                <div class="eye left-eye">
+                  <div class="pupil"></div>
+                </div>
+                <div class="eye right-eye">
+                  <div class="pupil"></div>
+                </div>
+                <div class="nose"></div>
+                <div class="mouth"></div>
+                <div class="tongue"></div>
+              </div>
             </div>
           </div>
           <div class="flip-card__back small-card">
@@ -199,8 +214,21 @@
               />
               <button class="flip-card__btn small-btn">Confirmar</button>
             </form>
+            <!-- Loader del registro -->
             <div class="loader-container" bind:this={registerLoader}>
-              <div class="loader"></div>
+              <div class="loader-dog-head">
+                <div class="ear left-ear"></div>
+                <div class="ear right-ear"></div>
+                <div class="eye left-eye">
+                  <div class="pupil"></div>
+                </div>
+                <div class="eye right-eye">
+                  <div class="pupil"></div>
+                </div>
+                <div class="nose"></div>
+                <div class="mouth"></div>
+                <div class="tongue"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -208,7 +236,7 @@
     </div>
   </div>
   <style>
-    /* Estilos para el loader */
+    /* Estilos para el loader de la cara de un perrito */
     .wrapper {
       --input-focus: #2d8cf0;
       --font-color: #323232;
@@ -237,22 +265,124 @@
       z-index: 100; /* Asegúrate de que esté encima de otros elementos */
     }
 
-    .loader {
-      border: 8px solid #f3f3f3;
-      border-top: 8px solid #3498db;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      animation: spin 2s linear infinite;
+    .loader-dog-head {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      background-color: #f4a261; /* Color de piel */
+      border-radius: 50%; /* Forma de la cara */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: bounce 2s infinite;
     }
 
-    /* Animación de giro del loader */
-    @keyframes spin {
-      0% {
-        transform: rotate(0deg);
-      }
+    .ear {
+      position: absolute;
+      background-color: #f4a261;
+      width: 40px;
+      height: 60px;
+      border-radius: 50%;
+      top: 10px;
+    }
+
+    .left-ear {
+      left: -20px;
+      transform: rotate(-30deg);
+    }
+
+    .right-ear {
+      right: -20px;
+      transform: rotate(30deg);
+    }
+
+    .eye {
+      position: absolute;
+      background-color: #fff;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      top: 35px;
+    }
+
+    .left-eye {
+      left: 30px;
+    }
+
+    .right-eye {
+      right: 30px;
+    }
+
+    .pupil {
+      position: absolute;
+      background-color: #000;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      top: 6px;
+      left: 6px;
+      animation: blink 3s infinite;
+    }
+
+    .nose {
+      position: absolute;
+      background-color: #2d3436;
+      width: 20px;
+      height: 15px;
+      border-radius: 50%;
+      bottom: 45px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    .mouth {
+      position: absolute;
+      width: 40px;
+      height: 20px;
+      border: 2px solid #2d3436;
+      border-top: none;
+      border-radius: 0 0 20px 20px;
+      bottom: 30px;
+    }
+
+    .tongue {
+      position: absolute;
+      background-color: #e76f51;
+      width: 16px;
+      height: 24px;
+      border-radius: 50%;
+      bottom: 15px;
+      animation: waggle 1.5s infinite ease-in-out;
+    }
+
+    /* Animaciones */
+    @keyframes bounce {
+      0%,
       100% {
-        transform: rotate(360deg);
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    @keyframes blink {
+      0%,
+      80%,
+      100% {
+        transform: scaleY(1);
+      }
+      90% {
+        transform: scaleY(0.1);
+      }
+    }
+
+    @keyframes waggle {
+      0%,
+      100% {
+        transform: rotate(0);
+      }
+      50% {
+        transform: rotate(10deg);
       }
     }
     /* switch card */
