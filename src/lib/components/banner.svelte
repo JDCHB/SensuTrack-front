@@ -125,7 +125,7 @@
     }
 
     .banner-image {
-        background-image: url("/static/banner-image.jpg"); /* Imagen de fondo */
+        background-image: url("/logo.jpg"); /* Imagen de fondo */
         background-position: center;
         background-size: cover;
         background-attachment: fixed; /* Efecto parallax */

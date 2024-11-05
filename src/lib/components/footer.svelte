@@ -15,23 +15,22 @@
                 <h4 class="fw-bold text-warning">Menu</h4>
                 <ul class="list-unstyled">
                     <li class="py-1">
-                        <a
-                            href="/home_icon"
-                            class="text-white text-decoration-none">Home</a
+                        <a href="/" class="text-white text-decoration-none"
+                            >Home</a
                         >
                     </li>
                     <li class="py-1">
-                        <a href="#" class="text-white text-decoration-none"
+                        <a href="/" class="text-white text-decoration-none"
                             >Shorts</a
                         >
                     </li>
                     <li class="py-1">
-                        <a href="#" class="text-white text-decoration-none"
+                        <a href="/" class="text-white text-decoration-none"
                             >About</a
                         >
                     </li>
                     <li class="py-1">
-                        <a href="#" class="text-white text-decoration-none"
+                        <a href="/" class="text-white text-decoration-none"
                             >Contact</a
                         >
                     </li>
@@ -43,12 +42,12 @@
                 <h4 class="fw-bold text-warning">More</h4>
                 <ul class="list-unstyled">
                     <li class="py-1">
-                        <a href="#" class="text-white text-decoration-none"
+                        <a href="/" class="text-white text-decoration-none"
                             >Landing Pages</a
                         >
                     </li>
                     <li class="py-1">
-                        <a href="#" class="text-white text-decoration-none"
+                        <a href="/" class="text-white text-decoration-none"
                             >FAQs</a
                         >
                     </li>
@@ -60,22 +59,22 @@
                 <h4 class="fw-bold text-warning">Categories</h4>
                 <ul class="list-unstyled">
                     <li class="py-1">
-                        <a href="#" class="text-white text-decoration-none"
+                        <a href="/" class="text-white text-decoration-none"
                             >Navbars</a
                         >
                     </li>
                     <li class="py-1">
-                        <a href="#" class="text-white text-decoration-none"
+                        <a href="/" class="text-white text-decoration-none"
                             >Cards</a
                         >
                     </li>
                     <li class="py-1">
-                        <a href="#" class="text-white text-decoration-none"
+                        <a href="/" class="text-white text-decoration-none"
                             >Buttons</a
                         >
                     </li>
                     <li class="py-1">
-                        <a href="#" class="text-white text-decoration-none"
+                        <a href="/" class="text-white text-decoration-none"
                             >Carousels</a
                         >
                     </li>
@@ -89,13 +88,13 @@
         <!-- Redes Sociales -->
         <div class="row justify-content-center mb-4">
             <div class="col-auto">
-                <a href="#" class="text-white mx-2" aria-label="Facebook">
+                <a href="/" class="text-white mx-2" aria-label="Facebook">
                     <i class="fab fa-facebook fa-2x"></i>
                 </a>
-                <a href="#" class="text-white mx-2" aria-label="Twitter">
+                <a href="/" class="text-white mx-2" aria-label="Twitter">
                     <i class="fab fa-twitter fa-2x"></i>
                 </a>
-                <a href="#" class="text-white mx-2" aria-label="Instagram">
+                <a href="/" class="text-white mx-2" aria-label="Instagram">
                     <i class="fab fa-instagram fa-2x"></i>
                 </a>
             </div>
