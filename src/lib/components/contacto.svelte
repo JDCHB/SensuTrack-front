@@ -56,7 +56,7 @@
                         >
                     </div>
                     <input type="hidden" name="_next" value="/" />
-                    <input type="hidden" name="_captcha" value="false" />
+                    <input type="hidden" name="_captcha" value="true" />
                     <input type="hidden" name="_formsubmit_id" value="form" />
                     <!-- Agregamos el atributo "value" -->
                 </form>
