@@ -5,6 +5,7 @@
     import Servicios from "../../lib/components/Servicios.svelte";
     import Productos from "../../lib/components/Productos.svelte";
     import Icons from "../../lib/components/icons.svelte";
+    import "bootstrap-icons/font/bootstrap-icons.css";
 </script>
 
 <NavbarUser></NavbarUser>

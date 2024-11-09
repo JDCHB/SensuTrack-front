@@ -10,7 +10,7 @@
   let v_documento = "";
   let v_telefono = "";
   let v_email = "";
-  let v_rol = "";
+  let v_rol = 1;
   let v_estado = true;
   let error = null;
 
@@ -56,11 +56,13 @@
 
       const data = await response.json();
       console.log(data);
-
       hideLoader(loginLoader); // Ocultar loader al terminar el login
 
       if (response.ok) {
-        if (v_rol == 1) {
+        let id_rol = data.resultado[0].id_rol;
+        alert(id_rol);
+
+        if (id_rol == 1) {
           let email = data.resultado[0].email;
           console.log("sakljdskfhsfhskdhfdjg");
           console.log(data.resultado[0].id);
@@ -70,7 +72,7 @@
           let miStorage = window.localStorage;
           miStorage.setItem("Administrador", JSON.stringify(encontrado));
           alert("BIENVENIDO AL SISTEMA DE ADMINISTRACIÓN " + email);
-          window.location.href = "/admin";
+          window.location.href = "/administrador";
         } else {
           let email = data.resultado[0].email;
           console.log("sakljdskfhsfhskdhfdjg");
@@ -148,13 +150,6 @@
           <div class="flip-card__front">
             <div class="title">INICIO DE SESION</div>
             <form on:submit|preventDefault={Login} class="flip-card__form">
-              <!-- Campo de selección de rol -->
-              <select class="flip-card__input" bind:value={v_rol} required>
-                <option value="" disabled selected>Seleccionar rol</option>
-                <option value="1">Administrador</option>
-                <option value="2">Usuario</option>
-              </select>
-
               <input
                 id="correo"
                 class="flip-card__input"
