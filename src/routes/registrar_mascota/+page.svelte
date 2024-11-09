@@ -1,7 +1,6 @@
 <script>
     import Footer from "../../lib/components/footer.svelte";
     import NavbarUser from "../../lib/components/NavbarUser.svelte";
-    import "bootstrap-icons/font/bootstrap-icons.css";
     import { onMount } from "svelte";
 
     let v_nombre = "";
@@ -11,10 +10,15 @@
     let v_estado = true;
     let error = null;
 
-    let miStorage = window.localStorage;
-    let id_p = JSON.parse(miStorage.getItem("usuario"));
-    v_idpropietario = id_p.id;
-    console.log("propietario", v_idpropietario);
+    onMount(() => {
+        miStorage = window.localStorage;
+        const storedUser = JSON.parse(miStorage.getItem("usuario"));
+        if (storedUser) {
+            id_p = storedUser.id;
+            v_idpropietario = id_p;
+            console.log("Propietario", v_idpropietario);
+        }
+    });
 
     // Referencias a los contenedores de los loader
     let registerLoader;
@@ -308,12 +312,12 @@
             transform: rotate(10deg);
         }
     }
-
-    /* HASTA AQUI*/
     .loader-container {
         text-align: center;
         margin-top: 20px;
     }
+
+    /* HASTA AQUI*/
 
     .card {
         background-color: #fff5e1;
