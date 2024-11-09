@@ -62,7 +62,10 @@
       if (response.ok) {
         if (v_rol == 1) {
           let email = data.resultado[0].email;
-          let encontrado = { email };
+          console.log("sakljdskfhsfhskdhfdjg");
+          console.log(data.resultado[0].id);
+          let id = data.resultado[0].id;
+          let encontrado = { email, id };
 
           let miStorage = window.localStorage;
           miStorage.setItem("Administrador", JSON.stringify(encontrado));
@@ -70,7 +73,10 @@
           window.location.href = "/admin";
         } else {
           let email = data.resultado[0].email;
-          let encontrado = { email };
+          console.log("sakljdskfhsfhskdhfdjg");
+          console.log(data.resultado[0].id);
+          let id = data.resultado[0].id;
+          let encontrado = { email, id };
 
           let miStorage = window.localStorage;
           miStorage.setItem("usuario", JSON.stringify(encontrado));

@@ -31,7 +31,7 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link text-white fw-bold" href="#!"
+                <a class="nav-link text-white fw-bold" href="/registrar_mascota"
                     >Registrar Mascota</a
                 >
             </li>
