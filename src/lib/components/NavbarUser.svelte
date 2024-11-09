@@ -36,10 +36,6 @@
                 >
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white fw-bold" href="#!">Nuevo Collar</a
-                >
-            </li>
-            <li class="nav-item">
                 <a class="nav-link text-white fw-bold" href="#!">Tracker Now</a>
             </li>
             <li class="nav-item">

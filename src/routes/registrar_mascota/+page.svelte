@@ -11,10 +11,10 @@
     let error = null;
 
     onMount(() => {
-        miStorage = window.localStorage;
+        let miStorage = window.localStorage;
         const storedUser = JSON.parse(miStorage.getItem("usuario"));
         if (storedUser) {
-            id_p = storedUser.id;
+            let id_p = storedUser.id;
             v_idpropietario = id_p;
             console.log("Propietario", v_idpropietario);
         }
