@@ -10,7 +10,7 @@
   let v_documento = "";
   let v_telefono = "";
   let v_email = "";
-  let v_rol = 1;
+  let v_rol = "";
   let v_estado = true;
   let error = null;
 
@@ -60,13 +60,23 @@
       hideLoader(loginLoader); // Ocultar loader al terminar el login
 
       if (response.ok) {
-        let email = data.resultado[0].email;
-        let encontrado = { email };
+        if (v_rol == 1) {
+          let email = data.resultado[0].email;
+          let encontrado = { email };
 
-        let miStorage = window.localStorage;
-        miStorage.setItem("usuario", JSON.stringify(encontrado));
-        alert("Inicio de sesión exitoso. Bienvenido " + email);
-        window.location.href = "/usuario";
+          let miStorage = window.localStorage;
+          miStorage.setItem("Administrador", JSON.stringify(encontrado));
+          alert("BIENVENIDO AL SISTEMA DE ADMINISTRACIÓN " + email);
+          window.location.href = "/admin";
+        } else {
+          let email = data.resultado[0].email;
+          let encontrado = { email };
+
+          let miStorage = window.localStorage;
+          miStorage.setItem("usuario", JSON.stringify(encontrado));
+          alert("Inicio de sesión exitoso. Bienvenido " + email);
+          window.location.href = "/usuario";
+        }
       } else {
         console.error("Error de autenticación:", data); // Muestra la respuesta del servidor
         alert("Error de autenticación: " + (data.message || "Datos inválidos"));
@@ -132,6 +142,13 @@
           <div class="flip-card__front">
             <div class="title">INICIO DE SESION</div>
             <form on:submit|preventDefault={Login} class="flip-card__form">
+              <!-- Campo de selección de rol -->
+              <select class="flip-card__input" bind:value={v_rol} required>
+                <option value="" disabled selected>Seleccionar rol</option>
+                <option value="1">Administrador</option>
+                <option value="2">Usuario</option>
+              </select>
+
               <input
                 id="correo"
                 class="flip-card__input"
@@ -235,6 +252,7 @@
       </label>
     </div>
   </div>
+
   <style>
     /* Estilos para el loader de la cara de un perrito */
     .wrapper {
