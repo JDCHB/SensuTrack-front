@@ -129,37 +129,53 @@
 <NavbarAD></NavbarAD>
 <div class="container" style="margin-top: 5%;">
     <div class="text-center pt-1 fs-3">
-        <p>Reportes</p>
+        <p class="fw-bold text-primary">Reportes</p>
     </div>
+
     <div class="row g-2">
         <div class="col-xl-1"></div>
-        <div class=" col-xl-10 text-center fs-3 py-5">
-            <select class="form-select" id="opcion" style="" required>
+        <div class="col-xl-10 text-center fs-3 py-5">
+            <select
+                class="form-select form-select-lg mb-3"
+                id="opcion"
+                required
+            >
                 <option value="1">Mascotas</option>
-                <option value="2">Diagnostico</option>
-                <option value="3">3</option>
+                <option value="2">Usuarios</option>
+                <option value="3">Otro</option>
             </select>
         </div>
     </div>
 
-    <div class="row">
+    <div class="row mb-4">
         <div class="col-xl-6 text-end">
             Desde:
-            <input type="date" name="mascotas" id="desde_mascotas" />
+            <input
+                type="date"
+                name="mascotas"
+                id="desde_mascotas"
+                class="form-control"
+            />
         </div>
         <div class="col-xl-6">
             Hasta:
-            <input type="date" name="mascotas" id="hasta_mascotas" />
+            <input
+                type="date"
+                name="mascotas"
+                id="hasta_mascotas"
+                class="form-control"
+            />
         </div>
     </div>
 
-    <div class="row">
-        <button type="button" class="btn btn-dark" on:click={generar}
-            >Generar</button
+    <div class="row justify-content-center">
+        <button type="button" class="btn btn-primary btn-lg" on:click={generar}
+            >Generar Reporte</button
         >
     </div>
 </div>
 
+<!-- Modal -->
 <div
     class="modal fade"
     id="Exported_modal"
@@ -177,69 +193,56 @@
                     aria-label="Close"
                 ></button>
             </div>
-            <div class="modal-body row">
-                <h3>Como quieres exportar los datos?</h3>
+            <div class="modal-body text-center">
+                <h3>¿Cómo quieres exportar los datos?</h3>
                 <button
                     on:click={generar}
-                    class="col-md-4 text-decoration-none btn btn-outline-dark"
-                    style="margin-left: 4%; margin-top:2%">PDF</button
+                    class="col-md-4 btn btn-outline-dark mt-3">PDF</button
                 >
-                <div class="col-md-3" style="color: white;">relleno :D</div>
                 <button
                     on:click={Ocultar}
-                    class="col-md-4 text-decoration-none btn btn-outline-dark"
-                    style="margin-top:2%">Excel</button
+                    class="col-md-4 btn btn-outline-dark mt-3">Excel</button
                 >
             </div>
         </div>
     </div>
 </div>
 
+<!-- Mostrar Datos -->
 <div id="Mostrarusuario">
     <div class="container py-4">
-        <h2 class="mb-4">Citas agendadas</h2>
+        <h2 class="mb-4 text-center">Mascotas registradas</h2>
+
         {#if loading}
             <p class="text-center">Cargando datos...</p>
         {:else if error}
-            <p class="text-red-500">Error: {error}</p>
+            <p class="text-danger text-center">Error: {error}</p>
         {:else}
             <div class="overflow-x-auto">
                 <table
-                    class="min-w-full bg-white border border-gray-300"
-                    id="myTable"
+                    class="table table-bordered table-striped table-responsive"
                 >
                     <thead>
                         <tr>
-                            <th class="px-4 py-2 border">id</th>
-                            <th class="px-4 py-2 border"
-                                >nombre de la mascota</th
-                            >
-                            <th class="px-4 py-2 border">id_genero_mascota</th>
-                            <th class="px-4 py-2 border">id_tipo_mascota</th>
-                            <th class="px-4 py-2 border">id_propietario</th>
-                            <th class="px-4 py-2 border">fecha_hora</th>
-                            <th class="px-4 py-2 border">estado</th>
+                            <th>Id</th>
+                            <th>Nombre de la Mascota</th>
+                            <th>Género</th>
+                            <th>Tipo de Mascota</th>
+                            <th>Propietario</th>
+                            <th>Fecha y Hora</th>
+                            <th>Estado</th>
                         </tr>
                     </thead>
-
                     <tbody>
                         {#each todos as todo}
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-4 py-2 border">{todo.id}</td>
-                                <td class="px-4 py-2 border">{todo.nombre}</td>
-                                <td class="px-4 py-2 border"
-                                    >{todo.id_genero_mascota}</td
-                                >
-                                <td class="px-4 py-2 border"
-                                    >{todo.id_tipo_mascota}</td
-                                >
-                                <td class="px-4 py-2 border"
-                                    >{todo.id_propietario}</td
-                                >
-                                <td class="px-4 py-2 border"
-                                    >{todo.fecha_hora}</td
-                                >
-                                <td class="px-4 py-2 border">{todo.estado}</td>
+                            <tr class="hover-bg-light">
+                                <td>{todo.id}</td>
+                                <td>{todo.nombre}</td>
+                                <td>{todo.id_genero_mascota}</td>
+                                <td>{todo.id_tipo_mascota}</td>
+                                <td>{todo.id_propietario}</td>
+                                <td>{todo.fecha_hora}</td>
+                                <td>{todo.estado}</td>
                             </tr>
                         {/each}
                     </tbody>
@@ -248,7 +251,6 @@
         {/if}
     </div>
 </div>
-
 <Footer></Footer>
 
 <style>
