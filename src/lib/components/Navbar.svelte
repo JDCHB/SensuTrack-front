@@ -46,12 +46,6 @@
   </div>
 </nav>
 
-<!-- Inclusión de los iconos de Bootstrap (por ejemplo, para los iconos de la barra de navegación) -->
-<link
-  href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
-  rel="stylesheet"
-/>
-
 <!-- Estilos CSS -->
 <style>
   /* Navbar Styling */
