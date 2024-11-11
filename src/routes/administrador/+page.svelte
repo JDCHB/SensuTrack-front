@@ -68,45 +68,49 @@
                     globalThis.$("#myTable").DataTable(); // Para convertrlo en datatable :D
                 });
 
-                /* const { jsPDF } = window.jspdf;
-                    console.log(response.data.length)
- 
-                        var doc = new jsPDF();
-                        doc.setFontSize(35);
-                        doc.setFont("helvetica");
-                        doc.text(76, 20, "Hostipal.");
-                        const docWidth = doc.internal.pageSize.getWidth();
-                        doc.line(0, 30, docWidth, 30);
-                        doc.setFontSize(18);
- 
- 
- 
-                        doc.text(12, 40, "Informacion de los entrenadores con mas usuarios para entrenar");
-                        doc.setFontSize(12);
-                        doc.text(15, 50, `A continuacion estan los entrenadores que poseen mas usuarios para entrenar.
-                Es importante conocer la disponibilidad de los entrenadores, es por eso que la tabla esta diseñada
-                con 2 columnas, el nombre del entrenador y la cantidad de usuarios que entrena`);
- 
-                        var columns = ["Nombre", "Cantidad de usuario"];
-                        //var data = [[body],[body2]];
- 
-                        doc.autoTable(columns, body, {
-                            startX: 15,
-                            startY: 70,
-                        });
-                        doc.text(12, 110, `Nota: Si tiene mas cantidad de usuarios tiene menos disponibilidad y no podra aceptar a otro usuario`)
- 
-                        doc.setFontSize(12);
-                        doc.setFont("helvetica")
-                        doc.text(12, 120, y2)
- 
-                        //doc.setFont("bold");
-                        //doc.text(16, 55, 'PDF de prueba');//las dimensiones de la hoja
- 
-                        // doc.addPage();
-                        //doc.text(10, 10, 'bienvenido a gymrack');//las dimensiones de la hoja
- 
-                        doc.save('Citas_en fechas_recientes.pdf');*/
+                const { jsPDF } = window.jspdf;
+                var doc = new jsPDF();
+
+                var body = [];
+
+                for (let i = 0; i < todos.length; i++) {
+                    body.push([
+                        todos[i].id,
+                        todos[i].nombre,
+                        todos[i].id_genero_mascota,
+                        todos[i].id_tipo_mascota,
+                        todos[i].id_propietario,
+                        todos[i].fecha_hora,
+                        todos[i].estado,
+                    ]);
+                }
+
+                var pdf = new jsPDF();
+
+                pdf.text(
+                    20,
+                    20,
+                    "Reporte de turistas registrados en la pagina",
+                );
+
+                var columns = [
+                    "Id",
+                    "Nombre",
+                    "id del genero de la mascota",
+                    "id del tipo de mascota",
+                    "id del propietario",
+                    "Fecha y hora de registro",
+                    "Estado",
+                ];
+
+                pdf.autoTable(
+                    columns,
+                    body,
+
+                    { margin: { top: 25 } },
+                );
+
+                pdf.save("ReporteMascotas.pdf");
             } //fin de la opcion 1
             else if (opcion == 2) {
                 alert("opcion2");
