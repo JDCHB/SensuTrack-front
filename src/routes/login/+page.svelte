@@ -10,7 +10,7 @@
   let v_documento = "";
   let v_telefono = "";
   let v_email = "";
-  let v_rol = 1;
+  let v_rol = 2;
   let v_estado = true;
   let error = null;
 
