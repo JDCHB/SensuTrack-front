@@ -1,47 +1,66 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3">
-    <a class="navbar-brand d-flex align-items-center" href="/">
+<script>
+    function logout() {
+        // Limpiar los datos de inicio de sesión en el LocalStorage
+        localStorage.clear();
+        window.location.href = "/login"; // Redirigir a la página de login
+    }
+</script>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-dark py-4">
+    <a class="navbar-brand d-flex align-items-center" href="/usuario">
         <img
             src="/logo.jpg"
             width="56"
             height="60"
             class="d-inline-block align-top rounded-circle ml-1"
-            alt="PetTracker logo"
+            alt="Logo"
         />
         <span class="ms-2 text-white fw-bold">PetTracker</span>
     </a>
     <button
-        class="navbar-toggler"
+        class="navbar-toggler bg-white"
         type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
+        data-toggle="collapse"
+        data-target="#navbarNav"
         aria-controls="navbarNav"
         aria-expanded="false"
         aria-label="Toggle navigation"
     >
-        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon bg-white"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link text-white fw-bold" href="/sobre_nosotros"
-                    >Sobre Nosotros</a
+            <li class="nav-item active">
+                <a class="nav-link text-white fw-bold" href="/registrar_mascota"
+                    >Registrar Mascota</a
                 >
             </li>
             <li class="nav-item">
+                <a class="nav-link text-white fw-bold" href="#!">Tracker Now</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white fw-bold" href="#!">Servicios</a>
+            </li>
+
+            <!-- Dropdown para ADMIN -->
+            <li class="nav-item dropdown">
                 <a
-                    class="nav-link text-white fw-bold"
-                    href="/preguntas_frecuentes">Preguntas Frecuentes</a
+                    class="nav-link dropdown-toggle text-white fw-bold"
+                    href="#!"
+                    id="navbarDropdown"
+                    role="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
                 >
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white fw-bold" href="/contacto"
-                    >Contáctenos</a
-                >
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white fw-bold" href="/login"
-                    >Iniciar Sesión</a
-                >
+                    ADMIN
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <!-- Opción para Cerrar sesión -->
+                    <a class="dropdown-item" href="#!" on:click={logout}
+                        >Cerrar sesión</a
+                    >
+                </div>
             </li>
         </ul>
     </div>

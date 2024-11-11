@@ -33,8 +33,9 @@
         console.log(opcion);
         try {
             if (opcion == 1) {
-                let fecha_de = document.getElementById("desde_citas").value;
-                let fecha_hasta = document.getElementById("hasta_citas").value;
+                let fecha_de = document.getElementById("desde_mascotas").value;
+                let fecha_hasta =
+                    document.getElementById("hasta_mascotas").value;
                 console.log("----Comprando el generar------");
                 console.log(fecha_de);
                 console.log(fecha_hasta);
@@ -46,14 +47,14 @@
                 console.log(n);
 
                 const response = await fetch(
-                    "http://127.0.0.1:8000/reportes_citas/",
+                    "https://proyectomascotas.onrender.com/Mascotas_Report/",
                     {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
                         },
                         body: JSON.stringify({
-                            fecha: fecha_de,
+                            fecha1: fecha_de,
                             fecha2: fecha_hasta,
                         }),
                     },
@@ -130,7 +131,7 @@
         <div class="col-xl-1"></div>
         <div class=" col-xl-10 text-center fs-3 py-5">
             <select class="form-select" id="opcion" style="" required>
-                <option value="1">Citas</option>
+                <option value="1">Mascotas</option>
                 <option value="2">Diagnostico</option>
                 <option value="3">3</option>
             </select>
@@ -140,11 +141,11 @@
     <div class="row">
         <div class="col-xl-6 text-end">
             Desde:
-            <input type="date" name="citas" id="desde_citas" />
+            <input type="date" name="mascotas" id="desde_mascotas" />
         </div>
         <div class="col-xl-6">
             Hasta:
-            <input type="date" name="citas" id="hasta_citas" />
+            <input type="date" name="mascotas" id="hasta_mascotas" />
         </div>
     </div>
 
@@ -205,21 +206,33 @@
                 >
                     <thead>
                         <tr>
-                            <th class="px-4 py-2 border">Paciente</th>
-                            <th class="px-4 py-2 border">Doctor</th>
-                            <th class="px-4 py-2 border">Fecha</th>
-                            <th class="px-4 py-2 border">Hora</th>
+                            <th class="px-4 py-2 border">id</th>
+                            <th class="px-4 py-2 border"
+                                >nombre de la mascota</th
+                            >
+                            <th class="px-4 py-2 border">id_genero_mascota</th>
+                            <th class="px-4 py-2 border">id_tipo_mascota</th>
+                            <th class="px-4 py-2 border">id_propietario</th>
+                            <th class="px-4 py-2 border">fecha_hora</th>
+                            <th class="px-4 py-2 border">estado</th>
                         </tr>
                     </thead>
 
                     <tbody>
                         {#each todos as todo}
                             <tr class="hover:bg-gray-50">
-                                <td class="px-4 py-2 border">{todo.paciente}</td
+                                <td class="px-4 py-2 border">{todo.id}</td>
+                                <td class="px-4 py-2 border">{todo.nombre}</td>
+                                <td class="px-4 py-2 border"
+                                    >{todo.id_genero_mascota}</td
                                 >
-                                <td class="px-4 py-2 border">{todo.medico}</td>
-                                <td class="px-4 py-2 border">{todo.fecha}</td>
-                                <td class="px-4 py-2 border">{todo.hora}</td>
+                                <td class="px-4 py-2 border"
+                                    >{todo.id_propietario}</td
+                                >
+                                <td class="px-4 py-2 border"
+                                    >{todo.fecha_hora}</td
+                                >
+                                <td class="px-4 py-2 border">{todo.estado}</td>
                             </tr>
                         {/each}
                     </tbody>
