@@ -41,13 +41,13 @@
                 console.log(fecha_hasta);
 
                 let miStorage = window.localStorage;
-                let vid = JSON.parse(miStorage.getItem("usuario"));
+                let vid = JSON.parse(miStorage.getItem("Administrador"));
                 let n = vid.id;
                 console.log("agendamos cita");
                 console.log(n);
 
                 const response = await fetch(
-                    "https://proyectomascotas.onrender.com/Mascotas_Report/",
+                    "https://proyectomascotas.onrender.com/Mascotas_Report",
                     {
                         method: "POST",
                         headers: {
@@ -225,6 +225,9 @@
                                 <td class="px-4 py-2 border">{todo.nombre}</td>
                                 <td class="px-4 py-2 border"
                                     >{todo.id_genero_mascota}</td
+                                >
+                                <td class="px-4 py-2 border"
+                                    >{todo.id_tipo_mascota}</td
                                 >
                                 <td class="px-4 py-2 border"
                                     >{todo.id_propietario}</td
