@@ -67,23 +67,11 @@
 </div>
 
 <style>
-    .contact-section {
-        background-color: #f9f9f9;
-        border-radius: 15px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        padding: 30px;
-        position: relative;
-        background-color: rgba(255, 255, 255, 0.85);
-        background-image: url("https://your-image-url.com/pets-background.jpg");
-        background-size: cover;
-        background-position: center;
-    }
-
     .contact-section h2 {
         font-family: "Comic Sans MS", sans-serif;
         font-size: 2rem;
         font-weight: bold;
-        color: #ff7f50;
+        color: #006aff;
         text-align: center;
     }
 
@@ -106,8 +94,8 @@
     }
 
     .form-control:focus {
-        border-color: #ff7f50;
-        box-shadow: 0 0 5px rgba(255, 127, 80, 0.5);
+        border-color: #006aff;
+        box-shadow: #006aff;
     }
 
     .form-label {
@@ -117,7 +105,7 @@
 
     button {
         width: 100%;
-        background-color: #ff7f50;
+        background-color: #000000;
         border: none;
         border-radius: 50px;
         font-size: 1.2rem;
@@ -128,7 +116,7 @@
     }
 
     button:hover {
-        background-color: #ff6347;
+        background-color: #006aff;
     }
 
     @media (max-width: 767px) {
