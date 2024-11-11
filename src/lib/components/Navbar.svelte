@@ -46,6 +46,12 @@
   </div>
 </nav>
 
+<!-- Inclusión de los iconos de Bootstrap (por ejemplo, para los iconos de la barra de navegación) -->
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+  rel="stylesheet"
+/>
+
 <!-- Estilos CSS -->
 <style>
   /* Navbar Styling */
@@ -66,18 +72,18 @@
   }
 
   .navbar-nav .nav-link:hover {
-    color: #006eff !important; /* Color de hover */
+    color: #0079fa !important; /* Color de hover */
     text-decoration: underline; /* Subrayado en hover */
     transform: scale(1.1); /* Efecto de agrandado en hover */
   }
 
   .navbar-toggler {
-    border: 1px solid #006eff; /* Contorno anaranjado para el botón */
+    border: 1px solid #0079fa; /* Contorno anaranjado para el botón */
     border-radius: 5px;
   }
 
   .navbar-toggler-icon {
-    background-color: #006eff; /* Icono anaranjado para el menú */
+    background-color: #0079fa; /* Icono anaranjado para el menú */
   }
 
   .nav-item i {

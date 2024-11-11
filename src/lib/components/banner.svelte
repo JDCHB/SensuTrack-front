@@ -12,7 +12,9 @@
 
 <section class="benefits py-5">
     <div class="container">
-        <h2 class="text-center mb-5">Beneficios del Collar GPS</h2>
+        <h2 class="text-center mb-5" style="color:#006aff ;">
+            Beneficios del Collar GPS
+        </h2>
         <div class="row justify-content-center">
             <!-- Beneficio 1: Rastreo en Tiempo Real -->
             <div class="col-12 col-md-4 mb-4">
@@ -98,7 +100,7 @@
         font-weight: bold;
         margin-bottom: 20px;
         letter-spacing: 2px;
-        color: #ff8c00; /* Color del texto (Naranja brillante) */
+        color: #006aff; /* Color del texto (Naranja brillante) */
     }
 
     .banner p {
@@ -109,18 +111,19 @@
 
     /* Botón destacado */
     .btn-cta {
+        border-color: #006aff;
         font-size: 1.2rem;
         padding: 10px 25px;
         border-radius: 30px;
-        background-color: #ff8c00;
-        color: white;
+        background-color: #ffffff;
+        color: rgb(0, 0, 0);
         transition:
             background-color 0.3s,
             transform 0.3s ease;
     }
 
     .btn-cta:hover {
-        background-color: #ffb74d;
+        background-color: #006aff;
         transform: translateY(-5px);
     }
 
