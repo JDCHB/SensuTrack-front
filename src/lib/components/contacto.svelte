@@ -51,7 +51,9 @@
                         ></textarea>
                     </div>
                     <div class="submit-container text-center">
-                        <button type="submit" class="btn btn-primary"
+                        <button
+                            type="submit"
+                            class="btn btn-primary w-100 mt-4 shadow-sm rounded-pill"
                             >🐶 Enviar mensaje 🐱</button
                         >
                     </div>
@@ -103,20 +105,23 @@
         font-size: 1rem;
     }
 
-    button {
+    .btn-primary {
         width: 100%;
-        background-color: #000000;
-        border: none;
+        background-color: #0079fa; /* Botón de registro en azul */
+        border-color: #0079fa;
         border-radius: 50px;
+        font-weight: 600;
         font-size: 1.2rem;
         font-weight: bold;
         padding: 15px;
         cursor: pointer;
         transition: background-color 0.3s;
+        text-transform: uppercase;
     }
 
-    button:hover {
-        background-color: #006aff;
+    .btn-primary:hover {
+        background-color: #005f89; /* Color azul oscuro al pasar el cursor */
+        border-color: #005f89;
     }
 
     @media (max-width: 767px) {

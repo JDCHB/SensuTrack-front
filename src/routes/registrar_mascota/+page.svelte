@@ -77,12 +77,12 @@
 
 <NavbarUser></NavbarUser>
 
-<main class="container py-5">
+<main class="container py-5" style="margin-bottom: 50px;">
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-8">
             <div
                 class="card shadow-lg p-4 rounded"
-                style="background-color: #ffe9d6;"
+                style="background-color: #f9f9f9;"
             >
                 <div class="text-center mb-4">
                     <i
@@ -97,7 +97,7 @@
                 </div>
                 <form on:submit|preventDefault={RegisterMascota}>
                     <div class="mb-3">
-                        <label for="nombre" class="form-label"
+                        <label for="nombre" class="form-label text-primary"
                             >Nombre de la Mascota</label
                         >
                         <input
@@ -111,7 +111,9 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="genero" class="form-label">Género</label>
+                        <label for="genero" class="form-label text-primary"
+                            >Género</label
+                        >
                         <select
                             class="form-select shadow-sm"
                             id="genero"
@@ -127,7 +129,9 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="tipo_mascota" class="form-label"
+                        <label
+                            for="tipo_mascota"
+                            class="form-label text-primary"
                             >Tipo de Mascota</label
                         >
                         <select
@@ -148,7 +152,7 @@
                         type="submit"
                         class="btn btn-primary w-100 mt-4 shadow-sm rounded-pill"
                     >
-                        Registrar Mascota
+                        🐶 Registrar Mascota 🐱
                     </button>
 
                     <!-- Loader -->
@@ -175,8 +179,71 @@
 
 <Footer></Footer>
 
+<!-- Estilos CSS -->
 <style>
+    /* Estilo principal para el formulario */
+    .card {
+        background-color: #ffe9d6; /* Fondo claro para la tarjeta */
+        border-radius: 15px; /* Bordes redondeados */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    }
+
+    .card .form-label {
+        color: #0079fa; /* Títulos en azul */
+    }
+
+    .btn-primary {
+        background-color: #0079fa; /* Botón de registro en azul */
+        border-color: #0079fa;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .btn-primary:hover {
+        background-color: #005f89; /* Color azul oscuro al pasar el cursor */
+        border-color: #005f89;
+    }
+
+    .form-control {
+        border-radius: 10px; /* Bordes redondeados en los inputs */
+        box-shadow: none;
+    }
+
+    .form-select {
+        border-radius: 10px; /* Bordes redondeados en los select */
+        box-shadow: none;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #0079fa; /* Borde azul al enfocar */
+        box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+    }
+
+    .text-primary {
+        color: #0079fa !important; /* Color de texto azul */
+    }
+
+    .loader-container {
+        display: none; /* Inicialmente oculto */
+        text-align: center;
+        margin-top: 20px;
+    }
+
     /* Estilos para el loader de la cara de un perrito */
+    .wrapper {
+        --input-focus: #2d8cf0;
+        --font-color: #323232;
+        --font-color-sub: #666;
+        --bg-color: #fff;
+        --bg-color-alt: #666;
+        --main-color: #323232;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
 
     /* Contenedor para el loader */
     .loader-container {
@@ -311,63 +378,5 @@
         50% {
             transform: rotate(10deg);
         }
-    }
-    .loader-container {
-        text-align: center;
-        margin-top: 20px;
-    }
-
-    /* HASTA AQUI*/
-
-    .card {
-        background-color: #fff5e1;
-        border-radius: 15px;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    }
-
-    .form-control,
-    .form-select {
-        border-radius: 10px;
-        font-size: 1rem;
-        border: 1px solid #ddd;
-    }
-
-    .btn-primary {
-        background-color: #ff7f50;
-        border-color: #ff7f50;
-        border-radius: 25px;
-        padding: 12px 20px;
-        font-size: 18px;
-        font-weight: bold;
-    }
-
-    .btn-primary:hover {
-        background-color: #e36e47;
-        border-color: #e36e47;
-        transition: background-color 0.3s ease;
-    }
-
-    .card h3 {
-        font-family: "Arial", sans-serif;
-        color: #2c3e50;
-        font-weight: bold;
-    }
-
-    .card p {
-        font-size: 1.1rem;
-        color: #7f8c8d;
-    }
-
-    .form-label {
-        font-weight: bold;
-        color: #2c3e50;
-    }
-
-    .text-primary {
-        color: #ff7f50 !important;
-    }
-
-    .bi-paw-fill {
-        color: #ff7f50;
     }
 </style>
