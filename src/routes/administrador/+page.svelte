@@ -90,7 +90,7 @@
                 pdf.text(
                     20,
                     20,
-                    "Reporte de turistas registrados en la pagina",
+                    "Reporte de mascotas registrados en la pagina",
                 );
 
                 var columns = [
