@@ -5,9 +5,10 @@
             <div class="col-12 col-md-4 mb-4 mb-md-0">
                 <h3 class="fw-bold text-primary">PETTRACKER</h3>
                 <p class="pt-2">Mascota segura, dueño tranquilo.</p>
-                <p><strong>Teléfonos:</strong></p>
+                <p><strong>Teléfono:</strong></p>
                 <p>0987654321</p>
-                <p>1234567890</p>
+                <p><strong>Correo:</strong></p>
+                <p>PetTrackerOF@gmail.com</p>
             </div>
 
             <!-- Menú de navegación -->
