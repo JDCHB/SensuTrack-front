@@ -36,6 +36,11 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link text-dark fw-bold" href="/registrar_mascota">
+                    <i class="bi bi-person"></i> Registrar Usuario
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link text-dark fw-bold" href="/usuario">
                     <i class="bi bi-pin-map"></i> Tracker Now
                 </a>
@@ -49,7 +54,7 @@
             <!-- Dropdown para Usuario -->
             <li class="nav-item dropdown">
                 <a
-                    class="nav-link dropdown-toggle text-black fw-bold"
+                    class="nav-link dropdown-toggle text-black fw-bold bi bi-person"
                     href="#!"
                     id="navbarDropdown"
                     role="button"

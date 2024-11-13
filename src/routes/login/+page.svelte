@@ -98,37 +98,62 @@
 
   async function Register() {
     try {
-      showLoader(registerLoader); // Mostrar loader al comenzar el registro
-      const response = await fetch(
-        "https://proyectomascotas.onrender.com/create_user",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: v_email,
-            password: v_password,
-            nombre: v_nombre,
-            apellido: v_apellido,
-            documento: v_documento,
-            telefono: v_telefono,
-            id_rol: v_rol,
-            estado: v_estado,
-          }),
+      // Muestra el cuadro de confirmación antes de proceder con el registro
+      const result = await Swal.fire({
+        title: "¿Estás seguro?",
+        text: "¡Quieres registrarte!?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, registrarse!",
+        customClass: {
+          popup: "swal-popup", // Clase para personalizar el popup de la alerta
+          title: "custom-title", // Clase personalizada para el título
         },
-      );
+      });
+      // Si el usuario confirma, continuamos con el registro
+      if (result.isConfirmed) {
+        showLoader(registerLoader); // Mostrar loader al comenzar el registro
+        const response = await fetch(
+          "https://proyectomascotas.onrender.com/create_user",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: v_email,
+              password: v_password,
+              nombre: v_nombre,
+              apellido: v_apellido,
+              documento: v_documento,
+              telefono: v_telefono,
+              id_rol: v_rol,
+              estado: v_estado,
+            }),
+          },
+        );
 
-      const data = await response.json();
-      console.log(data);
+        const data = await response.json();
+        console.log(data);
 
-      hideLoader(registerLoader); // Ocultar loader al terminar el registro
+        hideLoader(registerLoader); // Ocultar loader al terminar el registro
 
-      if (response.ok) {
-        alert("Registro exitoso. Bienvenido " + v_nombre);
-        window.location.href = "/login";
+        if (response.ok) {
+          Swal.fire({
+            title: "¡Registrado!,¡Bienvenido! " + v_nombre,
+            icon: "success",
+            customClass: {
+              popup: "swal-popup", // Clase para personalizar el popup de la alerta
+              title: "custom-title", // Clase personalizada para el título
+            },
+          });
+        } else {
+          alert("Error en el registro");
+        }
       } else {
-        alert("Error en el registro");
+        console.log("Registro Cancelado");
       }
     } catch (e) {
       error = e.message;
@@ -255,6 +280,22 @@
   </div>
 
   <style>
+    /* Estilos para Sweet Alert */
+    /* Fondo blanco para la alerta SweetAlert */
+    .swal-popup {
+      background-color: white !important;
+    }
+
+    /* Fondo blanco para la alerta de éxito */
+    .swal-popup-success {
+      background-color: white !important;
+    }
+    /* Cambiar el color del título a negro */
+    .custom-title {
+      color: black !important; /* Asegúrate de que el color se aplique */
+      text-align: center; /* Centrar el título */
+    }
+
     /* Estilos para el loader de la cara de un perrito */
     .wrapper {
       --input-focus: #2d8cf0;
