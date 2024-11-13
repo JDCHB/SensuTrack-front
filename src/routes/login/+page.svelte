@@ -60,34 +60,63 @@
 
       if (response.ok) {
         let id_rol = data.resultado[0].id_rol;
-        alert(id_rol);
+        console.log(id_rol);
 
         if (id_rol == 1) {
           let email = data.resultado[0].email;
-          console.log("sakljdskfhsfhskdhfdjg");
+
           console.log(data.resultado[0].id);
           let id = data.resultado[0].id;
           let encontrado = { email, id };
 
           let miStorage = window.localStorage;
           miStorage.setItem("Administrador", JSON.stringify(encontrado));
-          alert("BIENVENIDO AL SISTEMA DE ADMINISTRACIÓN " + email);
-          window.location.href = "/administrador";
+          Swal.fire({
+            title: "Inicio de Sesión Exitoso",
+            text: "¡Bienvenido al Sistema de Administración!",
+            icon: "success",
+            confirmButtonText: "OK", // Botón para cerrar la alerta
+            customClass: {
+              popup: "swal-popup", // Clase para personalizar el popup de la alerta
+              title: "custom-title", // Clase personalizada para el título
+            },
+          }).then(() => {
+            // Cuando el usuario haga clic en "OK", redirigimos a la página de usuario
+            window.location.href = "/administrador";
+          });
         } else {
           let email = data.resultado[0].email;
-          console.log("sakljdskfhsfhskdhfdjg");
           console.log(data.resultado[0].id);
           let id = data.resultado[0].id;
           let encontrado = { email, id };
 
           let miStorage = window.localStorage;
           miStorage.setItem("usuario", JSON.stringify(encontrado));
-          alert("Inicio de sesión exitoso. Bienvenido " + email);
-          window.location.href = "/usuario";
+          Swal.fire({
+            title: "Inicio de Sesión Exitoso",
+            text: "¡Bienvenido al sistema!",
+            icon: "success",
+            confirmButtonText: "OK", // Botón para cerrar la alerta
+            customClass: {
+              popup: "swal-popup", // Clase para personalizar el popup de la alerta
+              title: "custom-title", // Clase personalizada para el título
+            },
+          }).then(() => {
+            // Cuando el usuario haga clic en "OK", redirigimos a la página de usuario
+            window.location.href = "/usuario";
+          });
         }
       } else {
+        Swal.fire({
+          icon: "ERROR",
+          title: "Oops...",
+          text: "Usuario o Contraseña Incorrecto! ",
+          customClass: {
+            popup: "swal-popup", // Clase para personalizar el popup de la alerta
+            title: "custom-title", // Clase personalizada para el título
+          },
+        });
         console.error("Error de autenticación:", data); // Muestra la respuesta del servidor
-        alert("Error de autenticación: " + (data.message || "Datos inválidos"));
       }
     } catch (e) {
       error = e.message;
