@@ -57,12 +57,13 @@
                             >🐶 Enviar mensaje 🐱</button
                         >
                     </div>
-                    <input type="hidden" name="_next" value="/" />
+                    <input
+                        type="hidden"
+                        name="_next"
+                        value="http://localhost:5173/"
+                    />
                     <input type="hidden" name="_captcha" value="true" />
-                    <input type="hidden" name="_formsubmit_id" value="form" />
-                    <!-- Agregamos el atributo "value" -->
                 </form>
-                <!-- Move this line here -->
             </div>
         </div>
     </div>
