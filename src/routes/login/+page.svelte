@@ -130,7 +130,7 @@
       // Muestra el cuadro de confirmación antes de proceder con el registro
       const result = await Swal.fire({
         title: "¿Estás seguro?",
-        text: "¡Quieres registrarte!?",
+        text: "¡Desea registrarse a PETTRACKER!?",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -171,7 +171,7 @@
 
         if (response.ok) {
           Swal.fire({
-            title: "¡Registrado!,¡Bienvenido! " + v_nombre,
+            title: "¡Registrado!,¡Bienvenido " + v_nombre + "!",
             icon: "success",
             customClass: {
               popup: "swal-popup", // Clase para personalizar el popup de la alerta
