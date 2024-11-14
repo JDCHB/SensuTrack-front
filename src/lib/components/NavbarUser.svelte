@@ -36,7 +36,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-dark fw-bold" href="/usuario">
+                <a class="nav-link text-dark fw-bold" href="/tracking">
                     <i class="bi bi-pin-map"></i> Tracker Now
                 </a>
             </li>
