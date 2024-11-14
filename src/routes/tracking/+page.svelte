@@ -31,6 +31,17 @@
             radius: 150,
         }).addTo(map);
         circle.bindPopup("En esta area se encuentra tu mascota!");
+
+        var popup = L.popup();
+
+        /*function onMapClick(e) {
+            popup
+                .setLatLng(e.latlng)
+                .setContent("Oh!, ¡has clickeado en: " + e.latlng.toString())
+                .openOn(map);
+        }
+
+        map.on("click", onMapClick);*/
     });
 </script>
 
