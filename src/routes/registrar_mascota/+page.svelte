@@ -63,7 +63,14 @@
             hideLoader(registerLoader);
 
             if (response.ok) {
-                alert(v_nombre + " se ha registrado correctamente");
+                Swal.fire({
+                    title: "Mascota Registrada Exitosamente!",
+                    text: "¡Le damos la bienvenida a la familia!",
+                    icon: "success",
+                    confirmButtonText: "OK",
+                    background: "white", // Fondo blanco
+                    color: "black", // Texto general negro
+                });
             } else {
                 alert("Error al registrar la mascota");
             }
@@ -228,21 +235,6 @@
         display: none; /* Inicialmente oculto */
         text-align: center;
         margin-top: 20px;
-    }
-
-    /* Estilos para el loader de la cara de un perrito */
-    .wrapper {
-        --input-focus: #2d8cf0;
-        --font-color: #323232;
-        --font-color-sub: #666;
-        --bg-color: #fff;
-        --bg-color-alt: #666;
-        --main-color: #323232;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
     }
 
     /* Contenedor para el loader */
