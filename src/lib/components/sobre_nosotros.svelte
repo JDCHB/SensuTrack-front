@@ -50,7 +50,7 @@
         Si tienes preguntas sobre nuestros productos o deseas obtener más
         información sobre cómo mantener a tu mascota segura, no dudes en ponerte
         en contacto con nosotros a través de nuestro formulario en línea o por
-        correo electrónico a PetTracker@gmail.com. Estamos aquí para ayudarte.
+        correo electrónico a PetTrackerOF@gmail.com. Estamos aquí para ayudarte.
     </p>
 
     <h2>
