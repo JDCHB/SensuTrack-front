@@ -44,6 +44,13 @@
                     `<b>${nombre_mascota}</b><br>Latitud: ${latitud}, Longitud: ${longitud}`,
                 )
                 .openPopup();
+            var circle = L.circle([latitud, longitud], {
+                color: "red",
+                fillColor: "#f03",
+                fillOpacity: 0.5,
+                radius: 100,
+            }).addTo(map);
+            circle.bindPopup(nombre_mascota + " se encuentra en esta area");
         });
     }
 
@@ -58,74 +65,6 @@
 
         cargarMascotas(); // Carga las ubicaciones de las mascotas cuando se monta el componente
     });
-
-    /*async function Mapa() {
-        const userData = JSON.parse(localStorage.getItem("usuario"));
-        const userId = userData?.id; // Extrae el user_id del localStorage
-
-        try {
-            const response = await fetch(
-                "https://proyectomascotas.onrender.com/Mascotas_Map",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        user_id: userId,
-                    }),
-                },
-            );
-
-            const data = await response.json();
-            if (response.ok) {
-                // Aquí puedes utilizar data.resultado para obtener los datos y mostrarlos en el mapa
-                console.log(data.resultado);
-            } else {
-                console.error("Error:", data.detail);
-            }
-        } catch (e) {
-            alert("Error en la solicitud: " + e.message);
-        }
-    }
-
-    // Función para mostrar los marcadores de todas las mascotas en el mapa
-    function mostrarMarcadores() {
-        mascotas.forEach((mascota) => {
-            const { nombre_mascota, latitud, longitud } = mascota;
-            const coordenadas = [latitud, longitud];
-
-            // Agregar un marcador para cada mascota
-            const marker = L.marker(coordenadas).addTo(map);
-            marker
-                .bindPopup(`<b>¡Aquí está tu mascota ${nombre_mascota}!</b>`)
-                .openPopup();
-
-            // Agregar un círculo alrededor del marcador
-            L.circle(coordenadas, {
-                color: "red",
-                fillColor: "#f03",
-                fillOpacity: 0.5,
-                radius: 150,
-            })
-                .addTo(map)
-                .bindPopup(`Área aproximada de ${nombre_mascota}`);
-        });
-    }
-
-    onMount(() => {
-        // Inicializar el mapa con una posición predeterminada
-        map = L.map("map").setView([0, 0], 13); // Ajustar la vista inicial
-
-        // Cargar las teselas del mapa
-        L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            attribution:
-                '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        }).addTo(map);
-
-        // Llamar a la función para cargar y mostrar las mascotas
-        Mapa();
-    });*/
 </script>
 
 <NavbarUser></NavbarUser>
