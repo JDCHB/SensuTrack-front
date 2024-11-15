@@ -1,13 +1,5 @@
-<script>
-    function logout() {
-        // Limpiar los datos de inicio de sesión en el LocalStorage
-        localStorage.clear();
-        window.location.href = "/login"; // Redirigir a la página de login
-    }
-</script>
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light py-3">
-    <a class="navbar-brand d-flex align-items-center" href="/usuario">
+    <a class="navbar-brand d-flex align-items-center" href="/administrador">
         <img
             src="/logo.jpg"
             width="56"
@@ -31,45 +23,9 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link text-dark fw-bold" href="/registrar_mascota">
-                    <i class="bi bi-house-door"></i> Registrar Mascota
+                <a class="nav-link text-dark fw-bold" href="/administrador">
+                    <i class="bi bi-house-door"></i> Volver al menu
                 </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark fw-bold" href="/registrar_mascota">
-                    <i class="bi bi-person"></i> Registrar Usuario
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark fw-bold" href="/usuario">
-                    <i class="bi bi-pin-map"></i> Tracker Now
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark fw-bold" href="/usuario">
-                    <i class="bi bi-gear"></i> Servicios
-                </a>
-            </li>
-
-            <!-- Dropdown para Usuario -->
-            <li class="nav-item dropdown">
-                <a
-                    class="nav-link dropdown-toggle text-black fw-bold bi bi-person"
-                    href="#!"
-                    id="navbarDropdown"
-                    role="button"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                >
-                    Administrador
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <!-- Opción para Cerrar sesión -->
-                    <a class="dropdown-item" href="#!" on:click={logout}
-                        >Cerrar sesión</a
-                    >
-                </div>
             </li>
         </ul>
     </div>

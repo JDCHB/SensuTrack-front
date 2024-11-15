@@ -1,271 +1,202 @@
 <script>
-    import NavbarAD from "../../lib/components/NavbarAD.svelte";
-    import Footer from "../../lib/components/footer.svelte";
     import { onMount } from "svelte";
 
-    let todos = {};
-    let loading = true;
-    let error = null;
-    let exportesModal;
-    let opcion;
-    let fecha_de = "";
-    let fecha_hasta = "";
-
-    onMount(() => {
-        const modalElement = document.getElementById("Exported_modal");
-        if (modalElement) {
-            exportesModal = new bootstrap.Modal(modalElement);
-        }
-    });
-
-    function showModal() {
-        if (exportesModal) {
-            exportesModal.show();
-        }
-    }
-
-    function Ocultar() {
-        exportesModal.hide();
-    }
-
-    async function generar() {
-        let opcion = document.getElementById("opcion").value;
-        console.log(opcion);
-        try {
-            if (opcion == 1) {
-                let fecha_de = document.getElementById("desde_mascotas").value;
-                let fecha_hasta =
-                    document.getElementById("hasta_mascotas").value;
-                console.log("----Comprando el generar------");
-                console.log(fecha_de);
-                console.log(fecha_hasta);
-
-                let miStorage = window.localStorage;
-                let vid = JSON.parse(miStorage.getItem("Administrador"));
-                let n = vid.id;
-                console.log("agendamos cita");
-                console.log(n);
-
-                const response = await fetch(
-                    "https://proyectomascotas.onrender.com/Mascotas_Report",
-                    {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({
-                            fecha1: fecha_de,
-                            fecha2: fecha_hasta,
-                        }),
-                    },
-                );
-                if (!response.ok) throw new Error("Error al cargar los datos");
-                const data = await response.json();
-
-                todos = data.resultado;
-                console.log(todos);
-                setTimeout(() => {
-                    globalThis.$("#myTable").DataTable(); // Para convertrlo en datatable :D
+    // Función que maneja el evento de clic en el botón
+    const mostrarConfirmacionUser = () => {
+        Swal.fire({
+            title: "¿Desea ver la vista de Usuario?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Sí, ingresar!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: "Bienvenido a la vista de Usuario!",
+                    icon: "success",
                 });
-
-                const { jsPDF } = window.jspdf;
-                var doc = new jsPDF();
-
-                var body = [];
-
-                for (let i = 0; i < todos.length; i++) {
-                    body.push([
-                        todos[i].id,
-                        todos[i].nombre,
-                        todos[i].id_genero_mascota,
-                        todos[i].id_tipo_mascota,
-                        todos[i].id_propietario,
-                        todos[i].fecha_hora,
-                        todos[i].estado,
-                    ]);
-                }
-
-                var pdf = new jsPDF();
-
-                pdf.text(
-                    20,
-                    20,
-                    "Reporte de mascotas registrados en la pagina",
-                );
-
-                var columns = [
-                    "Id",
-                    "Nombre",
-                    "id del genero de la mascota",
-                    "id del tipo de mascota",
-                    "id del propietario",
-                    "Fecha y hora de registro",
-                    "Estado",
-                ];
-
-                pdf.autoTable(
-                    columns,
-                    body,
-
-                    { margin: { top: 25 } },
-                );
-
-                pdf.save("ReporteMascotas.pdf");
-            } //fin de la opcion 1
-            else if (opcion == 2) {
-                alert("opcion2");
-            } else {
-                alert("opcion3");
+                // Redirigir a la página de usuario
+                window.location.href = "/usuario";
             }
-        } catch (e) {
-            error = e.message;
-            alert("Error en la solicitud: " + error);
-        } finally {
-            loading = false;
-        }
-    }
+        });
+    };
+
+    const mostrarConfirmacionReporte = () => {
+        Swal.fire({
+            title: "¿Desea revisar los Reportes?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Sí, ingresar!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: "Bienvenido a la vista de Usuario!",
+                    icon: "success",
+                });
+                // Redirigir a la página de usuario
+                window.location.href = "/Admin_reportes";
+            }
+        });
+    };
+
+    const mostrarConfirmacionRegistroUsuario = () => {
+        Swal.fire({
+            title: "¿Desea ir a la pagina de Registro de Usuarios?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Sí, ingresar!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: "Bienvenido a la vista de Usuario!",
+                    icon: "success",
+                });
+                // Redirigir a la página de usuario
+                window.location.href = "/Registro_Admin_Usuario";
+            }
+        });
+    };
+
+    const logout = () => {
+        Swal.fire({
+            title: "¿Desea cerrar sesión?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Sí, cerrar sesión!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: "Adios, que tenga buen dia!",
+                    icon: "success",
+                });
+                localStorage.clear();
+                window.location.href = "/login"; // Redirigir a la página de login
+            }
+        });
+    };
 </script>
 
-<NavbarAD></NavbarAD>
-<div class="container" style="margin-top: 5%;">
-    <div class="text-center pt-1 fs-3">
-        <p class="fw-bold text-primary">Reportes</p>
-    </div>
-
-    <div class="row g-2">
-        <div class="col-xl-1"></div>
-        <div class="col-xl-10 text-center fs-3 py-5">
-            <select
-                class="form-select form-select-lg mb-3"
-                id="opcion"
-                required
-            >
-                <option value="1">Mascotas</option>
-                <option value="2">Usuarios</option>
-                <option value="3">Otro</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="row mb-4">
-        <div class="col-xl-6 text-end">
-            Desde:
-            <input
-                type="date"
-                name="mascotas"
-                id="desde_mascotas"
-                class="form-control"
-            />
-        </div>
-        <div class="col-xl-6">
-            Hasta:
-            <input
-                type="date"
-                name="mascotas"
-                id="hasta_mascotas"
-                class="form-control"
-            />
-        </div>
-    </div>
-
+<!-- HTML del menú de administrador -->
+<div class="container mt-5 pt-5">
     <div class="row justify-content-center">
-        <button type="button" class="btn btn-primary btn-lg" on:click={generar}
-            >Generar Reporte</button
-        >
-    </div>
-</div>
+        <div class="col-md-8 col-lg-6">
+            <div class="admin-menu bg-white shadow-lg rounded p-4">
+                <h2 class="text-center mb-4 text-primary">
+                    Menú de Administrador
+                </h2>
 
-<!-- Modal -->
-<div
-    class="modal fade"
-    id="Exported_modal"
-    tabindex="-1"
-    aria-labelledby="rModalLabel"
-    aria-hidden="true"
->
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                ></button>
-            </div>
-            <div class="modal-body text-center">
-                <h3>¿Cómo quieres exportar los datos?</h3>
-                <button
-                    on:click={generar}
-                    class="col-md-4 btn btn-outline-dark mt-3">PDF</button
-                >
-                <button
-                    on:click={Ocultar}
-                    class="col-md-4 btn btn-outline-dark mt-3">Excel</button
-                >
+                <div class="text-center mb-4">
+                    <p class="lead">
+                        Bienvenido, Administrador. ¿A qué página deseas
+                        ingresar?
+                    </p>
+                </div>
+
+                <div class="d-grid gap-3">
+                    <button
+                        on:click={mostrarConfirmacionUser}
+                        class="btn btn-lg btn-outline-primary d-flex align-items-center justify-content-between"
+                    >
+                        <span>USUARIO</span>
+                        <i class="bi bi-person-circle"></i>
+                    </button>
+
+                    <button
+                        class="btn btn-lg btn-outline-success d-flex align-items-center justify-content-between"
+                        on:click={mostrarConfirmacionRegistroUsuario}
+                    >
+                        <span>REGISTRAR USUARIO</span>
+                        <i class="bi bi-box"></i>
+                    </button>
+
+                    <button
+                        class="btn btn-lg btn-outline-danger d-flex align-items-center justify-content-between"
+                        on:click={mostrarConfirmacionReporte}
+                    >
+                        <span>REPORTES</span>
+
+                        <i class="bi bi-bar-chart-line"></i>
+                    </button>
+
+                    <button
+                        class="btn btn-lg btn-outline-warning d-flex align-items-center justify-content-between"
+                    >
+                        <span>CONFIGURACIONES</span>
+                        <i class="bi bi-gear-fill"></i>
+                    </button>
+                    <button
+                        class="btn btn-lg btn-outline-danger d-flex align-items-center justify-content-between"
+                        on:click={logout}
+                    >
+                        <span>CERRAR SESION</span>
+                        <i class="bi bi-house-door"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Mostrar Datos -->
-<div id="Mostrarusuario">
-    <div class="container py-4">
-        <h2 class="mb-4 text-center">Mascotas registradas</h2>
-
-        {#if loading}
-            <p class="text-center">Cargando datos...</p>
-        {:else if error}
-            <p class="text-danger text-center">Error: {error}</p>
-        {:else}
-            <div class="overflow-x-auto">
-                <table
-                    class="table table-bordered table-striped table-responsive"
-                >
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Nombre de la Mascota</th>
-                            <th>Género</th>
-                            <th>Tipo de Mascota</th>
-                            <th>Propietario</th>
-                            <th>Fecha y Hora</th>
-                            <th>Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {#each todos as todo}
-                            <tr class="hover-bg-light">
-                                <td>{todo.id}</td>
-                                <td>{todo.nombre}</td>
-                                <td>{todo.id_genero_mascota}</td>
-                                <td>{todo.id_tipo_mascota}</td>
-                                <td>{todo.id_propietario}</td>
-                                <td>{todo.fecha_hora}</td>
-                                <td>{todo.estado}</td>
-                            </tr>
-                        {/each}
-                    </tbody>
-                </table>
-            </div>
-        {/if}
-    </div>
-</div>
-<Footer></Footer>
+<!-- Incluir Bootstrap Icons para los iconos -->
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+    rel="stylesheet"
+/>
 
 <style>
-    .container {
-        max-width: 600px; /* Limita el ancho del contenedor */
-        margin: auto; /* Centra el contenedor horizontalmente */
-        padding: 20px; /* Agrega padding interno */
-        border-radius: 10px; /* Bordes redondeados */
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para profundidad */
-        background-color: #f9f9f9; /* Color de fondo claro */
+    /* Diseño para el menú de administrador */
+    .admin-menu {
+        background-color: #f9f9f9;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    @media (max-width: 768px) {
-        .col-md-4 {
-            width: 100%; /* Hace que los inputs ocupen el 100% en pantallas pequeñas */
-        }
+    .admin-menu h2 {
+        font-size: 1.75rem;
+        font-weight: 600;
+    }
+
+    .admin-menu p {
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+
+    .admin-menu button {
+        font-size: 1.1rem;
+        font-weight: 500;
+        padding: 15px 25px;
+    }
+
+    .admin-menu button i {
+        font-size: 1.3rem;
+        margin-left: 10px;
+    }
+
+    .btn-outline-primary:hover {
+        background-color: #3085d6;
+        color: white;
+    }
+
+    .btn-outline-success:hover {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .btn-outline-danger:hover {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .btn-outline-warning:hover {
+        background-color: #ffc107;
+        color: white;
     }
 </style>
