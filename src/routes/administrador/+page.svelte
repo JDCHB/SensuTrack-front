@@ -33,7 +33,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire({
-                    title: "Bienvenido a la vista de Usuario!",
+                    title: "Bienvenido a la vista de Reportes!",
                     icon: "success",
                 });
                 // Redirigir a la página de usuario
