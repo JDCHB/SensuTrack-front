@@ -136,7 +136,7 @@
                         on:click={logout}
                     >
                         <span>CERRAR SESION</span>
-                        <i class="bi bi-house-door"></i>
+                        <i class="bi bi-power"></i>
                     </button>
                 </div>
             </div>
