@@ -104,7 +104,7 @@
                         on:click={mostrarConfirmacionUser}
                         class="btn btn-lg btn-outline-primary d-flex align-items-center justify-content-between"
                     >
-                        <span>USUARIO</span>
+                        <span>VISTA DE USUARIO</span>
                         <i class="bi bi-person-circle"></i>
                     </button>
 
@@ -113,7 +113,7 @@
                         on:click={mostrarConfirmacionRegistroUsuario}
                     >
                         <span>REGISTRAR USUARIO</span>
-                        <i class="bi bi-box"></i>
+                        <i class="bi bi-person-plus"></i>
                     </button>
 
                     <button
@@ -121,15 +121,14 @@
                         on:click={mostrarConfirmacionReporte}
                     >
                         <span>REPORTES</span>
-
-                        <i class="bi bi-bar-chart-line"></i>
+                        <i class="bi bi-gear-fill"></i>
                     </button>
 
                     <button
                         class="btn btn-lg btn-outline-warning d-flex align-items-center justify-content-between"
                     >
                         <span>CONFIGURACIONES</span>
-                        <i class="bi bi-gear-fill"></i>
+                        <i class="bi bi-bar-chart-line"></i>
                     </button>
                     <button
                         class="btn btn-lg btn-outline-danger d-flex align-items-center justify-content-between"
