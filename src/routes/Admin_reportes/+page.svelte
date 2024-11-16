@@ -3,130 +3,90 @@
     import Footer from "../../lib/components/footer.svelte";
     import { onMount } from "svelte";
 
-    let todos = {};
-    let loading = true;
+    let todos = [];
+    let loading = false;
     let error = null;
-    let exportesModal;
     let opcion;
     let fecha_de = "";
     let fecha_hasta = "";
-
-    onMount(() => {
-        const modalElement = document.getElementById("Exported_modal");
-        if (modalElement) {
-            exportesModal = new bootstrap.Modal(modalElement);
-        }
-    });
-
-    function showModal() {
-        if (exportesModal) {
-            exportesModal.show();
-        }
-    }
-
-    function Ocultar() {
-        exportesModal.hide();
-    }
+    let mostrarReporte = false;
 
     async function generar() {
-        let opcion = document.getElementById("opcion").value;
-        console.log(opcion);
         try {
-            if (opcion == 1) {
-                let fecha_de = document.getElementById("desde_mascotas").value;
-                let fecha_hasta =
-                    document.getElementById("hasta_mascotas").value;
-                console.log("----Comprando el generar------");
-                console.log(fecha_de);
-                console.log(fecha_hasta);
+            loading = true;
+            mostrarReporte = false;
+            error = null;
 
-                let miStorage = window.localStorage;
-                let vid = JSON.parse(miStorage.getItem("Administrador"));
-                let n = vid.id;
-                console.log("agendamos cita");
-                console.log(n);
+            opcion = document.getElementById("opcion").value;
+            fecha_de = document.getElementById("desde_mascotas").value;
+            fecha_hasta = document.getElementById("hasta_mascotas").value;
 
-                const response = await fetch(
-                    "https://proyectomascotas.onrender.com/Mascotas_Report",
-                    {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({
-                            fecha1: fecha_de,
-                            fecha2: fecha_hasta,
-                        }),
-                    },
-                );
-                if (!response.ok) throw new Error("Error al cargar los datos");
-                const data = await response.json();
+            const response = await fetch(
+                "https://proyectomascotas.onrender.com/Mascotas_Report",
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        fecha1: fecha_de,
+                        fecha2: fecha_hasta,
+                    }),
+                },
+            );
 
-                todos = data.resultado;
-                console.log(todos);
-                setTimeout(() => {
-                    globalThis.$("#myTable").DataTable(); // Para convertrlo en datatable :D
-                });
+            if (!response.ok) throw new Error("Error al cargar los datos");
+            const data = await response.json();
 
-                const { jsPDF } = window.jspdf;
-                var doc = new jsPDF();
+            todos = data.resultado;
+            mostrarReporte = true;
 
-                var body = [];
-
-                for (let i = 0; i < todos.length; i++) {
-                    body.push([
-                        todos[i].id,
-                        todos[i].nombre,
-                        todos[i].id_genero_mascota,
-                        todos[i].id_tipo_mascota,
-                        todos[i].id_propietario,
-                        todos[i].fecha_hora,
-                        todos[i].estado,
-                    ]);
-                }
-
-                var pdf = new jsPDF();
-
-                pdf.text(
-                    20,
-                    20,
-                    "Reporte de mascotas registrados en la pagina",
-                );
-
-                var columns = [
-                    "Id",
-                    "Nombre",
-                    "id del genero de la mascota",
-                    "id del tipo de mascota",
-                    "id del propietario",
-                    "Fecha y hora de registro",
-                    "Estado",
-                ];
-
-                pdf.autoTable(
-                    columns,
-                    body,
-
-                    { margin: { top: 25 } },
-                );
-
-                pdf.save("ReporteMascotas.pdf");
-            } //fin de la opcion 1
-            else if (opcion == 2) {
-                alert("opcion2");
-            } else {
-                alert("opcion3");
-            }
+            setTimeout(() => globalThis.$("#myTable").DataTable(), 0);
         } catch (e) {
             error = e.message;
-            alert("Error en la solicitud: " + error);
+            console.error("Error al generar reporte:", e);
         } finally {
             loading = false;
         }
     }
+
+    function exportarPDF() {
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF();
+
+        const columns = [
+            "Id",
+            "Nombre",
+            "Género",
+            "Tipo",
+            "Propietario",
+            "Fecha y Hora",
+            "Estado",
+        ];
+
+        const body = todos.map((todo) => [
+            todo.id,
+            todo.nombre,
+            todo.id_genero_mascota,
+            todo.id_tipo_mascota,
+            todo.id_propietario,
+            todo.fecha_hora,
+            todo.estado,
+        ]);
+
+        pdf.text(20, 20, "Reporte de mascotas registradas en la página");
+        pdf.autoTable(columns, body, { startY: 30 });
+        pdf.save("ReporteMascotas.pdf");
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Se exportó de manera exitosa",
+            showConfirmButton: false,
+            timer: 1500,
+        });
+    }
 </script>
 
-<NavbarAD></NavbarAD>
+<NavbarAD />
+
 <div class="container" style="margin-top: 5%;">
     <div class="text-center pt-1 fs-3">
         <p class="fw-bold text-primary">Reportes</p>
@@ -150,122 +110,80 @@
     <div class="row mb-4">
         <div class="col-xl-6 text-end">
             Desde:
-            <input
-                type="date"
-                name="mascotas"
-                id="desde_mascotas"
-                class="form-control"
-            />
+            <input type="date" id="desde_mascotas" class="form-control" />
         </div>
         <div class="col-xl-6">
             Hasta:
-            <input
-                type="date"
-                name="mascotas"
-                id="hasta_mascotas"
-                class="form-control"
-            />
+            <input type="date" id="hasta_mascotas" class="form-control" />
         </div>
     </div>
 
     <div class="row justify-content-center">
-        <button type="button" class="btn btn-primary btn-lg" on:click={generar}
-            >Generar Reporte</button
-        >
-    </div>
-</div>
-
-<!-- Modal -->
-<div
-    class="modal fade"
-    id="Exported_modal"
-    tabindex="-1"
-    aria-labelledby="rModalLabel"
-    aria-hidden="true"
->
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                ></button>
-            </div>
-            <div class="modal-body text-center">
-                <h3>¿Cómo quieres exportar los datos?</h3>
-                <button
-                    on:click={generar}
-                    class="col-md-4 btn btn-outline-dark mt-3">PDF</button
-                >
-                <button
-                    on:click={Ocultar}
-                    class="col-md-4 btn btn-outline-dark mt-3">Excel</button
-                >
-            </div>
-        </div>
+        <button type="button" class="btn btn-primary btn-lg" on:click={generar}>
+            Generar Reporte
+        </button>
     </div>
 </div>
 
 <!-- Mostrar Datos -->
-<div id="Mostrarusuario">
-    <div class="container py-4">
-        <h2 class="mb-4 text-center">Mascotas registradas</h2>
-
-        {#if loading}
-            <p class="text-center">Cargando datos...</p>
-        {:else if error}
-            <p class="text-danger text-center">Error: {error}</p>
-        {:else}
-            <div class="overflow-x-auto">
-                <table
-                    class="table table-bordered table-striped table-responsive"
-                >
-                    <thead>
+<div class="container py-4" id="MostrarReporte">
+    {#if loading}
+        <p class="text-center">Cargando datos...</p>
+    {:else if error}
+        <p class="text-danger text-center">Error: {error}</p>
+    {:else if mostrarReporte}
+        <h2 class="mb-4 text-center">Mascotas Registradas</h2>
+        <div class="overflow-x-auto">
+            <table class="table table-bordered table-striped table-responsive">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Género</th>
+                        <th>Tipo</th>
+                        <th>Propietario</th>
+                        <th>Fecha y Hora</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {#each todos as todo}
                         <tr>
-                            <th>Id</th>
-                            <th>Nombre de la Mascota</th>
-                            <th>Género</th>
-                            <th>Tipo de Mascota</th>
-                            <th>Propietario</th>
-                            <th>Fecha y Hora</th>
-                            <th>Estado</th>
+                            <td>{todo.id}</td>
+                            <td>{todo.nombre}</td>
+                            <td>{todo.id_genero_mascota}</td>
+                            <td>{todo.id_tipo_mascota}</td>
+                            <td>{todo.id_propietario}</td>
+                            <td>{todo.fecha_hora}</td>
+                            <td>{todo.estado}</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        {#each todos as todo}
-                            <tr class="hover-bg-light">
-                                <td>{todo.id}</td>
-                                <td>{todo.nombre}</td>
-                                <td>{todo.id_genero_mascota}</td>
-                                <td>{todo.id_tipo_mascota}</td>
-                                <td>{todo.id_propietario}</td>
-                                <td>{todo.fecha_hora}</td>
-                                <td>{todo.estado}</td>
-                            </tr>
-                        {/each}
-                    </tbody>
-                </table>
-            </div>
-        {/if}
-    </div>
+                    {/each}
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center mt-4">
+            <button class="btn btn-success" on:click={exportarPDF}>
+                Exportar como PDF
+            </button>
+        </div>
+    {/if}
 </div>
-<Footer></Footer>
+
+<Footer />
 
 <style>
     .container {
-        max-width: 600px; /* Limita el ancho del contenedor */
-        margin: auto; /* Centra el contenedor horizontalmente */
-        padding: 20px; /* Agrega padding interno */
-        border-radius: 10px; /* Bordes redondeados */
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para profundidad */
-        background-color: #f9f9f9; /* Color de fondo claro */
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
     @media (max-width: 768px) {
-        .col-md-4 {
-            width: 100%; /* Hace que los inputs ocupen el 100% en pantallas pequeñas */
+        .col-xl-6 {
+            margin-bottom: 10px;
         }
     }
 </style>
