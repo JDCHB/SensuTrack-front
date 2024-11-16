@@ -12,7 +12,7 @@
                     más fiel. Seguridad, amor y tecnología en un solo
                     dispositivo.
                 </p>
-                <a href="#!" class="btn btn-primary btn-lg rounded-pill"
+                <a href="/login" class="btn btn-primary btn-lg rounded-pill"
                     >Descubre más</a
                 >
             </div>

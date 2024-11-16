@@ -26,7 +26,7 @@
                             ¡Nunca más perderás de vista a tu compañero fiel!
                         </p>
                         <a
-                            href="#!"
+                            href="/login"
                             class="btn btn-outline-primary mt-3 rounded-pill"
                             >Leer más</a
                         >
@@ -49,7 +49,7 @@
                             mano!
                         </p>
                         <a
-                            href="#!"
+                            href="/login"
                             class="btn btn-outline-primary mt-3 rounded-pill"
                             >Leer más</a
                         >
@@ -71,7 +71,7 @@
                             de la familia estén siempre a salvo.
                         </p>
                         <a
-                            href="#!"
+                            href="/login"
                             class="btn btn-outline-primary mt-3 rounded-pill"
                             >Leer más</a
                         >
