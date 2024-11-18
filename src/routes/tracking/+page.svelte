@@ -57,7 +57,7 @@
                 fillOpacity: 0.5,
                 radius: 100,
             }).addTo(map);
-            circle.bindPopup(nombre_mascota + " se encuentra en esta area");
+            circle.bindPopup(nombre_mascota + " se encuentra en esta area!");
         });
     }
 
