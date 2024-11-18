@@ -77,7 +77,7 @@
                     icon: "success",
                 });
                 localStorage.clear();
-                window.location.href = "/login"; // Redirigir a la página de login
+                window.location.href = "/login";
             }
         });
     };

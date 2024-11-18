@@ -25,6 +25,7 @@
             if (response.ok) {
                 mascotas = data.resultado; // Almacena los datos de las mascotas en el array
                 mostrarUbicaciones(); // Llama a la función para mostrar los marcadores en el mapa
+                console.log(data.resultado);
             } else {
                 console.error("Error al obtener datos:", data);
             }
@@ -37,11 +38,17 @@
     // Función para mostrar las ubicaciones de las mascotas en el mapa
     function mostrarUbicaciones() {
         mascotas.forEach((mascota) => {
-            const { nombre_mascota, latitud, longitud } = mascota;
+            const {
+                nombre_mascota,
+                latitud,
+                longitud,
+                numero_serie,
+                nivel_bateria,
+            } = mascota;
             const marker = L.marker([latitud, longitud]).addTo(map);
             marker
                 .bindPopup(
-                    `<b>${nombre_mascota}</b><br>Latitud: ${latitud}, Longitud: ${longitud}`,
+                    `<b>${nombre_mascota}</b><br>Latitud: ${latitud}, Longitud: ${longitud}<br>CollarGPS:${numero_serie}<br>Nivel de Bateria:${nivel_bateria}%`,
                 )
                 .openPopup();
             var circle = L.circle([latitud, longitud], {
