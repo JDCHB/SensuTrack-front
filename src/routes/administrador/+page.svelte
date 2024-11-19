@@ -137,7 +137,7 @@
                     </button>
 
                     <button
-                        class="btn btn-lg btn-outline-danger d-flex align-items-center justify-content-between"
+                        class="btn btn-lg btn-outline-dark d-flex align-items-center justify-content-between"
                         on:click={mostrarConfirmacionReporte}
                     >
                         <span>REPORTES</span>
@@ -149,7 +149,7 @@
                         on:click={mostrarConfirmacionRegistroCollares}
                     >
                         <span>REGISTRAR COLLARES</span>
-                        <i class="bi bi-bar-chart-line"></i>
+                        <i class="bi bi-plus-circle"></i>
                     </button>
                     <button
                         class="btn btn-lg btn-outline-danger d-flex align-items-center justify-content-between"
