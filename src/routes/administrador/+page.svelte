@@ -22,6 +22,26 @@
         });
     };
 
+    const mostrarConfirmacionRegistroUsuario = () => {
+        Swal.fire({
+            title: "¿Desea ir a la pagina de Registro de Usuarios?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Sí, ingresar!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: "Bienvenido a la vista de Usuario!",
+                    icon: "success",
+                });
+                // Redirigir a la página de usuario
+                window.location.href = "/Registro_Admin_Usuario";
+            }
+        });
+    };
+
     const mostrarConfirmacionReporte = () => {
         Swal.fire({
             title: "¿Desea revisar los Reportes?",
@@ -42,9 +62,9 @@
         });
     };
 
-    const mostrarConfirmacionRegistroUsuario = () => {
+    const mostrarConfirmacionRegistroCollares = () => {
         Swal.fire({
-            title: "¿Desea ir a la pagina de Registro de Usuarios?",
+            title: "¿Desea ir a la pagina de Registro de Collares?",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -53,11 +73,11 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire({
-                    title: "Bienvenido a la vista de Usuario!",
+                    title: "Bienvenido a la vista de Registro de Collares!",
                     icon: "success",
                 });
                 // Redirigir a la página de usuario
-                window.location.href = "/Registro_Admin_Usuario";
+                window.location.href = "/Admin_Registro_Collares";
             }
         });
     };
@@ -126,8 +146,9 @@
 
                     <button
                         class="btn btn-lg btn-outline-warning d-flex align-items-center justify-content-between"
+                        on:click={mostrarConfirmacionRegistroCollares}
                     >
-                        <span>CONFIGURACIONES</span>
+                        <span>REGISTRAR COLLARES</span>
                         <i class="bi bi-bar-chart-line"></i>
                     </button>
                     <button
