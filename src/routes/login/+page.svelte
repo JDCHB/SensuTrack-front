@@ -46,7 +46,10 @@
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ email: v_usuario, password: v_password }),
+          body: JSON.stringify({
+            email: v_usuario,
+            password: v_password,
+          }),
         },
       );
 
