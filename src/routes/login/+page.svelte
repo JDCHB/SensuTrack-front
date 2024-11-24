@@ -34,94 +34,74 @@
   }
 
   async function Login() {
-    var v_usuario = document.getElementById("correo").value;
-    var v_password = document.getElementById("contraseña").value;
-    console.log(v_usuario);
-    console.log(v_password);
+    const v_usuario = document.getElementById("correo").value;
+    const v_password = document.getElementById("contraseña").value;
+
     try {
-      showLoader(loginLoader); // Mostrar loader al comenzar el login
+      showLoader(loginLoader); // Mostrar loader
       const response = await fetch(
-        "https://proyectomascotas.onrender.com/login",
+        "https://proyectomascotas.onrender.com/login_generate_token",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            email: v_usuario,
-            password: v_password,
-          }),
+          body: JSON.stringify({ email: v_usuario, password: v_password }),
         },
       );
 
       const data = await response.json();
-      console.log(data);
-      hideLoader(loginLoader); // Ocultar loader al terminar el login
+      hideLoader(loginLoader); // Ocultar loader
 
       if (response.ok) {
-        let id_rol = data.resultado[0].id_rol;
-        console.log(id_rol);
+        const { access_token, user_data } = data; // Extraer token y datos del usuario
 
-        if (id_rol == 1) {
-          let email = data.resultado[0].email;
+        // Guardar token y datos en localStorage
+        localStorage.setItem("access_token", access_token);
+        localStorage.setItem("user_data", JSON.stringify(user_data));
 
-          console.log(data.resultado[0].id);
-          let id = data.resultado[0].id;
-          let encontrado = { email, id };
-
-          let miStorage = window.localStorage;
-          miStorage.setItem("Administrador", JSON.stringify(encontrado));
+        if (user_data.id_rol == 1) {
           Swal.fire({
             title: "Inicio de Sesión Exitoso",
             text: "¡Bienvenido al Sistema de Administración!",
             icon: "success",
-            confirmButtonText: "OK", // Botón para cerrar la alerta
-            customClass: {
-              popup: "swal-popup", // Clase para personalizar el popup de la alerta
-              title: "custom-title", // Clase personalizada para el título
-            },
+            confirmButtonText: "OK",
           }).then(() => {
-            // Cuando el usuario haga clic en "OK", redirigimos a la página de usuario
             window.location.href = "/administrador";
           });
-        } else {
-          let email = data.resultado[0].email;
-          console.log(data.resultado[0].id);
-          let id = data.resultado[0].id;
-          let encontrado = { email, id };
-
-          let miStorage = window.localStorage;
-          miStorage.setItem("usuario", JSON.stringify(encontrado));
+        } else if (user_data.id_rol == 2) {
           Swal.fire({
             title: "Inicio de Sesión Exitoso",
-            text: "¡Bienvenido al sistema!",
+            text: "¡Bienvenido al Sistema!",
             icon: "success",
-            confirmButtonText: "OK", // Botón para cerrar la alerta
+            confirmButtonText: "OK",
             customClass: {
               popup: "swal-popup", // Clase para personalizar el popup de la alerta
               title: "custom-title", // Clase personalizada para el título
             },
           }).then(() => {
-            // Cuando el usuario haga clic en "OK", redirigimos a la página de usuario
             window.location.href = "/usuario";
           });
         }
       } else {
         Swal.fire({
-          icon: "ERROR",
+          icon: "error",
           title: "Oops...",
-          text: "Usuario o Contraseña Incorrecto! ",
+          text: data.detail || "Usuario o Contraseña Incorrecto!",
           customClass: {
             popup: "swal-popup", // Clase para personalizar el popup de la alerta
             title: "custom-title", // Clase personalizada para el título
           },
         });
-        console.error("Error de autenticación:", data); // Muestra la respuesta del servidor
       }
     } catch (e) {
-      error = e.message;
-      hideLoader(loginLoader); // Ocultar loader si ocurre un error
-      alert("Error en la solicitud: " + error);
+      console.error("Error en la solicitud:", e.message);
+      hideLoader(loginLoader);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Hubo un problema con el inicio de sesión. Intenta nuevamente.",
+      });
     }
   }
 
