@@ -12,7 +12,7 @@
 
     onMount(() => {
         let miStorage = window.localStorage;
-        const storedUser = JSON.parse(miStorage.getItem("usuario"));
+        const storedUser = JSON.parse(miStorage.getItem("user_data"));
         if (storedUser) {
             let id_p = storedUser.id;
             v_idpropietario = id_p;
