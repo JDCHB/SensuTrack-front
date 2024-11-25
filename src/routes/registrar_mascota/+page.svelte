@@ -69,7 +69,7 @@
                     icon: "success",
                     confirmButtonText: "OK",
                     background: "white", // Fondo blanco
-                    color: "black", // Texto general negro
+                    color: "black",
                 });
             } else {
                 alert("Error al registrar la mascota");
