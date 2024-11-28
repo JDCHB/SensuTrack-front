@@ -17,7 +17,8 @@
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                        user_id: JSON.parse(localStorage.getItem("usuario")).id, // Usa el ID del usuario en la sesión
+                        user_id: JSON.parse(localStorage.getItem("user_data"))
+                            .id, // Usa el ID del usuario en la sesión
                     }),
                 },
             );
