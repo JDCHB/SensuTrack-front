@@ -7,7 +7,7 @@
             class="d-inline-block align-top rounded-circle"
             alt="PetTracker logo"
         />
-        <span class="ms-2 text-dark fw-bold">PetTracker</span>
+        <span class="ms-2 text-dark fw-bold">SensuTrack</span>
     </a>
     <button
         class="navbar-toggler"
