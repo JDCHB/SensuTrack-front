@@ -45,9 +45,10 @@
 
 <script>
 	todos = {}
-	Juan = true
 	let v_token = ""
 	async function revisar_token() {
+
+
 
 		let miStorage = window.localStorage;
 		let verificar_tokenv = JSON.parse(miStorage.getItem('user_data'));
@@ -58,23 +59,26 @@
 		if (verificar_tokenv) {
 			v_token = miStorage.getItem('access_token');
 		} else {
-			v_token = "Token invalido"
+			v_token = ""
+			console.log("Token invalido")
 
 		}
 
 
-		console.log("revisando ando", v_token)
+		console.log("Token:", v_token)
 
-		const response = await fetch("https://proyectomascotas.onrender.com/verify_token", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				token: v_token
-			}),
+		const response = await fetch(
+			"https://proyectomascotas.onrender.com/verify_token",
+			{
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					token: v_token
+				}),
 
-		});
+			});
 		console.log("asd")
 		//  return {"message": "Token válido"}
 		//  return {"message": "Token inválido"}
@@ -82,26 +86,17 @@
 
 		const data = await response.json()
 		todos = data.message
-		console.log("revisando el token", todos)
+		console.log("El Token es:", todos)
 
 
 
 		if (todos == "Token expirado" & pagina_v != "/" & pagina_v != "/login") {
-			console.log("sssssssssds")
-
-
+			console.log("Redirigiendo por token expirado")
 			window.location.href = "/login";
 
-
-		} else if (todos == "Token invalido" & pagina_v != "/" & pagina_v != "/login") {
-			console.log("entro al expirado")
-
+		} else if (todos == "Token inválido" & pagina_v != "/" & pagina_v != "/login") {
+			console.log("Redirigiendo por token inválido")
 			window.location.href = "/login";
-
-
-
-
-
 		}
 	}
 
