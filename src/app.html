@@ -45,11 +45,9 @@
 
 <script>
 	todos = {}
-	henry = true
+	Juan = true
 	let v_token = ""
 	async function revisar_token() {
-
-
 
 		let miStorage = window.localStorage;
 		let verificar_tokenv = JSON.parse(miStorage.getItem('user_data'));
@@ -58,7 +56,7 @@
 
 
 		if (verificar_tokenv) {
-			v_token = verificar_tokenv.todos2
+			v_token = miStorage.getItem('access_token');
 		} else {
 			v_token = "Token invalido"
 
@@ -88,15 +86,15 @@
 
 
 
-		if (todos == "Token expirado" & pagina_v != "/" & pagina_v != "/login" & pagina_v != "/routes") {
+		if (todos == "Token expirado" & pagina_v != "/" & pagina_v != "/login") {
 			console.log("sssssssssds")
 
 
 			window.location.href = "/login";
 
 
-		} else if (todos == "Token invalido" & pagina_v != "/" & pagina_v != "/login" & pagina_v != "/routes") {
-
+		} else if (todos == "Token invalido" & pagina_v != "/" & pagina_v != "/login") {
+			console.log("entro al expirado")
 
 			window.location.href = "/login";
 
