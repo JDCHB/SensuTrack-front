@@ -82,6 +82,26 @@
         });
     };
 
+    const mostrarTablaUsuarios = () => {
+        Swal.fire({
+            title: "¿Desea ver la tabla de usuarios?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Sí, ingresar!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: "Bienvenido a la tabla de Usuarios!",
+                    icon: "success",
+                });
+                // Redirigir a la página de usuario
+                window.location.href = "/Admin_Tabla_Usuarios";
+            }
+        });
+    };
+
     const logout = () => {
         Swal.fire({
             title: "¿Desea cerrar sesión?",
@@ -149,6 +169,13 @@
                         on:click={mostrarConfirmacionRegistroCollares}
                     >
                         <span>REGISTRAR COLLARES</span>
+                        <i class="bi bi-plus-circle"></i>
+                    </button>
+                    <button
+                        class="btn btn-lg btn-outline-warning d-flex align-items-center justify-content-between"
+                        on:click={mostrarTablaUsuarios}
+                    >
+                        <span>TABLA USUARIOS</span>
                         <i class="bi bi-plus-circle"></i>
                     </button>
                     <button
