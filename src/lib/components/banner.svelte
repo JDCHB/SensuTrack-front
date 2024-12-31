@@ -13,7 +13,7 @@
 <section class="benefits py-5">
     <div class="container">
         <h2 class="text-center mb-5" style="color:#006aff ;">
-            Beneficios del Collar GPS
+            Beneficios del GPS para Personas Ciegas
         </h2>
         <div class="row justify-content-center">
             <!-- Beneficio 1: Rastreo en Tiempo Real -->
@@ -26,8 +26,8 @@
                     <div class="card-body text-center">
                         <h4 class="card-title">Rastreo en Tiempo Real</h4>
                         <p class="card-text">
-                            Siempre sabrás la ubicación exacta de tu mascota,
-                            donde sea que esté.
+                            Siempre sabrás la ubicación exacta de la persona
+                            ciega, donde sea que esté.
                         </p>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                     <div class="card-body text-center">
                         <h4 class="card-title">Resistente al Agua</h4>
                         <p class="card-text">
-                            Perfecto para todos los climas, tu mascota estará
+                            Perfecto para todos los climas, la persona estará
                             segura bajo la lluvia.
                         </p>
                     </div>
@@ -72,13 +72,13 @@
 >
     <div class="container position-relative z-index-2">
         <h2 class="display-4 font-weight-bold mb-4">
-            ¡Mantén a tu mascota segura en todo momento!
+            ¡Mantén a la persona ciega segura en todo momento!
         </h2>
         <p class="lead mb-4">
-            Nuestro Collar GPS te ayuda a rastrear a tu mascota en tiempo real y
-            asegurar su seguridad durante los paseos. Si no estás completamente
-            satisfecho con tu collar GPS, te devolvemos tu dinero en 30 días.
-            ¡Compra con total confianza y sin riesgos!. ¡Compra ahora!
+            Nuestro GPS te ayuda a rastrear a la persona ciega en tiempo real y
+            asegurar su seguridad durante sus desplazamientos. Si no estás
+            completamente satisfecho con tu GPS, te devolvemos tu dinero en 30
+            días. ¡Compra con total confianza y sin riesgos!. ¡Compra ahora!
         </p>
         <a href="login" class="btn btn-warning btn-lg btn-cta">Compra Ahora</a>
     </div>
