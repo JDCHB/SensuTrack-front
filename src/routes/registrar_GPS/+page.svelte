@@ -96,17 +96,16 @@
                         class="bi bi-paw-fill text-primary"
                         style="font-size: 60px;"
                     ></i>
-                    <h3 class="text-primary mt-3">¡Registra a tu Mascota!</h3>
+                    <h3 class="text-primary mt-3">¡Registra un nuevo GPS!</h3>
                     <p class="text-muted">
-                        Completa los detalles de tu mascota en el siguiente
-                        formulario.
+                        Completa los detalles en el siguiente formulario.
                     </p>
                 </div>
                 <form on:submit|preventDefault={RegisterMascota}>
                     <div class="mb-3">
                         <label for="nombre" class="form-label text-primary"
-                            >Nombre de la Mascota</label
-                        >
+                            >Nombre del incapacitado
+                        </label>
                         <input
                             type="text"
                             class="form-control shadow-sm"

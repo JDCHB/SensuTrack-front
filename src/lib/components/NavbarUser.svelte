@@ -31,8 +31,8 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link text-dark fw-bold" href="/registrar_mascota">
-                    <i class="bi bi-house-door"></i> Registrar Mascota
+                <a class="nav-link text-dark fw-bold" href="/registrar_GPS">
+                    <i class="bi bi-house-door"></i> Registrar GPS
                 </a>
             </li>
             <li class="nav-item">
