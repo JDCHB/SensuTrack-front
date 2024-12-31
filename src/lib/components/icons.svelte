@@ -2,7 +2,10 @@
     <div class="container">
         <div class="row">
             <!-- Envio Gratis -->
-            <div class="col-12 col-md-6 col-lg-4 box-icons">
+            <div
+                class="col-12 col-md-6 col-lg-4 box-icons"
+                style="padding-left: 5%;"
+            >
                 <div class="d-flex align-items-center">
                     <i class="bi bi-airplane display-4 icon"></i>
                     <div class="ms-4">
@@ -16,7 +19,10 @@
             </div>
 
             <!-- Rembolsos -->
-            <div class="col-12 col-md-6 col-lg-4 box-icons">
+            <div
+                class="col-12 col-md-6 col-lg-4 box-icons"
+                style="padding-left: 5%;"
+            >
                 <div class="d-flex align-items-center">
                     <i class="bi bi-cash-coin display-4 icon"></i>
                     <div class="ms-4">
@@ -30,7 +36,10 @@
             </div>
 
             <!-- Gran Regalo -->
-            <div class="col-12 col-md-6 col-lg-4 box-icons">
+            <div
+                class="col-12 col-md-6 col-lg-4 box-icons"
+                style="padding-left: 5%;"
+            >
                 <div class="d-flex align-items-center">
                     <i class="bi bi-gift-fill display-4 icon"></i>
                     <div class="ms-4">
@@ -58,6 +67,7 @@
     .section-icons {
         background-color: #f8f9fa; /* Fondo claro para la sección */
         padding: 60px 0;
+        padding-bottom: 4%;
     }
 
     .box-icons {
