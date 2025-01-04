@@ -84,7 +84,7 @@
             document.getElementById("documento").value = data.documento;
             document.getElementById("telefono").value = data.telefono;
             document.getElementById("correo").value = data.email;
-            console.log("verificando el estado" + data.estado);
+            console.log("verificando el estado: " + data.estado);
             const estado_v = data.estado ? "1" : "0"; //condicion ? valorSiVerdadero : valorSiFalso
             document.getElementById("estado").value = estado_v;
 
@@ -137,7 +137,7 @@
                     },
                     body: JSON.stringify({
                         id: vid,
-                        usuario: vcorreo,
+                        email: vcorreo,
                         nombre: vnombre,
                         apellido: vapellidos,
                         documento: vdocumento,
