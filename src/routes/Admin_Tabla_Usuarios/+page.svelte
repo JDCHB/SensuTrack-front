@@ -65,18 +65,16 @@
             console.log("Entra al try de buscar");
 
             const response = await fetch(
-                "https://proyectomascotas.onrender.com/get_user",
+                `https://proyectomascotas.onrender.com/get_user/${vid}`,
                 {
-                    method: "POST",
+                    method: "GET",
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify({
-                        id: vid,
-                    }),
                 },
             );
             const data = await response.json();
+            console.log(response);
             console.log(data);
             console.log("Buscando al usuario seleccionado");
             todos = data.apellido;
@@ -85,7 +83,7 @@
             document.getElementById("apellidos").value = data.apellido;
             document.getElementById("documento").value = data.documento;
             document.getElementById("telefono").value = data.telefono;
-            document.getElementById("correo").value = data.usuario;
+            document.getElementById("correo").value = data.email;
             console.log("verificando el estado" + data.estado);
             const estado_v = data.estado ? "1" : "0"; //condicion ? valorSiVerdadero : valorSiFalso
             document.getElementById("estado").value = estado_v;
