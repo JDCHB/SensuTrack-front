@@ -16,7 +16,6 @@
             const data = await response.json();
             todos = data.resultado;
             console.log(todos);
-            console.log(todos.usuario);
 
             setTimeout(() => {
                 globalThis.$("#myTable").DataTable(); // Para convertrlo en datatable :D
@@ -129,14 +128,13 @@
             console.log("Entra al try de actualzar");
 
             const response = await fetch(
-                "https://proyectomascotas.onrender.com/update_user",
+                `https://proyectomascotas.onrender.com/update_user/${vid}`, // Incluye el user_id en la URL
                 {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                        id: vid,
                         email: vcorreo,
                         nombre: vnombre,
                         apellido: vapellidos,
@@ -189,21 +187,24 @@
     const templateID = "template_bloqueouser";
     const apikey = "3bmpPn1S0SLhgotWj";
 
-    async function desactivar(id, nombre, usuario) {
+    async function desactivar(id, nombre, email) {
         let vestado = 0;
         let vid = id;
-        console.log("Correo" + usuario);
+        console.log("Correo" + email);
         try {
-            const response = await fetch("http://127.0.0.1:8000/estado_user", {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
+            const response = await fetch(
+                `https://proyectomascotas.onrender.com/update_user/${vid}`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        id: vid,
+                        estado: vestado,
+                    }),
                 },
-                body: JSON.stringify({
-                    id: vid,
-                    estado: vestado,
-                }),
-            });
+            );
 
             const data = await response.json();
             if (response.ok) {
@@ -232,10 +233,10 @@
                     emailjs
                         .send(serviceID, templateID, {
                             nombre: nombre,
-                            email: usuario,
+                            email: email,
                         })
                         .then((result) => {
-                            console.log("Corro enviado con exito");
+                            console.log("Correo enviado con exito");
                         })
                         .catch((error) => {
                             console.log(
@@ -264,16 +265,18 @@
         let vid = id;
 
         try {
-            const response = await fetch("http://127.0.0.1:8000/estado_user", {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
+            const response = await fetch(
+                `https://proyectomascotas.onrender.com/update_estado_user/${vid}`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        estado: vestado,
+                    }),
                 },
-                body: JSON.stringify({
-                    id: vid,
-                    estado: vestado,
-                }),
-            });
+            );
 
             const data = await response.json();
 
@@ -354,7 +357,7 @@
                     <tbody>
                         {#each todos as todo}
                             <tr class="hover:bg-gray-50">
-                                <td class="px-4 py-2 border">{todo.usuario}</td>
+                                <td class="px-4 py-2 border">{todo.email}</td>
                                 <td class="px-4 py-2 border">{todo.nombre}</td>
                                 <td class="px-4 py-2 border">{todo.apellido}</td
                                 >
@@ -387,7 +390,7 @@
                                                 desactivar(
                                                     todo.id,
                                                     todo.nombre,
-                                                    todo.usuario,
+                                                    todo.email,
                                                 )}
                                         >
                                             Desactivar
