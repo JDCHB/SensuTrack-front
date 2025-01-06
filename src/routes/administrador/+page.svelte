@@ -3,123 +3,27 @@
 
     // Función que maneja el evento de clic en el botón
     const mostrarConfirmacionUser = () => {
-        Swal.fire({
-            title: "¿Desea ver la vista de Usuario?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Sí, ingresar!",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire({
-                    title: "Bienvenido a la vista de Usuario!",
-                    icon: "success",
-                });
-                // Redirigir a la página de usuario
-                window.location.href = "/usuario";
-            }
-        });
+        window.location.href = "/usuario";
     };
 
     const mostrarConfirmacionRegistroUsuario = () => {
-        Swal.fire({
-            title: "¿Desea ir a la pagina de Registro de Usuarios?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Sí, ingresar!",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire({
-                    title: "Bienvenido a la vista de Usuario!",
-                    icon: "success",
-                });
-                // Redirigir a la página de usuario
-                window.location.href = "/Registro_Admin_Usuario";
-            }
-        });
+        window.location.href = "/Registro_Admin_Usuario";
     };
 
     const mostrarConfirmacionReporte = () => {
-        Swal.fire({
-            title: "¿Desea revisar los Reportes?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Sí, ingresar!",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire({
-                    title: "Bienvenido a la vista de Reportes!",
-                    icon: "success",
-                });
-                // Redirigir a la página de usuario
-                window.location.href = "/Admin_reportes";
-            }
-        });
+        window.location.href = "/Admin_reportes";
     };
 
     const mostrarConfirmacionRegistroCollares = () => {
-        Swal.fire({
-            title: "¿Desea ir a la pagina de Registro de Collares?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Sí, ingresar!",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire({
-                    title: "Bienvenido a la vista de Registro de Collares!",
-                    icon: "success",
-                });
-                // Redirigir a la página de usuario
-                window.location.href = "/Admin_Registro_Collares";
-            }
-        });
+        window.location.href = "/Admin_Registro_Collares";
     };
 
     const mostrarTablaUsuarios = () => {
-        Swal.fire({
-            title: "¿Desea ver la tabla de usuarios?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Sí, ingresar!",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire({
-                    title: "Bienvenido a la tabla de Usuarios!",
-                    icon: "success",
-                });
-                // Redirigir a la página de usuario
-                window.location.href = "/Admin_Tabla_Usuarios";
-            }
-        });
+        window.location.href = "/Admin_Tabla_Usuarios";
     };
 
     const logout = () => {
-        Swal.fire({
-            title: "¿Desea cerrar sesión?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Sí, cerrar sesión!",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire({
-                    title: "Adios, que tenga buen dia!",
-                    icon: "success",
-                });
-                localStorage.clear();
-                window.location.href = "/login";
-            }
-        });
+        window.location.href = "/login";
     };
 </script>
 
