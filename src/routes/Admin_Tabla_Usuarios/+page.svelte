@@ -120,9 +120,8 @@
         let vtelefono = document.getElementById("telefono").value;
         let vcorreo = document.getElementById("correo").value;
         let vestado = document.getElementById("estado").value;
-        //let vestado = document.getElementById('estado').value;
 
-        console.log("IDE DE ESTADO ENVIADO A LA BASE DE DATOS ES " + vestado);
+        console.log("ID DE ESTADO ENVIADO A LA BASE DE DATOS ES " + vestado);
 
         try {
             console.log("Entra al try de actualzar");
@@ -183,30 +182,31 @@
         }
     }
 
-    const serviceID = "service_acpug5r";
+    /*const serviceID = "service_acpug5r";
     const templateID = "template_bloqueouser";
-    const apikey = "3bmpPn1S0SLhgotWj";
+    const apikey = "3bmpPn1S0SLhgotWj";*/
 
-    async function desactivar(id, nombre, email) {
+    async function desactivar(id /*nombre, email*/) {
         let vestado = 0;
         let vid = id;
-        console.log("Correo" + email);
+        let estadoBooleano = vestado !== 0;
+        //console.log("Correo" + email);
         try {
             const response = await fetch(
-                `https://proyectomascotas.onrender.com/update_user/${vid}`,
+                `https://proyectomascotas.onrender.com/update_estado_user/${vid}`,
                 {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                        id: vid,
-                        estado: vestado,
+                        estado: estadoBooleano, // Envía el valor booleano
                     }),
                 },
             );
 
             const data = await response.json();
+
             if (response.ok) {
                 const Toast = Swal.mixin({
                     toast: true,
@@ -228,7 +228,7 @@
                 });
                 //sendEmail()
 
-                function sendEmail() {
+                /*function sendEmail() {
                     emailjs.init(apikey);
                     emailjs
                         .send(serviceID, templateID, {
@@ -244,7 +244,7 @@
                                 error.text,
                             );
                         });
-                }
+                }*/
 
                 setTimeout(() => {
                     location.reload();
@@ -260,9 +260,12 @@
         }
     }
 
-    async function activar(id, nombre) {
+    async function activar(id) {
         let vestado = 1;
         let vid = id;
+
+        // Convertir el valor a booleano
+        let estadoBooleano = vestado === 1;
 
         try {
             const response = await fetch(
@@ -273,7 +276,7 @@
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                        estado: vestado,
+                        estado: estadoBooleano, // Envía el valor booleano
                     }),
                 },
             );
@@ -389,8 +392,8 @@
                                             on:click={() =>
                                                 desactivar(
                                                     todo.id,
-                                                    todo.nombre,
-                                                    todo.email,
+                                                    /*todo.nombre,
+                                                    todo.email,*/
                                                 )}
                                         >
                                             Desactivar
@@ -399,8 +402,7 @@
                                         <!-- Mostrar botón "Activar" si el usuario está desactivado -->
                                         <button
                                             class="btn btn-success"
-                                            on:click={() =>
-                                                activar(todo.id, todo.nombre)}
+                                            on:click={() => activar(todo.id)}
                                         >
                                             Activar
                                         </button>
