@@ -3,12 +3,12 @@
         <div class="row">
             <!-- Sección de la marca -->
             <div class="col-12 col-md-4 mb-4 mb-md-0">
-                <h3 class="fw-bold text-primary">PETTRACKER</h3>
-                <p class="pt-2">Mascota segura, dueño tranquilo.</p>
+                <h3 class="fw-bold text-primary">SENSUTRACK</h3>
+                <p class="pt-2">Confianza y seguridad en cada paso.</p>
                 <p><strong>Teléfono:</strong></p>
                 <p>0987654321</p>
                 <p><strong>Correo:</strong></p>
-                <p>PetTrackerOF@gmail.com</p>
+                <p>SensuTrackSupport@gmail.com</p>
             </div>
 
             <!-- Menú de navegación -->
@@ -66,30 +66,30 @@
                 <ul class="list-unstyled">
                     <li class="py-1">
                         <a
-                            href="/"
-                            class="text-white text-decoration-none nav-link"
-                            >Navbars</a
+                            href="/sobre_nosotros"
+                            class="text-white text-decoration-none nav-link bi bi-house-door"
+                            >Sobre Nosotros</a
                         >
                     </li>
                     <li class="py-1">
                         <a
-                            href="/"
-                            class="text-white text-decoration-none nav-link"
-                            >Cards</a
+                            href="/preguntas_frecuentes"
+                            class="text-white text-decoration-none nav-link bi bi-question-circle"
+                            >Preguntas Frecuentes</a
                         >
                     </li>
                     <li class="py-1">
                         <a
-                            href="/"
-                            class="text-white text-decoration-none nav-link"
-                            >Buttons</a
+                            href="/contacto"
+                            class="text-white text-decoration-none nav-link bi bi-envelope"
+                            >Contactenos</a
                         >
                     </li>
                     <li class="py-1">
                         <a
-                            href="/"
-                            class="text-white text-decoration-none nav-link"
-                            >Carousels</a
+                            href="/login"
+                            class="text-white text-decoration-none nav-link bi bi-person-circle"
+                            >Mapa</a
                         >
                     </li>
                 </ul>
@@ -117,7 +117,7 @@
         <!-- Copyright -->
         <div class="row">
             <div class="col text-center">
-                <p>&copy; 2024 PETTRACKER. Todos los derechos reservados.</p>
+                <p>&copy; 2024 SensuTrack. Todos los derechos reservados.</p>
             </div>
         </div>
     </div>
