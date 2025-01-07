@@ -3,14 +3,11 @@
         <div class="row align-items-center">
             <div class="col-md-6 text-center text-md-start">
                 <h2 class="display-4 text-primary">
-                    La seguridad que tu mascota merece, la tranquilidad que tú
-                    necesitas.
+                    Navega con confianza y seguridad.
                 </h2>
                 <p class="lead text-muted mb-4">
-                    Porque cada paseo, cada aventura, y cada momento cuenta. Con
-                    nuestro collar GPS, nunca perderás de vista a tu compañero
-                    más fiel. Seguridad, amor y tecnología en un solo
-                    dispositivo.
+                    Nuestros dispositivos GPS para personas ciegas te permiten
+                    vivir con independencia y libertad.
                 </p>
                 <a href="/login" class="btn btn-primary btn-lg rounded-pill"
                     >Descubre más</a

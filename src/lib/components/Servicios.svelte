@@ -6,7 +6,8 @@
                     <h2 class="display-4 text-primary">Información General</h2>
                     <p class="lead text-muted">
                         Descubre las características y beneficios que hacen de
-                        nuestro collar GPS la opción ideal para tu mascota.
+                        nuestros dispositivos GPS la opción ideal para personas
+                        ciegas.
                     </p>
                 </div>
             </div>
@@ -21,9 +22,9 @@
                             Rastreo en Tiempo Real
                         </h3>
                         <p class="card-text text-muted">
-                            Mantén a tu mascota siempre a la vista, en cualquier
-                            momento y lugar, gracias al rastreo en tiempo real.
-                            ¡Nunca más perderás de vista a tu compañero fiel!
+                            Mantén un seguimiento preciso de la ubicación en
+                            tiempo real, permitiendole moverse con confianza y
+                            seguridad en cualquier entorno.
                         </p>
                         <a
                             href="/login"
@@ -43,10 +44,10 @@
                             Asignaciones Inteligentes
                         </h3>
                         <p class="card-text text-muted">
-                            Personaliza las asignaciones de geocercas para
-                            recibir alertas si tu mascota se aleja de áreas
-                            predefinidas. ¡Seguridad y control al alcance de tu
-                            mano!
+                            Personaliza rutas y recibe alertas si se desvía de
+                            áreas predefinidas, garantizando su seguridad y
+                            orientación en todo momento. ¡Seguridad y control al
+                            alcance de tu mano!.
                         </p>
                         <a
                             href="/login"
@@ -57,18 +58,19 @@
                 </div>
             </div>
 
-            <!-- Card 3: Para perros y gatos -->
+            <!-- Card 3: Para Todas las Necesidades -->
             <div class="col-12 col-md-4 mb-3">
                 <div class="card text-center shadow-lg border-0 rounded-3">
                     <div class="card-img-top bg-car3"></div>
                     <div class="card-body">
                         <h3 class="card-title text-primary">
-                            Para Perros y Gatos
+                            Para Todas las Necesidades
                         </h3>
                         <p class="card-text text-muted">
-                            Nuestro collar GPS es perfecto tanto para perros
-                            como para gatos, asegurando que todos los miembros
-                            de la familia estén siempre a salvo.
+                            Nuestros dispositivos GPS están diseñados para
+                            adaptarse a las necesidades de personas ciegas,
+                            ofreciendo soluciones personalizadas para cada
+                            situación.
                         </p>
                         <a
                             href="/login"
@@ -140,7 +142,7 @@
                 rgba(0, 0, 0, 0.3),
                 rgba(0, 0, 0, 0.3)
             ),
-            url(/rastreoM.jpg);
+            url(/asignaciones.jpg);
     }
 
     .bg-car3 {
@@ -148,7 +150,7 @@
                 rgba(0, 0, 0, 0.3),
                 rgba(0, 0, 0, 0.3)
             ),
-            url(/PyG.jpg);
+            url(/para_todas_las_necesidades.jpg);
     }
 
     .btn-outline-primary {

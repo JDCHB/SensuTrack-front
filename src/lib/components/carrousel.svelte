@@ -34,11 +34,14 @@
             <img
                 src="/carrusel1.jpg"
                 class="d-block w-100"
-                alt="Collares para mascotas"
+                alt="Dispositivos GPS para personas ciegas"
             />
             <div class="carousel-caption">
-                <h5>Los mejores collares</h5>
-                <p>Los mejores collares con GPS para tu mascota</p>
+                <h5>Dispositivos GPS de última generación</h5>
+                <p>
+                    Navega con confianza y seguridad con nuestros dispositivos
+                    GPS diseñados para personas ciegas.
+                </p>
                 <p><a href="#!" class="btn btn-primary mt-3">Leer más</a></p>
             </div>
         </div>
@@ -46,11 +49,14 @@
             <img
                 src="/carrusel2.jpg"
                 class="d-block w-100"
-                alt="Collares para mascotas"
+                alt="Dispositivos GPS para personas ciegas"
             />
             <div class="carousel-caption">
-                <h5>Los mejores collares</h5>
-                <p>Los mejores collares con GPS para tu mascota</p>
+                <h5>Independencia y seguridad</h5>
+                <p>
+                    Facilitamos la movilidad y la independencia de las personas
+                    ciegas con tecnología avanzada.
+                </p>
                 <p><a href="#!" class="btn btn-primary mt-3">Leer más</a></p>
             </div>
         </div>
@@ -58,11 +64,14 @@
             <img
                 src="/imagen1c.jpg"
                 class="d-block w-100"
-                alt="Collares para mascotas"
+                alt="Dispositivos GPS para personas ciegas"
             />
             <div class="carousel-caption">
-                <h5>Los mejores collares</h5>
-                <p>Los mejores collares con GPS para tu mascota</p>
+                <h5>Tecnología accesible</h5>
+                <p>
+                    Diseñamos dispositivos GPS fáciles de usar y adaptados a las
+                    necesidades de las personas ciegas.
+                </p>
                 <p><a href="#!" class="btn btn-primary mt-3">Leer más</a></p>
             </div>
         </div>
