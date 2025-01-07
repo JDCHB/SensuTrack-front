@@ -5,8 +5,11 @@
                 class="contact-section bg-light p-4 rounded"
                 style="margin-top: 10%; margin-bottom: 10;"
             >
-                <h2>Formulario de Contacto 🐾</h2>
-                <p>¡Cuéntanos cómo podemos ayudar a tu amigo peludo!</p>
+                <h2>👨‍🦯 Formulario de Contacto 👨‍🦯‍➡️</h2>
+                <p>
+                    ¡Cuéntanos cómo podemos ayudarte a mejorar la movilidad y
+                    seguridad de las personas ciegas! (❁´◡`❁)
+                </p>
                 <form
                     action="https://formsubmit.co/pettrackerof@gmail.com"
                     method="POST"
@@ -54,7 +57,7 @@
                         <button
                             type="submit"
                             class="btn btn-primary w-100 mt-4 shadow-sm rounded-pill"
-                            >🐶 Enviar mensaje 🐱</button
+                            >🦮 Enviar mensaje 🦮</button
                         >
                     </div>
                     <input
