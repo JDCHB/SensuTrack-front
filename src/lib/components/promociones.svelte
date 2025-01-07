@@ -15,8 +15,8 @@
             </div>
             <div class="col-md-6 text-center">
                 <img
-                    src="/localizador-GPS-perro.webp"
-                    alt="Localizador GPS para perro"
+                    src="/banner.jpg"
+                    alt="BANNER"
                     class="img-fluid rounded-3 shadow-lg"
                 />
             </div>
