@@ -1,6 +1,8 @@
 <section class="faq py-5">
     <div class="container">
-        <h2 class="text-center mb-4">Preguntas Frecuentes</h2>
+        <h2 class="text-center mb-4">
+            Preguntas Frecuentes sobre GPS para Personas Ciegas
+        </h2>
         <div class="row">
             <div class="col-md-12">
                 <!-- Acordeón de preguntas frecuentes -->
@@ -30,10 +32,11 @@
                                 data-bs-parent="#faqAccordion"
                             >
                                 <div class="card-body">
-                                    El collar GPS se conecta a tu teléfono móvil
-                                    mediante nuestra aplicación, y te permite
-                                    rastrear la ubicación exacta de tu mascota
-                                    en tiempo real.
+                                    El GPS se conecta a tu teléfono móvil
+                                    mediante nuestra aplicación o sitio web, y
+                                    te permite rastrear la ubicación exacta de
+                                    una persona ciega en tiempo real, ayudando
+                                    en su navegación y seguridad.
                                 </div>
                             </div>
                         </div>
@@ -51,7 +54,7 @@
                                         aria-expanded="false"
                                         aria-controls="collapseTwo"
                                     >
-                                        ¿El collar es resistente al agua?
+                                        ¿El dispositivo es resistente al agua?
                                     </button>
                                 </h5>
                             </div>
@@ -62,9 +65,9 @@
                                 data-bs-parent="#faqAccordion"
                             >
                                 <div class="card-body">
-                                    Sí, el collar es resistente al agua, por lo
-                                    que puede ser usado incluso bajo la lluvia o
-                                    mientras tu mascota se baña.
+                                    Sí, el dispositivo GPS es resistente al
+                                    agua, por lo que puede ser usado incluso
+                                    bajo la lluvia o en condiciones húmedas.
                                 </div>
                             </div>
                         </div>
@@ -82,7 +85,7 @@
                                         aria-expanded="false"
                                         aria-controls="collapseThree"
                                     >
-                                        ¿Cómo se carga el collar?
+                                        ¿Cómo se carga el dispositivo?
                                     </button>
                                 </h5>
                             </div>
@@ -93,9 +96,9 @@
                                 data-bs-parent="#faqAccordion"
                             >
                                 <div class="card-body">
-                                    El collar se carga mediante un cable USB que
-                                    viene incluido en el paquete. La carga
-                                    completa se logra en 2 horas.
+                                    El dispositivo se carga mediante un cable
+                                    USB que viene incluido en el paquete. La
+                                    carga completa se logra en 2 horas.
                                 </div>
                             </div>
                         </div>
@@ -124,7 +127,7 @@
                                 data-bs-parent="#faqAccordion"
                             >
                                 <div class="card-body">
-                                    La batería del collar dura hasta 7 días
+                                    La batería del dispositivo dura hasta 7 días
                                     dependiendo del uso. Puedes verificar el
                                     estado de la batería a través de la app.
                                 </div>
