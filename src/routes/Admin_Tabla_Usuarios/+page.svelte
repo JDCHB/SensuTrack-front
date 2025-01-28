@@ -224,7 +224,7 @@
                     iconColor: "white",
                     color: "white",
                     background: "#ff4e4e",
-                    title: "usuario desactivado con exito",
+                    title: "El Usuario a sido desactivado de manera exitosa",
                 });
                 //sendEmail()
 
@@ -300,7 +300,7 @@
                     iconColor: "#000000",
                     color: "black",
                     background: "#76fa78",
-                    title: "usuario activado con exito",
+                    title: "El usuario se ha activado de manera exitosa",
                 });
 
                 setTimeout(() => {
