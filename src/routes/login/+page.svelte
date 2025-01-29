@@ -103,97 +103,140 @@
 
 <Navbar></Navbar>
 
-<section class="vh-100">
-  <div class="container py-5 h-100">
-    <div class="row d-flex align-items-center justify-content-center h-100">
-      <div class="col-md-8 col-lg-7 col-xl-6">
-        <img
-          src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
-          class="img-fluid"
-          alt=""
-        />
-      </div>
-      <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-        <form on:submit|preventDefault={Login}>
-          <!-- Email input -->
-          <div data-mdb-input-init class="form-outline mb-4">
-            <input
-              type="email"
-              id="correo"
-              class="form-control form-control-lg"
-              bind:value={v_usuario}
-              placeholder="Correo Electronico"
-              required
-            />
-          </div>
+<section
+  class="vh-100 pt-5"
+  style="background-color: #eee; padding-bottom: 50%;"
+>
+  <div class="wrapper d-flex align-items-center justify-content-center vh-100">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-lg-12 col-xl-11">
+          <div class="card text-black" style="border-radius: 25px;">
+            <div class="card-body p-md-5">
+              <div class="row justify-content-center">
+                <!-- Columna para la imagen -->
+                <div
+                  class="col-md-10 col-lg-6 col-xl-5 d-flex align-items-center"
+                >
+                  <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                    class="img-fluid"
+                    alt=""
+                    style="max-width: 110%;"
+                  />
+                </div>
 
-          <!-- Password input -->
-          <div data-mdb-input-init class="form-outline mb-4">
-            <input
-              type="password"
-              id="contraseña"
-              class="form-control form-control-lg"
-              bind:value={v_password}
-              placeholder="Contraseña"
-              required
-            />
-          </div>
+                <!-- Columna para el formulario -->
+                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                  <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+                    INICIAR SESIÓN
+                  </p>
 
-          <div class="d-flex justify-content-around align-items-center mb-4">
-            <a href="#!">Olvidaste la contraseña?</a>
-          </div>
+                  <form on:submit|preventDefault={Login} class="mx-1 mx-md-4">
+                    <!-- Campos del formulario -->
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="bi bi-envelope fa-lg me-3 fa-fw"></i>
+                      <div
+                        data-mdb-input-init
+                        class="form-outline flex-fill mb-0"
+                      >
+                        <input
+                          type="email"
+                          id="correo"
+                          class="form-control form-control-lg"
+                          bind:value={v_usuario}
+                          placeholder="Correo Electronico"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="bi bi-lock fa-lg me-3 fa-fw"></i>
+                      <div
+                        data-mdb-input-init
+                        class="form-outline flex-fill mb-0"
+                      >
+                        <input
+                          type="password"
+                          id="contraseña"
+                          class="form-control form-control-lg"
+                          bind:value={v_password}
+                          placeholder="Contraseña"
+                          required
+                        />
+                      </div>
+                    </div>
 
-          <div class="d-flex justify-content-around align-items-center mb-4">
-            <a href="/Registro_User">No tienes cuenta? Registrate!!</a>
-          </div>
-          <!-- Submit button -->
-          <div class="text-center">
-            <button
-              type="submit"
-              data-mdb-button-init
-              data-mdb-ripple-init
-              class="btn btn-primary btn-lg btn-block">Iniciar Sesión</button
-            >
-          </div>
-          <div class="divider d-flex align-items-center my-4">
-            <p class="text-center fw-bold mx-3 mb-0 text-muted">
-              TAMBIEN PUEDES INICIAR SESION CON:
-            </p>
-          </div>
+                    <div
+                      class="d-flex justify-content-around align-items-center mb-4"
+                    >
+                      <a href="#!">Olvidaste la contraseña?</a>
+                    </div>
 
-          <a
-            data-mdb-ripple-init
-            class="btn btn-primary btn-lg btn-block"
-            style="background-color: #3b5998"
-            href="#!"
-            role="button"
-          >
-            <i class="bi bi-facebook me-2"></i>Continuar con Facebook
-          </a>
-          <a
-            data-mdb-ripple-init
-            class="btn btn-primary btn-lg btn-block"
-            style="background-color: #0082fb"
-            href="#!"
-            role="button"
-          >
-            <i class="bi bi-google me-2"></i>Continuar con Google</a
-          >
-        </form>
-        <!-- Loader del login -->
-        <div class="loader-container" bind:this={loginLoader}>
-          <div class="loader-dog-head">
-            <div class="ear left-ear"></div>
-            <div class="ear right-ear"></div>
-            <div class="eye left-eye">
-              <div class="pupil"></div>
+                    <div
+                      class="d-flex justify-content-around align-items-center mb-4"
+                    >
+                      <a href="/Registro_User">No tienes cuenta? Registrate!!</a
+                      >
+                    </div>
+
+                    <div class="text-center">
+                      <button
+                        type="submit"
+                        data-mdb-button-init
+                        data-mdb-ripple-init
+                        class="btn btn-primary btn-lg btn-block"
+                        >Iniciar Sesión</button
+                      >
+                    </div>
+
+                    <div class="divider d-flex align-items-center my-4">
+                      <p class="text-center fw-bold mx-3 mb-0 text-muted">
+                        TAMBIEN PUEDES INICIAR SESION CON:
+                      </p>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                      <a
+                        data-mdb-ripple-init
+                        class="btn btn-primary btn-lg"
+                        style="background-color: #3b5998"
+                        href="#!"
+                        role="button"
+                      >
+                        <i class="bi bi-facebook me-2"></i>
+                        Facebook
+                      </a>
+                      <a
+                        data-mdb-ripple-init
+                        class="btn btn-primary btn-lg"
+                        style="background-color: #0082fb"
+                        href="#!"
+                        role="button"
+                      >
+                        <i class="bi bi-google me-2"></i>Google
+                      </a>
+                    </div>
+                  </form>
+                  <!-- Loader del login -->
+                  <div class="loader-container" bind:this={loginLoader}>
+                    <div class="loader-dog-head">
+                      <div class="ear left-ear"></div>
+                      <div class="ear right-ear"></div>
+                      <div class="eye left-eye">
+                        <div class="pupil"></div>
+                      </div>
+                      <div class="eye right-eye">
+                        <div class="pupil"></div>
+                      </div>
+                      <div class="nose"></div>
+                      <div class="mouth"></div>
+                      <div class="tongue"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="eye right-eye">
-              <div class="pupil"></div>
-            </div>
-            <div class="nose"></div>
-            <div class="mouth"></div>
-            <div class="tongue"></div>
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@
     import Navbar from "../../lib/components/Navbar.svelte";
     import { onMount } from "svelte";
 
+    let v_usuario = "";
     let v_password = "";
     let v_nombre = "";
     let v_apellido = "";
@@ -36,7 +37,7 @@
             // Muestra el cuadro de confirmación antes de proceder con el registro
             const result = await Swal.fire({
                 title: "¿Estás seguro?",
-                text: "¡Desea registrarse a SensuTrack!?",
+                text: "¡Desea registrarse a PETTRACKER!?",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
@@ -84,7 +85,6 @@
                             title: "custom-title", // Clase personalizada para el título
                         },
                     });
-                    window.location.href = "/login";
                 } else {
                     alert("Error en el registro");
                 }
@@ -102,7 +102,7 @@
 <Navbar></Navbar>
 <section
     class="vh-100 pt-5"
-    style="background-color: #eee; padding-bottom: 55%;"
+    style="background-color: #eee; padding-bottom: 60%; "
 >
     <div
         class="wrapper d-flex align-items-center justify-content-center vh-100"
@@ -250,6 +250,25 @@
                                         </div>
 
                                         <div
+                                            class="d-flex flex-row align-items-center mb-4"
+                                        >
+                                            <i
+                                                class="bi bi-lock-fill fa-lg me-3 fa-fw"
+                                            ></i>
+                                            <div
+                                                data-mdb-input-init
+                                                class="form-outline flex-fill mb-0"
+                                            >
+                                                <input
+                                                    type="password"
+                                                    class="form-control"
+                                                    placeholder="Confirmar Contraseña"
+                                                    required
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div
                                             class="form-check d-flex justify-content-center mb-5"
                                         >
                                             <input
@@ -274,6 +293,9 @@
                                             class="d-flex justify-content-center mx-4 mb-3 mb-lg-4"
                                         >
                                             <button
+                                                type="button"
+                                                data-mdb-button-init
+                                                data-mdb-ripple-init
                                                 class="btn btn-primary btn-lg"
                                                 >Registrarse</button
                                             >
@@ -303,8 +325,8 @@
                                 >
                                     <img
                                         src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
-                                        alt=""
                                         class="img-fluid"
+                                        alt=""
                                     />
                                 </div>
                             </div>
@@ -315,9 +337,26 @@
         </div>
     </div>
 </section>
+
 <Footer></Footer>
 
 <style>
+    /* Estilos para Sweet Alert */
+    /* Fondo blanco para la alerta SweetAlert */
+    .swal-popup {
+        background-color: white !important;
+    }
+
+    /* Fondo blanco para la alerta de éxito */
+    .swal-popup-success {
+        background-color: white !important;
+    }
+    /* Cambiar el color del título a negro */
+    .custom-title {
+        color: black !important; /* Asegúrate de que el color se aplique */
+        text-align: center; /* Centrar el título */
+    }
+
     /* Estilos para el loader de la cara de un perrito */
     .wrapper {
         --input-focus: #2d8cf0;
