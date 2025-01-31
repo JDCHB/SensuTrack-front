@@ -37,7 +37,7 @@
             // Muestra el cuadro de confirmación antes de proceder con el registro
             const result = await Swal.fire({
                 title: "¿Estás seguro?",
-                text: "¡Desea registrarse a PETTRACKER!?",
+                text: "¡Desea registrarse a SensuTrack!?",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",

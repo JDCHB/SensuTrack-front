@@ -22,6 +22,10 @@
         window.location.href = "/Admin_Tabla_Usuarios";
     };
 
+    const mostrarRegistroRoles = () => {
+        window.location.href = "/Admin_Registro_Roles";
+    };
+
     const logout = () => {
         window.location.href = "/login";
     };
@@ -92,9 +96,9 @@
                     <div class="col-6 mb-3">
                         <button
                             class="btn btn-lg btn-outline-success d-flex align-items-center justify-content-between w-100"
-                            on:click={mostrarTablaUsuarios}
+                            on:click={mostrarRegistroRoles}
                         >
-                            <span>PERFIL</span>
+                            <span>REGISTRAR ROLES</span>
                             <i class="bi bi-gear-fill"></i>
                         </button>
                     </div>
