@@ -1,5 +1,4 @@
 <script>
-    import Footer from "../../lib/components/footer.svelte";
     import Navbar from "../../lib/components/Navbar.svelte";
     import { onMount } from "svelte";
 
@@ -337,8 +336,6 @@
         </div>
     </div>
 </section>
-
-<Footer></Footer>
 
 <style>
     /* Estilos para Sweet Alert */
