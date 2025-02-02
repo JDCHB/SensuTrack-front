@@ -26,6 +26,10 @@
         window.location.href = "/Admin_Registro_Roles";
     };
 
+    const mostrarRegistroModulos = () => {
+        window.location.href = "/Admin_Registro_Modulo";
+    };
+
     const logout = () => {
         window.location.href = "/login";
     };
@@ -99,6 +103,15 @@
                             on:click={mostrarRegistroRoles}
                         >
                             <span>REGISTRAR ROLES</span>
+                            <i class="bi bi-gear-fill"></i>
+                        </button>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <button
+                            class="btn btn-lg btn-outline-dark d-flex align-items-center justify-content-between w-100"
+                            on:click={mostrarRegistroModulos}
+                        >
+                            <span>REGISTRAR MODULOS</span>
                             <i class="bi bi-gear-fill"></i>
                         </button>
                     </div>

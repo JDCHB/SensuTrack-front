@@ -76,7 +76,7 @@
 </script>
 
 <NavbarUser></NavbarUser>
-<h2>Ubicación de tus Mascotas</h2>
+<h2>Ubicacion del GPS</h2>
 
 <div class="map-container" id="map" style="height: 500px;"></div>
 
