@@ -33,7 +33,7 @@
             // Muestra el cuadro de confirmación antes de proceder con el registro
             const result = await Swal.fire({
                 title: "¿Estás seguro?",
-                text: "¡Desea registrar el siguiente Modulo!?: " + v_nombre,
+                text: "¡Desea registrar el siguiente ModuloxRol!?: " + v_nombre,
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
