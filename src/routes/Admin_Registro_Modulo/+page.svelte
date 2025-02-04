@@ -70,7 +70,7 @@
                 if (response.ok) {
                     Swal.fire({
                         title:
-                            "¡Se ha registrado el Rol llamado " +
+                            "¡Se ha registrado el Modulo llamado " +
                             v_nombre +
                             " con exito!",
                         icon: "success",
