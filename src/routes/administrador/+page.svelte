@@ -30,6 +30,10 @@
         window.location.href = "/Admin_Registro_Modulo";
     };
 
+    const mostrarRegistroModuloxRol = () => {
+        window.location.href = "/Admin_Registro_ModuloxRol";
+    };
+
     const logout = () => {
         window.location.href = "/login";
     };
@@ -113,6 +117,15 @@
                         >
                             <span>REGISTRAR MODULOS</span>
                             <i class="bi bi-gear-fill"></i>
+                        </button>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <button
+                            class="btn btn-lg btn-outline-warning d-flex align-items-center justify-content-between w-100"
+                            on:click={mostrarRegistroModuloxRol}
+                        >
+                            <span>MODULOXROL</span>
+                            <i class="bi bi-plus-circle"></i>
                         </button>
                     </div>
                     <div class="col-6 mb-3">
