@@ -4,6 +4,7 @@
 
     let v_nombre = "";
     let v_descripcion = "";
+    let v_ubicacion = "";
     let v_estado = true;
 
     //ESTOS 3 DE AQUI SON PARA LA TABLA
@@ -58,6 +59,7 @@
                         body: JSON.stringify({
                             nombre: v_nombre,
                             descripcion: v_descripcion,
+                            ubicacion: v_ubicacion,
                             estado: v_estado,
                         }),
                     },
@@ -411,6 +413,13 @@
             class="form__input small-input"
             bind:value={v_descripcion}
             placeholder="Descripcion del Modulo"
+            type="text"
+            required
+        />
+        <input
+            class="form__input small-input"
+            bind:value={v_ubicacion}
+            placeholder="Ubicacion del Modulo"
             type="text"
             required
         />
