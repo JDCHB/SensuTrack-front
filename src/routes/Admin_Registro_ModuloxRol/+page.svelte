@@ -1,17 +1,35 @@
 <script>
     import NavbarAD from "../../lib/components/NavbarAD.svelte";
     import { onMount } from "svelte";
-    let v_nombre = "";
-    let v_descripcion = "";
+    let v_id_rol = "";
     let v_estado = true;
+    let v_modulos = [];
+    let v_roles = [];
 
     //ESTOS 3 DE AQUI SON PARA LA TABLA
     let todos = {};
+    let todos2 = {};
     let loading = true;
     let error = null;
 
     // Referencias a los contenedores de los loader
     let registerLoader;
+
+    onMount(async () => {
+        const response = await fetch(
+            "https://proyectomascotas.onrender.com/get_modulos/",
+        );
+        const data = await response.json();
+        todos = data.resultado;
+        console.log(todos);
+
+        const response2 = await fetch(
+            "https://proyectomascotas.onrender.com/get_roles/",
+        );
+        const data2 = await response2.json();
+        todos2 = data2.resultado;
+        console.log(todos2);
+    });
 
     // Función para mostrar el loader
     // Función para mostrar el loader
@@ -28,12 +46,16 @@
         }
     }
 
-    async function RegisterModulo() {
+    async function RegisterModuloxRol() {
+        console.log(v_modulos);
+        console.log(v_roles);
+        v_id_modulo = document.getElementById("modulo").value;
+        v_id_rol = document.getElementById("roles").value;
         try {
             // Muestra el cuadro de confirmación antes de proceder con el registro
             const result = await Swal.fire({
                 title: "¿Estás seguro?",
-                text: "¡Desea registrar el siguiente ModuloxRol!?: " + v_nombre,
+                text: "¡Desea registrar el siguiente ModuloxRol!?",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
@@ -48,15 +70,15 @@
             if (result.isConfirmed) {
                 showLoader(registerLoader); // Mostrar loader al comenzar el registro
                 const response = await fetch(
-                    "https://proyectomascotas.onrender.com/create_modulo",
+                    "https://proyectomascotas.onrender.com/create_moduloXrol",
                     {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
                         },
                         body: JSON.stringify({
-                            nombre: v_nombre,
-                            descripcion: v_descripcion,
+                            id_modulo: v_modulos,
+                            id_rol: v_id_rol,
                             estado: v_estado,
                         }),
                     },
@@ -69,10 +91,7 @@
 
                 if (response.ok) {
                     Swal.fire({
-                        title:
-                            "¡Se ha registrado el Modulo llamado " +
-                            v_nombre +
-                            " con exito!",
+                        title: "¡Se ha registrado el ModuloxRol con exito ",
                         icon: "success",
                         customClass: {
                             popup: "swal-popup", // Clase para personalizar el popup de la alerta
@@ -398,21 +417,27 @@
     <div class="title small-title" style="color: dodgerblue;">
         REGISTRO DE MODULOS
     </div>
-    <form on:submit|preventDefault={RegisterModulo} class="class-form">
-        <input
-            class="form__input small-input"
-            bind:value={v_nombre}
-            placeholder="Nombre del Modulo"
-            type="text"
-            required
-        />
-        <input
-            class="form__input small-input"
-            bind:value={v_descripcion}
-            placeholder="Descripcion del Modulo"
-            type="text"
-            required
-        />
+    <form on:submit|preventDefault={RegisterModuloxRol} class="class-form">
+        <span>MODULOSXUSUARIO:</span>
+        <select id="roles" class="form__input" required>
+            <option value="" disabled selected>Selecciona un rol</option>
+            {#each todos2 as todo}
+                <option value={todo.id}>{todo.nombre}</option>
+            {/each}
+        </select>
+        <p>SELECCIONE LOS MODULOS:</p>
+        {#each todos as todo}
+            <label for="">
+                <br /><input
+                    type="checkbox"
+                    id="modulo"
+                    name="modulo"
+                    value={todo.id}
+                    bind:group={v_modulos}
+                />
+                {todo.nombre}
+            </label>
+        {/each}
         <button class="flip-card__btn small-btn">Confirmar</button>
     </form>
     <div class="loader-container" bind:this={registerLoader}>

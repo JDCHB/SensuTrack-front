@@ -1,6 +1,7 @@
 <script>
     import NavbarAD from "../../lib/components/NavbarAD.svelte";
     import { onMount } from "svelte";
+
     let v_nombre = "";
     let v_descripcion = "";
     let v_estado = true;
