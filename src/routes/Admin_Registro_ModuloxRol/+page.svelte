@@ -49,7 +49,6 @@
     async function RegisterModuloxRol() {
         console.log(v_modulos);
         console.log(v_roles);
-        v_id_modulo = document.getElementById("modulo").value;
         v_id_rol = document.getElementById("roles").value;
         try {
             // Muestra el cuadro de confirmación antes de proceder con el registro
