@@ -54,7 +54,7 @@
         localStorage.setItem("access_token", access_token);
         localStorage.setItem("user_data", JSON.stringify(user_data));
 
-        if (user_data.id_rol == 1) {
+        if (user_data.id_rol == 3) {
           Swal.fire({
             title: "Inicio de Sesión Exitoso",
             text: "¡Bienvenido al Sistema de Administración!",
@@ -66,7 +66,7 @@
         } else if (user_data.id_rol == 2) {
           Swal.fire({
             title: "Inicio de Sesión Exitoso",
-            text: "¡Bienvenido al Sistema!",
+            text: "¡Bienvenido al Sistema de Usuario!",
             icon: "success",
             confirmButtonText: "OK",
             customClass: {
@@ -75,6 +75,19 @@
             },
           }).then(() => {
             window.location.href = "/usuario";
+          });
+        } else {
+          Swal.fire({
+            title: "Inicio de Sesión Exitoso",
+            text: "¡Bienvenido al Sistema!",
+            icon: "success",
+            confirmButtonText: "OK",
+            customClass: {
+              popup: "swal-popup", // Clase para personalizar el popup de la alerta
+              title: "custom-title", // Clase personalizada para el título
+            },
+          }).then(() => {
+            window.location.href = "/Can_See_Or_Not";
           });
         }
       } else {

@@ -14,8 +14,8 @@
         window.location.href = "/Admin_reportes";
     };
 
-    const mostrarConfirmacionRegistroCollares = () => {
-        window.location.href = "/Admin_Registro_Collares";
+    const mostrarConfirmacionRegistroGPS = () => {
+        window.location.href = "/Admin_Registro_GPS";
     };
 
     const mostrarTablaUsuarios = () => {
@@ -45,13 +45,12 @@
         <div class="col-md-8 col-lg-6">
             <div class="admin-menu bg-white shadow-lg rounded p-4">
                 <h2 class="text-center mb-4 text-primary">
-                    Menú de Administrador
+                    Menú de Super_Administrador
                 </h2>
 
                 <div class="text-center mb-4">
                     <p class="lead">
-                        Bienvenido, Administrador. ¿A qué página deseas
-                        ingresar?
+                        Bienvenido, Super_Admin. ¿A qué página deseas ingresar?
                     </p>
                 </div>
 
@@ -86,7 +85,7 @@
                     <div class="col-6 mb-3">
                         <button
                             class="btn btn-lg btn-outline-warning d-flex align-items-center justify-content-between w-100"
-                            on:click={mostrarConfirmacionRegistroCollares}
+                            on:click={mostrarConfirmacionRegistroGPS}
                         >
                             <span>REGISTRAR COLLARES</span>
                             <i class="bi bi-plus-circle"></i>
@@ -107,7 +106,7 @@
                             on:click={mostrarRegistroRoles}
                         >
                             <span>REGISTRAR ROLES</span>
-                            <i class="bi bi-gear-fill"></i>
+                            <i class="bi bi-person-plus"></i>
                         </button>
                     </div>
                     <div class="col-6 mb-3">
