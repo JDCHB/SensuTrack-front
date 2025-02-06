@@ -1,6 +1,6 @@
 <script>
-    import Navbaradmin from "../../lib/components/NavbarAD.svelte";
     import { onMount } from "svelte";
+    import NavBarCanSeeOrNot from "../../../lib/components/NavBarCanSeeOrNot.svelte";
 
     let todos = {};
     let loading = true;
@@ -317,7 +317,7 @@
     }
 </script>
 
-<Navbaradmin></Navbaradmin>
+<NavBarCanSeeOrNot></NavBarCanSeeOrNot>
 
 <div id="Mostrarusuario">
     <div class="container py-4">

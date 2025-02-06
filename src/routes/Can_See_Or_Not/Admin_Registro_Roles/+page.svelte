@@ -1,5 +1,5 @@
 <script>
-    import NavbarAD from "../../lib/components/NavbarAD.svelte";
+    import NavBarCanSeeOrNot from "$lib/components/NavBarCanSeeOrNot.svelte";
     import { onMount } from "svelte";
     let v_nombre = "";
     let v_estado = true;
@@ -381,7 +381,7 @@
     }
 </script>
 
-<NavbarAD></NavbarAD>
+<NavBarCanSeeOrNot></NavBarCanSeeOrNot>
 
 <div class="wrapper">
     <div class="title small-title" style="color: dodgerblue;">

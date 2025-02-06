@@ -1,5 +1,5 @@
 <script>
-    import NavbarAD from "../../lib/components/NavbarAD.svelte";
+    import NavBarCanSeeOrNot from "$lib/components/NavBarCanSeeOrNot.svelte";
     import Footer from "../../lib/components/footer.svelte";
     import { onMount } from "svelte";
 
@@ -85,7 +85,7 @@
     }
 </script>
 
-<NavbarAD />
+<NavBarCanSeeOrNot></NavBarCanSeeOrNot>
 
 <div class="container" style="margin-top: 5%;">
     <div class="text-center pt-1 fs-3">

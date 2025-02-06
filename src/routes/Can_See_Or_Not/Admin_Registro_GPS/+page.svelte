@@ -1,5 +1,5 @@
 <script>
-    import NavbarAD from "../../lib/components/NavbarAD.svelte";
+    import NavBarCanSeeOrNot from "$lib/components/NavBarCanSeeOrNot.svelte";
     import { onMount } from "svelte";
     let numero_serie = "";
     let id_mascota_vinculada = "";
@@ -74,7 +74,7 @@
     }
 </script>
 
-<NavbarAD></NavbarAD>
+<NavBarCanSeeOrNot></NavBarCanSeeOrNot>
 <div class="main">
     <h2>Registrar Collar GPS</h2>
     <form on:submit|preventDefault={registrarCollar}>

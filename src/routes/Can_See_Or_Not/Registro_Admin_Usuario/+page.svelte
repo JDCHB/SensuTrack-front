@@ -1,5 +1,5 @@
 <script>
-    import NavbarAd from "$lib/components/NavbarAD.svelte";
+    import NavBarCanSeeOrNot from "../../../lib/components/NavBarCanSeeOrNot.svelte";
 
     let v_password = "";
     let v_nombre = "";
@@ -89,7 +89,7 @@
     }
 </script>
 
-<NavbarAd></NavbarAd>
+<NavBarCanSeeOrNot></NavBarCanSeeOrNot>
 
 <div class="wrapper">
     <div class="title small-title" style="color: dodgerblue;">

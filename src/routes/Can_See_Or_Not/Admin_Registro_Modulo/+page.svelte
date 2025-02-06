@@ -1,5 +1,5 @@
 <script>
-    import NavbarAD from "../../lib/components/NavbarAD.svelte";
+    import NavBarCanSeeOrNot from "$lib/components/NavBarCanSeeOrNot.svelte";
     import { onMount } from "svelte";
 
     let v_nombre = "";
