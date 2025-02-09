@@ -418,27 +418,37 @@
     </div>
     <form on:submit|preventDefault={RegisterModuloxRol} class="class-form">
         <span>MODULOSXUSUARIO:</span>
+
+        <!-- Selector de roles -->
         <select id="roles" class="form__input" required>
             <option value="" disabled selected>Selecciona un rol</option>
             {#each todos2 as todo}
                 <option value={todo.id}>{todo.nombre}</option>
             {/each}
         </select>
-        <p>SELECCIONE LOS MODULOS:</p>
-        {#each todos as todo}
-            <label for="">
-                <br /><input
-                    type="checkbox"
-                    id="modulo"
-                    name="modulo"
-                    value={todo.id}
-                    bind:group={v_modulos}
-                />
-                {todo.nombre}
-            </label>
-        {/each}
+
+        <!-- Sección de selección de módulos -->
+        <fieldset class="checkbox-group">
+            <legend>Seleccione los módulos:</legend>
+            <div class="checkbox-container">
+                {#each todos as todo}
+                    <label class="checkbox-label">
+                        <input
+                            type="checkbox"
+                            id="modulo-{todo.id}"
+                            name="modulo"
+                            value={todo.id}
+                            bind:group={v_modulos}
+                        />
+                        {todo.nombre}
+                    </label>
+                {/each}
+            </div>
+        </fieldset>
+
         <button class="flip-card__btn small-btn">Confirmar</button>
     </form>
+
     <div class="loader-container" bind:this={registerLoader}>
         <div class="loader-dog-head">
             <div class="ear left-ear"></div>
@@ -630,6 +640,39 @@
 </div>
 
 <style>
+    /* ESTILOS PARA EL CHECKBOX */
+    .checkbox-group {
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 15px;
+        background: #f9f9f9;
+    }
+
+    .checkbox-group legend {
+        font-weight: bold;
+        margin-bottom: 10px;
+        font-size: 1.1em;
+    }
+
+    .checkbox-container {
+        display: grid;
+        grid-template-columns: repeat(
+            auto-fill,
+            minmax(150px, 1fr)
+        ); /* Múltiples columnas */
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .checkbox-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.95em;
+        cursor: pointer;
+    }
+
     /* Estilos para Sweet Alert */
     /* Fondo blanco para la alerta SweetAlert */
     .swal-popup {

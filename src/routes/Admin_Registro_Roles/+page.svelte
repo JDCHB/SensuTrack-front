@@ -571,16 +571,21 @@
                 </div>
             </div>
 
-            <p>Modulos:</p>
-            {#each todos_modulos as modulo}
-                <label for="">
-                    <input
-                        type="checkbox"
-                        value={modulo.id}
-                        bind:group={agrupacion}
-                    />{modulo.nombre}
-                </label>
-            {/each}
+            <fieldset class="checkbox-group">
+                <legend>Seleccione los módulos:</legend>
+                <div class="checkbox-container">
+                    {#each todos_modulos as modulo}
+                        <label class="checkbox-label">
+                            <input
+                                type="checkbox"
+                                value={modulo.id}
+                                bind:group={agrupacion}
+                            />
+                            {modulo.nombre}
+                        </label>
+                    {/each}
+                </div>
+            </fieldset>
 
             <div class="row pt-3">
                 <div class="col-lg-2">
@@ -615,6 +620,39 @@
 </div>
 
 <style>
+    /* ESTILOS DEL CHECKBOX */
+    .checkbox-group {
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 10px;
+        background: #f9f9f9;
+    }
+
+    .checkbox-group legend {
+        font-weight: bold;
+        margin-bottom: 8px;
+        font-size: 1.1em;
+    }
+
+    .checkbox-container {
+        display: grid;
+        grid-template-columns: repeat(
+            auto-fill,
+            minmax(150px, 1fr)
+        ); /* Se ajusta dinámicamente */
+        gap: 10px;
+        margin-top: 5px;
+    }
+
+    .checkbox-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.95em;
+        cursor: pointer;
+    }
+
     /* Estilos para Sweet Alert */
     /* Fondo blanco para la alerta SweetAlert */
     .swal-popup {
