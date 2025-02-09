@@ -414,10 +414,10 @@
 
 <div class="wrapper">
     <div class="title small-title" style="color: dodgerblue;">
-        REGISTRO DE MODULOS
+        REGISTRO DE MODULOSXROL
     </div>
     <form on:submit|preventDefault={RegisterModuloxRol} class="class-form">
-        <span>MODULOSXUSUARIO:</span>
+        <span>Roles:</span>
 
         <!-- Selector de roles -->
         <select id="roles" class="form__input" required>
@@ -429,7 +429,8 @@
 
         <!-- Sección de selección de módulos -->
         <fieldset class="checkbox-group">
-            <legend>Seleccione los módulos:</legend>
+            <legend>Módulos:</legend>
+            <span>Selecciona los Modulos que tendra el Rol seleccionado:</span>
             <div class="checkbox-container">
                 {#each todos as todo}
                     <label class="checkbox-label">
