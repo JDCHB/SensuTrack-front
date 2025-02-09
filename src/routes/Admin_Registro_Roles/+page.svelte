@@ -6,11 +6,23 @@
 
     //ESTOS 3 DE AQUI SON PARA LA TABLA
     let todos = {};
+    let todos_modulos = {};
     let loading = true;
     let error = null;
+    let agrupacion = [];
 
     // Referencias a los contenedores de los loader
     let registerLoader;
+
+    onMount(async () => {
+        const response = await fetch(
+            "https://proyectomascotas.onrender.com/get_modulos/",
+        );
+
+        const data = await response.json();
+        todos_modulos = data.resultado;
+        console.log("ando ando", todos_modulos);
+    });
 
     // Función para mostrar el loader
     // Función para mostrar el loader
@@ -146,6 +158,15 @@
         cambiar.insertBefore(v_editar, ocultar);
         console.log("NO Entra al try de buscar");
 
+        //get modulos para mostrar todos los modulos creados
+        const response = await fetch(
+            "https://proyectomascotas.onrender.com/get_modulos/",
+        );
+
+        const data = await response.json();
+        todos_modulos = data.resultado;
+        console.log("ando ando", todos_modulos);
+
         try {
             console.log("Entra al try de buscar");
 
@@ -202,6 +223,21 @@
                     body: JSON.stringify({
                         nombre: v_nombre,
                         estado: vestado,
+                    }),
+                },
+            );
+            console.log("Actualizado");
+
+            const response2 = await fetch(
+                `https://proyectomascotas.onrender.com/update_moduloXrol02/${vid}`, // Incluye el user_id en la URL
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        id_rol: vid,
+                        id_modulo: agrupacion,
                     }),
                 },
             );
@@ -534,6 +570,17 @@
                     />
                 </div>
             </div>
+
+            <p>Modulos:</p>
+            {#each todos_modulos as modulo}
+                <label for="">
+                    <input
+                        type="checkbox"
+                        value={modulo.id}
+                        bind:group={agrupacion}
+                    />{modulo.nombre}
+                </label>
+            {/each}
 
             <div class="row pt-3">
                 <div class="col-lg-2">
