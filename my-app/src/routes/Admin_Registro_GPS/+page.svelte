@@ -1,5 +1,5 @@
 <script>
-    import NavbarAD from "../../lib/components/NavbarAD.svelte";
+    import NavbarAD from "$lib/components/NavbarAD.svelte";
     import { onMount } from "svelte";
     let numero_serie = "";
     let id_mascota_vinculada = "";
@@ -90,7 +90,7 @@
         </div>
 
         <div class="form-group">
-            <label for="id_mascota">ID de la Mascota Vinculada:</label>
+            <label for="id_mascota">Seleccione el correcto: </label>
             <input
                 id="id_mascota"
                 type="text"
