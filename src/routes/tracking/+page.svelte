@@ -3,14 +3,14 @@
     import { onMount } from "svelte";
 
     let map;
-    let mascotas = []; // Aquí se almacenarán los datos de las mascotas
+    let ciegos = []; // Aquí se almacenarán los datos de las mascotas
     let error = null;
 
     // Función para obtener los datos de las mascotas del usuario desde la API
     async function cargarMascotas() {
         try {
             const response = await fetch(
-                "https://proyectomascotas.onrender.com/Mascotas_Map",
+                "https://proyectomascotas.onrender.com/Ciegos_Map",
                 {
                     method: "POST",
                     headers: {
@@ -24,7 +24,7 @@
             );
             const data = await response.json();
             if (response.ok) {
-                mascotas = data.resultado; // Almacena los datos de las mascotas en el array
+                ciegos = data.resultado; // Almacena los datos de las mascotas en el array
                 mostrarUbicaciones(); // Llama a la función para mostrar los marcadores en el mapa
                 console.log(data.resultado);
             } else {
@@ -38,18 +38,18 @@
 
     // Función para mostrar las ubicaciones de las mascotas en el mapa
     function mostrarUbicaciones() {
-        mascotas.forEach((mascota) => {
+        ciegos.forEach((ciegos) => {
             const {
-                nombre_mascota,
+                nombre_discapacitado,
                 latitud,
                 longitud,
                 numero_serie,
                 nivel_bateria,
-            } = mascota;
+            } = ciegos;
             const marker = L.marker([latitud, longitud]).addTo(map);
             marker
                 .bindPopup(
-                    `<b>${nombre_mascota}</b><br>Latitud: ${latitud}, Longitud: ${longitud}<br>CollarGPS:${numero_serie}<br>Nivel de Bateria:${nivel_bateria}%`,
+                    `<b>${nombre_discapacitado}</b><br>Latitud: ${latitud}, Longitud: ${longitud}<br>CollarGPS:${numero_serie}<br>Nivel de Bateria:${nivel_bateria}%`,
                 )
                 .openPopup();
             var circle = L.circle([latitud, longitud], {
@@ -58,7 +58,9 @@
                 fillOpacity: 0.5,
                 radius: 100,
             }).addTo(map);
-            circle.bindPopup(nombre_mascota + " se encuentra en esta area!");
+            circle.bindPopup(
+                nombre_discapacitado + " se encuentra en esta area!",
+            );
         });
     }
 
