@@ -205,22 +205,6 @@
         cursor: pointer;
     }
 
-    /* Estilos para Sweet Alert */
-    /* Fondo blanco para la alerta SweetAlert */
-    .swal-popup {
-        background-color: white !important;
-    }
-
-    /* Fondo blanco para la alerta de éxito */
-    .swal-popup-success {
-        background-color: white !important;
-    }
-    /* Cambiar el color del título a negro */
-    .custom-title {
-        color: black !important; /* Asegúrate de que el color se aplique */
-        text-align: center; /* Centrar el título */
-    }
-
     /* Estilos para el loader de la cara de un perrito */
 
     /* Contenedor para el loader */
@@ -425,11 +409,6 @@
     .form__input::placeholder {
         color: #9b9b9b;
         font-size: 1.1em;
-    }
-
-    /* Campos con tamaño reducido */
-    .small-input {
-        font-size: 0.95em;
     }
 
     /* Botón de acción */

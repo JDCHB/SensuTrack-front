@@ -265,22 +265,6 @@
     background: #eee;
   }
 
-  /* Estilos para Sweet Alert */
-  /* Fondo blanco para la alerta SweetAlert */
-  .swal-popup {
-    background-color: white !important;
-  }
-
-  /* Fondo blanco para la alerta de éxito */
-  .swal-popup-success {
-    background-color: white !important;
-  }
-  /* Cambiar el color del título a negro */
-  .custom-title {
-    color: black !important; /* Asegúrate de que el color se aplique */
-    text-align: center; /* Centrar el título */
-  }
-
   /* Estilos para el loader de la cara de un perrito */
   .wrapper {
     --input-focus: #2d8cf0;
