@@ -1,6 +1,6 @@
 <script>
     import NavBarCanSeeOrNot from "$lib/components/NavBarCanSeeOrNot.svelte";
-    import Footer from "../../lib/components/footer.svelte";
+    import Footer from "$lib/components/footer.svelte";
     import { onMount } from "svelte";
 
     let todos = [];
