@@ -5,8 +5,8 @@
 
     let v_nombre = "";
     let v_genero = "";
-    let v_tpmascota = "";
-    let v_idpropietario = "";
+    let v_tipo_ceguera = "";
+    let v_id_cuidador = "";
     let v_estado = true;
     let error = null;
 
@@ -15,8 +15,8 @@
         const storedUser = JSON.parse(miStorage.getItem("user_data"));
         if (storedUser) {
             let id_p = storedUser.id;
-            v_idpropietario = id_p;
-            console.log("Propietario", v_idpropietario);
+            v_id_cuidador = id_p;
+            console.log("Propietario", v_id_cuidador);
         }
     });
 
@@ -37,11 +37,11 @@
         }
     }
 
-    async function RegisterMascota() {
+    async function RegisterDiscapacitadoV() {
         try {
             showLoader(registerLoader);
             const response = await fetch(
-                "https://proyectomascotas.onrender.com/create_mascota",
+                "https://proyectomascotas.onrender.com/create_discapacitadoV",
                 {
                     method: "POST",
                     headers: {
@@ -49,9 +49,9 @@
                     },
                     body: JSON.stringify({
                         nombre: v_nombre,
-                        id_genero_mascota: v_genero,
-                        id_tipo_mascota: v_tpmascota,
-                        id_propietario: v_idpropietario,
+                        id_genero_discapacitado: v_genero,
+                        id_tipo_ceguera: v_tipo_ceguera,
+                        id_cuidador: v_id_cuidador,
                         estado: v_estado,
                     }),
                 },
@@ -64,7 +64,7 @@
 
             if (response.ok) {
                 Swal.fire({
-                    title: "Mascota Registrada Exitosamente!",
+                    title: "Discapacitado Registrado Exitosamente!",
                     text: "¡Le damos la bienvenida a la familia!",
                     icon: "success",
                     confirmButtonText: "OK",
@@ -101,16 +101,16 @@
                         Completa los detalles en el siguiente formulario.
                     </p>
                 </div>
-                <form on:submit|preventDefault={RegisterMascota}>
+                <form on:submit|preventDefault={RegisterDiscapacitadoV}>
                     <div class="mb-3">
                         <label for="nombre" class="form-label text-primary"
-                            >Nombre del incapacitado
+                            >Nombre del Discapacitado
                         </label>
                         <input
                             type="text"
                             class="form-control shadow-sm"
                             id="nombre"
-                            placeholder="Nombre de la mascota"
+                            placeholder="Nombre del Discapacitado"
                             bind:value={v_nombre}
                             required
                         />
@@ -143,14 +143,14 @@
                         <select
                             class="form-select shadow-sm"
                             id="tipo_mascota"
-                            bind:value={v_tpmascota}
+                            bind:value={v_tipo_ceguera}
                             required
                         >
                             <option value="" disabled selected
-                                >Seleccionar tipo de mascota</option
+                                >Seleccione el tipo de ceguera del discapacitado</option
                             >
-                            <option value="1">Perro</option>
-                            <option value="2">Gato</option>
+                            <option value="1">Ceguera Total</option>
+                            <option value="2">Ceguera Parcial</option>
                         </select>
                     </div>
 
@@ -158,7 +158,7 @@
                         type="submit"
                         class="btn btn-primary w-100 mt-4 shadow-sm rounded-pill"
                     >
-                        🐶 Registrar Mascota 🐱
+                        🐶 ¡¡Registrar!! 🐱
                     </button>
 
                     <!-- Loader -->

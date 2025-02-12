@@ -1,6 +1,6 @@
 <script>
     import { onMount } from "svelte";
-    import NavBarCanSeeOrNot from "../../../lib/components/NavBarCanSeeOrNot.svelte";
+    import NavBarCanSeeOrNot from "$lib/components/NavBarCanSeeOrNot.svelte";
 
     let todos = {};
     let loading = true;
