@@ -169,7 +169,7 @@
     {/if}
 </div>
 
-<Footer />
+<Footer></Footer>
 
 <style>
     .container {
