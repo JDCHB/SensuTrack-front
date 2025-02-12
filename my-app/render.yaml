@@ -1,0 +1,14 @@
+version: 1
+services:
+  - type: web
+    name: my-svelte-app
+    env: node
+    buildCommand: |
+      echo "Instalando dependencias..."
+      npm install
+      echo "Construyendo la aplicación..."
+      npm run build
+    startCommand: "npm run start"  # Cambié a npm run start
+    envVars:
+      - key: NODE_VERSION
+        value: "20.17.0"
