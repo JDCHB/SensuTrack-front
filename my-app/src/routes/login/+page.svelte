@@ -206,10 +206,12 @@
                       >
                     </div>
 
-                    <div
-                      class="g-recaptcha"
-                      data-sitekey="6Lf0vdUqAAAAAN51836FYzxSTExokw1cl2HB426y"
-                    ></div>
+                    <div class="d-flex justify-content-center mb-4">
+                      <div
+                        class="g-recaptcha"
+                        data-sitekey="6Lf0vdUqAAAAAN51836FYzxSTExokw1cl2HB426y"
+                      ></div>
+                    </div>
 
                     <div class="text-center">
                       <button
