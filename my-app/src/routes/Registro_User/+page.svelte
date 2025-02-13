@@ -92,7 +92,7 @@
             }
         } catch (e) {
             error = e.message;
-            hideLoader(registerLoader); // Ocultar loader si ocurre un error
+            hideLoader(registerLoader); // Ocultar loader si ocurre algun error
             alert("Error en la solicitud: " + error);
         }
     }
