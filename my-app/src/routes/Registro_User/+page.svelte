@@ -32,10 +32,20 @@
     }
 
     async function RegisterUser() {
-        const Contraseña = document.getElementById(v_password).value;
+        // En el método RegisterUser()
+        const Contraseña = document.getElementById("v_password").value;
         const Confirmar_Contraseña = document.getElementById(
             "Confirmar_Contraseña",
         ).value;
+
+        if (Contraseña !== Confirmar_Contraseña) {
+            Swal.fire({
+                icon: "error",
+                title: "Las contraseñas no coinciden",
+                text: "Por favor, vuelve a intentarlo.",
+            });
+            return; // Evita continuar si las contraseñas no coinciden
+        }
 
         // Referencia al Captcha
         const captchaResponse = grecaptcha.getResponse();
@@ -49,77 +59,69 @@
             return;
         }
 
-        if (Contraseña == Confirmar_Contraseña) {
-            try {
-                // Muestra el cuadro de confirmación antes de proceder con el registro
-                const result = await Swal.fire({
-                    title: "¿Estás seguro?",
-                    text: "¡Desea registrarse a SensuTrack!?",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Sí, registrarse!",
-                    customClass: {
-                        popup: "swal-popup", // Clase para personalizar el popup de la alerta
-                        title: "custom-title", // Clase personalizada para el título
-                    },
-                });
-                // Si el usuario confirma, continuamos con el registro
-                if (result.isConfirmed) {
-                    showLoader(registerLoader); // Mostrar loader al comenzar el registro
-                    const response = await fetch(
-                        "https://proyectomascotas.onrender.com/create_user",
-                        {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify({
-                                email: v_email,
-                                password: v_password,
-                                nombre: v_nombre,
-                                apellido: v_apellido,
-                                documento: v_documento,
-                                telefono: v_telefono,
-                                id_rol: v_rol,
-                                estado: v_estado,
-                            }),
-                        },
-                    );
-
-                    const data = await response.json();
-                    console.log(data);
-
-                    hideLoader(registerLoader); // Ocultar loader al terminar el registro
-
-                    if (response.ok) {
-                        grecaptcha.reset(); // Restablece el CAPTCHA después de una respuesta exitosa
-                        Swal.fire({
-                            title: "¡Registrado!,¡Bienvenido " + v_nombre + "!",
-                            icon: "success",
-                            customClass: {
-                                popup: "swal-popup", // Clase para personalizar el popup de la alerta
-                                title: "custom-title", // Clase personalizada para el título
-                            },
-                        });
-                    } else {
-                        alert("Error en el registro");
-                    }
-                } else {
-                    console.log("Registro Cancelado");
-                }
-            } catch (e) {
-                error = e.message;
-                hideLoader(registerLoader); // Ocultar loader si ocurre algun error
-                alert("Error en la solicitud: " + error);
-            }
-        } else {
-            Swal.fire({
-                icon: "error",
-                title: "la contraseña no coincide",
-                text: "Por favor, vuelve a intentarlo.",
+        try {
+            // Muestra el cuadro de confirmación antes de proceder con el registro
+            const result = await Swal.fire({
+                title: "¿Estás seguro?",
+                text: "¡Desea registrarse a SensuTrack!?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Sí, registrarse!",
+                customClass: {
+                    popup: "swal-popup", // Clase para personalizar el popup de la alerta
+                    title: "custom-title", // Clase personalizada para el título
+                },
             });
+            // Si el usuario confirma, continuamos con el registro
+            if (result.isConfirmed) {
+                showLoader(registerLoader); // Mostrar loader al comenzar el registro
+                const response = await fetch(
+                    "https://proyectomascotas.onrender.com/create_user",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            email: v_email,
+                            password: v_password,
+                            nombre: v_nombre,
+                            apellido: v_apellido,
+                            documento: v_documento,
+                            telefono: v_telefono,
+                            id_rol: v_rol,
+                            estado: v_estado,
+                        }),
+                    },
+                );
+
+                const data = await response.json();
+                console.log(data);
+
+                hideLoader(registerLoader); // Ocultar loader al terminar el registro
+
+                if (response.ok) {
+                    grecaptcha.reset(); // Restablece el CAPTCHA después de una respuesta exitosa
+                    Swal.fire({
+                        title: "¡Registrado!,¡Bienvenido " + v_nombre + "!",
+                        icon: "success",
+                        customClass: {
+                            popup: "swal-popup", // Clase para personalizar el popup de la alerta
+                            title: "custom-title", // Clase personalizada para el título
+                        },
+                    });
+                } else {
+                    alert("Error en el registro");
+                }
+            } else {
+                console.log("Registro Cancelado");
+            }
+        } catch (e) {
+            error = e.message;
+            hideLoader(registerLoader); // Ocultar loader si ocurre algun error
+            alert("Error en la solicitud: " + error);
         }
     }
 </script>
