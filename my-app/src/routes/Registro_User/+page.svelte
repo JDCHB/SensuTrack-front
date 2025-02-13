@@ -32,6 +32,18 @@
     }
 
     async function Register() {
+        // Referencia al Captcha
+        const captchaResponse = grecaptcha.getResponse();
+
+        if (!captchaResponse) {
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Por favor, verifica el reCAPTCHA.",
+            });
+            return;
+        }
+
         try {
             // Muestra el cuadro de confirmación antes de proceder con el registro
             const result = await Swal.fire({
@@ -49,6 +61,8 @@
             });
             // Si el usuario confirma, continuamos con el registro
             if (result.isConfirmed) {
+                grecaptcha.reset(); // Restablece el CAPTCHA después de una respuesta exitosa
+
                 showLoader(registerLoader); // Mostrar loader al comenzar el registro
                 const response = await fetch(
                     "https://proyectomascotas.onrender.com/create_user",
@@ -268,6 +282,15 @@
                                         </div>
 
                                         <div
+                                            class="d-flex justify-content-center mb-4"
+                                        >
+                                            <div
+                                                class="g-recaptcha"
+                                                data-sitekey="6Lf0vdUqAAAAAN51836FYzxSTExokw1cl2HB426y"
+                                            ></div>
+                                        </div>
+
+                                        <div
                                             class="form-check d-flex justify-content-center mb-5"
                                         >
                                             <input
@@ -292,7 +315,7 @@
                                             class="d-flex justify-content-center mx-4 mb-3 mb-lg-4"
                                         >
                                             <button
-                                                type="button"
+                                                type="submit"
                                                 data-mdb-button-init
                                                 data-mdb-ripple-init
                                                 class="btn btn-primary btn-lg"
