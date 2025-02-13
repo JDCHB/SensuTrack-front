@@ -249,25 +249,6 @@
                                         </div>
 
                                         <div
-                                            class="d-flex flex-row align-items-center mb-4"
-                                        >
-                                            <i
-                                                class="bi bi-lock-fill fa-lg me-3 fa-fw"
-                                            ></i>
-                                            <div
-                                                data-mdb-input-init
-                                                class="form-outline flex-fill mb-0"
-                                            >
-                                                <input
-                                                    type="password"
-                                                    class="form-control"
-                                                    placeholder="Confirmar Contraseña"
-                                                    required
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <div
                                             class="form-check d-flex justify-content-center mb-5"
                                         >
                                             <input
