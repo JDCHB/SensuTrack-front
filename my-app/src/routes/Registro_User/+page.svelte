@@ -31,7 +31,18 @@
         }
     }
 
-    async function Register() {
+    async function RegisterUser() {
+        // Referencia al Captcha
+        const captchaResponse = grecaptcha.getResponse();
+
+        if (!captchaResponse) {
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Por favor, verifica el reCAPTCHA.",
+            });
+            return;
+        }
         try {
             // Muestra el cuadro de confirmación antes de proceder con el registro
             const result = await Swal.fire({
@@ -76,6 +87,7 @@
                 hideLoader(registerLoader); // Ocultar loader al terminar el registro
 
                 if (response.ok) {
+                    grecaptcha.reset(); // Restablece el CAPTCHA después de una respuesta exitosa
                     Swal.fire({
                         title: "¡Registrado!,¡Bienvenido " + v_nombre + "!",
                         icon: "success",
@@ -124,7 +136,7 @@
                                     </p>
 
                                     <form
-                                        on:submit|preventDefault={Register}
+                                        on:submit|preventDefault={RegisterUser}
                                         class="mx-1 mx-md-4"
                                     >
                                         <div
@@ -199,7 +211,7 @@
                                                 class="form-outline flex-fill mb-0"
                                             >
                                                 <input
-                                                    type="tel"
+                                                    type="text"
                                                     class="form-control"
                                                     bind:value={v_telefono}
                                                     placeholder="Teléfono"
@@ -246,6 +258,34 @@
                                                     required
                                                 />
                                             </div>
+                                        </div>
+
+                                        <div
+                                            class="d-flex flex-row align-items-center mb-4"
+                                        >
+                                            <i
+                                                class="bi bi-lock-fill fa-lg me-3 fa-fw"
+                                            ></i>
+                                            <div
+                                                data-mdb-input-init
+                                                class="form-outline flex-fill mb-0"
+                                            >
+                                                <input
+                                                    type="password"
+                                                    class="form-control"
+                                                    placeholder="Confirmar Contraseña"
+                                                    required
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            class="d-flex justify-content-center mb-4"
+                                        >
+                                            <div
+                                                class="g-recaptcha"
+                                                data-sitekey="6Lf0vdUqAAAAAN51836FYzxSTExokw1cl2HB426y"
+                                            ></div>
                                         </div>
 
                                         <div
