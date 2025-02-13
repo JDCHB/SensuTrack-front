@@ -138,7 +138,7 @@
                         <label
                             for="tipo_mascota"
                             class="form-label text-primary"
-                            >Tipo de Mascota</label
+                            >Tipo de Ceguera</label
                         >
                         <select
                             class="form-select shadow-sm"
