@@ -32,21 +32,6 @@
     }
 
     async function RegisterUser() {
-        // En el método RegisterUser()
-        const Contraseña = document.getElementById("v_password").value;
-        const Confirmar_Contraseña = document.getElementById(
-            "Confirmar_Contraseña",
-        ).value;
-
-        if (Contraseña !== Confirmar_Contraseña) {
-            Swal.fire({
-                icon: "error",
-                title: "Las contraseñas no coinciden",
-                text: "Por favor, vuelve a intentarlo.",
-            });
-            return; // Evita continuar si las contraseñas no coinciden
-        }
-
         // Referencia al Captcha
         const captchaResponse = grecaptcha.getResponse();
 
@@ -58,7 +43,6 @@
             });
             return;
         }
-
         try {
             // Muestra el cuadro de confirmación antes de proceder con el registro
             const result = await Swal.fire({
@@ -271,26 +255,6 @@
                                                     class="form-control"
                                                     bind:value={v_password}
                                                     placeholder="Contraseña"
-                                                    required
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <div
-                                            class="d-flex flex-row align-items-center mb-4"
-                                        >
-                                            <i
-                                                class="bi bi-lock-fill fa-lg me-3 fa-fw"
-                                            ></i>
-                                            <div
-                                                data-mdb-input-init
-                                                class="form-outline flex-fill mb-0"
-                                            >
-                                                <input
-                                                    id="Confirmar_Contraseña"
-                                                    type="password"
-                                                    class="form-control"
-                                                    placeholder="Confirmar Contraseña"
                                                     required
                                                 />
                                             </div>
