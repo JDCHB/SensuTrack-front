@@ -30,7 +30,7 @@
 
             const data = await response.json();
             console.log(data);
-            if (data && data.mensaje && data.mensaje.length > 0) {
+            if (data.email) {
                 codigo(vr);
 
                 emailjs.init(apikey);
@@ -65,13 +65,14 @@
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                        password: cn1,
                         email: vl_correo,
+                        password: cn1,
                     }),
                 },
             );
             const data = await response.json();
-            if (data[0].mensaje == "Contraseña actualizada exitosamente") {
+            console.log("Respuesta del servidor:", data);
+            if (data.mensaje == "Contraseña actualizada exitosamente") {
                 const Toast = Swal.mixin({
                     toast: true,
                     position: "top-end",
@@ -171,6 +172,7 @@
                 class="form-control"
                 placeholder="Correo"
                 id="correo"
+                bind:value={vl_correo}
             />
         </div>
     </div>
