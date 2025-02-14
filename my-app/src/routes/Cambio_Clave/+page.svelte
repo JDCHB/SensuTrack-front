@@ -15,15 +15,18 @@
         vl_correo = document.getElementById("correo").value; //
 
         try {
-            const response = await fetch("http://127.0.0.1:3000/passlog", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
+            const response = await fetch(
+                "https://proyectomascotas.onrender.com/Validar_Correo",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        email: vl_correo, // Enviar el valor como JSON
+                    }),
                 },
-                body: JSON.stringify({
-                    email: vl_correo, // Enviar el valor como JSON
-                }),
-            });
+            );
         } catch (e) {
             console.log(e);
         }
@@ -52,7 +55,7 @@
     async function cambiar_contrasena() {
         try {
             const response = await fetch(
-                "http://127.0.0.1:3000/Cambiar_password",
+                "https://proyectomascotas.onrender.com/update_contraseña",
                 {
                     method: "PUT",
                     headers: {
@@ -60,7 +63,7 @@
                     },
                     body: JSON.stringify({
                         password: cn1,
-                        correo: vl_correo,
+                        email: vl_correo,
                     }),
                 },
             );
