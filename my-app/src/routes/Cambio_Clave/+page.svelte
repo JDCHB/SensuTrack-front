@@ -181,30 +181,34 @@
 
 <Navbar></Navbar>
 <div class="wrapper">
-    <div class="container" style="margin-top: 10%;">
-        <div class="title small-title" style="color: dodgerblue;">
-            CAMBIO DE CONTRASEÑA
+    <div class="container py-5">
+        <div class="text-center">
+            <h2 class="title text-primary">Cambio de Contraseña</h2>
+            <p class="lead text-muted">
+                Por favor, ingrese su correo electrónico registrado en el
+                sistema
+            </p>
         </div>
-        <div class="row justify-content-center g-2">
-            <div class=" mx-5 col-md-6 mb-3">
-                <p class="lead">
-                    Porfavor digite su correo electronico registrado en el
-                    sistema
-                </p>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <label for="correo" class="form-label fw-bold"
+                    >Correo Electrónico</label
+                >
                 <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Correo"
+                    type="email"
+                    class="form-control form-control-lg"
+                    placeholder="ejemplo@correo.com"
                     id="correo"
                     bind:value={vl_correo}
+                    required
                 />
             </div>
         </div>
-        <div class="text-center">
+        <div class="text-center mt-4">
             <button
                 on:click={buscar_correo}
                 type="button"
-                class="btn btn-primary mt-3"
+                class="btn btn-primary btn-lg px-4"
                 data-bs-toggle="modal"
                 data-bs-target="#staticBackdrop"
             >
@@ -212,16 +216,14 @@
             </button>
         </div>
     </div>
+
+    <!-- Loader -->
     <div class="loader-container" bind:this={registerLoader}>
         <div class="loader-dog-head">
             <div class="ear left-ear"></div>
             <div class="ear right-ear"></div>
-            <div class="eye left-eye">
-                <div class="pupil"></div>
-            </div>
-            <div class="eye right-eye">
-                <div class="pupil"></div>
-            </div>
+            <div class="eye left-eye"><div class="pupil"></div></div>
+            <div class="eye right-eye"><div class="pupil"></div></div>
             <div class="nose"></div>
             <div class="mouth"></div>
             <div class="tongue"></div>
@@ -230,6 +232,24 @@
 </div>
 
 <style>
+    .wrapper {
+        max-width: 600px;
+        margin: 80px auto;
+        padding: 40px;
+        background: #fff;
+        border-radius: 12px;
+        border: 1px solid #dee2e6;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    /* Título */
+    .title {
+        font-size: 2rem;
+        font-weight: bold;
+        font-family: "Poppins", sans-serif;
+    }
+
     /* Contenedor para el loader */
     .loader-container {
         position: absolute;
@@ -363,40 +383,5 @@
         50% {
             transform: rotate(10deg);
         }
-    }
-
-    /* Contenedor principal */
-    .wrapper {
-        width: 100%;
-        max-width: 700px;
-        margin: 60px auto;
-        padding: 40px;
-        background-color: #fff;
-        border-radius: 15px;
-        border: 1px solid #e2e6e9;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        background-image: linear-gradient(135deg, #f3f4f8, #ffffff);
-        position: relative;
-        overflow: hidden;
-    }
-
-    /* Título */
-    .title {
-        font-size: 2.5em;
-        font-weight: bold;
-        color: #4b4f58;
-        text-align: center;
-        margin-bottom: 30px;
-        font-family: "Roboto", sans-serif;
-        letter-spacing: -0.5px;
-    }
-
-    /* Subtítulo */
-    .small-title {
-        font-size: 1.6em;
-        color: #6c757d;
-        text-align: center;
-        font-family: "Roboto", sans-serif;
-        margin-bottom: 20px;
     }
 </style>
