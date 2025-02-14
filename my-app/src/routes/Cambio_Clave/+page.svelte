@@ -1,10 +1,30 @@
 <script>
+    import Navbar from "$lib/components/Navbar.svelte";
+
     const serviceID = "service_j9bousa";
     const templateID = "template_zszjdla";
     const apikey = "dFD1OdFitzwQblEX0";
     let cn1 = "";
     let vl_correo = "";
     let vr = 0;
+
+    // Referencias a los contenedores de los loader
+    let registerLoader;
+
+    // Función para mostrar el loader
+    function showLoader(loader) {
+        if (loader) {
+            loader.style.display = "flex";
+        }
+    }
+
+    // Función para ocultar el loader
+    function hideLoader(loader) {
+        if (loader) {
+            loader.style.display = "none";
+        }
+    }
+
     //Can change 7 to 2 for longer results.
     function codigo() {
         vr = (Math.random() + 1).toString(36).substring(4);
@@ -15,6 +35,7 @@
         vl_correo = document.getElementById("correo").value; //
 
         try {
+            showLoader(registerLoader); // Mostrar loader al comenzar el registro
             const response = await fetch(
                 "https://proyectomascotas.onrender.com/Validar_Correo",
                 {
@@ -30,6 +51,7 @@
 
             const data = await response.json();
             console.log(data);
+            hideLoader(registerLoader); // Ocultar loader al terminar el registro
             if (data.email) {
                 codigo(vr);
 
@@ -57,6 +79,7 @@
 
     async function cambiar_contrasena() {
         try {
+            showLoader(registerLoader); // Mostrar loader al comenzar el registro
             const response = await fetch(
                 "https://proyectomascotas.onrender.com/update_contraseña",
                 {
@@ -72,6 +95,7 @@
             );
             const data = await response.json();
             console.log("Respuesta del servidor:", data);
+            hideLoader(registerLoader); // Ocultar loader al terminar el registro
             if (data.mensaje == "Contraseña actualizada exitosamente") {
                 const Toast = Swal.mixin({
                     toast: true,
@@ -155,36 +179,224 @@
     }
 </script>
 
-<div class="container" style="margin-top: 10%;">
-    <div
-        style="text-align: center; margin-top: 4%; margin-bottom: 3%; "
-        class="fs-3"
-    >
-        <b>Cambio de clave</b>
-    </div>
-    <div class="row justify-content-center g-2">
-        <div class=" mx-5 col-md-6 mb-3">
-            <p class="lead">
-                Porfavor digite su correo electronico registrado en el sistema
-            </p>
-            <input
-                type="text"
-                class="form-control"
-                placeholder="Correo"
-                id="correo"
-                bind:value={vl_correo}
-            />
+<Navbar></Navbar>
+<div class="wrapper">
+    <div class="container" style="margin-top: 10%;">
+        <div class="title small-title" style="color: dodgerblue;">
+            CAMBIO DE CONTRASEÑA
+        </div>
+        <div class="row justify-content-center g-2">
+            <div class=" mx-5 col-md-6 mb-3">
+                <p class="lead">
+                    Porfavor digite su correo electronico registrado en el
+                    sistema
+                </p>
+                <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Correo"
+                    id="correo"
+                    bind:value={vl_correo}
+                />
+            </div>
+        </div>
+        <div class="text-center">
+            <button
+                on:click={buscar_correo}
+                type="button"
+                class="btn btn-primary mt-3"
+                data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop"
+            >
+                Enviar
+            </button>
         </div>
     </div>
-    <div class="text-center">
-        <button
-            on:click={buscar_correo}
-            type="button"
-            class="btn btn-primary mt-3"
-            data-bs-toggle="modal"
-            data-bs-target="#staticBackdrop"
-        >
-            Enviar
-        </button>
+    <div class="loader-container" bind:this={registerLoader}>
+        <div class="loader-dog-head">
+            <div class="ear left-ear"></div>
+            <div class="ear right-ear"></div>
+            <div class="eye left-eye">
+                <div class="pupil"></div>
+            </div>
+            <div class="eye right-eye">
+                <div class="pupil"></div>
+            </div>
+            <div class="nose"></div>
+            <div class="mouth"></div>
+            <div class="tongue"></div>
+        </div>
     </div>
 </div>
+
+<style>
+    /* Contenedor para el loader */
+    .loader-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
+        display: none; /* Oculto por defecto */
+        justify-content: center;
+        align-items: center;
+        z-index: 100; /* Asegúrate de que esté encima de otros elementos */
+    }
+
+    .loader-dog-head {
+        position: relative;
+        width: 120px;
+        height: 120px;
+        background-color: #f4a261; /* Color de piel */
+        border-radius: 50%; /* Forma de la cara */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: bounce 2s infinite;
+    }
+
+    .ear {
+        position: absolute;
+        background-color: #f4a261;
+        width: 40px;
+        height: 60px;
+        border-radius: 50%;
+        top: 10px;
+    }
+
+    .left-ear {
+        left: -20px;
+        transform: rotate(-30deg);
+    }
+
+    .right-ear {
+        right: -20px;
+        transform: rotate(30deg);
+    }
+
+    .eye {
+        position: absolute;
+        background-color: #fff;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        top: 35px;
+    }
+
+    .left-eye {
+        left: 30px;
+    }
+
+    .right-eye {
+        right: 30px;
+    }
+
+    .pupil {
+        position: absolute;
+        background-color: #000;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        top: 6px;
+        left: 6px;
+        animation: blink 3s infinite;
+    }
+
+    .nose {
+        position: absolute;
+        background-color: #2d3436;
+        width: 20px;
+        height: 15px;
+        border-radius: 50%;
+        bottom: 45px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    .mouth {
+        position: absolute;
+        width: 40px;
+        height: 20px;
+        border: 2px solid #2d3436;
+        border-top: none;
+        border-radius: 0 0 20px 20px;
+        bottom: 30px;
+    }
+
+    .tongue {
+        position: absolute;
+        background-color: #e76f51;
+        width: 16px;
+        height: 24px;
+        border-radius: 50%;
+        bottom: 15px;
+        animation: waggle 1.5s infinite ease-in-out;
+    }
+
+    /* Animaciones */
+    @keyframes bounce {
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    @keyframes blink {
+        0%,
+        80%,
+        100% {
+            transform: scaleY(1);
+        }
+        90% {
+            transform: scaleY(0.1);
+        }
+    }
+
+    @keyframes waggle {
+        0%,
+        100% {
+            transform: rotate(0);
+        }
+        50% {
+            transform: rotate(10deg);
+        }
+    }
+
+    /* Contenedor principal */
+    .wrapper {
+        width: 100%;
+        max-width: 700px;
+        margin: 60px auto;
+        padding: 40px;
+        background-color: #fff;
+        border-radius: 15px;
+        border: 1px solid #e2e6e9;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        background-image: linear-gradient(135deg, #f3f4f8, #ffffff);
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Título */
+    .title {
+        font-size: 2.5em;
+        font-weight: bold;
+        color: #4b4f58;
+        text-align: center;
+        margin-bottom: 30px;
+        font-family: "Roboto", sans-serif;
+        letter-spacing: -0.5px;
+    }
+
+    /* Subtítulo */
+    .small-title {
+        font-size: 1.6em;
+        color: #6c757d;
+        text-align: center;
+        font-family: "Roboto", sans-serif;
+        margin-bottom: 20px;
+    }
+</style>
