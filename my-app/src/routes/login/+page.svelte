@@ -24,9 +24,29 @@
     }
   }
 
+  let captchaElement;
+
+  onMount(() => {
+    // Al cargar la página, inicializamos el reCAPTCHA
+    grecaptcha.render(captchaElement, {
+      sitekey: "6Lf0vdUqAAAAAN51836FYzxSTExokw1cl2HB426y",
+    });
+  });
+
   async function Login() {
     const v_usuario = document.getElementById("correo").value;
     const v_password = document.getElementById("contraseña").value;
+    // Referencia al Captcha
+    const captchaResponse = grecaptcha.getResponse();
+
+    if (!captchaResponse) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Por favor, verifica el reCAPTCHA.",
+      });
+      return;
+    }
 
     try {
       showLoader(loginLoader); // Mostrar loader
@@ -48,9 +68,11 @@
       hideLoader(loginLoader); // Ocultar loader
 
       if (response.ok) {
-        const { access_token, user_data } = data; // Extraer token y datos del usuario
+        grecaptcha.reset(); // Restablece el CAPTCHA después de una respuesta exitosa
 
+        // Lógica de autenticación
         // Guardar token y datos en localStorage
+        const { access_token, user_data } = data; // Extraer token y datos del usuario
         localStorage.setItem("access_token", access_token);
         localStorage.setItem("user_data", JSON.stringify(user_data));
 
@@ -190,6 +212,10 @@
                     >
                       <a href="/Registro_User">No tienes cuenta? Registrate!!</a
                       >
+                    </div>
+
+                    <div class="d-flex justify-content-center mb-4">
+                      <div class="g-recaptcha" bind:this={captchaElement}></div>
                     </div>
 
                     <div class="text-center">
