@@ -204,7 +204,7 @@
                     <div
                       class="d-flex justify-content-around align-items-center mb-4"
                     >
-                      <a href="#!">Olvidaste la contraseña?</a>
+                      <a href="/Cambio_Clave">Olvidaste la contraseña?</a>
                     </div>
 
                     <div
