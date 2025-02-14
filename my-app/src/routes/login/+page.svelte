@@ -60,7 +60,6 @@
           body: JSON.stringify({
             email: v_usuario,
             password: v_password,
-            recaptcha: captchaResponse, // Enviar el token del reCAPTCHA
           }),
         },
       );
@@ -216,11 +215,7 @@
                     </div>
 
                     <div class="d-flex justify-content-center mb-4">
-                      <div
-                        class="g-recaptcha"
-                        bind:this={captchaElement}
-                        data-sitekey="6Lf0vdUqAAAAAN51836FYzxSTExokw1cl2HB426y"
-                      ></div>
+                      <div class="g-recaptcha" bind:this={captchaElement}></div>
                     </div>
 
                     <div class="text-center">
