@@ -66,13 +66,13 @@
                     </div>
                     <div class="submit-container text-center">
                         <button
+                            on:submit={mostrarConfirmacionCorreo}
                             type="submit"
                             class="btn btn-primary w-100 mt-4 shadow-sm rounded-pill"
                             >🦮 Enviar mensaje 🦮</button
                         >
                     </div>
                     <input
-                        on:load={mostrarConfirmacionCorreo}
                         type="hidden"
                         name="_next"
                         value="https://sensutrack-front.onrender.com/"
