@@ -31,6 +31,15 @@
         }
     }
 
+    let captchaElement;
+
+    onMount(() => {
+        // Al cargar la página, inicializamos el reCAPTCHA
+        grecaptcha.render(captchaElement, {
+            sitekey: "6Lf0vdUqAAAAAN51836FYzxSTExokw1cl2HB426y",
+        });
+    });
+
     async function RegisterUser() {
         // Referencia al Captcha
         const captchaResponse = grecaptcha.getResponse();
