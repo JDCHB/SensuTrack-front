@@ -1,3 +1,14 @@
+<script>
+    const mostrarConfirmacionCorreo = () => {
+        Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Por favor, verifica el reCAPTCHA.",
+        });
+        return;
+    };
+</script>
+
 <div class="container mt-3 mb-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
@@ -61,6 +72,7 @@
                         >
                     </div>
                     <input
+                        on:load={mostrarConfirmacionCorreo}
                         type="hidden"
                         name="_next"
                         value="https://sensutrack-front.onrender.com/"
