@@ -27,8 +27,10 @@
                     }),
                 },
             );
+
             const data = await response.json();
-            if (data.length > 0) {
+            console.log(data);
+            if (data && data.mensaje && data.mensaje.length > 0) {
                 codigo(vr);
 
                 emailjs.init(apikey);
