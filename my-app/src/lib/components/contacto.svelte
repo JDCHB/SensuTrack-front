@@ -63,7 +63,7 @@
                     <input
                         type="hidden"
                         name="_next"
-                        value="http://localhost:5173/"
+                        value="https://sensutrack-front.onrender.com/"
                     />
                     <input type="hidden" name="_captcha" value="true" />
                 </form>
