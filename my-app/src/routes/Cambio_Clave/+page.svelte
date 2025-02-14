@@ -27,28 +27,29 @@
                     }),
                 },
             );
+            const data = await response.json();
+            if (data.length > 0) {
+                codigo(vr);
+
+                emailjs.init(apikey);
+                emailjs
+                    .send(serviceID, templateID, {
+                        r: vr,
+                        email: vl_correo,
+                    })
+                    .then((result) => {})
+                    .catch((error) => {});
+
+                mostrarModalValidacion();
+            } else {
+                Swal.fire({
+                    position: "top",
+                    icon: "error",
+                    title: "Correo no encontrado",
+                });
+            }
         } catch (e) {
             console.log(e);
-        }
-        if (response.data.length > 0) {
-            codigo(vr);
-
-            emailjs.init(apikey);
-            emailjs
-                .send(serviceID, templateID, {
-                    r: vr,
-                    email: vl_correo,
-                })
-                .then((result) => {})
-                .catch((error) => {});
-
-            mostrarModalValidacion();
-        } else {
-            Swal.fire({
-                position: "top",
-                icon: "error",
-                title: "Correo no encontrado",
-            });
         }
     }
 
@@ -67,39 +68,39 @@
                     }),
                 },
             );
+            const data = await response.json();
+            if (data[0].mensaje == "Contraseña actualizada exitosamente") {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    },
+                });
+                Toast.fire({
+                    icon: "success",
+                    iconColor: "white",
+                    color: "white",
+                    background: "green",
+                    title: "Contraseñass cambiada exitosamente",
+                });
+
+                setTimeout(() => {
+                    window.location.href = "/usuario";
+                }, 3500);
+            } else {
+                Swal.fire({
+                    title: "Error",
+                    text: "Hubo un problema al cambiar la contraseña.",
+                    icon: "error",
+                });
+            }
         } catch (e) {
             console.log(e);
-        }
-
-        if (response.data[0].informacion == "actualizado") {
-            const Toast = Swal.mixin({
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.onmouseenter = Swal.stopTimer;
-                    toast.onmouseleave = Swal.resumeTimer;
-                },
-            });
-            Toast.fire({
-                icon: "success",
-                iconColor: "white",
-                color: "white",
-                background: "green",
-                title: "Contraseñass cambiada exitosamente",
-            });
-
-            setTimeout(() => {
-                window.location.href = "/index.html";
-            }, 3500);
-        } else {
-            Swal.fire({
-                title: "Error",
-                text: "Hubo un problema al cambiar la contraseña.",
-                icon: "error",
-            });
         }
     }
 
