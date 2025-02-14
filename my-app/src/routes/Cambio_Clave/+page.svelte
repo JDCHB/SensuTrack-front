@@ -93,7 +93,7 @@
                 });
 
                 setTimeout(() => {
-                    window.location.href = "/usuario";
+                    window.location.href = "/";
                 }, 3500);
             } else {
                 Swal.fire({
