@@ -87,7 +87,7 @@
                             class="btn btn-lg btn-outline-warning d-flex align-items-center justify-content-between w-100"
                             on:click={mostrarConfirmacionRegistroGPS}
                         >
-                            <span>REGISTRAR COLLARES</span>
+                            <span>REGISTRAR GPS</span>
                             <i class="bi bi-plus-circle"></i>
                         </button>
                     </div>
