@@ -21,11 +21,27 @@
             fecha_de = document.getElementById("desde_ciegos").value;
             fecha_hasta = document.getElementById("hasta_ciegos").value;
 
+            console.log({
+                fecha1: fecha_de,
+                fecha2: fecha_hasta,
+            });
+
+            if (!fecha_de || !fecha_hasta) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Por favor, selecciona ambas fechas.",
+                });
+                return;
+            }
+
             const response = await fetch(
                 "https://proyectomascotas.onrender.com/Ciegos_Report",
                 {
                     method: "POST",
-                    headers: { "Content-Type": "application/json" },
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
                     body: JSON.stringify({
                         fecha1: fecha_de,
                         fecha2: fecha_hasta,
@@ -58,7 +74,7 @@
             "Género",
             "Tipo",
             "Cuidador",
-            "Fecha y Hora",
+            "Fecha",
             "Estado",
         ];
 
@@ -68,7 +84,7 @@
             todo.id_genero_discapacitado,
             todo.id_tipo_ceguera,
             todo.id_cuidador,
-            todo.fecha_hora,
+            todo.fecha,
             todo.estado,
         ]);
 
@@ -158,7 +174,7 @@
                             <td>{todo.id_genero_discapacitado}</td>
                             <td>{todo.id_tipo_ceguera}</td>
                             <td>{todo.id_cuidador}</td>
-                            <td>{todo.fecha_hora}</td>
+                            <td>{todo.fecha}</td>
                             <td>{todo.estado}</td>
                         </tr>
                     {/each}
