@@ -18,11 +18,11 @@
             error = null;
 
             opcion = document.getElementById("opcion").value;
-            fecha_de = document.getElementById("desde_mascotas").value;
-            fecha_hasta = document.getElementById("hasta_mascotas").value;
+            fecha_de = document.getElementById("desde_ciegos").value;
+            fecha_hasta = document.getElementById("hasta_ciegos").value;
 
             const response = await fetch(
-                "https://proyectomascotas.onrender.com/Mascotas_Report",
+                "https://proyectomascotas.onrender.com/Ciegos_Report",
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -57,7 +57,7 @@
             "Nombre",
             "Género",
             "Tipo",
-            "Propietario",
+            "Cuidador",
             "Fecha y Hora",
             "Estado",
         ];
@@ -65,16 +65,20 @@
         const body = todos.map((todo) => [
             todo.id,
             todo.nombre,
-            todo.id_genero_mascota,
-            todo.id_tipo_mascota,
-            todo.id_propietario,
+            todo.id_genero_discapacitado,
+            todo.id_tipo_ceguera,
+            todo.id_cuidador,
             todo.fecha_hora,
             todo.estado,
         ]);
 
-        pdf.text(20, 20, "Reporte de mascotas registradas en la página");
+        pdf.text(
+            20,
+            20,
+            "Reporte de discapacitados visuales registrados en la página",
+        );
         pdf.autoTable(columns, body, { startY: 30 });
-        pdf.save("ReporteMascotas.pdf");
+        pdf.save("ReporteDiscapacitados.pdf");
         Swal.fire({
             position: "center",
             icon: "success",
@@ -100,7 +104,7 @@
                 id="opcion"
                 required
             >
-                <option value="1">Mascotas</option>
+                <option value="1">Discapacitados</option>
                 <option value="2">Usuarios</option>
                 <option value="3">Otro</option>
             </select>
@@ -110,11 +114,11 @@
     <div class="row mb-4">
         <div class="col-xl-6 text-end">
             Desde:
-            <input type="date" id="desde_mascotas" class="form-control" />
+            <input type="date" id="desde_ciegos" class="form-control" />
         </div>
         <div class="col-xl-6">
             Hasta:
-            <input type="date" id="hasta_mascotas" class="form-control" />
+            <input type="date" id="hasta_ciegos" class="form-control" />
         </div>
     </div>
 
@@ -132,7 +136,7 @@
     {:else if error}
         <p class="text-danger text-center">Error: {error}</p>
     {:else if mostrarReporte}
-        <h2 class="mb-4 text-center">Mascotas Registradas</h2>
+        <h2 class="mb-4 text-center">Discapacitados Registrados</h2>
         <div class="overflow-x-auto">
             <table class="table table-bordered table-striped table-responsive">
                 <thead>
@@ -141,7 +145,7 @@
                         <th>Nombre</th>
                         <th>Género</th>
                         <th>Tipo</th>
-                        <th>Propietario</th>
+                        <th>Cuidador</th>
                         <th>Fecha y Hora</th>
                         <th>Estado</th>
                     </tr>
@@ -151,9 +155,9 @@
                         <tr>
                             <td>{todo.id}</td>
                             <td>{todo.nombre}</td>
-                            <td>{todo.id_genero_mascota}</td>
-                            <td>{todo.id_tipo_mascota}</td>
-                            <td>{todo.id_propietario}</td>
+                            <td>{todo.id_genero_discapacitado}</td>
+                            <td>{todo.id_tipo_ceguera}</td>
+                            <td>{todo.id_cuidador}</td>
                             <td>{todo.fecha_hora}</td>
                             <td>{todo.estado}</td>
                         </tr>
