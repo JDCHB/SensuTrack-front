@@ -102,7 +102,7 @@
                 type="text"
                 bind:value={numero_serie}
                 class="form__input"
-                placeholder="Ingrese el Serial del CollarGPS"
+                placeholder="Ingrese el Serial del GPS"
                 required
             />
         </div>

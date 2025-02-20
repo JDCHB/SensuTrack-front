@@ -29,7 +29,7 @@
         try {
             const result = await Swal.fire({
                 title: "¿Estás seguro?",
-                text: "¡Desea registrar un nuevo Usuario a PETTRACKER!?",
+                text: "¡Desea registrar un nuevo Usuario a SensuTrack!?",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
