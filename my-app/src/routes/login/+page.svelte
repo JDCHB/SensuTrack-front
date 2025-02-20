@@ -77,9 +77,11 @@
         localStorage.setItem("user_data", JSON.stringify(user_data));
 
         if (user_data.id_rol == 3) {
+          todos = user_data;
+          let v_nombre = user_data.nombre;
           Swal.fire({
             title: "Inicio de Sesión Exitoso",
-            text: "¡Bienvenido al Sistema de Administración!",
+            text: "¡Bienvenido al Sistema de Administración " + v_nombre + "!",
             icon: "success",
             confirmButtonText: "OK",
           }).then(() => {
@@ -88,7 +90,7 @@
         } else if (user_data.id_rol == 2) {
           Swal.fire({
             title: "Inicio de Sesión Exitoso",
-            text: "¡Bienvenido al Sistema de Usuario!",
+            text: "¡Bienvenido al Sistema de Usuario " + v_nombre + "!",
             icon: "success",
             confirmButtonText: "OK",
             customClass: {
@@ -101,7 +103,7 @@
         } else {
           Swal.fire({
             title: "Inicio de Sesión Exitoso",
-            text: "¡Bienvenido al Sistema!",
+            text: "¡Bienvenido al Sistema" + v_nombre + "!",
             icon: "success",
             confirmButtonText: "OK",
             customClass: {
