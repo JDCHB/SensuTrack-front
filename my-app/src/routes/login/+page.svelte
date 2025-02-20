@@ -81,7 +81,7 @@
           let v_nombre = user_data.nombre;
           Swal.fire({
             title: "Inicio de Sesión Exitoso",
-            text: "¡Bienvenido al Sistema de Administración " + v_nombre + "!",
+            text: "¡Bienvenido al Sistema de Administración!",
             icon: "success",
             confirmButtonText: "OK",
           }).then(() => {
@@ -90,7 +90,7 @@
         } else if (user_data.id_rol == 2) {
           Swal.fire({
             title: "Inicio de Sesión Exitoso",
-            text: "¡Bienvenido al Sistema de Usuario " + v_nombre + "!",
+            text: "¡Bienvenido al Sistema de Usuario!",
             icon: "success",
             confirmButtonText: "OK",
             customClass: {
@@ -103,7 +103,7 @@
         } else {
           Swal.fire({
             title: "Inicio de Sesión Exitoso",
-            text: "¡Bienvenido al Sistema" + v_nombre + "!",
+            text: "¡Bienvenido al Sistema!",
             icon: "success",
             confirmButtonText: "OK",
             customClass: {
