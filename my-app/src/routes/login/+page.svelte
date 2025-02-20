@@ -75,7 +75,7 @@
         const { access_token, user_data } = data; // Extraer token y datos del usuario
         localStorage.setItem("access_token", access_token);
         localStorage.setItem("user_data", JSON.stringify(user_data));
-
+        console.log(user_data);
         if (user_data.id_rol == 3) {
           todos = user_data;
           let v_nombre = user_data.nombre;
