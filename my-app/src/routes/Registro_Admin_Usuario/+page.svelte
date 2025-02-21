@@ -95,7 +95,7 @@
             "https://proyectomascotas.onrender.com/get_roles/",
         );
         const data = await response.json();
-        let roles = data.resultado;
+        roles = data.resultado;
         console.log(roles);
     });
 </script>
