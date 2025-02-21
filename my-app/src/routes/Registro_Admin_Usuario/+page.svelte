@@ -10,7 +10,6 @@
     let v_email = "";
     let v_rol = "";
     let v_estado = true;
-    let roles = "";
     let error = null;
 
     let registerLoader;
@@ -95,8 +94,8 @@
             "https://proyectomascotas.onrender.com/get_roles/",
         );
         const data = await response.json();
-        roles = data.resultado;
-        console.log(roles);
+        v_rol = data.resultado;
+        console.log(v_rol);
     });
 </script>
 
@@ -151,7 +150,7 @@
         />
         <select id="roles" class="form__input-wrapper">
             <option value="" disabled selected>Seleccione el Rol:</option>
-            {#each roles as rol}
+            {#each v_rol as rol}
                 <option value={rol.id}>{rol.nombre}</option>
             {/each}
         </select>
