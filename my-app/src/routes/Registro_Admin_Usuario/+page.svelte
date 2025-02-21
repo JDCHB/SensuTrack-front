@@ -9,10 +9,19 @@
     let v_telefono = "";
     let v_email = "";
     let v_rol = "";
+    let roles = [];
     let v_estado = true;
     let error = null;
-
     let registerLoader;
+
+    onMount(async () => {
+        const response = await fetch(
+            "https://proyectomascotas.onrender.com/get_roles/",
+        );
+        const data = await response.json();
+        roles = data.resultado;
+        console.log(roles);
+    });
 
     function showLoader(loader) {
         if (loader) {
@@ -42,6 +51,16 @@
                 },
             });
 
+            // Convertir el rol seleccionado a número entero
+            const id_rol = parseInt(v_rol, 10);
+
+            // Validar que el rol es un número válido
+            if (isNaN(id_rol)) {
+                alert("Por favor, seleccione un rol válido.");
+                hideLoader(registerLoader);
+                return;
+            }
+
             if (result.isConfirmed) {
                 showLoader(registerLoader);
                 const response = await fetch(
@@ -65,6 +84,7 @@
                 );
 
                 const data = await response.json();
+                console.log("Respuesta del servidor:", data);
                 hideLoader(registerLoader);
 
                 if (response.ok) {
@@ -88,15 +108,6 @@
             alert("Error en la solicitud: " + error);
         }
     }
-
-    onMount(async () => {
-        const response = await fetch(
-            "https://proyectomascotas.onrender.com/get_roles/",
-        );
-        const data = await response.json();
-        v_rol = data.resultado;
-        console.log(v_rol);
-    });
 </script>
 
 <NavbarAd></NavbarAd>
@@ -148,9 +159,10 @@
             type="password"
             required
         />
-        <select id="roles" class="form__input-wrapper">
+        <!-- Select para elegir el rol -->
+        <select id="roles" class="form__input-wrapper" bind:value={v_rol}>
             <option value="" disabled selected>Seleccione el Rol:</option>
-            {#each v_rol as rol}
+            {#each roles as rol}
                 <option value={rol.id}>{rol.nombre}</option>
             {/each}
         </select>
