@@ -1,4 +1,5 @@
 <script>
+    import { onMount } from "svelte";
     import NavbarAd from "../../lib/components/NavbarAD.svelte";
 
     let v_password = "";
@@ -9,6 +10,7 @@
     let v_email = "";
     let v_rol = "";
     let v_estado = true;
+    let roles = "";
     let error = null;
 
     let registerLoader;
@@ -87,6 +89,15 @@
             alert("Error en la solicitud: " + error);
         }
     }
+
+    onMount(async () => {
+        const response = await fetch(
+            "https://proyectomascotas.onrender.com/get_roles/",
+        );
+        const data = await response.json();
+        let roles = data.resultado;
+        console.log(roles);
+    });
 </script>
 
 <NavbarAd></NavbarAd>
@@ -138,15 +149,12 @@
             type="password"
             required
         />
-        <div class="form__input-wrapper">
-            <label for="role">Seleccione el Rol:</label>
-            <select id="role" class="form__input" bind:value={v_rol} required>
-                <option value="" disabled selected>Selecciona un rol</option>
-                <option value="1">Administrador</option>
-                <option value="2">Usuario</option>
-                <option value="3">Super Admin</option>
-            </select>
-        </div>
+        <select id="roles" class="form__input-wrapper">
+            <option value="" disabled selected>Seleccione el Rol:</option>
+            {#each roles as rol}
+                <option value={rol.id}>{rol.nombre}</option>
+            {/each}
+        </select>
         <button class="flip-card__btn small-btn">Confirmar</button>
     </form>
     <!-- Loader del registro -->
