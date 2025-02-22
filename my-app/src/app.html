@@ -54,8 +54,6 @@
 	let v_token = ""
 	async function revisar_token() {
 
-
-
 		let miStorage = window.localStorage;
 		let verificar_tokenv = JSON.parse(miStorage.getItem('user_data'));
 		const pagina_v = window.location.pathname;
@@ -96,12 +94,12 @@
 
 
 
-		if (todos == "Token expirado" & pagina_v != "/" & pagina_v != "/login" & pagina_v != "/Registro_User" & pagina_v != "/Cambio_Clave") {
+		if (todos == "Token expirado" & pagina_v != "/" & pagina_v != "/login" & pagina_v != "/Registro_User" & pagina_v != "/Cambio_Clave" & pagina_v != "/administrador" & pagina_v != "/Registro_Admin_Usuario") {
 			console.log("Redirigiendo por token expirado")
 			localStorage.clear();
 			window.location.href = "/login";
 
-		} else if (todos == "Token inválido" & pagina_v != "/" & pagina_v != "/login" & pagina_v != "/Registro_User" & pagina_v != "/Cambio_Clave") {
+		} else if (todos == "Token inválido" & pagina_v != "/" & pagina_v != "/login" & pagina_v != "/Registro_User" & pagina_v != "/Cambio_Clave" & pagina_v != "/administrador" & pagina_v != "/Registro_Admin_Usuario") {
 			console.log("Redirigiendo por token inválido")
 			localStorage.clear();
 			window.location.href = "/login";

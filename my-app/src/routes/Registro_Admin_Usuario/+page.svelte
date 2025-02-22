@@ -87,7 +87,7 @@
                 console.log("Respuesta del servidor:", data);
                 hideLoader(registerLoader);
 
-                if (response.ok) {
+                if (data.resultado === "Usuario creado") {
                     Swal.fire({
                         title: "¡Registrado!,¡Bienvenid@ " + v_nombre + "!",
                         icon: "success",
@@ -96,8 +96,12 @@
                             title: "custom-title",
                         },
                     });
-                } else {
-                    alert("Error en el registro");
+                } else if (data.resultado === "El usuario ya existe") {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: "Lo sentimos, el usuario ya existe.",
+                    });
                 }
             } else {
                 console.log("Registro Cancelado");
