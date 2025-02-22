@@ -51,10 +51,10 @@
 
             if (!response.ok) throw new Error("Error al cargar los datos");
             const data = await response.json();
+            console.log(data);
 
             todos = data.resultado;
             mostrarReporte = true;
-
             setTimeout(() => globalThis.$("#myTable").DataTable(), 0);
         } catch (e) {
             error = e.message;
@@ -72,7 +72,7 @@
             "Id",
             "Nombre",
             "Género",
-            "Tipo",
+            "Tipo de Ceguera",
             "Cuidador",
             "Fecha",
             "Estado",
@@ -81,9 +81,9 @@
         const body = todos.map((todo) => [
             todo.id,
             todo.nombre,
-            todo.id_genero_discapacitado,
-            todo.id_tipo_ceguera,
-            todo.id_cuidador,
+            todo.genero,
+            todo.tipo_ceguera,
+            todo.nombre_cuidador,
             todo.fecha,
             todo.estado,
         ]);
@@ -160,7 +160,7 @@
                         <th>Id</th>
                         <th>Nombre</th>
                         <th>Género</th>
-                        <th>Tipo</th>
+                        <th>Tipo de Ceguera</th>
                         <th>Cuidador</th>
                         <th>Fecha y Hora</th>
                         <th>Estado</th>
@@ -171,11 +171,11 @@
                         <tr>
                             <td>{todo.id}</td>
                             <td>{todo.nombre}</td>
-                            <td>{todo.id_genero_discapacitado}</td>
-                            <td>{todo.id_tipo_ceguera}</td>
-                            <td>{todo.id_cuidador}</td>
+                            <td>{todo.genero}</td>
+                            <td>{todo.tipo_ceguera}</td>
+                            <td>{todo.nombre_cuidador}</td>
                             <td>{todo.fecha}</td>
-                            <td>{todo.estado}</td>
+                            <td>{todo.estado ? "Activo" : "Inactivo"}</td>
                         </tr>
                     {/each}
                 </tbody>
