@@ -86,7 +86,7 @@
                         </div>
                         <div class="col-6 mb-3">
                             <button
-                                class="btn btn-lg btn-outline-warning d-flex align-items-center justify-content-between w-100"
+                                class="btn btn-lg btn-outline-primary d-flex align-items-center justify-content-between w-100"
                                 on:click={mostrarConfirmacionRegistroGPS}
                             >
                                 <span>REGISTRAR GPS</span>
@@ -95,7 +95,7 @@
                         </div>
                         <div class="col-6 mb-3">
                             <button
-                                class="btn btn-lg btn-outline-primary d-flex align-items-center justify-content-between w-100"
+                                class="btn btn-lg btn-outline-success d-flex align-items-center justify-content-between w-100"
                                 on:click={mostrarTablaUsuarios}
                             >
                                 <span>TABLA USUARIOS</span>
@@ -104,7 +104,7 @@
                         </div>
                         <div class="col-6 mb-3">
                             <button
-                                class="btn btn-lg btn-outline-success d-flex align-items-center justify-content-between w-100"
+                                class="btn btn-lg btn-outline-dark d-flex align-items-center justify-content-between w-100"
                                 on:click={mostrarRegistroRoles}
                             >
                                 <span>REGISTRAR ROLES</span>
@@ -113,7 +113,7 @@
                         </div>
                         <div class="col-6 mb-3">
                             <button
-                                class="btn btn-lg btn-outline-dark d-flex align-items-center justify-content-between w-100"
+                                class="btn btn-lg btn-outline-primary d-flex align-items-center justify-content-between w-100"
                                 on:click={mostrarRegistroModulos}
                             >
                                 <span>REGISTRAR MODULOS</span>
@@ -122,7 +122,7 @@
                         </div>
                         <div class="col-6 mb-3">
                             <button
-                                class="btn btn-lg btn-outline-warning d-flex align-items-center justify-content-between w-100"
+                                class="btn btn-lg btn-outline-success d-flex align-items-center justify-content-between w-100"
                                 on:click={mostrarRegistroModuloxRol}
                             >
                                 <span>MODULOXROL</span>
