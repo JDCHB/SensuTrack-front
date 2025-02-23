@@ -2,9 +2,10 @@
     import { onMount } from "svelte";
     import NavbarAd from "../../lib/components/NavbarAD.svelte";
 
-    let v_password = "";
     let v_nombre = "";
     let v_apellido = "";
+    let v_password = "";
+    let Confirmar_Contraseña = "";
     let v_documento = "";
     let v_telefono = "";
     let v_email = "";
