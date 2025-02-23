@@ -36,80 +36,103 @@
     }
 
     async function Register() {
-        try {
-            const result = await Swal.fire({
-                title: "¿Estás seguro?",
-                text: "¡Desea registrar un nuevo Usuario a SensuTrack!?",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Sí, registrar!",
-                customClass: {
-                    popup: "swal-popup",
-                    title: "custom-title",
-                },
-            });
+        Confirmar_Contraseña = document.getElementById(
+            "Confirmar_Contraseña",
+        ).value;
 
-            // Convertir el rol seleccionado a número entero
-            const id_rol = parseInt(v_rol, 10);
-
-            // Validar que el rol es un número válido
-            if (isNaN(id_rol)) {
-                alert("Por favor, seleccione un rol válido.");
-                hideLoader(registerLoader);
-                return;
-            }
-
-            if (result.isConfirmed) {
-                showLoader(registerLoader);
-                const response = await fetch(
-                    "https://proyectomascotas.onrender.com/create_user",
-                    {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({
-                            email: v_email,
-                            password: v_password,
-                            nombre: v_nombre,
-                            apellido: v_apellido,
-                            documento: v_documento,
-                            telefono: v_telefono,
-                            id_rol: v_rol,
-                            estado: v_estado,
-                        }),
+        if (Confirmar_Contraseña === v_password) {
+            try {
+                const result = await Swal.fire({
+                    title: "¿Estás seguro?",
+                    text: "¡Desea registrar un nuevo Usuario a SensuTrack!?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Sí, registrar!",
+                    customClass: {
+                        popup: "swal-popup",
+                        title: "custom-title",
                     },
-                );
+                });
 
-                const data = await response.json();
-                console.log("Respuesta del servidor:", data);
-                hideLoader(registerLoader);
+                // Convertir el rol seleccionado a número entero
+                const id_rol = parseInt(v_rol, 10);
 
-                if (data.resultado === "Usuario creado") {
-                    Swal.fire({
-                        title: "¡Registrado!,¡Bienvenid@ " + v_nombre + "!",
-                        icon: "success",
-                        customClass: {
-                            popup: "swal-popup",
-                            title: "custom-title",
+                // Validar que el rol es un número válido
+                if (isNaN(id_rol)) {
+                    alert("Por favor, seleccione un rol válido.");
+                    hideLoader(registerLoader);
+                    return;
+                }
+
+                if (result.isConfirmed) {
+                    showLoader(registerLoader);
+                    const response = await fetch(
+                        "https://proyectomascotas.onrender.com/create_user",
+                        {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                                email: v_email,
+                                password: v_password,
+                                nombre: v_nombre,
+                                apellido: v_apellido,
+                                documento: v_documento,
+                                telefono: v_telefono,
+                                id_rol: v_rol,
+                                estado: v_estado,
+                            }),
                         },
-                    });
-                } else if (data.resultado === "El usuario ya existe") {
+                    );
+
+                    const data = await response.json();
+                    console.log("Respuesta del servidor:", data);
+                    hideLoader(registerLoader);
+
+                    if (data.resultado === "Usuario creado") {
+                        Swal.fire({
+                            title: "¡Registrado!,¡Bienvenid@ " + v_nombre + "!",
+                            icon: "success",
+                            customClass: {
+                                popup: "swal-popup",
+                                title: "custom-title",
+                            },
+                        });
+                    } else if (data.resultado === "El usuario ya existe") {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Error",
+                            text: "Lo sentimos, el usuario ya existe.",
+                        });
+                    }
+                } else {
                     Swal.fire({
+                        title: "REGISTRO CANCELADO",
                         icon: "error",
-                        title: "Error",
-                        text: "Lo sentimos, el usuario ya existe.",
+                        customClass: {
+                            popup: "swal-popup", // Clase para personalizar el popup de la alerta
+                            title: "custom-title", // Clase personalizada para el título
+                        },
                     });
                 }
-            } else {
-                console.log("Registro Cancelado");
+            } catch (e) {
+                error = e.message;
+                hideLoader(registerLoader);
+                alert("Error en la solicitud: " + error);
             }
-        } catch (e) {
-            error = e.message;
-            hideLoader(registerLoader);
-            alert("Error en la solicitud: " + error);
+        } else {
+            Swal.fire({
+                title: "Parece que ha ocurrido un error",
+                text: "No son iguales las contraseñas, porfavor intente de nuevo :]",
+                icon: "error",
+                customClass: {
+                    popup: "swal-popup", // Clase para personalizar el popup de la alerta
+                    title: "custom-title", // Clase personalizada para el título
+                },
+            });
         }
     }
 </script>
@@ -159,6 +182,14 @@
         <input
             class="form__input small-input"
             bind:value={v_password}
+            placeholder="Contraseña"
+            type="password"
+            required
+        />
+
+        <input
+            class="form__input small-input"
+            id="Confirmar_Contraseña"
             placeholder="Contraseña"
             type="password"
             required
