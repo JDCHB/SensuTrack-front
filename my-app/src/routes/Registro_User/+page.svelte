@@ -4,6 +4,7 @@
 
     let v_usuario = "";
     let v_password = "";
+    let Confirmar_Contraseña = "";
     let v_nombre = "";
     let v_apellido = "";
     let v_documento = "";
@@ -42,6 +43,7 @@
 
     async function RegisterUser() {
         // Referencia al Captcha
+
         const captchaResponse = grecaptcha.getResponse();
 
         if (!captchaResponse) {
@@ -52,69 +54,86 @@
             });
             return;
         }
-        try {
-            // Muestra el cuadro de confirmación antes de proceder con el registro
-            const result = await Swal.fire({
-                title: "¿Estás seguro?",
-                text: "¡Desea registrarse a SensuTrack!?",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Sí, registrarse!",
-                customClass: {
-                    popup: "swal-popup", // Clase para personalizar el popup de la alerta
-                    title: "custom-title", // Clase personalizada para el título
-                },
-            });
-            // Si el usuario confirma, continuamos con el registro
-            if (result.isConfirmed) {
-                showLoader(registerLoader); // Mostrar loader al comenzar el registro
-                const response = await fetch(
-                    "https://proyectomascotas.onrender.com/create_user",
-                    {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({
-                            email: v_email,
-                            password: v_password,
-                            nombre: v_nombre,
-                            apellido: v_apellido,
-                            documento: v_documento,
-                            telefono: v_telefono,
-                            id_rol: v_rol,
-                            estado: v_estado,
-                        }),
+
+        Confirmar_Contraseña = document.getElementById(
+            "Confirmar_Contraseña",
+        ).value;
+
+        if (Confirmar_Contraseña === v_password) {
+            try {
+                // Muestra el cuadro de confirmación antes de proceder con el registro
+                const result = await Swal.fire({
+                    title: "¿Estás seguro?",
+                    text: "¡Desea registrarse a SensuTrack!?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Sí, registrarse!",
+                    customClass: {
+                        popup: "swal-popup", // Clase para personalizar el popup de la alerta
+                        title: "custom-title", // Clase personalizada para el título
                     },
-                );
-
-                const data = await response.json();
-                console.log(data);
-
-                hideLoader(registerLoader); // Ocultar loader al terminar el registro
-
-                if (response.ok) {
-                    grecaptcha.reset(); // Restablece el CAPTCHA después de una respuesta exitosa
-                    Swal.fire({
-                        title: "¡Registrado!,¡Bienvenido " + v_nombre + "!",
-                        icon: "success",
-                        customClass: {
-                            popup: "swal-popup", // Clase para personalizar el popup de la alerta
-                            title: "custom-title", // Clase personalizada para el título
+                });
+                // Si el usuario confirma, continuamos con el registro
+                if (result.isConfirmed) {
+                    showLoader(registerLoader); // Mostrar loader al comenzar el registro
+                    const response = await fetch(
+                        "https://proyectomascotas.onrender.com/create_user",
+                        {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                                email: v_email,
+                                password: v_password,
+                                nombre: v_nombre,
+                                apellido: v_apellido,
+                                documento: v_documento,
+                                telefono: v_telefono,
+                                id_rol: v_rol,
+                                estado: v_estado,
+                            }),
                         },
-                    });
+                    );
+
+                    const data = await response.json();
+                    console.log(data);
+
+                    hideLoader(registerLoader); // Ocultar loader al terminar el registro
+
+                    if (response.ok) {
+                        grecaptcha.reset(); // Restablece el CAPTCHA después de una respuesta exitosa
+                        Swal.fire({
+                            title: "¡Registrado!,¡Bienvenido " + v_nombre + "!",
+                            icon: "success",
+                            customClass: {
+                                popup: "swal-popup", // Clase para personalizar el popup de la alerta
+                                title: "custom-title", // Clase personalizada para el título
+                            },
+                        });
+                    } else {
+                        alert("Error en el registro");
+                    }
                 } else {
-                    alert("Error en el registro");
+                    swalWithBootstrapButtons.fire({
+                        title: "REGISTRO CANCELADO",
+                        text: "Okey....",
+                        icon: "error",
+                    });
                 }
-            } else {
-                console.log("Registro Cancelado");
+            } catch (e) {
+                error = e.message;
+                hideLoader(registerLoader); // Ocultar loader si ocurre algun error
+                alert("Error en la solicitud: " + error);
             }
-        } catch (e) {
-            error = e.message;
-            hideLoader(registerLoader); // Ocultar loader si ocurre algun error
-            alert("Error en la solicitud: " + error);
+        } else {
+            swalWithBootstrapButtons.fire({
+                title: "Parece que ha ocurrido un error",
+                text: "No son iguales las contraseñas, porfavor intente de nuevo :]",
+                icon: "error",
+            });
         }
     }
 </script>
@@ -264,6 +283,26 @@
                                                     class="form-control"
                                                     bind:value={v_password}
                                                     placeholder="Contraseña"
+                                                    required
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            class="d-flex flex-row align-items-center mb-4"
+                                        >
+                                            <i
+                                                class="bi bi-lock fa-lg me-3 fa-fw"
+                                            ></i>
+                                            <div
+                                                data-mdb-input-init
+                                                class="form-outline flex-fill mb-0"
+                                            >
+                                                <input
+                                                    type="password"
+                                                    class="form-control"
+                                                    id="Confirmar_Contraseña"
+                                                    placeholder="Confirmar Contraseña"
                                                     required
                                                 />
                                             </div>
