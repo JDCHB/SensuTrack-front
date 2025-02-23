@@ -45,7 +45,7 @@
 
 <!-- HTML del menú de administrador -->
 <div class="fondo">
-    <div class="container mt-5">
+    <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6">
                 <div class="admin-menu">
