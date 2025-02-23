@@ -140,7 +140,7 @@
 
     <div class="row justify-content-center">
         <button type="button" class="btn btn-primary btn-lg" on:click={generar}>
-            Generar Reporte
+            <i class="fas fa-file-alt"></i> Generar Reporte
         </button>
     </div>
 </div>
@@ -148,7 +148,16 @@
 <!-- Mostrar Datos -->
 <div class="container py-4" id="MostrarReporte">
     {#if loading}
-        <p class="text-center">Cargando datos...</p>
+        <div class="progress" style="height: 5px; margin-top: 20px;">
+            <div
+                class="progress-bar progress-bar-striped progress-bar-animated"
+                role="progressbar"
+                aria-valuenow="100"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                style="width: 100%"
+            ></div>
+        </div>
     {:else if error}
         <p class="text-danger text-center">Error: {error}</p>
     {:else if mostrarReporte}
@@ -183,7 +192,7 @@
         </div>
         <div class="text-center mt-4">
             <button class="btn btn-success" on:click={exportarPDF}>
-                Exportar como PDF
+                <i class="fas fa-download"></i> Exportar como PDF
             </button>
         </div>
     {/if}
@@ -193,17 +202,85 @@
 
 <style>
     .container {
-        max-width: 800px;
+        max-width: 900px;
         margin: auto;
-        padding: 20px;
-        background-color: #f9f9f9;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
     }
 
-    @media (max-width: 768px) {
-        .col-xl-6 {
-            margin-bottom: 10px;
-        }
+    .row {
+        margin-bottom: 20px;
+    }
+
+    input,
+    select,
+    button {
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    }
+
+    input:focus,
+    select:focus,
+    button:focus {
+        outline: none;
+        box-shadow: 0 0 5px 3px #5a9bff;
+    }
+
+    button {
+        background-color: #5a9bff;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        cursor: pointer;
+        font-size: 1.1rem;
+        font-weight: bold;
+    }
+
+    button:hover {
+        background-color: #4b86e3;
+    }
+
+    button:active {
+        background-color: #3e75c7;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        padding: 15px;
+        text-align: center;
+    }
+
+    th {
+        background-color: #f4f5f7;
+        color: #333;
+        font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tr:hover {
+        background-color: #e2e6ea;
+    }
+
+    .progress {
+        height: 5px;
+        margin-top: 20px;
+    }
+
+    #MostrarReporte {
+        background-color: #f1f3f7;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
 </style>
