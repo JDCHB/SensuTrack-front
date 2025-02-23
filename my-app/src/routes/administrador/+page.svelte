@@ -60,7 +60,7 @@
                         <div class="col-6 mb-3">
                             <button
                                 on:click={mostrarConfirmacionUser}
-                                class="btn btn-lg btn-outline-primary d-flex align-items-center justify-content-between w-100"
+                                class="btn btn-lg btn-outline-dark d-flex align-items-center justify-content-between w-100"
                             >
                                 <span>VISTA DE USUARIO</span>
                                 <i class="bi bi-person-circle"></i>
@@ -68,7 +68,7 @@
                         </div>
                         <div class="col-6 mb-3">
                             <button
-                                class="btn btn-lg btn-outline-success d-flex align-items-center justify-content-between w-100"
+                                class="btn btn-lg btn-outline-dark d-flex align-items-center justify-content-between w-100"
                                 on:click={mostrarConfirmacionRegistroUsuario}
                             >
                                 <span>REGISTRAR USUARIO</span>
@@ -86,7 +86,7 @@
                         </div>
                         <div class="col-6 mb-3">
                             <button
-                                class="btn btn-lg btn-outline-primary d-flex align-items-center justify-content-between w-100"
+                                class="btn btn-lg btn-outline-dark d-flex align-items-center justify-content-between w-100"
                                 on:click={mostrarConfirmacionRegistroGPS}
                             >
                                 <span>REGISTRAR GPS</span>
@@ -95,7 +95,7 @@
                         </div>
                         <div class="col-6 mb-3">
                             <button
-                                class="btn btn-lg btn-outline-success d-flex align-items-center justify-content-between w-100"
+                                class="btn btn-lg btn-outline-dark d-flex align-items-center justify-content-between w-100"
                                 on:click={mostrarTablaUsuarios}
                             >
                                 <span>TABLA USUARIOS</span>
@@ -113,7 +113,7 @@
                         </div>
                         <div class="col-6 mb-3">
                             <button
-                                class="btn btn-lg btn-outline-primary d-flex align-items-center justify-content-between w-100"
+                                class="btn btn-lg btn-outline-dark d-flex align-items-center justify-content-between w-100"
                                 on:click={mostrarRegistroModulos}
                             >
                                 <span>REGISTRAR MODULOS</span>
@@ -122,7 +122,7 @@
                         </div>
                         <div class="col-6 mb-3">
                             <button
-                                class="btn btn-lg btn-outline-success d-flex align-items-center justify-content-between w-100"
+                                class="btn btn-lg btn-outline-dark d-flex align-items-center justify-content-between w-100"
                                 on:click={mostrarRegistroModuloxRol}
                             >
                                 <span>MODULOXROL</span>
@@ -190,23 +190,8 @@
         margin-left: 10px;
     }
 
-    .btn-outline-primary:hover {
-        background-color: #3085d6;
-        color: white;
-    }
-
-    .btn-outline-success:hover {
-        background-color: #28a745;
-        color: white;
-    }
-
     .btn-outline-danger:hover {
         background-color: #dc3545;
-        color: white;
-    }
-
-    .btn-outline-warning:hover {
-        background-color: #ffc107;
         color: white;
     }
 </style>
