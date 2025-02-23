@@ -117,10 +117,13 @@
                         alert("Error en el registro");
                     }
                 } else {
-                    swalWithBootstrapButtons.fire({
+                    Swal.fire({
                         title: "REGISTRO CANCELADO",
-                        text: "Okey....",
                         icon: "error",
+                        customClass: {
+                            popup: "swal-popup", // Clase para personalizar el popup de la alerta
+                            title: "custom-title", // Clase personalizada para el título
+                        },
                     });
                 }
             } catch (e) {
@@ -129,10 +132,14 @@
                 alert("Error en la solicitud: " + error);
             }
         } else {
-            swalWithBootstrapButtons.fire({
+            Swal.fire({
                 title: "Parece que ha ocurrido un error",
                 text: "No son iguales las contraseñas, porfavor intente de nuevo :]",
                 icon: "error",
+                customClass: {
+                    popup: "swal-popup", // Clase para personalizar el popup de la alerta
+                    title: "custom-title", // Clase personalizada para el título
+                },
             });
         }
     }
