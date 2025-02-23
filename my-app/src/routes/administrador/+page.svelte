@@ -22,6 +22,10 @@
         window.location.href = "/Admin_Tabla_Usuarios";
     };
 
+    const mostrarTablaCiegos = () => {
+        window.location.href = "/Admin_Tabla_Ciegos";
+    };
+
     const mostrarRegistroRoles = () => {
         window.location.href = "/Admin_Registro_Roles";
     };
@@ -63,7 +67,7 @@
                                 class="btn btn-lg btn-outline-dark d-flex align-items-center justify-content-between w-100"
                             >
                                 <span>VISTA DE USUARIO</span>
-                                <i class="bi bi-person-circle"></i>
+                                <i class="bi bi-person-video"></i>
                             </button>
                         </div>
                         <div class="col-6 mb-3">
@@ -72,7 +76,7 @@
                                 on:click={mostrarConfirmacionRegistroUsuario}
                             >
                                 <span>REGISTRAR USUARIO</span>
-                                <i class="bi bi-person-plus"></i>
+                                <i class="bi-person-add"></i>
                             </button>
                         </div>
                         <div class="col-6 mb-3">
@@ -81,7 +85,7 @@
                                 on:click={mostrarConfirmacionReporte}
                             >
                                 <span>REPORTES</span>
-                                <i class="bi bi-gear-fill"></i>
+                                <i class="bi bi-file-earmark-spreadsheet"></i>
                             </button>
                         </div>
                         <div class="col-6 mb-3">
@@ -90,7 +94,7 @@
                                 on:click={mostrarConfirmacionRegistroGPS}
                             >
                                 <span>REGISTRAR GPS</span>
-                                <i class="bi bi-plus-circle"></i>
+                                <i class="bi bi-geo-alt"></i>
                             </button>
                         </div>
                         <div class="col-6 mb-3">
@@ -99,7 +103,16 @@
                                 on:click={mostrarTablaUsuarios}
                             >
                                 <span>TABLA USUARIOS</span>
-                                <i class="bi bi-person"></i>
+                                <i class="bi bi-table"></i>
+                            </button>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <button
+                                class="btn btn-lg btn-outline-dark d-flex align-items-center justify-content-between w-100"
+                                on:click={mostrarTablaCiegos}
+                            >
+                                <span>TABLA CIEGOS</span>
+                                <i class="bi bi-table"></i>
                             </button>
                         </div>
                         <div class="col-6 mb-3">
@@ -108,7 +121,7 @@
                                 on:click={mostrarRegistroRoles}
                             >
                                 <span>REGISTRAR ROLES</span>
-                                <i class="bi bi-person-plus"></i>
+                                <i class="bi bi-person-badge"></i>
                             </button>
                         </div>
                         <div class="col-6 mb-3">
@@ -117,7 +130,7 @@
                                 on:click={mostrarRegistroModulos}
                             >
                                 <span>REGISTRAR MODULOS</span>
-                                <i class="bi bi-gear-fill"></i>
+                                <i class="bi bi-stack"></i>
                             </button>
                         </div>
                         <div class="col-6 mb-3">
@@ -126,7 +139,7 @@
                                 on:click={mostrarRegistroModuloxRol}
                             >
                                 <span>MODULOXROL</span>
-                                <i class="bi bi-plus-circle"></i>
+                                <i class="bi bi-shield-lock"></i>
                             </button>
                         </div>
                         <div class="col-6 mb-3">
