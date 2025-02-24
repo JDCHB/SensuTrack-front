@@ -10,7 +10,7 @@
         try {
             console.log("2");
             const response = await fetch(
-                "https://proyectomascotas.onrender.com/get_users",
+                "https://proyectomascotas.onrender.com/get_discapacitadosVCOMPLETOS",
             );
             if (!response.ok) throw new Error("Error al cargar los datos");
             const data = await response.json();
@@ -321,7 +321,7 @@
 
 <div id="Mostrarusuario">
     <div class="container py-4">
-        <h2 class="mb-4">Lista de usuarios</h2>
+        <h2 class="mb-4">Lista de discapacitados</h2>
         {#if loading}
             <!---->
             <div class="row g-2 justify-content-center">
@@ -347,11 +347,9 @@
                 >
                     <thead>
                         <tr>
-                            <th class="px-4 py-2 border">Usuario</th>
                             <th class="px-4 py-2 border">Nombre</th>
-                            <th class="px-4 py-2 border">Apellido</th>
-                            <th class="px-4 py-2 border">Documento</th>
-                            <th class="px-4 py-2 border">Telefono</th>
+                            <th class="px-4 py-2 border">Genero</th>
+                            <th class="px-4 py-2 border">Tipo_Ceguera</th>
                             <th class="px-4 py-2 border">Estado</th>
                             <th class="px-4 py-2 border">Opcion</th>
                         </tr>
@@ -360,14 +358,10 @@
                     <tbody>
                         {#each todos as todo}
                             <tr class="hover:bg-gray-50">
-                                <td class="px-4 py-2 border">{todo.email}</td>
                                 <td class="px-4 py-2 border">{todo.nombre}</td>
-                                <td class="px-4 py-2 border">{todo.apellido}</td
-                                >
+                                <td class="px-4 py-2 border">{todo.genero}</td>
                                 <td class="px-4 py-2 border"
-                                    >{todo.documento}</td
-                                >
-                                <td class="px-4 py-2 border">{todo.telefono}</td
+                                    >{todo.tipo_ceguera}</td
                                 >
                                 <td class="px-4 py-2 border">
                                     <span
@@ -545,4 +539,3 @@
         </div>
     </div>
 </div>
-\end{code}
