@@ -260,18 +260,9 @@
                   </form>
                   <!-- Loader del login -->
                   <div class="loader-container" bind:this={loginLoader}>
-                    <div class="loader-dog-head">
-                      <div class="ear left-ear"></div>
-                      <div class="ear right-ear"></div>
-                      <div class="eye left-eye">
-                        <div class="pupil"></div>
-                      </div>
-                      <div class="eye right-eye">
-                        <div class="pupil"></div>
-                      </div>
-                      <div class="nose"></div>
-                      <div class="mouth"></div>
-                      <div class="tongue"></div>
+                    <div class="loader-cane">
+                      <div class="cane-stick"></div>
+                      <div class="cane-tip"></div>
                     </div>
                   </div>
                 </div>
@@ -293,7 +284,6 @@
     background: #eee;
   }
 
-  /* Estilos para el loader de la cara de un perrito */
   .wrapper {
     --input-focus: #2d8cf0;
     --font-color: #323232;
@@ -322,124 +312,51 @@
     z-index: 100; /* Asegúrate de que esté encima de otros elementos */
   }
 
-  .loader-dog-head {
-    position: relative;
-    width: 120px;
-    height: 120px;
-    background-color: #f4a261; /* Color de piel */
-    border-radius: 50%; /* Forma de la cara */
-    display: flex;
+  /* Contenedor para el loader */
+  .loader-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    display: none;
     justify-content: center;
     align-items: center;
-    animation: bounce 2s infinite;
+    z-index: 100;
   }
 
-  .ear {
-    position: absolute;
-    background-color: #f4a261;
-    width: 40px;
-    height: 60px;
-    border-radius: 50%;
-    top: 10px;
+  .loader-cane {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: float 2s infinite ease-in-out;
   }
 
-  .left-ear {
-    left: -20px;
-    transform: rotate(-30deg);
+  .cane-stick {
+    width: 15px;
+    height: 100px;
+    background-color: #2d3436; /* Color oscuro para el bastón */
+    border-radius: 10px;
   }
 
-  .right-ear {
-    right: -20px;
-    transform: rotate(30deg);
-  }
-
-  .eye {
-    position: absolute;
-    background-color: #fff;
+  .cane-tip {
     width: 20px;
     height: 20px;
+    background-color: #e76f51; /* Color rojo para la punta del bastón */
     border-radius: 50%;
-    top: 35px;
+    margin-top: 5px;
   }
 
-  .left-eye {
-    left: 30px;
-  }
-
-  .right-eye {
-    right: 30px;
-  }
-
-  .pupil {
-    position: absolute;
-    background-color: #000;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    top: 6px;
-    left: 6px;
-    animation: blink 3s infinite;
-  }
-
-  .nose {
-    position: absolute;
-    background-color: #2d3436;
-    width: 20px;
-    height: 15px;
-    border-radius: 50%;
-    bottom: 45px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  }
-
-  .mouth {
-    position: absolute;
-    width: 40px;
-    height: 20px;
-    border: 2px solid #2d3436;
-    border-top: none;
-    border-radius: 0 0 20px 20px;
-    bottom: 30px;
-  }
-
-  .tongue {
-    position: absolute;
-    background-color: #e76f51;
-    width: 16px;
-    height: 24px;
-    border-radius: 50%;
-    bottom: 15px;
-    animation: waggle 1.5s infinite ease-in-out;
-  }
-
-  /* Animaciones */
-  @keyframes bounce {
+  /* Animación para el bastón flotando */
+  @keyframes float {
     0%,
     100% {
       transform: translateY(0);
     }
     50% {
-      transform: translateY(-10px);
-    }
-  }
-
-  @keyframes blink {
-    0%,
-    80%,
-    100% {
-      transform: scaleY(1);
-    }
-    90% {
-      transform: scaleY(0.1);
-    }
-  }
-
-  @keyframes waggle {
-    0%,
-    100% {
-      transform: rotate(0);
-    }
-    50% {
-      transform: rotate(10deg);
+      transform: translateY(-15px);
     }
   }
 </style>

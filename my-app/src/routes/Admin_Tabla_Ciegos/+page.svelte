@@ -34,9 +34,8 @@
         const v_editar = document.getElementById("nav-listado");
         v_editar.setAttribute("class", "fade");
 
-        let mostrar = document.getElementById("Mostrarusuario");
+        let mostrar = document.getElementById("MostrarDiscapacitado");
         mostrar.removeAttribute("class");
-
         location.reload();
     }
 
@@ -50,7 +49,7 @@
         console.log(Number.isInteger(vid));
 
         console.log(vid);
-        let ocultar = document.getElementById("Mostrarusuario");
+        let ocultar = document.getElementById("MostrarDiscapacitado");
         ocultar.setAttribute("class", "fade");
         console.log(ocultar);
 
@@ -79,23 +78,28 @@
             todos = data.nombre;
             console.log(todos);
             document.getElementById("nombres").value = data.nombre;
+
             document.getElementById("genero").value =
                 data.id_genero_discapacitado;
+
             document.getElementById("tipo_ceguera").value =
                 data.id_tipo_ceguera;
+
             console.log("verificando el estado: " + data.estado);
+
             const estado_v = data.estado ? "1" : "0"; //condicion ? valorSiVerdadero : valorSiFalso
+
             document.getElementById("estado").value = estado_v;
 
             const v_edit_nombre = document.getElementById("nombres");
             v_edit_nombre.removeAttribute("readonly");
             v_edit_nombre.focus();
 
-            const v_edit_apellido = document.getElementById("genero");
-            v_edit_apellido.removeAttribute("readonly");
+            const v_edit_genero = document.getElementById("genero");
+            v_edit_genero.removeAttribute("readonly");
 
-            const v_edit_documento = document.getElementById("tipo_ceguera");
-            v_edit_documento.removeAttribute("readonly");
+            const v_edit_tipo_ceguera = document.getElementById("tipo_ceguera");
+            v_edit_tipo_ceguera.removeAttribute("readonly");
 
             const v_edit_estado = document.getElementById("estado");
             v_edit_estado.removeAttribute("readonly");
@@ -151,14 +155,14 @@
                 iconColor: "white",
                 color: "white",
                 background: "#00bdff",
-                title: "usuario actualizado con exito",
+                title: "Discapacitado actualizado con exito",
             });
 
             setTimeout(() => {
                 const v_editar = document.getElementById("nav-listado");
                 v_editar.setAttribute("class", "fade");
 
-                let ocultar = document.getElementById("Mostrarusuario");
+                let ocultar = document.getElementById("MostrarDiscapacitado");
                 ocultar.removeAttribute("class");
 
                 const cambiar = v_editar.parentElement;
@@ -309,7 +313,7 @@
 
 <Navbaradmin></Navbaradmin>
 
-<div id="Mostrarusuario">
+<div id="MostrarDiscapacitado">
     <div class="container py-4">
         <h2 class="mb-4">Lista de discapacitados</h2>
         {#if loading}
@@ -456,6 +460,7 @@
                 <div class="col-lg-2">
                     <p class="card-text"><b>Tipo de Ceguera:</b></p>
                 </div>
+
                 <div class="col-lg-10">
                     <input
                         type="text"
