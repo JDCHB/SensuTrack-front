@@ -260,9 +260,10 @@
                   </form>
                   <!-- Loader del login -->
                   <div class="loader-container" bind:this={loginLoader}>
-                    <div class="loader-cane">
-                      <div class="cane-stick"></div>
-                      <div class="cane-tip"></div>
+                    <div class="loader-blind-person">
+                      <div class="circle-head"></div>
+                      <div class="body-stick"></div>
+                      <div class="blind-cane"></div>
                     </div>
                   </div>
                 </div>
@@ -284,6 +285,7 @@
     background: #eee;
   }
 
+  /* Estilos para el loader de la cara de un perrito */
   .wrapper {
     --input-focus: #2d8cf0;
     --font-color: #323232;
@@ -305,20 +307,6 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
-    display: none; /* Oculto por defecto */
-    justify-content: center;
-    align-items: center;
-    z-index: 100; /* Asegúrate de que esté encima de otros elementos */
-  }
-
-  /* Contenedor para el loader */
-  .loader-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
     background: rgba(255, 255, 255, 0.8);
     display: none;
     justify-content: center;
@@ -326,37 +314,57 @@
     z-index: 100;
   }
 
-  .loader-cane {
+  .loader-blind-person {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    animation: float 2s infinite ease-in-out;
+    animation: walk 2s infinite linear;
   }
 
-  .cane-stick {
-    width: 15px;
-    height: 100px;
-    background-color: #2d3436; /* Color oscuro para el bastón */
+  .circle-head {
+    width: 40px;
+    height: 40px;
+    background-color: #2d3436;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+
+  .body-stick {
+    width: 20px;
+    height: 80px;
+    background-color: #2d3436;
     border-radius: 10px;
   }
 
-  .cane-tip {
-    width: 20px;
-    height: 20px;
-    background-color: #e76f51; /* Color rojo para la punta del bastón */
-    border-radius: 50%;
-    margin-top: 5px;
+  .blind-cane {
+    width: 10px;
+    height: 60px;
+    background-color: #e76f51;
+    position: absolute;
+    right: -20px;
+    bottom: 0;
+    transform: rotate(30deg);
+    animation: cane-move 2s infinite ease-in-out;
   }
 
-  /* Animación para el bastón flotando */
-  @keyframes float {
+  @keyframes walk {
     0%,
     100% {
       transform: translateY(0);
     }
     50% {
-      transform: translateY(-15px);
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes cane-move {
+    0%,
+    100% {
+      transform: rotate(30deg);
+    }
+    50% {
+      transform: rotate(45deg);
     }
   }
 </style>
