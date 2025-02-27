@@ -64,7 +64,7 @@
             console.log("Entra al try de buscar");
 
             const response = await fetch(
-                `https://proyectomascotas.onrender.com/get_user/${vid}`,
+                `https://proyectomascotas.onrender.com/get_discapacitadoV/${vid}`,
                 {
                     method: "GET",
                     headers: {
@@ -76,13 +76,13 @@
             console.log(response);
             console.log(data);
             console.log("Buscando al usuario seleccionado");
-            todos = data.apellido;
+            todos = data.nombre;
             console.log(todos);
             document.getElementById("nombres").value = data.nombre;
-            document.getElementById("apellidos").value = data.apellido;
-            document.getElementById("documento").value = data.documento;
-            document.getElementById("telefono").value = data.telefono;
-            document.getElementById("correo").value = data.email;
+            document.getElementById("genero").value =
+                data.id_genero_discapacitado;
+            document.getElementById("tipo_ceguera").value =
+                data.id_tipo_ceguera;
             console.log("verificando el estado: " + data.estado);
             const estado_v = data.estado ? "1" : "0"; //condicion ? valorSiVerdadero : valorSiFalso
             document.getElementById("estado").value = estado_v;
@@ -91,17 +91,11 @@
             v_edit_nombre.removeAttribute("readonly");
             v_edit_nombre.focus();
 
-            const v_edit_apellido = document.getElementById("apellidos");
+            const v_edit_apellido = document.getElementById("genero");
             v_edit_apellido.removeAttribute("readonly");
 
-            const v_edit_documento = document.getElementById("documento");
+            const v_edit_documento = document.getElementById("tipo_ceguera");
             v_edit_documento.removeAttribute("readonly");
-
-            const v_edit_telefono = document.getElementById("telefono");
-            v_edit_telefono.removeAttribute("readonly");
-
-            const v_edit_usuario = document.getElementById("correo");
-            v_edit_usuario.removeAttribute("readonly");
 
             const v_edit_estado = document.getElementById("estado");
             v_edit_estado.removeAttribute("readonly");
@@ -115,10 +109,8 @@
     async function actualizar() {
         console.log(vid);
         let vnombre = document.getElementById("nombres").value;
-        let vapellidos = document.getElementById("apellidos").value;
-        let vdocumento = document.getElementById("documento").value;
-        let vtelefono = document.getElementById("telefono").value;
-        let vcorreo = document.getElementById("correo").value;
+        let vgenero = document.getElementById("genero").value;
+        let vtipoceguera = document.getElementById("tipo_ceguera").value;
         let vestado = document.getElementById("estado").value;
 
         console.log("ID DE ESTADO ENVIADO A LA BASE DE DATOS ES " + vestado);
@@ -134,11 +126,9 @@
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                        email: vcorreo,
                         nombre: vnombre,
-                        apellido: vapellidos,
-                        documento: vdocumento,
-                        telefono: vtelefono,
+                        genero: vgenero,
+                        tipo_ceguera: vtipoceguera,
                         estado: vestado,
                     }),
                 },
@@ -377,7 +367,7 @@
                                         class="btn btn-info"
                                         on:click={() =>
                                             editar(todo.id, todo.nombre)}
-                                        >Editar</button
+                                        ><i class="bi bi-pencil"></i> Editar</button
                                     >
                                     {#if todo.estado}
                                         <!-- Mostrar botón "Desactivar" si el usuario está activo -->
@@ -390,7 +380,7 @@
                                                     todo.email,*/
                                                 )}
                                         >
-                                            Desactivar
+                                            <i class="bi bi-lock"></i> Desactivar
                                         </button>
                                     {:else}
                                         <!-- Mostrar botón "Activar" si el usuario está desactivado -->
@@ -398,7 +388,7 @@
                                             class="btn btn-success"
                                             on:click={() => activar(todo.id)}
                                         >
-                                            Activar
+                                            <i class="bi bi-unlock"></i> Activar
                                         </button>
                                     {/if}
                                 </td>
@@ -421,7 +411,7 @@
     </div>
     <div class="card border-dark shadow" style="width: 60%; margin-left: 20%;">
         <div class="card-header row g-2">
-            <h5 class="card-title col-lg-11"><b>Editando Usuario</b></h5>
+            <h5 class="card-title col-lg-11"><b>Editando Discapacitado</b></h5>
             <button
                 class="btn btn-close col-lg-1"
                 aria-label="Cerrar edición de usuario"
@@ -448,14 +438,14 @@
 
             <div class="row pt-3">
                 <div class="col-lg-2">
-                    <p class="card-text"><b>Apellido:</b></p>
+                    <p class="card-text"><b>Genero:</b></p>
                 </div>
 
                 <div class="col-lg-10">
                     <input
                         type="text"
-                        placeholder="Apellidos"
-                        id="apellidos"
+                        placeholder="Genero"
+                        id="genero"
                         style="border: none; width: 55%;"
                         readonly
                     />
@@ -464,44 +454,13 @@
 
             <div class="row pt-3">
                 <div class="col-lg-2">
-                    <p class="card-text"><b>documento:</b></p>
+                    <p class="card-text"><b>Tipo de Ceguera:</b></p>
                 </div>
                 <div class="col-lg-10">
                     <input
                         type="text"
-                        id="documento"
-                        placeholder="Documento de identidad"
-                        style="border: none; width: 55%;"
-                        readonly
-                    />
-                </div>
-            </div>
-
-            <div class="row pt-3">
-                <div class="col-lg-2">
-                    <p class="card-text"><b>Telefono:</b></p>
-                </div>
-                <div class="col-lg-10">
-                    <input
-                        type="text"
-                        id="telefono"
-                        placeholder="Telefono"
-                        maxlength="20"
-                        style="border: none; width: 55%;"
-                        readonly
-                    />
-                </div>
-            </div>
-
-            <div class="row pt-3">
-                <div class="col-lg-2">
-                    <p class="card-text"><b>Correo:</b></p>
-                </div>
-                <div class="col-lg-10">
-                    <input
-                        type="text"
-                        placeholder="Correo electronico"
-                        id="correo"
+                        id="tipo_ceguera"
+                        placeholder="Ceguera"
                         style="border: none; width: 55%;"
                         readonly
                     />

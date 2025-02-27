@@ -383,8 +383,8 @@
                                         class="btn btn-info"
                                         on:click={() =>
                                             editar(todo.id, todo.nombre)}
-                                        >Editar</button
-                                    >
+                                        ><i class="bi bi-pencil"></i> Editar
+                                    </button>
                                     {#if todo.estado}
                                         <!-- Mostrar botón "Desactivar" si el usuario está activo -->
                                         <button
@@ -396,7 +396,7 @@
                                                     todo.email,*/
                                                 )}
                                         >
-                                            Desactivar
+                                            <i class="bi bi-lock"></i> Desactivar
                                         </button>
                                     {:else}
                                         <!-- Mostrar botón "Activar" si el usuario está desactivado -->
@@ -404,7 +404,7 @@
                                             class="btn btn-success"
                                             on:click={() => activar(todo.id)}
                                         >
-                                            Activar
+                                            <i class="bi bi-unlock"></i> Activar
                                         </button>
                                     {/if}
                                 </td>
