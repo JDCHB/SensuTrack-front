@@ -166,45 +166,72 @@
 
 <style>
     .fondo {
-        display: flex; /* Usamos flexbox */
-        justify-content: center; /* Centra el contenido horizontalmente */
-        align-items: center; /* Centra el contenido verticalmente */
+        display: flex;
+        justify-content: center;
+        align-items: center;
         background-image: url("/FONDO-ADMIN.jpg");
-        background-size: cover; /* Ajusta la imagen al tamaño del contenedor */
+        background-size: cover; /* Ajusta la imagen para cubrir todo */
         background-position: center;
         background-repeat: no-repeat;
-        height: 100vh; /* Asegura que la imagen ocupe toda la pantalla */
+        height: 100vh; /* Altura completa de la pantalla */
+        width: 100%; /* Ancho completo */
+        padding: 20px;
+        box-sizing: border-box; /* Para que padding no afecte el tamaño */
     }
 
-    /* Diseño para el menú de administrador */
     .admin-menu {
         border-radius: 15px;
-        padding: 30px;
+        padding: 40px;
+        max-width: 800px; /* Máximo ancho para que no se vea muy grande */
+        width: 100%; /* Ancho completo para que se adapte */
+        text-align: center; /* Centra el contenido */
+        transition: all 0.3s ease; /* Suaviza las animaciones */
     }
 
     .admin-menu h2 {
-        font-size: 1.75rem;
+        font-size: 2rem;
         font-weight: 600;
     }
 
-    .admin-menu p {
-        font-size: 1.1rem;
-        font-weight: 500;
-    }
-
     .admin-menu button {
-        font-size: 1.1rem;
-        font-weight: 500;
-        padding: 15px 25px;
+        font-size: 1.2rem;
+        padding: 15px;
+        margin-bottom: 10px;
+        width: 100%; /* Que los botones ocupen todo el ancho */
+        transition: all 0.3s ease; /* Efecto suave al pasar el mouse */
     }
 
-    .admin-menu button i {
-        font-size: 1.3rem;
-        margin-left: 10px;
+    .admin-menu button:hover {
+        transform: scale(1.05); /* Pequeño efecto de escala */
     }
 
-    .btn-outline-danger:hover {
-        background-color: #dc3545;
-        color: white;
+    @media (max-width: 768px) {
+        .admin-menu {
+            padding: 20px; /* Reduce el padding para móviles */
+        }
+
+        .admin-menu h2 {
+            font-size: 1.5rem; /* Texto más pequeño */
+        }
+
+        .admin-menu button {
+            font-size: 1rem;
+            padding: 10px; /* Botones más pequeños */
+        }
+    }
+
+    @media (max-width: 480px) {
+        .admin-menu {
+            padding: 15px; /* Más pequeño para teléfonos */
+        }
+
+        .admin-menu h2 {
+            font-size: 1.2rem;
+        }
+
+        .admin-menu button {
+            font-size: 0.9rem;
+            padding: 8px;
+        }
     }
 </style>
