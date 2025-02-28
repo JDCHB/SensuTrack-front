@@ -187,7 +187,7 @@
         //console.log("Correo" + email);
         try {
             const response = await fetch(
-                `https://proyectomascotas.onrender.com/update_estado_user/${vid}`,
+                `https://proyectomascotas.onrender.com/update_estado_discapacitado/${vid}`,
                 {
                     method: "PUT",
                     headers: {
@@ -218,7 +218,7 @@
                     iconColor: "white",
                     color: "white",
                     background: "#ff4e4e",
-                    title: "El Usuario a sido desactivado de manera exitosa",
+                    title: "El Discapacitado a sido desactivado de manera exitosa",
                 });
                 //sendEmail()
 
@@ -263,7 +263,7 @@
 
         try {
             const response = await fetch(
-                `https://proyectomascotas.onrender.com/update_estado_user/${vid}`,
+                `https://proyectomascotas.onrender.com/update_estado_discapacitado/${vid}`,
                 {
                     method: "PUT",
                     headers: {
@@ -294,7 +294,7 @@
                     iconColor: "#000000",
                     color: "black",
                     background: "#76fa78",
-                    title: "El usuario se ha activado de manera exitosa",
+                    title: "El Discapacitado se ha activado de manera exitosa",
                 });
 
                 setTimeout(() => {
