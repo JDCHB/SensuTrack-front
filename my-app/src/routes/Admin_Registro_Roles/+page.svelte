@@ -434,18 +434,17 @@
         <button class="flip-card__btn small-btn">Confirmar</button>
     </form>
     <div class="loader-container" bind:this={registerLoader}>
-        <div class="loader-dog-head">
-            <div class="ear left-ear"></div>
-            <div class="ear right-ear"></div>
-            <div class="eye left-eye">
-                <div class="pupil"></div>
-            </div>
-            <div class="eye right-eye">
-                <div class="pupil"></div>
-            </div>
-            <div class="nose"></div>
-            <div class="mouth"></div>
-            <div class="tongue"></div>
+        <div class="loader-text">
+            <span>S</span>
+            <span>e</span>
+            <span>n</span>
+            <span>s</span>
+            <span>u</span>
+            <span>T</span>
+            <span>r</span>
+            <span>a</span>
+            <span>c</span>
+            <span>k</span>
         </div>
     </div>
 </div>
@@ -653,9 +652,19 @@
         cursor: pointer;
     }
 
-    /* Estilos para Sweet Alert */
-
-    /* Estilos para el loader de la cara de un perrito */
+    /* Contenedor para el loader */
+    .loader-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
+        display: none; /* Oculto por defecto */
+        justify-content: center;
+        align-items: center;
+        z-index: 100; /* Asegúrate de que esté encima de otros elementos */
+    }
 
     /* Contenedor para el loader */
     .loader-container {
@@ -671,124 +680,83 @@
         z-index: 100; /* Asegúrate de que esté encima de otros elementos */
     }
 
-    .loader-dog-head {
-        position: relative;
-        width: 120px;
-        height: 120px;
-        background-color: #f4a261; /* Color de piel */
-        border-radius: 50%; /* Forma de la cara */
-        display: flex;
+    /* Contenedor para el loader */
+    .loader-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.9);
+        display: none;
         justify-content: center;
         align-items: center;
-        animation: bounce 2s infinite;
+        z-index: 100;
     }
 
-    .ear {
-        position: absolute;
-        background-color: #f4a261;
-        width: 40px;
-        height: 60px;
-        border-radius: 50%;
-        top: 10px;
+    .loader-text {
+        display: flex;
+        font-size: 48px;
+        font-weight: bold;
+        letter-spacing: 5px;
+        color: #007bff; /* Color azul principal */
+        animation: fadeIn 1.5s infinite alternate;
     }
 
-    .left-ear {
-        left: -20px;
-        transform: rotate(-30deg);
+    .loader-text span {
+        animation: bounce 1.5s infinite ease-in-out;
+        animation-delay: calc(0.1s * var(--i));
     }
 
-    .right-ear {
-        right: -20px;
-        transform: rotate(30deg);
+    .loader-text span:nth-child(1) {
+        --i: 1;
+    }
+    .loader-text span:nth-child(2) {
+        --i: 2;
+    }
+    .loader-text span:nth-child(3) {
+        --i: 3;
+    }
+    .loader-text span:nth-child(4) {
+        --i: 4;
+    }
+    .loader-text span:nth-child(5) {
+        --i: 5;
+    }
+    .loader-text span:nth-child(6) {
+        --i: 6;
+    }
+    .loader-text span:nth-child(7) {
+        --i: 7;
+    }
+    .loader-text span:nth-child(8) {
+        --i: 8;
+    }
+    .loader-text span:nth-child(9) {
+        --i: 9;
+    }
+    .loader-text span:nth-child(10) {
+        --i: 10;
     }
 
-    .eye {
-        position: absolute;
-        background-color: #fff;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        top: 35px;
-    }
-
-    .left-eye {
-        left: 30px;
-    }
-
-    .right-eye {
-        right: 30px;
-    }
-
-    .pupil {
-        position: absolute;
-        background-color: #000;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        top: 6px;
-        left: 6px;
-        animation: blink 3s infinite;
-    }
-
-    .nose {
-        position: absolute;
-        background-color: #2d3436;
-        width: 20px;
-        height: 15px;
-        border-radius: 50%;
-        bottom: 45px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    }
-
-    .mouth {
-        position: absolute;
-        width: 40px;
-        height: 20px;
-        border: 2px solid #2d3436;
-        border-top: none;
-        border-radius: 0 0 20px 20px;
-        bottom: 30px;
-    }
-
-    .tongue {
-        position: absolute;
-        background-color: #e76f51;
-        width: 16px;
-        height: 24px;
-        border-radius: 50%;
-        bottom: 15px;
-        animation: waggle 1.5s infinite ease-in-out;
-    }
-
-    /* Animaciones */
     @keyframes bounce {
         0%,
         100% {
             transform: translateY(0);
+            opacity: 0.7;
         }
         50% {
-            transform: translateY(-10px);
+            transform: translateY(-15px);
+            opacity: 1;
         }
     }
 
-    @keyframes blink {
-        0%,
-        80%,
+    @keyframes fadeIn {
+        0% {
+            opacity: 0.7;
+        }
         100% {
-            transform: scaleY(1);
-        }
-        90% {
-            transform: scaleY(0.1);
-        }
-    }
-
-    @keyframes waggle {
-        0%,
-        100% {
-            transform: rotate(0);
-        }
-        50% {
-            transform: rotate(10deg);
+            opacity: 1;
         }
     }
 
