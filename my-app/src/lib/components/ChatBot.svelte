@@ -48,7 +48,20 @@
             }
         } catch (e) {
             error = e.message;
-            alert("Error en la solicitud: " + error);
+            console.log("Error en la solicitud: " + error);
+            Swal.fire({
+                title: "Error",
+                text: "Lo sentimos, ahora mismo no está activa la función de ChatBot (Solo está de manera Local)",
+                icon: "error",
+                customClass: {
+                    title: "custom-title", // Aplica la clase al título
+                },
+                background: "white", // Establece el fondo a blanco
+                willOpen: () => {
+                    document.querySelector(".swal2-title").style.color =
+                        "black"; // Cambia el color del título a negro
+                },
+            });
         }
 
         // Limpiar el mensaje después de enviarlo
