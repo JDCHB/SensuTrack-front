@@ -1,5 +1,6 @@
 <script>
     import Navbar from "$lib/components/Navbar.svelte";
+    import ChatBot from "$lib/components/ChatBot.svelte";
 
     const serviceID = "service_j9bousa";
     const templateID = "template_zszjdla";
@@ -180,6 +181,7 @@
 </script>
 
 <Navbar></Navbar>
+<ChatBot></ChatBot>
 <div class="wrapper">
     <div class="container py-5">
         <div class="text-center">

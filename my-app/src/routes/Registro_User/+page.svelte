@@ -1,5 +1,6 @@
 <script>
     import Navbar from "../../lib/components/Navbar.svelte";
+    import ChatBot from "$lib/components/ChatBot.svelte";
     import { onMount } from "svelte";
 
     let v_usuario = "";
@@ -146,6 +147,7 @@
 </script>
 
 <Navbar></Navbar>
+<ChatBot></ChatBot>
 <section
     class="vh-100 pt-5"
     style="background-color: #eee; padding-bottom: 60%; "

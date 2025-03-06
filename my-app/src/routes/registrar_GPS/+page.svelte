@@ -1,6 +1,7 @@
 <script>
-    import Footer from "../../lib/components/footer.svelte";
     import NavbarUser from "../../lib/components/NavbarUser.svelte";
+    import ChatBot from "$lib/components/ChatBot.svelte";
+    import Footer from "../../lib/components/footer.svelte";
     import { onMount } from "svelte";
 
     let v_nombre = "";
@@ -89,6 +90,7 @@
 </script>
 
 <NavbarUser></NavbarUser>
+<ChatBot></ChatBot>
 
 <main class="container py-5" style="margin-bottom: 50px;">
     <div class="row justify-content-center">

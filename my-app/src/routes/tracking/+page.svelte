@@ -1,5 +1,6 @@
 <script>
     import NavbarUser from "../../lib/components/NavbarUser.svelte";
+    import ChatBot from "$lib/components/ChatBot.svelte";
     import { onMount } from "svelte";
 
     let map;
@@ -78,6 +79,7 @@
 </script>
 
 <NavbarUser></NavbarUser>
+<ChatBot></ChatBot>
 <h2>Ubicacion del GPS</h2>
 
 <div class="map-container" id="map" style="height: 500px;"></div>

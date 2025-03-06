@@ -94,12 +94,12 @@
 
 
 
-		if (todos == "Token expirado" & pagina_v != "/" & pagina_v != "/login" & pagina_v != "/Registro_User" & pagina_v != "/Cambio_Clave" & pagina_v != "/administrador" & pagina_v != "/Registro_Admin_Usuario" & pagina_v != "/Admin_Tabla_Usuarios" & pagina_v != "/Admin_Tabla_Ciegos" & pagina_v != "/ChatBot") {
+		if (todos == "Token expirado" & pagina_v != "/" & pagina_v != "/login" & pagina_v != "/Registro_User" & pagina_v != "/Cambio_Clave" & pagina_v != "/administrador" & pagina_v != "/Registro_Admin_Usuario" & pagina_v != "/Admin_Tabla_Usuarios" & pagina_v != "/Admin_Tabla_Ciegos") {
 			console.log("Redirigiendo por token expirado")
 			localStorage.clear();
 			window.location.href = "/login";
 
-		} else if (todos == "Token inválido" & pagina_v != "/" & pagina_v != "/login" & pagina_v != "/Registro_User" & pagina_v != "/Cambio_Clave" & pagina_v != "/administrador" & pagina_v != "/Registro_Admin_Usuario" & pagina_v != "/Admin_Tabla_Usuarios" & pagina_v != "/Admin_Tabla_Ciegos" & pagina_v != "/ChatBot") {
+		} else if (todos == "Token inválido" & pagina_v != "/" & pagina_v != "/login" & pagina_v != "/Registro_User" & pagina_v != "/Cambio_Clave" & pagina_v != "/administrador" & pagina_v != "/Registro_Admin_Usuario" & pagina_v != "/Admin_Tabla_Usuarios" & pagina_v != "/Admin_Tabla_Ciegos") {
 			console.log("Redirigiendo por token inválido")
 			localStorage.clear();
 			window.location.href = "/login";

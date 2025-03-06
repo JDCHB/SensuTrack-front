@@ -5,6 +5,7 @@
     import Promociones from "../lib/components/promociones.svelte";
     import Servicios from "../lib/components/Servicios.svelte";
     import Banner from "../lib/components/banner.svelte";
+    import ChatBot from "$lib/components/ChatBot.svelte";
     import "bootstrap-icons/font/bootstrap-icons.css";
 </script>
 
@@ -17,3 +18,4 @@
 <Servicios></Servicios>
 <Banner></Banner>
 <Footer></Footer>
+<ChatBot></ChatBot>
