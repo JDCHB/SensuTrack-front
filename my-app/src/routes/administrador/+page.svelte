@@ -138,7 +138,7 @@
                                 class="btn btn-lg btn-outline-dark d-flex align-items-center justify-content-between w-100"
                                 on:click={mostrarRegistroModuloxRol}
                             >
-                                <span>MODULOXROL</span>
+                                <span>ASIGNAR MODULO</span>
                                 <i class="bi bi-shield-lock"></i>
                             </button>
                         </div>
