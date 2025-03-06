@@ -72,7 +72,13 @@
                     color: "black",
                 });
             } else {
-                alert("Error al registrar la mascota");
+                Swal.fire({
+                    title: "Registro Cancelado",
+                    icon: "error",
+                    confirmButtonText: "OK",
+                    background: "white", // Fondo blanco
+                    color: "black",
+                });
             }
         } catch (e) {
             error = e.message;
