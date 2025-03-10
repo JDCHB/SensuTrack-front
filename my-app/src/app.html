@@ -93,19 +93,32 @@
 		console.log("El Token es:", todos)
 
 
+		if (pagina_v.startsWith("/administrador" || pagina_v.startsWith("/usuario")) || pagina_v.startsWith("/Can_See_Or_Not")) {
+			console.log("ENtra")
 
-		if (todos == "Token expirado" & pagina_v != "/" & pagina_v != "/login" & pagina_v != "/Registro_User" & pagina_v != "/Cambio_Clave" & pagina_v != "/administrador" & pagina_v != "/Registro_Admin_Usuario" & pagina_v != "/Admin_Tabla_Usuarios" & pagina_v != "/Admin_Tabla_Ciegos") {
-			console.log("Redirigiendo por token expirado")
-			localStorage.clear();
-			window.location.href = "/login";
+			if (todos == "Token expirado") {
+				console.log("Token expirado, contacte con Dorian para mas información")
+				window.location.href = "/login"
 
-		} else if (todos == "Token inválido" & pagina_v != "/" & pagina_v != "/login" & pagina_v != "/Registro_User" & pagina_v != "/Cambio_Clave" & pagina_v != "/administrador" & pagina_v != "/Registro_Admin_Usuario" & pagina_v != "/Admin_Tabla_Usuarios" & pagina_v != "/Admin_Tabla_Ciegos") {
-			console.log("Redirigiendo por token inválido")
-			localStorage.clear();
-			window.location.href = "/login";
+			} else if (todos == "Token inválido") {
+				console.log("Token inválido, contacte con Dorian para mas información")
+				window.location.href = "/login"
+			}
+
 		}
-	}
-
+	/*
+			if (todos == "Token expirado" & pagina_v != "/" & pagina_v != "/login" & pagina_v != "/Registro_User" & pagina_v != "/Cambio_Clave" & pagina_v != "/administrador" & pagina_v != "/Registro_Admin_Usuario" & pagina_v != "/Admin_Tabla_Usuarios" & pagina_v != "/Admin_Tabla_Ciegos" & pagina_v != "/administrador" & pagina_v != "/Admin_Registro_GPS" & pagina_v != "/Admin_Registro_ModuloxRol" & pagina_v != "/Admin_Tabla_GPS_Discapacitado" & pagina_v != "/Admin_Informe") {
+				console.log("Redirigiendo por token expirado")
+				localStorage.clear();
+				window.location.href = "/login";
+	
+			} else if (todos == "Token inválido" & pagina_v != "/" & pagina_v != "/login" & pagina_v != "/Registro_User" & pagina_v != "/Cambio_Clave" & pagina_v != "/administrador" & pagina_v != "/Registro_Admin_Usuario" & pagina_v != "/Admin_Tabla_Usuarios" & pagina_v != "/Admin_Tabla_Ciegos" & pagina_v != "/administrador" & pagina_v != "/Admin_Registro_GPS" & pagina_v != "/Admin_Registro_ModuloxRol" & pagina_v != "/Admin_Tabla_GPS_Discapacitado" & pagina_v != "/Admin_Informe") {
+				console.log("Redirigiendo por token inválido")
+				localStorage.clear();
+				window.location.href = "/login";
+			}
+		}
+	*/
 
 
 </script>
