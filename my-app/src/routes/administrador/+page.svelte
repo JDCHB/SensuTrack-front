@@ -7,7 +7,7 @@
     };
 
     const mostrarConfirmacionRegistroUsuario = () => {
-        window.location.href = "/Registro_Admin_Usuario";
+        window.location.href = "/Admin_Registro_Usuario";
     };
 
     const mostrarConfirmacionReporte = () => {
@@ -38,6 +38,10 @@
         window.location.href = "/Admin_Registro_ModuloxRol";
     };
 
+    const mostrarTableroPowerBI = () => {
+        window.location.href = "/Admin_Informe";
+    };
+
     const logout = () => {
         localStorage.clear();
         window.location.href = "/login";
@@ -46,7 +50,7 @@
 
 <!-- HTML del menú de administrador -->
 <div class="fondo">
-    <div class="container">
+    <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6">
                 <div class="admin-menu">
@@ -141,6 +145,15 @@
                             >
                                 <span>ASIGNAR MODULO</span>
                                 <i class="bi bi-shield-lock"></i>
+                            </button>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <button
+                                class="btn btn-lg btn-outline-dark d-flex align-items-center justify-content-between w-100"
+                                on:click={mostrarTableroPowerBI}
+                            >
+                                <span>TABLERO</span>
+                                <i class="bi bi-graph-up"></i>
                             </button>
                         </div>
                         <div class="col-6 mb-3">

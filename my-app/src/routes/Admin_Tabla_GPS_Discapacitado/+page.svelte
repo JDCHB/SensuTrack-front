@@ -79,7 +79,7 @@
             todos = data.nombre;
             console.log(todos);
             document.getElementById("nombres").value = data.nombre;
-            document.getElementById("apellidos").value = data.numero_serie;
+            document.getElementById("numero_serie").value = data.numero_serie;
             console.log("verificando el estado: " + data.estado);
             const estado_v = data.estado ? "1" : "0"; //condicion ? valorSiVerdadero : valorSiFalso
             document.getElementById("estado").value = estado_v;
@@ -88,17 +88,8 @@
             v_edit_nombre.removeAttribute("readonly");
             v_edit_nombre.focus();
 
-            const v_edit_apellido = document.getElementById("apellidos");
-            v_edit_apellido.removeAttribute("readonly");
-
-            const v_edit_documento = document.getElementById("documento");
-            v_edit_documento.removeAttribute("readonly");
-
-            const v_edit_telefono = document.getElementById("telefono");
-            v_edit_telefono.removeAttribute("readonly");
-
-            const v_edit_usuario = document.getElementById("correo");
-            v_edit_usuario.removeAttribute("readonly");
+            const v_edit_serial = document.getElementById("numero_serie");
+            v_edit_serial.removeAttribute("readonly");
 
             const v_edit_estado = document.getElementById("estado");
             v_edit_estado.removeAttribute("readonly");
@@ -268,7 +259,7 @@
 
         try {
             const response = await fetch(
-                `https://proyectomascotas.onrender.com/update_estado_user/${vid}`,
+                `https://proyectomascotas.onrender.com/update_estado_GPS/${vid}`,
                 {
                     method: "PUT",
                     headers: {
@@ -320,7 +311,7 @@
 
 <div id="MostrarGPS">
     <div class="container py-4">
-        <h2 class="mb-4">Lista de usuarios</h2>
+        <h2 class="mb-4">Lista de GPS con Discapacitado</h2>
         {#if loading}
             <!---->
             <div class="row g-2 justify-content-center">
@@ -447,14 +438,14 @@
 
             <div class="row pt-3">
                 <div class="col-lg-2">
-                    <p class="card-text"><b>Apellido:</b></p>
+                    <p class="card-text"><b>Serial:</b></p>
                 </div>
 
                 <div class="col-lg-10">
                     <input
                         type="text"
-                        placeholder="Apellidos"
-                        id="apellidos"
+                        placeholder="Numero de serie"
+                        id="numero_serie"
                         style="border: none; width: 55%;"
                         readonly
                     />
