@@ -42,6 +42,10 @@
         window.location.href = "/Admin_Informe";
     };
 
+    const mostrarHistorialUbicaciones = () => {
+        window.location.href = "/Tabla_Historial_Ubicaciones";
+    };
+
     const logout = () => {
         localStorage.clear();
         window.location.href = "/login";
@@ -153,6 +157,15 @@
                                 on:click={mostrarTableroPowerBI}
                             >
                                 <span>TABLERO</span>
+                                <i class="bi bi-graph-up"></i>
+                            </button>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <button
+                                class="btn btn-lg btn-outline-dark d-flex align-items-center justify-content-between w-100"
+                                on:click={mostrarHistorialUbicaciones}
+                            >
+                                <span>UBICACIÓNES</span>
                                 <i class="bi bi-graph-up"></i>
                             </button>
                         </div>
