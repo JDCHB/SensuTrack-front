@@ -169,6 +169,7 @@
                     INICIAR SESIÓN
                   </p>
 
+                  <!-- Formulario de inicio de sesión -->
                   <form on:submit|preventDefault={Login} class="mx-1 mx-md-4">
                     <!-- Campos del formulario -->
                     <div class="d-flex flex-row align-items-center mb-4">
@@ -237,44 +238,49 @@
                       </p>
                     </div>
                   </form>
-                  <form method="post" action="?/OAuth2">
-                    <div class="d-flex justify-content-between">
-                      <a
-                        data-mdb-ripple-init
-                        class="btn btn-primary btn-lg"
-                        style="background-color: #3b5998"
-                        href="#!"
-                        role="button"
-                      >
-                        <i class="bi bi-facebook me-2"></i>
-                        Facebook
-                      </a>
-                      <a
+
+                  <!-- Botones de autenticación externa (Facebook y Google) -->
+                  <div class="d-flex justify-content-between">
+                    <!-- Botón de Facebook -->
+                    <a
+                      data-mdb-ripple-init
+                      class="btn btn-primary btn-lg"
+                      style="background-color: #3b5998"
+                      href="#!"
+                      role="button"
+                    >
+                      <i class="bi bi-facebook me-2"></i>
+                      Facebook
+                    </a>
+
+                    <!-- Formulario para el botón de Google -->
+                    <form method="post" action="?/OAuth2" class="d-inline">
+                      <button
+                        type="submit"
                         data-mdb-ripple-init
                         class="btn btn-primary btn-lg"
                         style="background-color: #0082fb"
-                        href="#!"
-                        role="button"
                       >
                         <i class="bi bi-google me-2"></i>Google
-                      </a>
+                      </button>
+                    </form>
+                  </div>
+
+                  <!-- Loader del login -->
+                  <div class="loader-container" bind:this={loginLoader}>
+                    <div class="loader-text">
+                      <span>S</span>
+                      <span>e</span>
+                      <span>n</span>
+                      <span>s</span>
+                      <span>u</span>
+                      <span>T</span>
+                      <span>r</span>
+                      <span>a</span>
+                      <span>c</span>
+                      <span>k</span>
                     </div>
-                    <!-- Loader del login -->
-                    <div class="loader-container" bind:this={loginLoader}>
-                      <div class="loader-text">
-                        <span>S</span>
-                        <span>e</span>
-                        <span>n</span>
-                        <span>s</span>
-                        <span>u</span>
-                        <span>T</span>
-                        <span>r</span>
-                        <span>a</span>
-                        <span>c</span>
-                        <span>k</span>
-                      </div>
-                    </div>
-                  </form>
+                  </div>
                 </div>
               </div>
             </div>
