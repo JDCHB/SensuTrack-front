@@ -24,7 +24,7 @@ async function getUserData(access_token) {
 
 async function verificarUsuarioEnBD(user) {
     console.log("user tiene", user)
-    const res = await fetch("https://red-neuronal-api.onrender.com/verif_user", {
+    const res = await fetch("https://proyectomascotas.onrender.com/Verificar_Google_User", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -46,7 +46,7 @@ var rol_v = 0
 let estado_v = 0
 let v_estado = 0
 export const GET = async ({ url, cookies }) => {
-    const redirectURL = 'https://red-neurolal-svelte.onrender.com/oauth';
+    const redirectURL = 'https://sensutrack-front.onrender.com/oauth';
     const code = await url.searchParams.get('code');
 
     //console.log('returned state',state)
@@ -131,16 +131,16 @@ export const GET = async ({ url, cookies }) => {
 
         if (estado_v === "Ya_existe" && v_estado != false) {
             if (rol_v == 1) {
-                throw redirect(303, '/administrador_vista');
+                throw redirect(303, '/Can_See_Or_Not');
             }
             else if (rol_v == 2) {
                 throw redirect(303, '/usuario');
             }
             else if (rol_v == 3) {
-                throw redirect(303, '/doctor_adm');
+                throw redirect(303, '/administrador');
             }
             else {
-                throw redirect(303, '/vista_main');
+                throw redirect(303, '/');
             }
         } else if (estado_v === "Registrada") {
             console.log("Estado actual:", estado_v, "Rol:", rol_v);
