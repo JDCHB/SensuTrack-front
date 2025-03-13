@@ -236,7 +236,8 @@
                         TAMBIEN PUEDES INICIAR SESION CON:
                       </p>
                     </div>
-
+                  </form>
+                  <form method="post" action="?/OAuth2">
                     <div class="d-flex justify-content-between">
                       <a
                         data-mdb-ripple-init
@@ -258,22 +259,22 @@
                         <i class="bi bi-google me-2"></i>Google
                       </a>
                     </div>
-                  </form>
-                  <!-- Loader del login -->
-                  <div class="loader-container" bind:this={loginLoader}>
-                    <div class="loader-text">
-                      <span>S</span>
-                      <span>e</span>
-                      <span>n</span>
-                      <span>s</span>
-                      <span>u</span>
-                      <span>T</span>
-                      <span>r</span>
-                      <span>a</span>
-                      <span>c</span>
-                      <span>k</span>
+                    <!-- Loader del login -->
+                    <div class="loader-container" bind:this={loginLoader}>
+                      <div class="loader-text">
+                        <span>S</span>
+                        <span>e</span>
+                        <span>n</span>
+                        <span>s</span>
+                        <span>u</span>
+                        <span>T</span>
+                        <span>r</span>
+                        <span>a</span>
+                        <span>c</span>
+                        <span>k</span>
+                      </div>
                     </div>
-                  </div>
+                  </form>
                 </div>
               </div>
             </div>
