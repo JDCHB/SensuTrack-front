@@ -170,72 +170,74 @@
                   </p>
 
                   <!-- Formulario de inicio de sesión -->
-
-                  <!-- Campos del formulario -->
-                  <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="bi bi-envelope fa-lg me-3 fa-fw"></i>
-                    <div
-                      data-mdb-input-init
-                      class="form-outline flex-fill mb-0"
-                    >
-                      <input
-                        type="email"
-                        id="correo"
-                        class="form-control form-control-lg"
-                        bind:value={v_usuario}
-                        placeholder="Correo Electronico"
-                        required
-                      />
+                  <form on:submit|preventDefault={Login} class="mx-1 mx-md-4">
+                    <!-- Campos del formulario -->
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="bi bi-envelope fa-lg me-3 fa-fw"></i>
+                      <div
+                        data-mdb-input-init
+                        class="form-outline flex-fill mb-0"
+                      >
+                        <input
+                          type="email"
+                          id="correo"
+                          class="form-control form-control-lg"
+                          bind:value={v_usuario}
+                          placeholder="Correo Electronico"
+                          required
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="bi bi-lock fa-lg me-3 fa-fw"></i>
-                    <div
-                      data-mdb-input-init
-                      class="form-outline flex-fill mb-0"
-                    >
-                      <input
-                        type="password"
-                        id="contraseña"
-                        class="form-control form-control-lg"
-                        bind:value={v_password}
-                        placeholder="Contraseña"
-                        required
-                      />
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="bi bi-lock fa-lg me-3 fa-fw"></i>
+                      <div
+                        data-mdb-input-init
+                        class="form-outline flex-fill mb-0"
+                      >
+                        <input
+                          type="password"
+                          id="contraseña"
+                          class="form-control form-control-lg"
+                          bind:value={v_password}
+                          placeholder="Contraseña"
+                          required
+                        />
+                      </div>
                     </div>
-                  </div>
 
-                  <div
-                    class="d-flex justify-content-around align-items-center mb-4"
-                  >
-                    <a href="/Cambio_Clave">Olvidaste la contraseña?</a>
-                  </div>
-
-                  <div
-                    class="d-flex justify-content-around align-items-center mb-4"
-                  >
-                    <a href="/Registro_User">No tienes cuenta? Registrate!!</a>
-                  </div>
-
-                  <div class="d-flex justify-content-center mb-4">
-                    <div class="g-recaptcha" bind:this={captchaElement}></div>
-                  </div>
-
-                  <div class="text-center">
-                    <button
-                      type="submit"
-                      data-mdb-button-init
-                      data-mdb-ripple-init
-                      class="btn btn-primary btn-lg btn-block"
-                      >Iniciar Sesión</button
+                    <div
+                      class="d-flex justify-content-around align-items-center mb-4"
                     >
-                  </div>
+                      <a href="/Cambio_Clave">Olvidaste la contraseña?</a>
+                    </div>
 
-                  <div class="divider d-flex align-items-center my-4">
-                    <p class="text-center fw-bold mx-3 mb-0 text-muted">
-                      TAMBIEN PUEDES INICIAR SESION CON:
-                    </p>
-                  </div>
+                    <div
+                      class="d-flex justify-content-around align-items-center mb-4"
+                    >
+                      <a href="/Registro_User">No tienes cuenta? Registrate!!</a
+                      >
+                    </div>
+
+                    <div class="d-flex justify-content-center mb-4">
+                      <div class="g-recaptcha" bind:this={captchaElement}></div>
+                    </div>
+
+                    <div class="text-center">
+                      <button
+                        type="submit"
+                        data-mdb-button-init
+                        data-mdb-ripple-init
+                        class="btn btn-primary btn-lg btn-block"
+                        >Iniciar Sesión</button
+                      >
+                    </div>
+
+                    <div class="divider d-flex align-items-center my-4">
+                      <p class="text-center fw-bold mx-3 mb-0 text-muted">
+                        TAMBIEN PUEDES INICIAR SESION CON:
+                      </p>
+                    </div>
+                  </form>
 
                   <!-- Botones de autenticación externa (Facebook y Google) -->
                   <div class="d-flex justify-content-between">
