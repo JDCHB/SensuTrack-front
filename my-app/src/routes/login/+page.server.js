@@ -5,6 +5,7 @@ import { SECRET_CLIENT_ID, SECRET_CLIENT_SECRET } from '$env/static/private';
 
 export const actions = {
     OAuth2: async ({ }) => {
+        console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
         const redirectURL = 'https://sensutrack-front.onrender.com/oauth';
 
         console.log('id', SECRET_CLIENT_ID)
