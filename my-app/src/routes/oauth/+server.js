@@ -61,7 +61,7 @@ export const GET = async ({ url, cookies }) => {
         console.log('credentials', user);
 
         //await getUserData(user.access_token);
-
+        console.log('Verifying user in DB:', user);
         const usuarioBD = await verificarUsuarioEnBD({
             google_id: user.sub,  // ID único de Google
             nombre: user.name,
@@ -71,6 +71,7 @@ export const GET = async ({ url, cookies }) => {
             given_name: user.given_name,
             family_name: user.family_name
         });
+        console.log('User from DB:', usuarioBD);
         let v_google_id = user.sub;
         let v_nombre = user.name;
         let v_email = user.email;
