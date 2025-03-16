@@ -264,23 +264,6 @@
                         <i class="bi bi-google me-2"></i>Google
                       </button>
                     </form>
-
-                    <div class="col-sm-2 col-md-3 col-xl-6 col-lg-2 col-2">
-                      <div class="input-group">
-                        <span class="input-group-text">
-                          <img
-                            src="https://ssl.gstatic.com/images/branding/product/1x/gsa_512dp.png"
-                            alt="Google"
-                            width="24"
-                          />
-                        </span>
-                        <form method="post" action="?/OAuth2">
-                          <button class="form-control btn" type="submit"
-                            >Inicia sesion con Google</button
-                          >
-                        </form>
-                      </div>
-                    </div>
                   </div>
 
                   <!-- Loader del login -->
