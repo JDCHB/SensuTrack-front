@@ -257,6 +257,7 @@
                     <form method="post" action="/OAuth2" class="d-inline">
                       <button
                         type="submit"
+                        data-mdb-ripple-init
                         class="btn btn-primary btn-lg"
                         style="background-color: #0082fb"
                       >
