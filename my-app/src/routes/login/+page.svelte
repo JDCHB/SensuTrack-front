@@ -258,7 +258,7 @@
                       type="button"
                       class="btn btn-primary btn-lg"
                       style="background-color: #0082fb"
-                      on:click={"window.location.href='/OAuth2'"}
+                      on:click={() => (window.location.href = "/OAuth2")}
                     >
                       <i class="bi bi-google me-2"></i>Google
                     </button>
