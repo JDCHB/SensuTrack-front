@@ -254,13 +254,8 @@
                     </a>
 
                     <!-- Formulario para el botón de Google -->
-                    <form method="post" action="?/OAuth2" class="d-inline">
-                      <button
-                        type="submit"
-                        data-mdb-ripple-init
-                        class="btn btn-primary btn-lg"
-                        style="background-color: #0082fb"
-                      >
+                    <form method="post" action="?/OAuth2">
+                      <button type="submit" style="background-color: #0082fb">
                         <i class="bi bi-google me-2"></i>Google
                       </button>
                     </form>
