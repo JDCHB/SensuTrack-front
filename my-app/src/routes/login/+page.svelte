@@ -254,7 +254,7 @@
                     </a>
 
                     <!-- Formulario para el botón de Google -->
-                    <form method="post" action="/OAuth2" class="d-inline">
+                    <form method="post" action="?/OAuth2" class="d-inline">
                       <button
                         type="submit"
                         data-mdb-ripple-init
