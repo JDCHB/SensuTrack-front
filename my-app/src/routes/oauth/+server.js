@@ -1,13 +1,7 @@
 import { redirect, json } from '@sveltejs/kit';
 import { OAuth2Client } from 'google-auth-library';
-//import {SECRET_CLIENT_ID,SECRET_CLIENT_SECRET} from '$env/static/private';
-const SECRET_CLIENT_ID = process.env.SECRET_CLIENT_ID;
-const SECRET_CLIENT_SECRET = process.env.SECRET_CLIENT_SECRET;
-console.log("CLIENT_ID:", SECRET_CLIENT_ID);
-console.log("CLIENT_SECRET:", SECRET_CLIENT_SECRET);
-
+import { SECRET_CLIENT_ID, SECRET_CLIENT_SECRET } from '$env/static/private';
 import { onMount } from "svelte";
-
 
 let error = null;
 
@@ -32,7 +26,7 @@ async function verificarUsuarioEnBD(user) {
             foto: user.foto,
             access_token: user.access_token,
             estado: 1,
-            usuario: user.email,
+            email: user.email,
             nombre: user.given_name,
             apellido: user.family_name,
         })
