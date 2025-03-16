@@ -136,6 +136,19 @@
       });
     }
   }
+
+  document
+    .getElementById("google-login-btn")
+    .addEventListener("click", async () => {
+      try {
+        const res = await fetch("/OAuth2", { method: "POST" });
+        if (res.redirected) {
+          window.location.href = res.url; // Redirige al usuario a la URL de Google
+        }
+      } catch (error) {
+        console.error("Error al iniciar sesión con Google", error);
+      }
+    });
 </script>
 
 <Navbar></Navbar>
@@ -254,16 +267,13 @@
                     </a>
 
                     <!-- Formulario para el botón de Google -->
-                    <form method="post" action="?/OAuth2" class="d-inline">
-                      <button
-                        type="submit"
-                        data-mdb-ripple-init
-                        class="btn btn-primary btn-lg"
-                        style="background-color: #0082fb"
-                      >
-                        <i class="bi bi-google me-2"></i>Google
-                      </button>
-                    </form>
+                    <button
+                      id="google-login-btn"
+                      class="btn btn-primary btn-lg"
+                      style="background-color: #0082fb"
+                    >
+                      <i class="bi bi-google me-2"></i>Google
+                    </button>
                   </div>
 
                   <!-- Loader del login -->
