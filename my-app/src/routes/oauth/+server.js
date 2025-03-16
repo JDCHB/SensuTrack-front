@@ -113,14 +113,14 @@ export const GET = async ({ url, cookies }) => {
     } catch (err) {
         console.log('Error logging in with OAuth2 user', err);
         error = err
-        throw redirect(303, '/Login');
+        throw redirect(303, '/login');
 
     }
     finally {
 
         if (error) {
 
-            throw redirect(303, '/Login');
+            throw redirect(303, '/login');
 
         }
 
