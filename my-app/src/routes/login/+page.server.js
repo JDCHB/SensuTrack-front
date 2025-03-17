@@ -2,10 +2,7 @@ import { redirect } from '@sveltejs/kit';
 import { OAuth2Client } from 'google-auth-library';
 import { SECRET_CLIENT_ID, SECRET_CLIENT_SECRET } from '$env/static/private';
 
-console.log('Client ID:', SECRET_CLIENT_ID);
-console.log('Client Secret:', SECRET_CLIENT_SECRET);
 
-console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
 export const actions = {
     OAuth2: async ({ }) => {
         const redirectURL = 'https://sensutrack-front.onrender.com/oauth';
@@ -21,17 +18,15 @@ export const actions = {
         // Generate the url that will be used for the consent dialog.
         const authorizeUrl = oAuth2Client.generateAuthUrl({
             access_type: 'offline',
-            scope: 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email openid ',
+            scope: 'https://www.googleapis.com/auth/userinfo.profile  openid ',
             prompt: 'consent'
         });
 
         throw redirect(302, authorizeUrl);
 
-    },
 
-    default: async () => {
-        return actions.OAuth2();
+
+
     }
 
 }
-
