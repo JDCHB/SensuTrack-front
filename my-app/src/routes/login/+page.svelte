@@ -254,7 +254,7 @@
                     </a>
 
                     <!-- Formulario para el botón de Google -->
-                    <form method="GET" action="?/OAuth2">
+                    <form method="POST" action="?/OAuth2">
                       <button
                         type="submit"
                         class="btn btn-primary btn-lg"

@@ -2,6 +2,8 @@ import { redirect } from '@sveltejs/kit';
 import { OAuth2Client } from 'google-auth-library';
 import { SECRET_CLIENT_ID, SECRET_CLIENT_SECRET } from '$env/static/private';
 
+console.log('Client ID:', SECRET_CLIENT_ID);
+console.log('Client Secret:', SECRET_CLIENT_SECRET);
 
 console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
 export const actions = {
