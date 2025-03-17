@@ -40,7 +40,7 @@ var rol_v = 0
 let estado_v = 0
 let v_estado = 0
 export const GET = async ({ url, cookies }) => {
-    const redirectURL = 'https://sensutrack-front.onrender.com/login/oauth';
+    const redirectURL = 'https://sensutrack-front.onrender.com/oauth';
     const code = await url.searchParams.get('code');
 
     //console.log('returned state',state)
