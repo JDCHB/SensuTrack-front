@@ -254,10 +254,7 @@
                     </a>
 
                     <!-- Formulario para el botón de Google -->
-                    <form
-                      method="post"
-                      action="https://sensutrack-front.onrender.com/login/OAuth2"
-                    >
+                    <form method="post" action="?/OAuth2">
                       <button
                         type="submit"
                         class="btn btn-primary btn-lg"
