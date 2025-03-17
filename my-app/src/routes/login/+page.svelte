@@ -254,14 +254,13 @@
                     </a>
 
                     <!-- Formulario para el botón de Google -->
-                    <form method="post" action="?/OAuth2">
-                      <button
-                        type="submit"
-                        class="btn btn-primary btn-lg"
-                        style="background-color: #0082fb"
-                      >
-                        <i class="bi bi-google me-2"></i>Google
-                      </button>
+                    <form
+                      method="POST"
+                      action="https://sensutrack-front.onrender.com/login/OAuth2"
+                    >
+                      <input type="text" name="username" required />
+                      <input type="password" name="password" required />
+                      <button type="submit">Login</button>
                     </form>
                   </div>
 
