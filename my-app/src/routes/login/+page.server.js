@@ -25,7 +25,6 @@ export const actions = {
             prompt: 'consent'
         });
 
-        console.log("------  ----   --   ", authorizeUrl)
         throw redirect(302, authorizeUrl);
 
     }
