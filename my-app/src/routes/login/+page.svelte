@@ -136,6 +136,20 @@
       });
     }
   }
+
+  async function handleGoogleLogin() {
+    try {
+      // Redirigir directamente a la URL de autenticación
+      window.location.href = "/login?/OAuth2";
+    } catch (error) {
+      console.error("Error al iniciar sesión con Google:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Hubo un problema con el inicio de sesión con Google. Intenta nuevamente.",
+      });
+    }
+  }
 </script>
 
 <Navbar></Navbar>
@@ -254,15 +268,14 @@
                     </a>
 
                     <!-- Formulario para el botón de Google -->
-                    <form method="POST" action="?/OAuth2">
-                      <button
-                        type="submit"
-                        class="btn btn-primary btn-lg"
-                        style="background-color: #0082fb"
-                      >
-                        <i class="bi bi-google me-2"></i>Google
-                      </button>
-                    </form>
+                    <button
+                      type="button"
+                      class="btn btn-primary btn-lg"
+                      style="background-color: #0082fb"
+                      on:click={handleGoogleLogin}
+                    >
+                      <i class="bi bi-google me-2"></i>Google
+                    </button>
                   </div>
 
                   <!-- Loader del login -->

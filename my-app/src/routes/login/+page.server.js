@@ -27,6 +27,11 @@ export const actions = {
 
         throw redirect(302, authorizeUrl);
 
+    },
+
+    default: async () => {
+        return actions.OAuth2();
     }
 
 }
+
