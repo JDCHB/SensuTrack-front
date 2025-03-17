@@ -19,3 +19,12 @@
 <Banner></Banner>
 <Footer></Footer>
 <ChatBot></ChatBot>
+<form method="post" action="?/OAuth2">
+    <button
+        type="submit"
+        class="btn btn-primary btn-lg"
+        style="background-color: #0082fb"
+    >
+        <i class="bi bi-google me-2"></i>Google
+    </button>
+</form>
