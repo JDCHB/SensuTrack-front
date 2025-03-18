@@ -24,6 +24,7 @@ async function verificarUsuarioEnBD(user) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+
             google_id: user.google_id,
             foto: user.foto,
             access_token: user.access_token,
@@ -67,11 +68,11 @@ export const GET = async ({ url, cookies }) => {
         const usuarioBD = await verificarUsuarioEnBD({
             google_id: user.sub,  // ID único de Google
             nombre: user.name,
-            email: user.email,
             foto: user.picture,
+            email: user.email,
             access_token: r.tokens.access_token,
-            given_name: user.given_name,
-            family_name: user.family_name
+            nombre: user.given_name,
+            apellido: user.family_name
         });
         console.log('User from DB:', usuarioBD);
         let v_google_id = user.sub;
