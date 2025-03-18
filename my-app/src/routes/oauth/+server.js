@@ -88,7 +88,7 @@ export const GET = async ({ url, cookies }) => {
 
 
         estado_v = usuarioBD.Informacion;
-
+        console.log("sesionGoogle ESTA ES LA ENTRADAAAAAAAA ANTES DE TODOOOOOOOOOOOO")
         cookies.set('sesionGoogle', JSON.stringify({
             google_id: user.sub,
             nombre: user.given_name,
@@ -106,7 +106,7 @@ export const GET = async ({ url, cookies }) => {
             sameSite: "None",
             maxAge: 60 * 60 * 24 * 7 // 1 semana
         });
-
+        console.log("sesionGoogle AQUI YA PASOOOOOOOOOOOOOOO")
 
         error = null
 
