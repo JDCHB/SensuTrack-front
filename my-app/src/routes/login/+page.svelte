@@ -137,10 +137,16 @@
     }
   }
 
-  function handleSubmit(event) {
-    event.preventDefault(); // Evita que el formulario se envíe automáticamente
-    console.log("Formulario enviado");
-    event.target.submit(); // Envía el formulario manualmente
+  function handleGoogleLogin() {
+    const clientId =
+      "943980487438-holbvcti31mfbhagie83h3p5ur8q9nvi.apps.googleusercontent.com"; // Reemplaza con tu Client ID
+    const redirectUri = "https://sensutrack-front.onrender.com/oauth"; // Reemplaza con tu URL de redirección
+    const scope =
+      "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email openid ";
+    const authUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}&access_type=offline&prompt=consent`;
+
+    // Redirige al usuario a la URL de autorización de Google
+    window.location.href = authUrl;
   }
 </script>
 
@@ -260,19 +266,13 @@
                     </a>
 
                     <!-- Formulario para el botón de Google -->
-                    <form
-                      method="POST"
-                      action="?/OAuth2"
-                      on:submit={handleSubmit}
+                    <button
+                      on:click={handleGoogleLogin}
+                      class="btn btn-primary btn-lg"
+                      style="background-color: #0082fb"
                     >
-                      <button
-                        type="submit"
-                        class="btn btn-primary btn-lg"
-                        style="background-color: #0082fb"
-                      >
-                        <i class="bi bi-google me-2"></i>Google
-                      </button>
-                    </form>
+                      <i class="bi bi-google me-2"></i>Google
+                    </button>
                   </div>
 
                   <!-- Loader del login -->
