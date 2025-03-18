@@ -76,7 +76,7 @@ export const GET = async ({ url, cookies }) => {
         });
         console.log('User from DB:', usuarioBD);
         let v_google_id = user.sub;
-        let v_nombre = user.name;
+        let v_nombre = user.nombre;
         let v_email = user.email;
         let v_foto = user.foto;
         let access_token = r.tokens.access_token
