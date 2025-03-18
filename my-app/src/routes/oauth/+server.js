@@ -28,7 +28,7 @@ async function verificarUsuarioEnBD(user) {
             google_id: user.google_id,
             foto: user.foto,
             access_token: user.access_token,
-            estado: 1,
+            estado: true,
             email: user.email,
             nombre: user.given_name,
             apellido: user.family_name,
