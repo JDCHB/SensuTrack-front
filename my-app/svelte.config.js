@@ -26,11 +26,26 @@
 
 export default config;
 */
+// import adapter from '@sveltejs/adapter-node';
+
+// export default {
+// 	kit: {
+// 		// other config options
+// 		adapter: adapter(),  // Agrega el adaptador para Node.js
+// 	}
+// };
+
 import adapter from '@sveltejs/adapter-node';
 
 export default {
 	kit: {
-		// other config options
-		adapter: adapter(),  // Agrega el adaptador para Node.js
+		adapter: adapter({
+			out: 'build',
+			precompress: false,
+			env: {
+				port: 'PORT', // Render automáticamente asigna un puerto a la variable de entorno PORT
+				host: 'HOST', // Puedes usar '0.0.0.0' para escuchar en todas las interfaces de red
+			}
+		}),
 	}
 };
