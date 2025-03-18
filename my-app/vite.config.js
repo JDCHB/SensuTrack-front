@@ -1,4 +1,4 @@
-/*import { sveltekit } from '@sveltejs/kit/vite';
+import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
@@ -14,13 +14,10 @@ export default defineConfig({
 		outDir: 'build', // Especificamos el directorio de salida para la construcción
 	},
 });
-*/
-import { sveltekit } from '@sveltejs/kit/vite';
-import { defineConfig } from 'vite';
 
-export default defineConfig({
-	plugins: [sveltekit()],
-	preview: {
-		allowedHosts: ['sensutrack-front.onrender.com'], // Agrega tu host aquí
-	},
-});
+// import { sveltekit } from '@sveltejs/kit/vite';
+// import { defineConfig } from 'vite';
+
+// export default defineConfig({
+// 	plugins: [sveltekit()]
+// });
