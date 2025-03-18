@@ -67,10 +67,10 @@ export const GET = async ({ url, cookies }) => {
         console.log('Verifying user in DB:', user);
         const usuarioBD = await verificarUsuarioEnBD({
             google_id: user.sub,  // ID único de Google
-            nombre: user.name,
             foto: user.picture,
-            email: user.email,
             access_token: r.tokens.access_token,
+            estado: 1,  // Cambia esto a un booleano
+            email: user.email,
             nombre: user.given_name,
             apellido: user.family_name
         });
