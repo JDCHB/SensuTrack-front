@@ -17,6 +17,8 @@ async function getUserData(access_token) {
 
 
 async function verificarUsuarioEnBD(user) {
+
+    console.log("SI ENTRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AL Verificar_Google_User")
     console.log("user tiene", user)
     const res = await fetch("https://proyectomascotas.onrender.com/Verificar_Google_User", {
         method: "POST",
@@ -31,7 +33,7 @@ async function verificarUsuarioEnBD(user) {
             apellido: user.family_name,
         })
     });
-
+    console.log("SI2222222222222222222222 ENTRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AL Verificar_Google_User")
     return await res.json();
 }
 
