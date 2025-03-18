@@ -31,7 +31,7 @@ async function verificarUsuarioEnBD(user) {
             estado: 1,
             email: user.email,
             nombre: user.given_name,
-            //apellido: user.family_name,
+            apellido: user.family_name,
         })
     });
     console.log("SI2222222222222222222222 ENTRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AL Verificar_Google_User")
@@ -72,7 +72,7 @@ export const GET = async ({ url, cookies }) => {
             estado: 1,  // Cambia esto a un booleano
             email: user.email,
             nombre: user.given_name,
-            //apellido: user.family_name
+            apellido: user.family_name
         });
         console.log('User from DB:', usuarioBD);
         let v_google_id = user.sub;
@@ -92,7 +92,7 @@ export const GET = async ({ url, cookies }) => {
         cookies.set('sesionGoogle', JSON.stringify({
             google_id: user.sub,
             nombre: user.given_name,
-            //apellido: user.family_name,
+            apellido: user.family_name,
             email: user.email,
             foto: user.picture,
             access_token: r.tokens.access_token,
