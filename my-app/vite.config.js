@@ -19,5 +19,8 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-	plugins: [sveltekit()]
+	plugins: [sveltekit()],
+	preview: {
+		allowedHosts: ['sensutrack-front.onrender.com'], // Agrega tu host aquí
+	},
 });
