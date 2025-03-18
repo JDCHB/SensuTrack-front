@@ -136,6 +136,12 @@
       });
     }
   }
+
+  function handleSubmit(event) {
+    event.preventDefault(); // Evita que el formulario se envíe automáticamente
+    console.log("Formulario enviado");
+    event.target.submit(); // Envía el formulario manualmente
+  }
 </script>
 
 <Navbar></Navbar>
@@ -254,7 +260,11 @@
                     </a>
 
                     <!-- Formulario para el botón de Google -->
-                    <form method="POST" action="?/OAuth2">
+                    <form
+                      method="POST"
+                      action="?/OAuth2"
+                      on:submit={handleSubmit}
+                    >
                       <button
                         type="submit"
                         class="btn btn-primary btn-lg"
