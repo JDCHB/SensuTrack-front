@@ -140,10 +140,10 @@ export const GET = async ({ url, cookies }) => {
         } else if (estado_v === "Registrada") {
             console.log("Estado actual:", estado_v, "Rol:", rol_v);
 
-            throw redirect(303, '/completar_informacion');
+            throw redirect(303, '/formulario_completar');
         } else if (estado_v === "Ya_existe" && v_estado == false) {
 
-            throw redirect(303, '/completar_informacion');
+            throw redirect(303, '/formulario_completar');
         }
     }
     throw redirect(303, '/usuario');
