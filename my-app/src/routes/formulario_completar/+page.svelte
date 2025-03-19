@@ -1,6 +1,4 @@
 <script>
-    import Navbar from "../../lib/components/Navbar.svelte";
-    import ChatBot from "$lib/components/ChatBot.svelte";
     import { onMount } from "svelte";
 
     let v_usuario = "";
@@ -10,7 +8,6 @@
     let v_apellido = "";
     let v_documento = "";
     let v_telefono = "";
-    let v_email = "";
     let v_rol = 2;
     let v_estado = true;
     let error = null;
@@ -87,7 +84,6 @@
                                 "Content-Type": "application/json",
                             },
                             body: JSON.stringify({
-                                email: v_email,
                                 password: v_password,
                                 nombre: v_nombre,
                                 apellido: v_apellido,
@@ -146,8 +142,6 @@
     }
 </script>
 
-<Navbar></Navbar>
-<ChatBot></ChatBot>
 <section
     class="vh-100 pt-5"
     style="background-color: #eee; padding-bottom: 60%; "
@@ -163,13 +157,25 @@
                     <div class="card text-black" style="border-radius: 25px;">
                         <div class="card-body p-md-5">
                             <div class="row justify-content-center">
+                                <!-- Imagen a la izquierda -->
                                 <div
-                                    class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1"
+                                    class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-1"
+                                >
+                                    <img
+                                        src="/Imagen_Regis.png"
+                                        class="img-fluid"
+                                        alt=""
+                                    />
+                                </div>
+
+                                <!-- Formulario a la derecha -->
+                                <div
+                                    class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-2"
                                 >
                                     <p
                                         class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4"
                                     >
-                                        FORMULARIO DE REGISTRO
+                                        COMPLETA LA INFORMACIÓN
                                     </p>
 
                                     <form
@@ -261,27 +267,7 @@
                                             class="d-flex flex-row align-items-center mb-4"
                                         >
                                             <i
-                                                class="bi bi-envelope fa-lg me-3 fa-fw"
-                                            ></i>
-                                            <div
-                                                data-mdb-input-init
-                                                class="form-outline flex-fill mb-0"
-                                            >
-                                                <input
-                                                    type="email"
-                                                    class="form-control"
-                                                    bind:value={v_email}
-                                                    placeholder="Correo Electronico"
-                                                    required
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <div
-                                            class="d-flex flex-row align-items-center mb-4"
-                                        >
-                                            <i
-                                                class="bi bi-lock fa-lg me-3 fa-fw"
+                                                class="bi bi-unlock fa-lg me-3 fa-fw"
                                             ></i>
                                             <div
                                                 data-mdb-input-init
@@ -318,16 +304,6 @@
                                         </div>
 
                                         <div
-                                            class="d-flex justify-content-center mb-4"
-                                        >
-                                            <div
-                                                class="g-recaptcha"
-                                                bind:this={captchaElement}
-                                                data-sitekey="6Lf0vdUqAAAAAN51836FYzxSTExokw1cl2HB426y"
-                                            ></div>
-                                        </div>
-
-                                        <div
                                             class="form-check d-flex justify-content-center mb-5"
                                         >
                                             <input
@@ -361,7 +337,7 @@
                                                 data-mdb-button-init
                                                 data-mdb-ripple-init
                                                 class="btn btn-primary btn-lg"
-                                                >Registrarse</button
+                                                >CONFIRMAR</button
                                             >
                                         </div>
                                     </form>
@@ -382,15 +358,6 @@
                                             <span>k</span>
                                         </div>
                                     </div>
-                                </div>
-                                <div
-                                    class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2"
-                                >
-                                    <img
-                                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
-                                        class="img-fluid"
-                                        alt=""
-                                    />
                                 </div>
                             </div>
                         </div>
