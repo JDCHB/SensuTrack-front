@@ -41,8 +41,8 @@ async function verificarUsuarioEnBD(user) {
         })
     });
     console.log("Datos enviados al backend:", {
-        google_id: user.sub,
-        foto: user.picture,
+        google_id: user.google_id,
+        foto: user.foto,
         access_token: user.access_token,
         estado: true,
         email: user.email,
