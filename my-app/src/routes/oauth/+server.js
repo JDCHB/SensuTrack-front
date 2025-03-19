@@ -36,8 +36,8 @@ async function verificarUsuarioEnBD(user) {
             access_token: user.access_token,
             estado: true,
             email: user.email,
-            nombre: user.given_name,
-            apellido: user.family_name,
+            nombre: user.nombre, //puedes colocar nombre
+            apellido: user.apellido, //y aqui apellido para probar, digo yo
         })
     });
     console.log("Datos enviados al backend:", {
@@ -46,8 +46,8 @@ async function verificarUsuarioEnBD(user) {
         access_token: user.access_token,
         estado: true,
         email: user.email,
-        nombre: user.given_name,
-        apellido: user.family_name,
+        nombre: user.nombre,
+        apellido: user.apellido,
     });
     return await res.json();
 }
