@@ -24,13 +24,20 @@ async function verificarUsuarioEnBD(user) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-            google_id: "108073988978568365707",
-            foto: "https://lh3.googleusercontent.com/a/ACg8ocLJAwrGIdkk_oEG0r4o3uDoMICJ0VYzt7-wfK7Dos6cWvEEtPg=s96-c",
-            access_token: "ya29.a0AeXRPp4yG2S0En0Qwh_o_rVC04beHP7mwkLPk7hcFSeLZinkxole5nwHIm78Is_crUjuCUc3IRqn2rmMqCTAPSL-YqOHy5urEWqmcs8nojgu8yis9dHAB15P-E-kqNzqWEgV6DCezS6dO8d7nFjVh3bOwEp4O6C0Hj7ztXVDaCgYKARASARMSFQHGX2MiBBkbB7Mj-2Tw-buUapip_Q0175",
+            // google_id: "108073988978568365707",
+            // foto: "https://lh3.googleusercontent.com/a/ACg8ocLJAwrGIdkk_oEG0r4o3uDoMICJ0VYzt7-wfK7Dos6cWvEEtPg=s96-c",
+            // access_token: "ya29.a0AeXRPp4yG2S0En0Qwh_o_rVC04beHP7mwkLPk7hcFSeLZinkxole5nwHIm78Is_crUjuCUc3IRqn2rmMqCTAPSL-YqOHy5urEWqmcs8nojgu8yis9dHAB15P-E-kqNzqWEgV6DCezS6dO8d7nFjVh3bOwEp4O6C0Hj7ztXVDaCgYKARASARMSFQHGX2MiBBkbB7Mj-2Tw-buUapip_Q0175",
+            // estado: true,
+            // email: "juan.charris2110@gmail.com",
+            // nombre: "Juan",
+            // apellido: "Charris",
+            google_id: user.google_id,
+            foto: user.foto,
+            access_token: user.access_token,
             estado: true,
-            email: "juan.charris2110@gmail.com",
-            nombre: "Juan",
-            apellido: "Charris",
+            email: user.email,
+            nombre: user.given_name,
+            apellido: user.family_name,
         })
     });
     console.log("SI2222222222222222222222 ENTRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AL Verificar_Google_User")
