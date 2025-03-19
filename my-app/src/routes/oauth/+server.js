@@ -31,7 +31,7 @@ async function verificarUsuarioEnBD(user) {
             // email: "juan.charris2110@gmail.com",
             // nombre: "Juan",
             // apellido: "Charris",
-            google_id: user.google_id,
+            google_id: user.sub,
             foto: user.foto,
             access_token: user.access_token,
             estado: true,
@@ -40,7 +40,15 @@ async function verificarUsuarioEnBD(user) {
             apellido: user.family_name,
         })
     });
-    console.log("SI2222222222222222222222 ENTRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AL Verificar_Google_User")
+    console.log("Datos enviados al backend:", {
+        google_id: user.sub,
+        foto: user.picture,
+        access_token: r.tokens.access_token,
+        estado: true,
+        email: user.email,
+        nombre: user.given_name,
+        apellido: user.family_name,
+    });
     return await res.json();
 }
 
