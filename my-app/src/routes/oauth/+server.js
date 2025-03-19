@@ -43,7 +43,7 @@ async function verificarUsuarioEnBD(user) {
     console.log("Datos enviados al backend:", {
         google_id: user.sub,
         foto: user.picture,
-        access_token: r.tokens.access_token,
+        access_token: user.access_token,
         estado: true,
         email: user.email,
         nombre: user.given_name,
