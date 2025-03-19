@@ -11,7 +11,6 @@
     let v_apellido = "";
     let v_documento = "";
     let v_telefono = "";
-    let v_email = "";
     let v_rol = 2;
     let v_estado = true;
     let error = null;
@@ -72,7 +71,6 @@
                             "Content-Type": "application/json",
                         },
                         body: JSON.stringify({
-                            email: v_email,
                             password: v_password,
                             nombre: v_nombre,
                             apellido: v_apellido,
