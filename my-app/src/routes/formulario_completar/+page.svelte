@@ -64,7 +64,7 @@
             try {
                 showLoader(registerLoader); // Mostrar loader al comenzar el registro
                 const response = await fetch(
-                    "https://proyectomascotas.onrender.com/create_user",
+                    "https://proyectomascotas.onrender.com/Completar_Informacion",
                     {
                         method: "POST",
                         headers: {
