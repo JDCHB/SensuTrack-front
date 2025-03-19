@@ -31,7 +31,7 @@ async function verificarUsuarioEnBD(user) {
             // email: "juan.charris2110@gmail.com",
             // nombre: "Juan",
             // apellido: "Charris",
-            google_id: user.sub,
+            google_id: user.google_id,
             foto: user.foto,
             access_token: user.access_token,
             estado: true,
