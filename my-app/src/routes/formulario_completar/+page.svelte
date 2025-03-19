@@ -1,5 +1,8 @@
 <script>
+    import Navbar from "../../lib/components/Navbar.svelte";
+    import ChatBot from "$lib/components/ChatBot.svelte";
     import { onMount } from "svelte";
+    import { text } from "@sveltejs/kit";
 
     let v_usuario = "";
     let v_password = "";
@@ -8,6 +11,7 @@
     let v_apellido = "";
     let v_documento = "";
     let v_telefono = "";
+    let v_email = "";
     let v_rol = 2;
     let v_estado = true;
     let error = null;
@@ -59,63 +63,50 @@
 
         if (Confirmar_Contraseña === v_password) {
             try {
-                // Muestra el cuadro de confirmación antes de proceder con el registro
-                const result = await Swal.fire({
-                    title: "¿Estás seguro?",
-                    text: "¡Desea registrarse a SensuTrack!?",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Sí, registrarse!",
-                    customClass: {
-                        popup: "swal-popup", // Clase para personalizar el popup de la alerta
-                        title: "custom-title", // Clase personalizada para el título
-                    },
-                });
-                // Si el usuario confirma, continuamos con el registro
-                if (result.isConfirmed) {
-                    showLoader(registerLoader); // Mostrar loader al comenzar el registro
-                    const response = await fetch(
-                        "https://proyectomascotas.onrender.com/create_user",
-                        {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify({
-                                password: v_password,
-                                nombre: v_nombre,
-                                apellido: v_apellido,
-                                documento: v_documento,
-                                telefono: v_telefono,
-                                id_rol: v_rol,
-                                estado: v_estado,
-                            }),
+                showLoader(registerLoader); // Mostrar loader al comenzar el registro
+                const response = await fetch(
+                    "https://proyectomascotas.onrender.com/create_user",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
                         },
-                    );
+                        body: JSON.stringify({
+                            email: v_email,
+                            password: v_password,
+                            nombre: v_nombre,
+                            apellido: v_apellido,
+                            documento: v_documento,
+                            telefono: v_telefono,
+                            id_rol: v_rol,
+                            estado: v_estado,
+                        }),
+                    },
+                );
 
-                    const data = await response.json();
-                    console.log(data);
+                const data = await response.json();
+                console.log(data);
 
-                    hideLoader(registerLoader); // Ocultar loader al terminar el registro
+                hideLoader(registerLoader); // Ocultar loader al terminar el registro
 
-                    if (response.ok) {
-                        grecaptcha.reset(); // Restablece el CAPTCHA después de una respuesta exitosa
-                        Swal.fire({
-                            title: "¡Registrado!,¡Bienvenido " + v_nombre + "!",
-                            icon: "success",
-                            customClass: {
-                                popup: "swal-popup", // Clase para personalizar el popup de la alerta
-                                title: "custom-title", // Clase personalizada para el título
-                            },
-                        });
-                    } else {
-                        alert("Error en el registro");
-                    }
-                } else {
+                if (response.ok) {
+                    grecaptcha.reset(); // Restablece el CAPTCHA después de una respuesta exitosa
                     Swal.fire({
-                        title: "REGISTRO CANCELADO",
+                        title:
+                            "Registro Completado!,¡Bienvenido " +
+                            v_nombre +
+                            "!",
+                        icon: "success",
+                        customClass: {
+                            popup: "swal-popup", // Clase para personalizar el popup de la alerta
+                            title: "custom-title", // Clase personalizada para el título
+                        },
+                    });
+                } else {
+                    alert("Error en el registro");
+                    Swal.fire({
+                        title: "OCURRIO UN ERROR!",
+                        text: "Lo sentimos ha ocurrido un error, por favor intente de nuevo.",
                         icon: "error",
                         customClass: {
                             popup: "swal-popup", // Clase para personalizar el popup de la alerta
@@ -301,6 +292,16 @@
                                                     required
                                                 />
                                             </div>
+                                        </div>
+
+                                        <div
+                                            class="d-flex justify-content-center mb-4"
+                                        >
+                                            <div
+                                                class="g-recaptcha"
+                                                bind:this={captchaElement}
+                                                data-sitekey="6Lf0vdUqAAAAAN51836FYzxSTExokw1cl2HB426y"
+                                            ></div>
                                         </div>
 
                                         <div
