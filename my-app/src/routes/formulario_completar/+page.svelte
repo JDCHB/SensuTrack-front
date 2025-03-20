@@ -51,8 +51,8 @@
                 let apellido = sesionGoogle.apellido;
                 let id = sesionGoogle.id;
                 let correo = sesionGoogle.email;
-                let encontrado = { name, id, correo };
-                miStorage.setItem("usuario", JSON.stringify(encontrado));
+                let user_data = { name, id, correo };
+                miStorage.setItem("user_data", JSON.stringify(user_data));
 
                 document.getElementById("v_nombre").value = name;
                 document.getElementById("v_apellido").value = apellido;
@@ -69,8 +69,9 @@
         event.preventDefault(); // Evita que el formulario se envíe automáticamente
 
         let miStorage = window.localStorage;
-        let usuario = JSON.parse(miStorage.getItem("usuario"));
+        let usuario = JSON.parse(miStorage.getItem("user_data"));
         let v_id = usuario.id;
+        console.log(usuario);
 
         let v_email = document.getElementById("v_email").value;
         let v_nombre = document.getElementById("v_nombre").value;
@@ -110,6 +111,13 @@
                 hideLoader(registerLoader); // Ocultar loader al terminar el registro
 
                 if (response.ok) {
+                    const { access_token, user_data } = data; // Extraer token y datos del usuario
+                    localStorage.setItem("access_token", access_token);
+                    localStorage.setItem(
+                        "user_data",
+                        JSON.stringify(user_data),
+                    );
+                    console.log(user_data);
                     Swal.fire({
                         title:
                             "Registro Completado!,¡Bienvenido " +
@@ -120,6 +128,8 @@
                             popup: "swal-popup", // Clase para personalizar el popup de la alerta
                             title: "custom-title", // Clase personalizada para el título
                         },
+                    }).then(() => {
+                        window.location.href = "/usuario";
                     });
                 } else {
                     alert("Error en el registro");
@@ -207,6 +217,7 @@
                                                     class="form-control"
                                                     bind:value={v_nombre}
                                                     placeholder="Nombre"
+                                                    autocomplete="off"
                                                     required
                                                 />
                                             </div>
@@ -227,6 +238,7 @@
                                                     class="form-control"
                                                     bind:value={v_apellido}
                                                     placeholder="Apellido"
+                                                    autocomplete="off"
                                                     required
                                                 />
                                             </div>
@@ -248,6 +260,7 @@
                                                     class="form-control"
                                                     bind:value={v_documento}
                                                     placeholder="Documento"
+                                                    autocomplete="off"
                                                     required
                                                 />
                                             </div>
@@ -268,6 +281,7 @@
                                                     class="form-control"
                                                     bind:value={v_telefono}
                                                     placeholder="Teléfono"
+                                                    autocomplete="off"
                                                     required
                                                 />
                                             </div>
@@ -288,6 +302,7 @@
                                                     class="form-control"
                                                     bind:value={v_password}
                                                     placeholder="Contraseña"
+                                                    autocomplete="off"
                                                     required
                                                 />
                                             </div>
@@ -308,6 +323,7 @@
                                                     class="form-control"
                                                     id="Confirmar_Contraseña"
                                                     placeholder="Confirmar Contraseña"
+                                                    autocomplete="off"
                                                     required
                                                 />
                                             </div>
