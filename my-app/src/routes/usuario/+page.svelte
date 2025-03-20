@@ -7,6 +7,7 @@
     import Servicios from "../../lib/components/Servicios.svelte";
     import Footer from "../../lib/components/footer.svelte";
     import "bootstrap-icons/font/bootstrap-icons.css";
+    import { onMount } from "svelte";
 
     onMount(async () => {
         try {
