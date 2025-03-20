@@ -11,6 +11,7 @@
     let v_apellido = "";
     let v_documento = "";
     let v_telefono = "";
+    let v_email = "";
     let v_rol = 2;
     let v_estado = true;
     let error = null;
@@ -33,33 +34,53 @@
         }
     }
 
-    let captchaElement;
+    onMount(async () => {
+        try {
+            let cookies = document.cookie
+                .split("; ")
+                .find((row) => row.startsWith("sesionGoogle="));
 
-    onMount(() => {
-        // Al cargar la página, inicializamos el reCAPTCHA
-        grecaptcha.render(captchaElement, {
-            sitekey: "6Lf0vdUqAAAAAN51836FYzxSTExokw1cl2HB426y",
-        });
+            if (cookies) {
+                let sesionGoogleRaw = cookies.split("=")[1];
+                let sesionGoogle = JSON.parse(
+                    decodeURIComponent(sesionGoogleRaw),
+                );
+                console.log("Sesión decodificada:", sesionGoogle);
+                let miStorage = window.localStorage;
+                let name = sesionGoogle.nombre;
+                let apellido = sesionGoogle.apellido;
+                let id = sesionGoogle.id;
+                let correo = sesionGoogle.email;
+                let encontrado = { name, id, correo };
+                miStorage.setItem("usuario", JSON.stringify(encontrado));
+
+                document.getElementById("v_nombre").value = name;
+                document.getElementById("v_apellido").value = apellido;
+                document.getElementById("v_email").value = correo;
+            }
+        } catch (e) {
+            error = e.message;
+        } finally {
+            loading = false;
+        }
     });
 
-    async function RegisterUser() {
-        // Referencia al Captcha
+    async function RegisterUser(id) {
+        event.preventDefault(); // Evita que el formulario se envíe automáticamente
 
-        const captchaResponse = grecaptcha.getResponse();
+        let miStorage = window.localStorage;
+        let usuario = JSON.parse(miStorage.getItem("usuario"));
+        let v_id = usuario.id;
 
-        if (!captchaResponse) {
-            Swal.fire({
-                icon: "error",
-                title: "Error",
-                text: "Por favor, verifica el reCAPTCHA.",
-            });
-            return;
-        }
+        let v_email = document.getElementById("v_usuario").value;
+        let v_nombre = document.getElementById("v_nombre").value;
+        let v_apellido = document.getElementById("v_apellido").value;
 
         Confirmar_Contraseña = document.getElementById(
             "Confirmar_Contraseña",
         ).value;
 
+        vid = id;
         if (Confirmar_Contraseña === v_password) {
             try {
                 showLoader(registerLoader); // Mostrar loader al comenzar el registro
@@ -71,6 +92,7 @@
                             "Content-Type": "application/json",
                         },
                         body: JSON.stringify({
+                            email: v_email,
                             password: v_password,
                             nombre: v_nombre,
                             apellido: v_apellido,
@@ -88,7 +110,6 @@
                 hideLoader(registerLoader); // Ocultar loader al terminar el registro
 
                 if (response.ok) {
-                    grecaptcha.reset(); // Restablece el CAPTCHA después de una respuesta exitosa
                     Swal.fire({
                         title:
                             "Registro Completado!,¡Bienvenido " +
@@ -290,16 +311,6 @@
                                                     required
                                                 />
                                             </div>
-                                        </div>
-
-                                        <div
-                                            class="d-flex justify-content-center mb-4"
-                                        >
-                                            <div
-                                                class="g-recaptcha"
-                                                bind:this={captchaElement}
-                                                data-sitekey="6Lf0vdUqAAAAAN51836FYzxSTExokw1cl2HB426y"
-                                            ></div>
                                         </div>
 
                                         <div
