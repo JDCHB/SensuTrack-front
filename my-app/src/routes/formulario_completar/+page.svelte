@@ -213,6 +213,7 @@
                                                 class="form-outline flex-fill mb-0"
                                             >
                                                 <input
+                                                    id="v_nombre"
                                                     type="text"
                                                     class="form-control"
                                                     bind:value={v_nombre}
@@ -234,6 +235,7 @@
                                                 class="form-outline flex-fill mb-0"
                                             >
                                                 <input
+                                                    id="v_apellido"
                                                     type="text"
                                                     class="form-control"
                                                     bind:value={v_apellido}
@@ -282,6 +284,29 @@
                                                     bind:value={v_telefono}
                                                     placeholder="Teléfono"
                                                     autocomplete="off"
+                                                    required
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            class="d-flex flex-row align-items-center mb-4"
+                                        >
+                                            <i
+                                                class="bi bi-envelope fa-lg me-3 fa-fw"
+                                            ></i>
+                                            <div
+                                                data-mdb-input-init
+                                                class="form-outline flex-fill mb-0"
+                                            >
+                                                <input
+                                                    id="v_email"
+                                                    readonly
+                                                    autocomplete="off"
+                                                    type="email"
+                                                    class="form-control"
+                                                    bind:value={v_email}
+                                                    placeholder="Correo Electronico"
                                                     required
                                                 />
                                             </div>
