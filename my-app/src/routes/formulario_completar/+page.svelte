@@ -72,7 +72,7 @@
         let usuario = JSON.parse(miStorage.getItem("usuario"));
         let v_id = usuario.id;
 
-        let v_email = document.getElementById("v_usuario").value;
+        let v_email = document.getElementById("v_email").value;
         let v_nombre = document.getElementById("v_nombre").value;
         let v_apellido = document.getElementById("v_apellido").value;
 
@@ -268,6 +268,28 @@
                                                     class="form-control"
                                                     bind:value={v_telefono}
                                                     placeholder="Teléfono"
+                                                    required
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            class="d-flex flex-row align-items-center mb-4"
+                                        >
+                                            <i
+                                                class="bi bi-envelope fa-lg me-3 fa-fw"
+                                            ></i>
+                                            <div
+                                                data-mdb-input-init
+                                                class="form-outline flex-fill mb-0"
+                                            >
+                                                <input
+                                                    type="email"
+                                                    class="form-control"
+                                                    readonly
+                                                    autocomplete="off"
+                                                    bind:value={v_email}
+                                                    placeholder="Correo Electronico"
                                                     required
                                                 />
                                             </div>
