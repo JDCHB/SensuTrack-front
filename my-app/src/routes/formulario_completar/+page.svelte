@@ -81,12 +81,11 @@
             "Confirmar_Contraseña",
         ).value;
 
-        let vid = id;
         if (Confirmar_Contraseña === v_password) {
             try {
                 showLoader(registerLoader); // Mostrar loader al comenzar el registro
                 const response = await fetch(
-                    `https://proyectomascotas.onrender.com/Completar_Informacion/${vid}`,
+                    `https://proyectomascotas.onrender.com/Completar_Informacion/${v_id}`,
                     {
                         method: "PUT",
                         headers: {
