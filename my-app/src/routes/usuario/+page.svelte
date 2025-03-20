@@ -31,10 +31,6 @@
                 let user_data = { name, id, correo };
 
                 miStorage.setItem("user_data", JSON.stringify(user_data));
-                // Actualiza los campos del formulario con los datos de Google
-                document.getElementById("v_nombre").value = name;
-                document.getElementById("v_apellido").value = apellido;
-                document.getElementById("v_email").value = correo;
             }
         } catch (e) {
             error = e.message;
