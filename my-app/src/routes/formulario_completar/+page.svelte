@@ -36,6 +36,7 @@
 
     onMount(async () => {
         try {
+            // Verifica si hay una sesión de Google en las cookies
             let cookies = document.cookie
                 .split("; ")
                 .find((row) => row.startsWith("sesionGoogle="));
@@ -46,6 +47,8 @@
                     decodeURIComponent(sesionGoogleRaw),
                 );
                 console.log("Sesión decodificada:", sesionGoogle);
+
+                // Guarda los datos de la sesión en el localStorage
                 let miStorage = window.localStorage;
                 let name = sesionGoogle.nombre;
                 let apellido = sesionGoogle.apellido;
@@ -54,12 +57,19 @@
                 let user_data = { name, id, correo };
                 miStorage.setItem("user_data", JSON.stringify(user_data));
 
+                // Actualiza los campos del formulario con los datos de Google
                 document.getElementById("v_nombre").value = name;
                 document.getElementById("v_apellido").value = apellido;
                 document.getElementById("v_email").value = correo;
+
+                // Si hay un token en la respuesta de Google, guárdalo también
+                if (sesionGoogle.token) {
+                    miStorage.setItem("access_token", sesionGoogle.token);
+                }
             }
         } catch (e) {
             error = e.message;
+            console.error("Error al procesar la sesión de Google:", error);
         } finally {
             loading = false;
         }
