@@ -38,9 +38,7 @@
         } finally {
             loading = false;
         }
-    });
 
-    async function Token_Generate(params) {
         try {
             const response = await fetch(
                 "https://proyectomascotas.onrender.com/generate_token_google",
@@ -79,7 +77,7 @@
                 text: "Hubo un problema al crear el Token.",
             });
         }
-    }
+    });
 </script>
 
 <NavbarUser></NavbarUser>
