@@ -3,7 +3,6 @@
   import ChatBot from "$lib/components/ChatBot.svelte";
   import { onMount } from "svelte";
 
-  let todos = {};
   let v_usuario = "";
   let v_password = "";
   let error = null;
@@ -115,19 +114,6 @@
           }).then(() => {
             window.location.href = "/Can_See_Or_Not";
           });
-        } else {
-          let nombre = data.resultado[0].nombre;
-          let id = data.resultado[0].id;
-          let correo = data.resultado[0].correo;
-          let v_rol = data.resultado[0].id_rol;
-
-          let encontrado = { nombre, id, correo, v_rol };
-          console.log("Imprimos el encontrado", encontrado);
-          let miStorage = window.localStorage;
-          miStorage.setItem("user_data", JSON.stringify(encontrado));
-          const { access_token } = data; // Extraer token
-          localStorage.setItem("access_token", access_token);
-          console.log(user_data, access_token);
         }
       } else {
         Swal.fire({
