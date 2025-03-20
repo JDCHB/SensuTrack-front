@@ -81,7 +81,7 @@
             "Confirmar_Contraseña",
         ).value;
 
-        vid = id;
+        let vid = id;
         if (Confirmar_Contraseña === v_password) {
             try {
                 showLoader(registerLoader); // Mostrar loader al comenzar el registro
