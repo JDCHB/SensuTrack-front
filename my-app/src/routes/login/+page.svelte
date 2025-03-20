@@ -3,6 +3,7 @@
   import ChatBot from "$lib/components/ChatBot.svelte";
   import { onMount } from "svelte";
 
+  let todos = {};
   let v_usuario = "";
   let v_password = "";
   let error = null;
@@ -71,18 +72,18 @@
       if (response.ok) {
         grecaptcha.reset(); // Restablece el CAPTCHA después de una respuesta exitosa
 
-        // Lógica de autenticación
         // Guardar token y datos en localStorage
         const { access_token, user_data } = data; // Extraer token y datos del usuario
         localStorage.setItem("access_token", access_token);
         localStorage.setItem("user_data", JSON.stringify(user_data));
         console.log(user_data);
+
         if (user_data.id_rol == 3) {
           todos = user_data;
           let v_nombre = user_data.nombre;
           Swal.fire({
             title: "Inicio de Sesión Exitoso",
-            text: "¡Bienvenido al Sistema de Administración!",
+            text: "¡Bienvenido al Sistema de Super Administrador!",
             icon: "success",
             confirmButtonText: "OK",
           }).then(() => {
@@ -101,10 +102,10 @@
           }).then(() => {
             window.location.href = "/usuario";
           });
-        } else {
+        } else if (user_data.id_rol == 1) {
           Swal.fire({
             title: "Inicio de Sesión Exitoso",
-            text: "¡Bienvenido al Sistema!",
+            text: "¡Bienvenido al Sistema de Administrador!",
             icon: "success",
             confirmButtonText: "OK",
             customClass: {
@@ -114,6 +115,19 @@
           }).then(() => {
             window.location.href = "/Can_See_Or_Not";
           });
+        } else {
+          let nombre = data.resultado[0].nombre;
+          let id = data.resultado[0].id;
+          let correo = data.resultado[0].correo;
+          let v_rol = data.resultado[0].id_rol;
+
+          let encontrado = { nombre, id, correo, v_rol };
+          console.log("Imprimos el encontrado", encontrado);
+          let miStorage = window.localStorage;
+          miStorage.setItem("user_data", JSON.stringify(encontrado));
+          const { access_token } = data; // Extraer token
+          localStorage.setItem("access_token", access_token);
+          console.log(user_data, access_token);
         }
       } else {
         Swal.fire({
