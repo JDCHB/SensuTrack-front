@@ -11,35 +11,6 @@
 
     onMount(async () => {
         try {
-            const response = await fetch(
-                "https://proyectomascotas.onrender.com/generate_token_google",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({}),
-                },
-            );
-            const data = await response.json();
-
-            if (response.ok) {
-                const { access_token } = data;
-                localStorage.setItem("access_token", access_token);
-            } else {
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text:
-                        data.detail ||
-                        "Ha ocurrido un error al generar el token.",
-                    customClass: {
-                        popup: "swal-popup", // Clase para personalizar el popup de la alerta
-                        title: "custom-title", // Clase personalizada para el título
-                    },
-                });
-            }
-
             // Verifica si hay una sesión de Google en las cookies
             let cookies = document.cookie
                 .split("; ")
@@ -59,6 +30,37 @@
                 let id = sesionGoogle.id;
                 let correo = sesionGoogle.email;
                 let user_data = { name, id, correo };
+
+                const response = await fetch(
+                    "https://proyectomascotas.onrender.com/generate_token_google",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            email: correo,
+                        }),
+                    },
+                );
+                const data = await response.json();
+
+                if (response.ok) {
+                    const { access_token } = data;
+                    localStorage.setItem("access_token", access_token);
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text:
+                            data.detail ||
+                            "Ha ocurrido un error al generar el token.",
+                        customClass: {
+                            popup: "swal-popup", // Clase para personalizar el popup de la alerta
+                            title: "custom-title", // Clase personalizada para el título
+                        },
+                    });
+                }
 
                 miStorage.setItem("user_data", JSON.stringify(user_data));
             }
