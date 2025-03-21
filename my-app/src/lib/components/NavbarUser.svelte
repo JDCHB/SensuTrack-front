@@ -1,5 +1,11 @@
 <script>
     import { onMount } from "svelte";
+
+    let v_id = "";
+    let perfil = "";
+    let error = "";
+    let loading = true;
+
     function logout() {
         // Limpiar los datos de inicio de sesión en el LocalStorage
         localStorage.clear();
@@ -149,15 +155,20 @@
             </div>
             <div class="modal-body">
                 <div class="mb-2 d-flex align-items-center">
-                    <label class="form-label" style="padding-right: 6px;" for=""
-                        >Nombre</label
-                    >
-                    <input
-                        type="text"
-                        id="v_nombre"
-                        class="form-control"
-                        bind:value={usuario.nombre}
-                    />
+                    <div class="mb-2 d-flex align-items-center">
+                        <label
+                            class="form-label"
+                            style="padding-right: 6px;"
+                            for="">Nombre</label
+                        >
+                        <input
+                            type="text"
+                            id="v_nombre"
+                            class="form-control"
+                            bind:value={perfil.nombre}
+                            readonly
+                        />
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
