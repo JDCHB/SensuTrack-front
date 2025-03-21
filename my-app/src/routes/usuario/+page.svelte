@@ -9,6 +9,7 @@
     import "bootstrap-icons/font/bootstrap-icons.css";
     import { onMount } from "svelte";
 
+    let correo = "";
     onMount(async () => {
         try {
             // Verifica si hay una sesión de Google en las cookies
@@ -28,7 +29,7 @@
                 let name = sesionGoogle.nombre;
                 let apellido = sesionGoogle.apellido;
                 let id = sesionGoogle.id;
-                let correo = sesionGoogle.email;
+                correo = sesionGoogle.email;
                 let user_data = { name, id, correo };
 
                 const response = await fetch(
