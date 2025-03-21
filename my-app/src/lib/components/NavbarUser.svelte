@@ -15,7 +15,7 @@
     onMount(async () => {
         try {
             let miStorage = window.localStorage;
-            let usuario = JSON.parse(miStorage.getItem("user_data"));
+            usuario = JSON.parse(miStorage.getItem("user_data"));
             v_id = usuario?.id || "";
             console.log(
                 "ESSSSSSSSTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE",
