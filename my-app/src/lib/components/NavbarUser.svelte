@@ -166,7 +166,6 @@
                             id="v_nombre"
                             class="form-control"
                             bind:value={usuario.nombre}
-                            readonly={!editMode}
                         />
                     </div>
                 </div>
