@@ -30,6 +30,7 @@
                 let apellido = sesionGoogle.apellido;
                 let id = sesionGoogle.id;
                 correo = sesionGoogle.email;
+                console.log(correo);
                 let user_data = { name, id, correo };
 
                 const response = await fetch(
