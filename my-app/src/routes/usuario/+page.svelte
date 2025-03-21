@@ -8,7 +8,7 @@
     import Footer from "../../lib/components/footer.svelte";
     import "bootstrap-icons/font/bootstrap-icons.css";
     import { onMount } from "svelte";
-
+    let loading;
     let correo = "";
     onMount(async () => {
         try {
