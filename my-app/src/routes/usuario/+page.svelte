@@ -86,6 +86,26 @@
                 "ESSSSSSSSTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE",
                 v_id,
             );
+            if (!v_id) return;
+
+            //AHORA BUSQUEMOS LOS DATOS DEL USUARIO
+
+            const response = await fetch(
+                "https://proyectomascotas.onrender.com/get_user",
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ id: v_id }),
+                },
+            );
+            console.log(
+                "PARECE QUE SI ENTRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            );
+            usuario = await response.json();
+            console.log(
+                "DATOS TOMADOS DEL USUARIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
+                usuario,
+            );
         } catch (error) {}
     });
 </script>
