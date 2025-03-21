@@ -46,7 +46,7 @@
                     },
                 );
                 const data = await response.json();
-
+                console.log(data);
                 if (response.ok) {
                     const { access_token } = data;
                     localStorage.setItem("access_token", access_token);
