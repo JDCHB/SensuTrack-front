@@ -45,7 +45,12 @@
 </script>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light py-3">
-    <a class="navbar-brand d-flex align-items-center" href="/usuario">
+    <a
+        class="navbar-brand d-flex align-items-center"
+        data-bs-toggle="modal"
+        data-bs-target="#Perfil_Usuario"
+        href="#"
+    >
         <img
             src="/logo.jpg"
             width="56"
@@ -68,6 +73,11 @@
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link text-dark fw-bold" href="/usuario">
+                    <i class="bi bi-house"></i> Inicio
+                </a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link text-dark fw-bold" href="/registrar_GPS">
                     <i class="bi bi-house-door"></i> Registrar GPS
@@ -113,6 +123,55 @@
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
     rel="stylesheet"
 />
+
+<!-- Modal -->
+<div
+    class="modal fade"
+    id="Perfil_Usuario"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="Perfil_UsuarioLabel"
+    aria-hidden="true"
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="Perfil_UsuarioLabel">
+                    Perfil de usuario
+                </h1>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-2 d-flex align-items-center">
+                    <label class="form-label" style="padding-right: 6px;" for=""
+                        >Nombre</label
+                    >
+                    <input
+                        type="text"
+                        id="v_nombre"
+                        class="form-control"
+                        bind:value={usuario.nombre}
+                    />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal">Close</button
+                >
+                <button type="button" class="btn btn-primary">Understood</button
+                >
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Estilos CSS -->
 <style>
