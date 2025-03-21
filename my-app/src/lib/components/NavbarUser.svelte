@@ -156,46 +156,76 @@
             <div class="modal-body">
                 <div class="mb-2 d-flex align-items-center">
                     <div class="mb-2 d-flex align-items-center">
-                        <label
-                            class="form-label"
-                            style="padding-right: 6px;"
-                            for="">Nombre</label
-                        >
-                        <input
-                            type="text"
-                            id="v_nombre"
-                            class="form-control"
-                            bind:value={usuario.nombre}
-                            readonly
-                        />
-                        <input
-                            type="text"
-                            id="v_nombre"
-                            class="form-control"
-                            bind:value={usuario.apellido}
-                            readonly
-                        />
-                        <input
-                            type="text"
-                            id="v_nombre"
-                            class="form-control"
-                            bind:value={usuario.email}
-                            readonly
-                        />
-                        <input
-                            type="text"
-                            id="v_nombre"
-                            class="form-control"
-                            bind:value={usuario.documento}
-                            readonly
-                        />
-                        <input
-                            type="text"
-                            id="v_nombre"
-                            class="form-control"
-                            bind:value={usuario.telefono}
-                            readonly
-                        />
+                        <div class="mb-2 d-flex align-items-center">
+                            <label
+                                class="form-label"
+                                style="padding-right: 6px;"
+                                for="">Nombre</label
+                            >
+                            <input
+                                type="text"
+                                id="v_nombre"
+                                class="form-control"
+                                bind:value={usuario.nombre}
+                                readonly
+                            />
+                        </div>
+                        <div class="mb-2 d-flex align-items-center">
+                            <label
+                                class="form-label"
+                                style="padding-right: 6px;"
+                                for="">Apellido</label
+                            >
+                            <input
+                                type="text"
+                                id="v_nombre"
+                                class="form-control"
+                                bind:value={usuario.apellido}
+                                readonly
+                            />
+                        </div>
+                        <div class="mb-2 d-flex align-items-center">
+                            <label
+                                class="form-label"
+                                style="padding-right: 6px;"
+                                for="">Correo</label
+                            >
+                            <input
+                                type="text"
+                                id="v_nombre"
+                                class="form-control"
+                                bind:value={usuario.email}
+                                readonly
+                            />
+                        </div>
+                        <div class="mb-2 d-flex align-items-center">
+                            <label
+                                class="form-label"
+                                style="padding-right: 6px;"
+                                for="">Documento</label
+                            >
+                            <input
+                                type="text"
+                                id="v_nombre"
+                                class="form-control"
+                                bind:value={usuario.documento}
+                                readonly
+                            />
+                        </div>
+                        <div class="mb-2 d-flex align-items-center">
+                            <label
+                                class="form-label"
+                                style="padding-right: 6px;"
+                                for="">Telefono</label
+                            >
+                            <input
+                                type="text"
+                                id="v_nombre"
+                                class="form-control"
+                                bind:value={usuario.telefono}
+                                readonly
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
