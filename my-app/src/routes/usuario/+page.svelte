@@ -77,37 +77,6 @@
         } finally {
             loading = false;
         }
-
-        try {
-            let miStorage = window.localStorage;
-            let usuario = JSON.parse(miStorage.getItem("user_data"));
-            v_id = usuario?.id || "";
-            console.log(
-                "ESSSSSSSSTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE",
-                v_id,
-            );
-            if (!v_id) return;
-
-            //AHORA BUSQUEMOS LOS DATOS DEL USUARIO
-
-            const response = await fetch(
-                `https://proyectomascotas.onrender.com/get_user/${v_id}`,
-                {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                },
-            );
-            console.log(
-                "PARECE QUE SI ENTRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            );
-            usuario = await response.json();
-            console.log(
-                "DATOS TOMADOS DEL USUARIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
-                usuario,
-            );
-        } catch (error) {}
     });
 </script>
 
