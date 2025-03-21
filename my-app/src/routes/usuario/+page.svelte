@@ -91,11 +91,12 @@
             //AHORA BUSQUEMOS LOS DATOS DEL USUARIO
 
             const response = await fetch(
-                "https://proyectomascotas.onrender.com/get_user",
+                `https://proyectomascotas.onrender.com/get_user/${v_id}`,
                 {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ id: v_id }),
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
                 },
             );
             console.log(
