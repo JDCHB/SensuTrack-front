@@ -8,110 +8,75 @@
     import Footer from "../../lib/components/footer.svelte";
     import "bootstrap-icons/font/bootstrap-icons.css";
     import { onMount } from "svelte";
-    let loading;
+
+    let loading = true;
     let correo = "";
+
     onMount(async () => {
-        setTimeout(async () => {
-            try {
-                // Verifica si hay una sesión de Google en las cookies
-                let cookies = document.cookie
-                    .split("; ")
-                    .find((row) => row.startsWith("sesionGoogle="));
+        try {
+            let cookies = document.cookie
+                .split("; ")
+                .find((row) => row.startsWith("sesionGoogle="));
 
-                if (cookies) {
-                    let sesionGoogleRaw = cookies.split("=")[1];
-                    let sesionGoogle = JSON.parse(
-                        decodeURIComponent(sesionGoogleRaw),
+            if (cookies) {
+                let sesionGoogleRaw = cookies.split("=")[1];
+                let sesionGoogle = JSON.parse(
+                    decodeURIComponent(sesionGoogleRaw),
+                );
+
+                console.log("Sesión decodificada:", sesionGoogle);
+                let miStorage = window.localStorage;
+                let name = sesionGoogle.nombre;
+                let apellido = sesionGoogle.apellido;
+                let id = sesionGoogle.id;
+                correo = sesionGoogle.email;
+                console.log(correo);
+
+                let user_data = { name, id, correo };
+                localStorage.setItem("user_data", JSON.stringify(user_data));
+
+                // Solicitar el token
+                const response = await fetch(
+                    "https://proyectomascotas.onrender.com/generate_token_google",
+                    {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ email: correo }),
+                    },
+                );
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    const { access_token } = data;
+                    localStorage.setItem("access_token", access_token);
+                    console.log(
+                        "Token guardado en localStorage:",
+                        access_token,
                     );
+                } else {
+                    localStorage.removeItem("access_token"); // Asegurar que no haya un token inválido
 
-                    // Guarda los datos de la sesión en el localStorage
-                    console.log("Sesión decodificada:", sesionGoogle);
-                    let miStorage = window.localStorage;
-                    let name = sesionGoogle.nombre;
-                    let apellido = sesionGoogle.apellido;
-                    let id = sesionGoogle.id;
-                    correo = sesionGoogle.email;
-                    console.log(correo);
-                    let user_data = { name, id, correo };
-
-                    const response = await fetch(
-                        "https://proyectomascotas.onrender.com/generate_token_google",
-                        {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify({
-                                email: correo,
-                            }),
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text:
+                            data.detail ||
+                            "Ha ocurrido un error al generar el token.",
+                        customClass: {
+                            popup: "swal-popup",
+                            title: "custom-title",
                         },
-                    );
-                    const data = await response.json();
-                    console.log(data);
-                    if (response.ok) {
-                        const { access_token } = data;
-                        localStorage.setItem("access_token", access_token);
-                    } else {
-                        Swal.fire({
-                            icon: "error",
-                            title: "Oops...",
-                            text:
-                                data.detail ||
-                                "Ha ocurrido un error al generar el token.",
-                            customClass: {
-                                popup: "swal-popup", // Clase para personalizar el popup de la alerta
-                                title: "custom-title", // Clase personalizada para el título
-                            },
-                        });
-                    }
-
-                    miStorage.setItem("user_data", JSON.stringify(user_data));
+                    });
                 }
-            } catch (e) {
-                error = e.message;
-            } finally {
-                loading = false;
+            } else {
+                console.log("No se encontró sesión de Google en las cookies.");
             }
-
-            // try {
-            //     const response = await fetch(
-            //         "https://proyectomascotas.onrender.com/generate_token_google",
-            //         {
-            //             method: "POST",
-            //             headers: {
-            //                 "Content-Type": "application/json",
-            //             },
-            //             body: JSON.stringify({}),
-            //         },
-            //     );
-            //     const data = await response.json();
-
-            //     if (response.ok) {
-            //         const { access_token } = data;
-            //         localStorage.setItem("access_token", access_token);
-            //     } else {
-            //         Swal.fire({
-            //             icon: "error",
-            //             title: "Oops...",
-            //             text:
-            //                 data.detail ||
-            //                 "Ha ocurrido un error al generar el token.",
-            //             customClass: {
-            //                 popup: "swal-popup", // Clase para personalizar el popup de la alerta
-            //                 title: "custom-title", // Clase personalizada para el título
-            //             },
-            //         });
-            //     }
-            // } catch (error) {
-            //     console.error("Error en la solicitud:", e.message);
-            //     hideLoader(loginLoader);
-            //     Swal.fire({
-            //         icon: "error",
-            //         title: "Error",
-            //         text: "Hubo un problema al crear el Token.",
-            //     });
-            // }
-        }, 500);
+        } catch (error) {
+            console.error("Error al procesar la sesión:", error.message);
+        } finally {
+            loading = false;
+        }
     });
 </script>
 
