@@ -165,7 +165,7 @@
                             type="text"
                             id="v_nombre"
                             class="form-control"
-                            bind:value={perfil.nombre}
+                            bind:value={usuario.nombre}
                             readonly
                         />
                     </div>
