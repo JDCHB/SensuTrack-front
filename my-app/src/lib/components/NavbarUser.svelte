@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
 
     let v_id = "";
-    let perfil = "";
+    let usuario = "";
     let error = "";
     let loading = true;
 
