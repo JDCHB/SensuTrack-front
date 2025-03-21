@@ -140,103 +140,106 @@
     aria-labelledby="Perfil_UsuarioLabel"
     aria-hidden="true"
 >
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
+            <!-- Encabezado del modal -->
+            <div class="modal-header bg-primary text-white">
                 <h1 class="modal-title fs-5" id="Perfil_UsuarioLabel">
-                    Perfil de usuario
+                    Perfil de Usuario
                 </h1>
                 <button
                     type="button"
-                    class="btn-close"
+                    class="btn-close btn-close-white"
                     data-bs-dismiss="modal"
                     aria-label="Close"
                 ></button>
             </div>
+
+            <!-- Cuerpo del modal -->
             <div class="modal-body">
-                <div class="mb-2 d-flex align-items-center">
-                    <div class="mb-2 d-flex align-items-center">
-                        <div class="mb-2 d-flex align-items-center">
-                            <label
-                                class="form-label"
-                                style="padding-right: 6px;"
-                                for="">Nombre</label
-                            >
-                            <input
-                                type="text"
-                                id="v_nombre"
-                                class="form-control"
-                                bind:value={usuario.nombre}
-                                readonly
-                            />
-                        </div>
-                        <div class="mb-2 d-flex align-items-center">
-                            <label
-                                class="form-label"
-                                style="padding-right: 6px;"
-                                for="">Apellido</label
-                            >
-                            <input
-                                type="text"
-                                id="v_nombre"
-                                class="form-control"
-                                bind:value={usuario.apellido}
-                                readonly
-                            />
-                        </div>
-                        <div class="mb-2 d-flex align-items-center">
-                            <label
-                                class="form-label"
-                                style="padding-right: 6px;"
-                                for="">Correo</label
-                            >
-                            <input
-                                type="text"
-                                id="v_nombre"
-                                class="form-control"
-                                bind:value={usuario.email}
-                                readonly
-                            />
-                        </div>
-                        <div class="mb-2 d-flex align-items-center">
-                            <label
-                                class="form-label"
-                                style="padding-right: 6px;"
-                                for="">Documento</label
-                            >
-                            <input
-                                type="text"
-                                id="v_nombre"
-                                class="form-control"
-                                bind:value={usuario.documento}
-                                readonly
-                            />
-                        </div>
-                        <div class="mb-2 d-flex align-items-center">
-                            <label
-                                class="form-label"
-                                style="padding-right: 6px;"
-                                for="">Telefono</label
-                            >
-                            <input
-                                type="text"
-                                id="v_nombre"
-                                class="form-control"
-                                bind:value={usuario.telefono}
-                                readonly
-                            />
-                        </div>
-                    </div>
+                <!-- Nombre -->
+                <div class="mb-3">
+                    <label for="v_nombre" class="form-label fw-bold"
+                        >Nombre</label
+                    >
+                    <input
+                        type="text"
+                        id="v_nombre"
+                        class="form-control"
+                        bind:value={usuario.nombre}
+                        readonly
+                    />
+                </div>
+
+                <!-- Apellido -->
+                <div class="mb-3">
+                    <label for="v_apellido" class="form-label fw-bold"
+                        >Apellido</label
+                    >
+                    <input
+                        type="text"
+                        id="v_apellido"
+                        class="form-control"
+                        bind:value={usuario.apellido}
+                        readonly
+                    />
+                </div>
+
+                <!-- Correo -->
+                <div class="mb-3">
+                    <label for="v_correo" class="form-label fw-bold"
+                        >Correo</label
+                    >
+                    <input
+                        type="text"
+                        id="v_correo"
+                        class="form-control"
+                        bind:value={usuario.email}
+                        readonly
+                    />
+                </div>
+
+                <!-- Documento -->
+                <div class="mb-3">
+                    <label for="v_documento" class="form-label fw-bold"
+                        >Documento</label
+                    >
+                    <input
+                        type="text"
+                        id="v_documento"
+                        class="form-control"
+                        bind:value={usuario.documento}
+                        readonly
+                    />
+                </div>
+
+                <!-- Teléfono -->
+                <div class="mb-3">
+                    <label for="v_telefono" class="form-label fw-bold"
+                        >Teléfono</label
+                    >
+                    <input
+                        type="text"
+                        id="v_telefono"
+                        class="form-control"
+                        bind:value={usuario.telefono}
+                        readonly
+                    />
                 </div>
             </div>
+
+            <!-- Pie del modal -->
             <div class="modal-footer">
                 <button
                     type="button"
                     class="btn btn-secondary"
-                    data-bs-dismiss="modal">Close</button
+                    data-bs-dismiss="modal"
                 >
-                <button type="button" class="btn btn-primary">Understood</button
-                >
+                    Cerrar
+                </button>
+                <button type="button" class="btn btn-primary">
+                    Guardar Cambios
+                </button>
             </div>
         </div>
     </div>
