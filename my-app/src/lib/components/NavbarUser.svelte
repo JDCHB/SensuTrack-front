@@ -15,7 +15,7 @@
     onMount(async () => {
         try {
             let miStorage = window.localStorage;
-            usuario = JSON.parse(miStorage.getItem("user_data"));
+            let usuario = JSON.parse(miStorage.getItem("user_data"));
             v_id = usuario?.id || "";
             console.log(
                 "ESSSSSSSSTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE",
@@ -166,7 +166,7 @@
                             id="v_nombre"
                             class="form-control"
                             bind:value={usuario.nombre}
-                            readonly
+                            readonly={!editMode}
                         />
                     </div>
                 </div>
