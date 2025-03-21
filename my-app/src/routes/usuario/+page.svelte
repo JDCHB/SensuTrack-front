@@ -10,6 +10,9 @@
     import { onMount } from "svelte";
     let loading = true;
     let correo = "";
+    let todos = {};
+    let v_id = "";
+
     onMount(async () => {
         try {
             // Verifica si hay una sesión de Google en las cookies
@@ -75,44 +78,15 @@
             loading = false;
         }
 
-        // try {
-        //     const response = await fetch(
-        //         "https://proyectomascotas.onrender.com/generate_token_google",
-        //         {
-        //             method: "POST",
-        //             headers: {
-        //                 "Content-Type": "application/json",
-        //             },
-        //             body: JSON.stringify({}),
-        //         },
-        //     );
-        //     const data = await response.json();
-
-        //     if (response.ok) {
-        //         const { access_token } = data;
-        //         localStorage.setItem("access_token", access_token);
-        //     } else {
-        //         Swal.fire({
-        //             icon: "error",
-        //             title: "Oops...",
-        //             text:
-        //                 data.detail ||
-        //                 "Ha ocurrido un error al generar el token.",
-        //             customClass: {
-        //                 popup: "swal-popup", // Clase para personalizar el popup de la alerta
-        //                 title: "custom-title", // Clase personalizada para el título
-        //             },
-        //         });
-        //     }
-        // } catch (error) {
-        //     console.error("Error en la solicitud:", e.message);
-        //     hideLoader(loginLoader);
-        //     Swal.fire({
-        //         icon: "error",
-        //         title: "Error",
-        //         text: "Hubo un problema al crear el Token.",
-        //     });
-        // }
+        try {
+            let miStorage = window.localStorage;
+            let usuario = JSON.parse(miStorage.getItem("user_data"));
+            v_id = usuario?.id || "";
+            console.log(
+                "ESSSSSSSSTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE",
+                v_id,
+            );
+        } catch (error) {}
     });
 </script>
 
