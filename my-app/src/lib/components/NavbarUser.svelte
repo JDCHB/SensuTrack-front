@@ -166,6 +166,35 @@
                             id="v_nombre"
                             class="form-control"
                             bind:value={usuario.nombre}
+                            readonly
+                        />
+                        <input
+                            type="text"
+                            id="v_nombre"
+                            class="form-control"
+                            bind:value={usuario.apellido}
+                            readonly
+                        />
+                        <input
+                            type="text"
+                            id="v_nombre"
+                            class="form-control"
+                            bind:value={usuario.email}
+                            readonly
+                        />
+                        <input
+                            type="text"
+                            id="v_nombre"
+                            class="form-control"
+                            bind:value={usuario.documento}
+                            readonly
+                        />
+                        <input
+                            type="text"
+                            id="v_nombre"
+                            class="form-control"
+                            bind:value={usuario.telefono}
+                            readonly
                         />
                     </div>
                 </div>
