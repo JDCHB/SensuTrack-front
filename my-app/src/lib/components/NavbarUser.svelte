@@ -1,4 +1,5 @@
 <script>
+    import { onMount } from "svelte";
     function logout() {
         // Limpiar los datos de inicio de sesión en el LocalStorage
         localStorage.clear();
