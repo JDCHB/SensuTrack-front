@@ -157,75 +157,83 @@
 
             <!-- Cuerpo del modal -->
             <div class="modal-body">
-                <!-- Nombre -->
-                <div class="mb-3">
-                    <label for="v_nombre" class="form-label fw-bold"
-                        >Nombre</label
-                    >
-                    <input
-                        type="text"
-                        id="v_nombre"
-                        class="form-control"
-                        bind:value={usuario.nombre}
-                        readonly
-                    />
-                </div>
+                {#if loading}
+                    <div class="text-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Cargando...</span>
+                        </div>
+                        <p class="mt-2">Cargando datos del perfil...</p>
+                    </div>
+                {:else}
+                    <div class="mb-3">
+                        <label for="v_nombre" class="form-label fw-bold"
+                            >Nombre</label
+                        >
+                        <input
+                            type="text"
+                            id="v_nombre"
+                            class="form-control"
+                            bind:value={usuario.nombre}
+                            readonly
+                        />
+                    </div>
 
-                <!-- Apellido -->
-                <div class="mb-3">
-                    <label for="v_apellido" class="form-label fw-bold"
-                        >Apellido</label
-                    >
-                    <input
-                        type="text"
-                        id="v_apellido"
-                        class="form-control"
-                        bind:value={usuario.apellido}
-                        readonly
-                    />
-                </div>
+                    <!-- Apellido -->
+                    <div class="mb-3">
+                        <label for="v_apellido" class="form-label fw-bold"
+                            >Apellido</label
+                        >
+                        <input
+                            type="text"
+                            id="v_apellido"
+                            class="form-control"
+                            bind:value={usuario.apellido}
+                            readonly
+                        />
+                    </div>
 
-                <!-- Correo -->
-                <div class="mb-3">
-                    <label for="v_correo" class="form-label fw-bold"
-                        >Correo</label
-                    >
-                    <input
-                        type="text"
-                        id="v_correo"
-                        class="form-control"
-                        bind:value={usuario.email}
-                        readonly
-                    />
-                </div>
+                    <!-- Correo -->
+                    <div class="mb-3">
+                        <label for="v_correo" class="form-label fw-bold"
+                            >Correo</label
+                        >
+                        <input
+                            type="text"
+                            id="v_correo"
+                            class="form-control"
+                            bind:value={usuario.email}
+                            readonly
+                        />
+                    </div>
 
-                <!-- Documento -->
-                <div class="mb-3">
-                    <label for="v_documento" class="form-label fw-bold"
-                        >Documento</label
-                    >
-                    <input
-                        type="text"
-                        id="v_documento"
-                        class="form-control"
-                        bind:value={usuario.documento}
-                        readonly
-                    />
-                </div>
+                    <!-- Documento -->
+                    <div class="mb-3">
+                        <label for="v_documento" class="form-label fw-bold"
+                            >Documento</label
+                        >
+                        <input
+                            type="text"
+                            id="v_documento"
+                            class="form-control"
+                            bind:value={usuario.documento}
+                            readonly
+                        />
+                    </div>
 
-                <!-- Teléfono -->
-                <div class="mb-3">
-                    <label for="v_telefono" class="form-label fw-bold"
-                        >Teléfono</label
-                    >
-                    <input
-                        type="text"
-                        id="v_telefono"
-                        class="form-control"
-                        bind:value={usuario.telefono}
-                        readonly
-                    />
-                </div>
+                    <!-- Teléfono -->
+                    <div class="mb-3">
+                        <label for="v_telefono" class="form-label fw-bold"
+                            >Teléfono</label
+                        >
+                        <input
+                            type="text"
+                            id="v_telefono"
+                            class="form-control"
+                            bind:value={usuario.telefono}
+                            readonly
+                        />
+                    </div>
+                {/if}
             </div>
 
             <!-- Pie del modal -->
