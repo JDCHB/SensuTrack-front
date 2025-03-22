@@ -105,7 +105,7 @@
     }
 </script>
 
-<NavbarAD />
+<NavbarAD></NavbarAD>
 
 <div class="container" style="margin-top: 5%;">
     <div class="text-center pt-1 fs-3">
