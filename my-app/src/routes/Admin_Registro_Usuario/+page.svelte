@@ -203,7 +203,7 @@
             required
         />
         <!-- Select para elegir el rol -->
-        <select id="roles" class="form__input-wrapper" bind:value={v_rol}>
+        <select id="roles" class="form__select" bind:value={v_rol}>
             <option value="" disabled selected>Seleccione el Rol:</option>
             {#each roles as rol}
                 <option value={rol.id}>{rol.nombre}</option>
@@ -437,6 +437,14 @@
     /* Foco en los inputs */
     .form__input:focus {
         box-shadow: 0 0 10px rgba(23, 162, 184, 0.5);
+    }
+
+    .form__select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 1em;
     }
 
     /* Diseño responsivo */
