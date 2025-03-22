@@ -119,7 +119,9 @@
         let vdocumento = document.getElementById("documento").value;
         let vtelefono = document.getElementById("telefono").value;
         let vcorreo = document.getElementById("correo").value;
-        let vestado = document.getElementById("estado").value;
+
+        // Convierte el valor de estado a booleano
+        let vestado = document.getElementById("estado").value === "1"; // true si "1", false si "0"
 
         console.log("ID DE ESTADO ENVIADO A LA BASE DE DATOS ES " + vestado);
 
@@ -318,12 +320,10 @@
 </script>
 
 <Navbaradmin></Navbaradmin>
-
 <div id="Mostrarusuario">
     <div class="container py-4">
         <h2 class="mb-4">Lista de usuarios</h2>
         {#if loading}
-            <!---->
             <div class="row g-2 justify-content-center">
                 <p
                     class="text-center col-lg-2 col-md-2 col-sm-2 col-12 col-xl-2"
@@ -338,68 +338,53 @@
                 </div>
             </div>
         {:else if error}
-            <p class="text-red-500">Error: {error}</p>
+            <p class="text-danger">Error: {error}</p>
         {:else}
             <div class="overflow-x-auto">
-                <table
-                    class="min-w-full bg-white border border-gray-300"
-                    id="myTable"
-                >
+                <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th class="px-4 py-2 border">Usuario</th>
-                            <th class="px-4 py-2 border">Nombre</th>
-                            <th class="px-4 py-2 border">Apellido</th>
-                            <th class="px-4 py-2 border">Documento</th>
-                            <th class="px-4 py-2 border">Telefono</th>
-                            <th class="px-4 py-2 border">Estado</th>
-                            <th class="px-4 py-2 border">Opcion</th>
+                            <th>Usuario</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Documento</th>
+                            <th>Telefono</th>
+                            <th>Estado</th>
+                            <th>Opción</th>
                         </tr>
                     </thead>
-
                     <tbody>
                         {#each todos as todo}
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-4 py-2 border">{todo.email}</td>
-                                <td class="px-4 py-2 border">{todo.nombre}</td>
-                                <td class="px-4 py-2 border">{todo.apellido}</td
-                                >
-                                <td class="px-4 py-2 border"
-                                    >{todo.documento}</td
-                                >
-                                <td class="px-4 py-2 border">{todo.telefono}</td
-                                >
-                                <td class="px-4 py-2 border">
+                            <tr>
+                                <td>{todo.email}</td>
+                                <td>{todo.nombre}</td>
+                                <td>{todo.apellido}</td>
+                                <td>{todo.documento}</td>
+                                <td>{todo.telefono}</td>
+                                <td>
                                     <span
                                         class={todo.estado
-                                            ? "text-green-600"
-                                            : "text-red-600"}
+                                            ? "text-success"
+                                            : "text-danger"}
                                     >
                                         {todo.estado ? "Activo" : "Desactivado"}
                                     </span>
                                 </td>
-                                <td class="px-4 py-2 border">
+                                <td>
                                     <button
                                         class="btn btn-info"
-                                        on:click={() =>
-                                            editar(todo.id, todo.nombre)}
-                                        ><i class="bi bi-pencil"></i> Editar
+                                        on:click={() => editar(todo.id)}
+                                    >
+                                        <i class="bi bi-pencil"></i> Editar
                                     </button>
                                     {#if todo.estado}
-                                        <!-- Mostrar botón "Desactivar" si el usuario está activo -->
                                         <button
                                             class="btn btn-danger"
-                                            on:click={() =>
-                                                desactivar(
-                                                    todo.id,
-                                                    /*todo.nombre,
-                                                    todo.email,*/
-                                                )}
+                                            on:click={() => desactivar(todo.id)}
                                         >
                                             <i class="bi bi-lock"></i> Desactivar
                                         </button>
                                     {:else}
-                                        <!-- Mostrar botón "Activar" si el usuario está desactivado -->
                                         <button
                                             class="btn btn-success"
                                             on:click={() => activar(todo.id)}
@@ -416,6 +401,8 @@
         {/if}
     </div>
 </div>
+
+<!-- Modal de Edición -->
 <div
     class="fade"
     id="nav-listado"
@@ -423,7 +410,7 @@
     aria-labelledby="nav-listado-tab"
 >
     <div class="container text-center">
-        <p class="text-orange"></p>
+        <p class="text-warning"></p>
     </div>
     <div class="card border-dark shadow" style="width: 60%; margin-left: 20%;">
         <div class="card-header row g-2">
@@ -434,113 +421,100 @@
                 on:click={() => Ocultar()}
             ></button>
         </div>
-        <div class="card-body" style="margin-left: 10%;">
-            <div class="row">
-                <div class="col-lg-2">
-                    <p class="card-text"><b>Nombre:</b></p>
-                </div>
-
+        <div class="card-body">
+            <div class="row mb-3">
+                <label for="nombres" class="col-lg-2 col-form-label"
+                    ><b>Nombre:</b></label
+                >
                 <div class="col-lg-10">
                     <input
                         type="text"
-                        placeholder="Nombres"
                         id="nombres"
+                        class="form-control"
+                        placeholder="Nombres"
                         maxlength="100"
-                        style="border: none; width: 55%;"
                         readonly
                     />
                 </div>
             </div>
-
-            <div class="row pt-3">
-                <div class="col-lg-2">
-                    <p class="card-text"><b>Apellido:</b></p>
-                </div>
-
+            <div class="row mb-3">
+                <label for="apellidos" class="col-lg-2 col-form-label"
+                    ><b>Apellido:</b></label
+                >
                 <div class="col-lg-10">
                     <input
                         type="text"
-                        placeholder="Apellidos"
                         id="apellidos"
-                        style="border: none; width: 55%;"
+                        class="form-control"
+                        placeholder="Apellidos"
                         readonly
                     />
                 </div>
             </div>
-
-            <div class="row pt-3">
-                <div class="col-lg-2">
-                    <p class="card-text"><b>documento:</b></p>
-                </div>
+            <div class="row mb-3">
+                <label for="documento" class="col-lg-2 col-form-label"
+                    ><b>Documento:</b></label
+                >
                 <div class="col-lg-10">
                     <input
                         type="text"
                         id="documento"
+                        class="form-control"
                         placeholder="Documento de identidad"
-                        style="border: none; width: 55%;"
                         readonly
                     />
                 </div>
             </div>
-
-            <div class="row pt-3">
-                <div class="col-lg-2">
-                    <p class="card-text"><b>Telefono:</b></p>
-                </div>
+            <div class="row mb-3">
+                <label for="telefono" class="col-lg-2 col-form-label"
+                    ><b>Teléfono:</b></label
+                >
                 <div class="col-lg-10">
                     <input
                         type="text"
                         id="telefono"
-                        placeholder="Telefono"
+                        class="form-control"
+                        placeholder="Teléfono"
                         maxlength="20"
-                        style="border: none; width: 55%;"
                         readonly
                     />
                 </div>
             </div>
-
-            <div class="row pt-3">
-                <div class="col-lg-2">
-                    <p class="card-text"><b>Correo:</b></p>
-                </div>
+            <div class="row mb-3">
+                <label for="correo" class="col-lg-2 col-form-label"
+                    ><b>Correo:</b></label
+                >
                 <div class="col-lg-10">
                     <input
                         type="text"
-                        placeholder="Correo electronico"
                         id="correo"
-                        style="border: none; width: 55%;"
+                        class="form-control"
+                        placeholder="Correo electrónico"
                         readonly
                     />
                 </div>
             </div>
-
-            <div class="row pt-3">
-                <div class="col-lg-2">
-                    <p class="card-text"><b>Estado:</b></p>
-                </div>
+            <div class="row mb-3">
+                <label for="estado" class="col-lg-2 col-form-label"
+                    ><b>Estado:</b></label
+                >
                 <div class="col-lg-10">
-                    <select
-                        id="estado"
-                        name="opciones"
-                        style="border: none; width: 55%;"
-                    >
+                    <select id="estado" class="form-control">
                         <option value="1">Activar</option>
                         <option value="0">Desactivar</option>
                     </select>
                 </div>
             </div>
-
-            <div class="row" style="margin-top: 4%;">
+            <div class="row">
                 <div class="col-lg-9">
-                    ¡Al terminar de editar, darle click en actualizar para
-                    guardar los cambios!
+                    ¡Al terminar de editar, haga clic en actualizar para guardar
+                    los cambios!
                 </div>
                 <div class="col-lg-3 text-end">
                     <button on:click={actualizar} class="btn btn-outline-info"
                         ><b>Actualizar</b></button
                     >
                 </div>
-                <div id="estado" class="col-lg-10"></div>
             </div>
         </div>
     </div>
