@@ -54,9 +54,6 @@
             loading = false;
         }
     });
-
-    // Forzar la reactividad de loading
-    $: loading;
 </script>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light py-3">
