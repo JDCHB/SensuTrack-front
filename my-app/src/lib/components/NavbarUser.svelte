@@ -1,13 +1,68 @@
 <script>
+    import { onMount } from "svelte";
+
+    let v_id = "";
+    let usuario = "";
+    let error = "";
+    let loading = true;
+
     function logout() {
         // Limpiar los datos de inicio de sesión en el LocalStorage
         localStorage.clear();
         window.location.href = "/login"; // Redirigir a la página de login
     }
+
+    onMount(async () => {
+        try {
+            let miStorage = window.localStorage;
+            let userData = miStorage.getItem("user_data");
+
+            if (!userData) {
+                console.warn("No se encontró user_data en localStorage");
+                loading = false;
+                return;
+            }
+
+            usuario = JSON.parse(userData);
+            v_id = usuario?.id || "";
+
+            if (!v_id) {
+                console.warn("El usuario no tiene un ID válido");
+                loading = false;
+                return;
+            }
+
+            // AHORA BUSQUEMOS LOS DATOS DEL USUARIO
+            const response = await fetch(
+                `https://proyectomascotas.onrender.com/get_user/${v_id}`,
+                {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                },
+            );
+
+            if (!response.ok) {
+                throw new Error("Error al obtener los datos del usuario");
+            }
+
+            usuario = await response.json();
+        } catch (e) {
+            error = e.message;
+        } finally {
+            loading = false;
+        }
+    });
 </script>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light py-3">
-    <a class="navbar-brand d-flex align-items-center" href="/usuario">
+    <a
+        class="navbar-brand d-flex align-items-center"
+        data-bs-toggle="modal"
+        data-bs-target="#Perfil_Usuario"
+        href="#"
+    >
         <img
             src="/logo.jpg"
             width="56"
@@ -30,6 +85,11 @@
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link text-dark fw-bold" href="/usuario">
+                    <i class="bi bi-house"></i> Inicio
+                </a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link text-dark fw-bold" href="/registrar_GPS">
                     <i class="bi bi-house-door"></i> Registrar GPS
@@ -75,6 +135,122 @@
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
     rel="stylesheet"
 />
+
+<!-- Modal -->
+<div
+    class="modal fade"
+    id="Perfil_Usuario"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="Perfil_UsuarioLabel"
+    aria-hidden="true"
+>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h1 class="modal-title fs-5" id="Perfil_UsuarioLabel">
+                    Perfil de Usuario
+                </h1>
+                <button
+                    type="button"
+                    class="btn-close btn-close-white"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
+            </div>
+
+            <div class="modal-body">
+                {#if loading}
+                    <div class="text-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Cargando...</span>
+                        </div>
+                        <p class="mt-2">Cargando datos del perfil...</p>
+                    </div>
+                {:else}
+                    <div class="mb-3">
+                        <label for="v_nombre" class="form-label fw-bold"
+                            >Nombre</label
+                        >
+                        <input
+                            type="text"
+                            id="v_nombre"
+                            class="form-control"
+                            bind:value={usuario.nombre}
+                            readonly
+                        />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="v_apellido" class="form-label fw-bold"
+                            >Apellido</label
+                        >
+                        <input
+                            type="text"
+                            id="v_apellido"
+                            class="form-control"
+                            bind:value={usuario.apellido}
+                            readonly
+                        />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="v_correo" class="form-label fw-bold"
+                            >Correo</label
+                        >
+                        <input
+                            type="text"
+                            id="v_correo"
+                            class="form-control"
+                            bind:value={usuario.email}
+                            readonly
+                        />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="v_documento" class="form-label fw-bold"
+                            >Documento</label
+                        >
+                        <input
+                            type="text"
+                            id="v_documento"
+                            class="form-control"
+                            bind:value={usuario.documento}
+                            readonly
+                        />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="v_telefono" class="form-label fw-bold"
+                            >Teléfono</label
+                        >
+                        <input
+                            type="text"
+                            id="v_telefono"
+                            class="form-control"
+                            bind:value={usuario.telefono}
+                            readonly
+                        />
+                    </div>
+                {/if}
+            </div>
+
+            <div class="modal-footer">
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                >
+                    Cerrar
+                </button>
+                <button type="button" class="btn btn-primary">
+                    Guardar Cambios
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Estilos CSS -->
 <style>
