@@ -166,9 +166,9 @@
                 {#if loading}
                     <div class="text-center">
                         <div class="spinner-border text-primary" role="status">
-                            <span class="visually-hidden">Cargando...</span>
+                            <span class="visually-hidden">Cargando....</span>
                         </div>
-                        <p class="mt-2">Cargando datos del perfil...</p>
+                        <p class="mt-2">Cargando datos del perfil....</p>
                     </div>
                 {:else}
                     <div class="mb-3">
