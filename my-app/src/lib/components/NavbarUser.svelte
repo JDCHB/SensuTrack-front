@@ -148,6 +148,7 @@
 >
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
+            <!-- Encabezado del modal -->
             <div class="modal-header bg-primary text-white">
                 <h1 class="modal-title fs-5" id="Perfil_UsuarioLabel">
                     Perfil de Usuario
@@ -160,6 +161,7 @@
                 ></button>
             </div>
 
+            <!-- Cuerpo del modal -->
             <div class="modal-body">
                 {#if loading}
                     <div class="text-center">
@@ -182,6 +184,7 @@
                         />
                     </div>
 
+                    <!-- Apellido -->
                     <div class="mb-3">
                         <label for="v_apellido" class="form-label fw-bold"
                             >Apellido</label
@@ -195,6 +198,7 @@
                         />
                     </div>
 
+                    <!-- Correo -->
                     <div class="mb-3">
                         <label for="v_correo" class="form-label fw-bold"
                             >Correo</label
@@ -208,6 +212,7 @@
                         />
                     </div>
 
+                    <!-- Documento -->
                     <div class="mb-3">
                         <label for="v_documento" class="form-label fw-bold"
                             >Documento</label
@@ -221,6 +226,7 @@
                         />
                     </div>
 
+                    <!-- Teléfono -->
                     <div class="mb-3">
                         <label for="v_telefono" class="form-label fw-bold"
                             >Teléfono</label
@@ -236,6 +242,7 @@
                 {/if}
             </div>
 
+            <!-- Pie del modal -->
             <div class="modal-footer">
                 <button
                     type="button"
