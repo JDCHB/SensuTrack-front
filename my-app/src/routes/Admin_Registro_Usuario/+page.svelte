@@ -150,6 +150,7 @@
             bind:value={v_nombre}
             placeholder="Nombre"
             type="text"
+            autocomplete="off"
             required
         />
         <input
@@ -157,6 +158,7 @@
             bind:value={v_apellido}
             placeholder="Apellido"
             type="text"
+            autocomplete="off"
             required
         />
         <input
@@ -164,6 +166,7 @@
             bind:value={v_documento}
             placeholder="Documento"
             type="text"
+            autocomplete="off"
             required
         />
         <input
@@ -171,6 +174,7 @@
             bind:value={v_telefono}
             placeholder="Telefono"
             type="text"
+            autocomplete="off"
             required
         />
         <input
@@ -178,6 +182,7 @@
             bind:value={v_email}
             placeholder="Correo Electronico"
             type="text"
+            autocomplete="off"
             required
         />
         <input
@@ -185,6 +190,7 @@
             bind:value={v_password}
             placeholder="Contraseña"
             type="password"
+            autocomplete="off"
             required
         />
 
@@ -193,6 +199,7 @@
             id="Confirmar_Contraseña"
             placeholder="Contraseña"
             type="password"
+            autocomplete="off"
             required
         />
         <!-- Select para elegir el rol -->
