@@ -351,13 +351,13 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th>Usuario</th>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                            <th>Documento</th>
-                            <th>Telefono</th>
-                            <th>Estado</th>
-                            <th>Opción</th>
+                            <th class="px-4 py-2 border">Usuario</th>
+                            <th class="px-4 py-2 border">Nombre</th>
+                            <th class="px-4 py-2 border">Apellido</th>
+                            <th class="px-4 py-2 border">Documento</th>
+                            <th class="px-4 py-2 border">Telefono</th>
+                            <th class="px-4 py-2 border">Estado</th>
+                            <th class="px-4 py-2 border">Opción</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -419,21 +419,29 @@
     <div class="container text-center">
         <p class="text-warning"></p>
     </div>
-    <div class="card border-dark shadow" style="width: 60%; margin-left: 20%;">
-        <div class="card-header row g-2">
-            <h5 class="card-title col-lg-11"><b>Editando Usuario</b></h5>
+
+    <div
+        class="card border-dark shadow-lg"
+        style="width: 50%; margin: 5% auto;"
+    >
+        <div
+            class="card-header d-flex justify-content-between align-items-center"
+        >
+            <h5 class="card-title mb-0"><b>Editando Usuario</b></h5>
             <button
-                class="btn btn-close col-lg-1"
+                class="btn btn-close"
                 aria-label="Cerrar edición de usuario"
                 on:click={() => Ocultar()}
             ></button>
         </div>
+
         <div class="card-body">
-            <div class="row mb-3">
-                <label for="nombres" class="col-lg-2 col-form-label"
+            <!-- Nombre -->
+            <div class="mb-3 row">
+                <label for="nombres" class="col-lg-3 col-form-label"
                     ><b>Nombre:</b></label
                 >
-                <div class="col-lg-10">
+                <div class="col-lg-9">
                     <input
                         type="text"
                         id="nombres"
@@ -444,11 +452,13 @@
                     />
                 </div>
             </div>
-            <div class="row mb-3">
-                <label for="apellidos" class="col-lg-2 col-form-label"
+
+            <!-- Apellido -->
+            <div class="mb-3 row">
+                <label for="apellidos" class="col-lg-3 col-form-label"
                     ><b>Apellido:</b></label
                 >
-                <div class="col-lg-10">
+                <div class="col-lg-9">
                     <input
                         type="text"
                         id="apellidos"
@@ -458,11 +468,13 @@
                     />
                 </div>
             </div>
-            <div class="row mb-3">
-                <label for="documento" class="col-lg-2 col-form-label"
+
+            <!-- Documento -->
+            <div class="mb-3 row">
+                <label for="documento" class="col-lg-3 col-form-label"
                     ><b>Documento:</b></label
                 >
-                <div class="col-lg-10">
+                <div class="col-lg-9">
                     <input
                         type="text"
                         id="documento"
@@ -472,11 +484,13 @@
                     />
                 </div>
             </div>
-            <div class="row mb-3">
-                <label for="telefono" class="col-lg-2 col-form-label"
+
+            <!-- Teléfono -->
+            <div class="mb-3 row">
+                <label for="telefono" class="col-lg-3 col-form-label"
                     ><b>Teléfono:</b></label
                 >
-                <div class="col-lg-10">
+                <div class="col-lg-9">
                     <input
                         type="text"
                         id="telefono"
@@ -487,11 +501,13 @@
                     />
                 </div>
             </div>
-            <div class="row mb-3">
-                <label for="correo" class="col-lg-2 col-form-label"
+
+            <!-- Correo -->
+            <div class="mb-3 row">
+                <label for="correo" class="col-lg-3 col-form-label"
                     ><b>Correo:</b></label
                 >
-                <div class="col-lg-10">
+                <div class="col-lg-9">
                     <input
                         type="text"
                         id="correo"
@@ -501,26 +517,30 @@
                     />
                 </div>
             </div>
-            <div class="row mb-3">
-                <label for="estado" class="col-lg-2 col-form-label"
+
+            <!-- Estado -->
+            <div class="mb-3 row">
+                <label for="estado" class="col-lg-3 col-form-label"
                     ><b>Estado:</b></label
                 >
-                <div class="col-lg-10">
+                <div class="col-lg-9">
                     <select id="estado" class="form-control">
                         <option value="1">Activar</option>
                         <option value="0">Desactivar</option>
                     </select>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-9">
+
+            <!-- Notificación y botón de actualización -->
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="col-lg-9 text-muted">
                     ¡Al terminar de editar, haga clic en actualizar para guardar
                     los cambios!
                 </div>
                 <div class="col-lg-3 text-end">
-                    <button on:click={actualizar} class="btn btn-outline-info"
-                        ><b>Actualizar</b></button
-                    >
+                    <button on:click={actualizar} class="btn btn-outline-info">
+                        <b>Actualizar</b>
+                    </button>
                 </div>
             </div>
         </div>

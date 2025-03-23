@@ -315,7 +315,9 @@
 
 <div id="MostrarDiscapacitado">
     <div class="container py-4">
-        <h2 class="mb-4">Lista de discapacitados</h2>
+        <h2 class="mb-4" style="text-align: center;">
+            Lista de discapacitados
+        </h2>
         {#if loading}
             <!---->
             <div class="row g-2 justify-content-center">
@@ -332,13 +334,10 @@
                 </div>
             </div>
         {:else if error}
-            <p class="text-red-500">Error: {error}</p>
+            <p class="text-danger">Error: {error}</p>
         {:else}
             <div class="overflow-x-auto">
-                <table
-                    class="min-w-full bg-white border border-gray-300"
-                    id="myTable"
-                >
+                <table class="table table-bordered table-hover" id="myTable">
                     <thead>
                         <tr>
                             <th class="px-4 py-2 border">Nombre</th>
@@ -351,22 +350,20 @@
 
                     <tbody>
                         {#each todos as todo}
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-4 py-2 border">{todo.nombre}</td>
-                                <td class="px-4 py-2 border">{todo.genero}</td>
-                                <td class="px-4 py-2 border"
-                                    >{todo.tipo_ceguera}</td
-                                >
-                                <td class="px-4 py-2 border">
+                            <tr>
+                                <td>{todo.nombre}</td>
+                                <td>{todo.genero}</td>
+                                <td>{todo.tipo_ceguera}</td>
+                                <td>
                                     <span
                                         class={todo.estado
-                                            ? "text-green-600"
-                                            : "text-red-600"}
+                                            ? "text-success"
+                                            : "text-danger"}
                                     >
                                         {todo.estado ? "Activo" : "Desactivado"}
                                     </span>
                                 </td>
-                                <td class="px-4 py-2 border">
+                                <td>
                                     <button
                                         class="btn btn-info"
                                         on:click={() =>
@@ -411,94 +408,98 @@
     aria-labelledby="nav-listado-tab"
 >
     <div class="container text-center">
-        <p class="text-orange"></p>
+        <p class="text-warning"></p>
     </div>
-    <div class="card border-dark shadow" style="width: 60%; margin-left: 20%;">
-        <div class="card-header row g-2">
-            <h5 class="card-title col-lg-11"><b>Editando Discapacitado</b></h5>
+
+    <div
+        class="card border-dark shadow-lg"
+        style="width: 50%; margin: 5% auto;"
+    >
+        <div
+            class="card-header d-flex justify-content-between align-items-center"
+        >
+            <h5 class="card-title mb-0"><b>Editando Discapacitado</b></h5>
             <button
-                class="btn btn-close col-lg-1"
+                class="btn btn-close"
                 aria-label="Cerrar edición de usuario"
                 on:click={() => Ocultar()}
             ></button>
         </div>
-        <div class="card-body" style="margin-left: 10%;">
-            <div class="row">
-                <div class="col-lg-2">
-                    <p class="card-text"><b>Nombre:</b></p>
-                </div>
 
-                <div class="col-lg-10">
+        <div class="card-body">
+            <!-- Nombre -->
+            <div class="mb-3 row">
+                <label for="nombres" class="col-lg-3 col-form-label"
+                    ><b>Nombre:</b></label
+                >
+                <div class="col-lg-9">
                     <input
                         type="text"
-                        placeholder="Nombres"
                         id="nombres"
+                        class="form-control"
+                        placeholder="Nombres"
                         maxlength="100"
-                        style="border: none; width: 55%;"
                         readonly
                     />
                 </div>
             </div>
 
-            <div class="row pt-3">
-                <div class="col-lg-2">
-                    <p class="card-text"><b>Genero:</b></p>
-                </div>
-
-                <div class="col-lg-10">
+            <!-- Género -->
+            <div class="mb-3 row">
+                <label for="genero" class="col-lg-3 col-form-label"
+                    ><b>Género:</b></label
+                >
+                <div class="col-lg-9">
                     <input
                         type="text"
-                        placeholder="Genero"
                         id="genero"
-                        style="border: none; width: 55%;"
+                        class="form-control"
+                        placeholder="Género"
                         readonly
                     />
                 </div>
             </div>
 
-            <div class="row pt-3">
-                <div class="col-lg-2">
-                    <p class="card-text"><b>Tipo de Ceguera:</b></p>
-                </div>
-
-                <div class="col-lg-10">
+            <!-- Tipo de Ceguera -->
+            <div class="mb-3 row">
+                <label for="tipo_ceguera" class="col-lg-3 col-form-label"
+                    ><b>Tipo de Ceguera:</b></label
+                >
+                <div class="col-lg-9">
                     <input
                         type="text"
                         id="tipo_ceguera"
-                        placeholder="Ceguera"
-                        style="border: none; width: 55%;"
+                        class="form-control"
+                        placeholder="Tipo de Ceguera"
                         readonly
                     />
                 </div>
             </div>
 
-            <div class="row pt-3">
-                <div class="col-lg-2">
-                    <p class="card-text"><b>Estado:</b></p>
-                </div>
-                <div class="col-lg-10">
-                    <select
-                        id="estado"
-                        name="opciones"
-                        style="border: none; width: 55%;"
-                    >
+            <!-- Estado -->
+            <div class="mb-3 row">
+                <label for="estado" class="col-lg-3 col-form-label"
+                    ><b>Estado:</b></label
+                >
+                <div class="col-lg-9">
+                    <select id="estado" class="form-control">
                         <option value="1">Activar</option>
                         <option value="0">Desactivar</option>
                     </select>
                 </div>
             </div>
 
-            <div class="row" style="margin-top: 4%;">
-                <div class="col-lg-9">
-                    ¡Al terminar de editar, darle click en actualizar para
-                    guardar los cambios!
+            <!-- Notificación y botón de actualización -->
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="col-lg-9 text-muted">
+                    ¡Al terminar de editar, haga clic en actualizar para guardar
+                    los cambios!
                 </div>
                 <div class="col-lg-3 text-end">
-                    <button on:click={actualizar} class="btn btn-outline-info"
-                        ><b>Actualizar</b></button
-                    >
+                    <button on:click={actualizar} class="btn btn-outline-info">
+                        <b>Actualizar</b>
+                    </button>
                 </div>
-                <div id="estado" class="col-lg-10"></div>
             </div>
         </div>
     </div>
