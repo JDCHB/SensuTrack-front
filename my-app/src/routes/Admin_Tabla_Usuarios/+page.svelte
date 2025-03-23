@@ -119,9 +119,10 @@
         let vdocumento = document.getElementById("documento").value;
         let vtelefono = document.getElementById("telefono").value;
         let vcorreo = document.getElementById("correo").value;
+        let vestado = document.getElementById("estado").value;
 
-        // Convierte el valor de estado a booleano
-        let vestado = document.getElementById("estado").value === "1"; // true si "1", false si "0"
+        // Convertir el valor de "estado" a booleano
+        vestado = vestado === "1" ? true : false;
 
         console.log("ID DE ESTADO ENVIADO A LA BASE DE DATOS ES " + vestado);
 
@@ -129,7 +130,7 @@
             console.log("Entra al try de actualzar");
 
             const response = await fetch(
-                `https://proyectomascotas.onrender.com/update_user/${vid}`, // Incluye el user_id en la URL
+                `https://proyectomascotas.onrender.com/update_user_admin/${vid}`, // Incluye el user_id en la URL
                 {
                     method: "PUT",
                     headers: {
@@ -145,6 +146,7 @@
                     }),
                 },
             );
+
             console.log("Actualizado");
 
             const Toast = Swal.mixin({
@@ -178,7 +180,12 @@
                 location.reload();
             }, 3000);
         } catch (e) {
-            error = e.message;
+            console.error("Error al actualizar el usuario:", e);
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: e.message,
+            });
         } finally {
             loading = false;
         }
