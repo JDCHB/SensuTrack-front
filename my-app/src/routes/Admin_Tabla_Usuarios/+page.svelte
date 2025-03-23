@@ -329,7 +329,7 @@
 <Navbaradmin></Navbaradmin>
 <div id="Mostrarusuario">
     <div class="container py-4">
-        <h2 class="mb-4">Lista de usuarios</h2>
+        <h2 class="mb-4" style="text-align: center;">USUARIOS</h2>
         {#if loading}
             <div class="row g-2 justify-content-center">
                 <p
