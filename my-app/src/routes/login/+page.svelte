@@ -116,15 +116,22 @@
           });
         }
       } else {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: data.detail || "Usuario o Contraseña Incorrecto!",
-          customClass: {
-            popup: "swal-popup", // Clase para personalizar el popup de la alerta
-            title: "custom-title", // Clase personalizada para el título
-          },
-        });
+        // Si la respuesta es 403, mostrar un mensaje diferente
+        if (response.status === 403) {
+          Swal.fire({
+            icon: "warning",
+            title: "Cuenta Desactivada",
+            text:
+              data.detail ||
+              "Tu cuenta ha sido desactivada. Contacta al soporte.",
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: data.detail || "Usuario o Contraseña Incorrectos!",
+          });
+        }
       }
     } catch (e) {
       console.error("Error en la solicitud:", e.message);
