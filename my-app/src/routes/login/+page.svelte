@@ -117,7 +117,7 @@
         }
       } else {
         // Si la respuesta es 403, mostrar un mensaje diferente
-        if (response.status === 401) {
+        if (response.status === 403) {
           Swal.fire({
             icon: "warning",
             title: "Cuenta Desactivada",
