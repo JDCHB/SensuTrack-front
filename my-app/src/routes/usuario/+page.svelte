@@ -88,8 +88,6 @@
 
 <Icons></Icons>
 
-<Productos></Productos>
-
 <Servicios></Servicios>
 
 <Footer></Footer>
