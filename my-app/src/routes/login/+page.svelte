@@ -268,8 +268,8 @@
                       href="#!"
                       role="button"
                     >
-                      <i class="bi bi-facebook me-2"></i>
-                      Facebook
+                      <i class="bi bi-microsoft"></i>
+                      Microsoft
                     </a>
 
                     <!-- Formulario para el botón de Google -->
