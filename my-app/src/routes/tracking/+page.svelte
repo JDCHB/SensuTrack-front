@@ -8,7 +8,7 @@
     let error = null;
 
     // Función para obtener los datos de las mascotas del usuario desde la API
-    async function cargarMascotas() {
+    async function CargarDiscapacitado() {
         try {
             const response = await fetch(
                 "https://proyectomascotas.onrender.com/Ciegos_Map",
@@ -74,7 +74,7 @@
                 '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         }).addTo(map);
 
-        cargarMascotas(); // Carga las ubicaciones de las mascotas cuando se monta el componente
+        CargarDiscapacitado(); // Carga las ubicaciones de las mascotas cuando se monta el componente
     });
 </script>
 
