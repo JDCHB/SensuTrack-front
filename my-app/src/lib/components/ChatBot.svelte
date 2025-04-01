@@ -4,6 +4,7 @@
     let error = "";
     let showChat = false;
     let mensajes = [];
+    let isTyping = false;
 
     function mostrarChat() {
         showChat = !showChat;
@@ -15,6 +16,8 @@
         // Esto muestra el mensaje en el chat
         mensajes = [...mensajes, { text: v_message, from: "user" }];
 
+        // Mostrar indicador de que el bot está escribiendo
+        isTyping = true;
         try {
             const response = await fetch(
                 "http://localhost:5005/webhooks/rest/webhook",
@@ -33,6 +36,7 @@
             if (response.ok) {
                 const data = await response.json();
                 console.log(data[0].text); // Aquí ya está definida la variable 'data'
+                isTyping = false;
 
                 console.log("ChatBot: " + data[0].text);
 
@@ -44,9 +48,11 @@
                     ];
                 }
             } else {
+                isTyping = false;
                 console.log("Error");
             }
         } catch (e) {
+            isTyping = false;
             error = e.message;
             console.log("Error en la solicitud: " + error);
             Swal.fire({
@@ -112,6 +118,16 @@
                 </span>
             </div>
         {/each}
+
+        {#if isTyping}
+            <div class="chat-message" style="text-align: left;">
+                <span class="typing-indicator">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </span>
+            </div>
+        {/if}
     </div>
 
     <div class="chat-footer">
@@ -126,6 +142,52 @@
 </div>
 
 <style>
+    /* ESTILOS DEL TYPING */
+    .typing-indicator {
+        display: inline-flex;
+        padding: 10px 15px;
+        background: #e0e0e0;
+        border-radius: 20px;
+        align-items: center;
+    }
+
+    .dot {
+        width: 8px;
+        height: 8px;
+        background-color: #666;
+        border-radius: 50%;
+        margin: 0 3px;
+        animation: typing-animation 1.5s infinite ease-in-out;
+    }
+
+    .dot:nth-child(1) {
+        animation-delay: 0s;
+    }
+
+    .dot:nth-child(2) {
+        animation-delay: 0.3s;
+    }
+
+    .dot:nth-child(3) {
+        animation-delay: 0.6s;
+    }
+
+    @keyframes typing-animation {
+        0% {
+            transform: translateY(0);
+            opacity: 0.5;
+        }
+        50% {
+            transform: translateY(-5px);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 0.5;
+        }
+    }
+
+    /* HASTA AQUI */
     .chat-button {
         position: fixed;
         bottom: 20px;
