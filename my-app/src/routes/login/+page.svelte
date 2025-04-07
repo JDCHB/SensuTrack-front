@@ -203,6 +203,7 @@
                           class="form-control form-control-lg"
                           bind:value={v_usuario}
                           placeholder="Correo Electronico"
+                          autocomplete="off"
                           required
                         />
                       </div>
