@@ -7,8 +7,10 @@
     let drawControl;
     let drawnItems = new L.FeatureGroup();
     let ciegos = [];
+    let zonas_Seguras = [];
     let error = null;
     let modoAgregarZona = false;
+    // let modoEliminarZona = false;
     let cargando = true;
     let v_estado = true;
 
@@ -66,15 +68,28 @@
                 Nivel de Batería: ${nivel_bateria}%
             `);
 
+            // const circle = L.circle([latitud, longitud], {
+            //     color: "red",
+            //     fillColor: "#f03",
+            //     fillOpacity: 0.5,
+            //     radius: 100,
+            // }).addTo(map);
+            // circle.bindPopup(
+            //     `${nombre_discapacitado} se encuentra en esta área.`,
+            // );
+
             const circle = L.circle([latitud, longitud], {
                 color: "red",
                 fillColor: "#f03",
                 fillOpacity: 0.5,
                 radius: 100,
-            }).addTo(map);
+            });
             circle.bindPopup(
                 `${nombre_discapacitado} se encuentra en esta área.`,
             );
+
+            // ✅ Añadir al grupo editable
+            drawnItems.addLayer(circle);
         });
     }
 
@@ -88,19 +103,44 @@
             const data = await response.json();
 
             if (response.ok) {
-                const { nombre_zona, latitud, longitud } = data;
+                // Asegúrate de que data sea un array
+                if (Array.isArray(data)) {
+                    data.forEach((zona) => {
+                        const { nombre_zona, latitud, longitud } = zona;
 
-                const circle = L.circle(
-                    [parseFloat(latitud), parseFloat(longitud)],
-                    {
-                        color: "green",
-                        fillColor: "#7CFC00",
-                        fillOpacity: 0.4,
-                        radius: 100, // puedes cambiar el radio si quieres
-                    },
-                ).addTo(map);
+                        // const circle = L.circle(
+                        //     [parseFloat(latitud), parseFloat(longitud)],
+                        //     {
+                        //         color: "green",
+                        //         fillColor: "#7CFC00",
+                        //         fillOpacity: 0.4,
+                        //         radius: 100,
+                        //     },
+                        // ).addTo(map);
 
-                circle.bindPopup(`Zona Segura: <b>${nombre_zona}</b>`);
+                        const circle = L.circle(
+                            [parseFloat(latitud), parseFloat(longitud)],
+                            {
+                                color: "green",
+                                fillColor: "#7CFC00",
+                                fillOpacity: 0.4,
+                                radius: 100,
+                            },
+                        );
+
+                        // ✅ Asignar ID al círculo para poder eliminarlo
+                        circle._idZona = zona.id;
+
+                        // ✅ Agregar al grupo editable para que sea eliminable
+                        drawnItems.addLayer(circle);
+
+                        circle.bindPopup(`Zona Segura: <b>${nombre_zona}</b>`);
+                    });
+                } else {
+                    console.warn(
+                        "La respuesta no contiene una lista de zonas.",
+                    );
+                }
             } else {
                 console.warn("No hay zona segura registrada:", data.detail);
             }
@@ -214,6 +254,54 @@
             }
         });
 
+        map.on("draw:deleted", async (event) => {
+            const layers = event.layers;
+
+            layers.eachLayer(async function (layer) {
+                const idZonaSegura = layer._idZona;
+
+                if (!idZonaSegura) {
+                    console.warn("No se encontró el ID de la zona segura");
+                    return;
+                }
+
+                try {
+                    const response = await fetch(
+                        `https://proyectomascotas.onrender.com/delete_Zona_Segura/${idZonaSegura}`,
+                        {
+                            method: "DELETE",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                        },
+                    );
+
+                    const result = await response.json();
+
+                    if (response.ok) {
+                        Swal.fire(
+                            "Eliminada",
+                            "Zona segura eliminada exitosamente",
+                            "success",
+                        );
+                    } else {
+                        Swal.fire(
+                            "Error",
+                            result.detail || "No se pudo eliminar",
+                            "error",
+                        );
+                    }
+                } catch (error) {
+                    console.error("Error al eliminar zona:", error);
+                    Swal.fire(
+                        "Error",
+                        "Error al conectar con el servidor",
+                        "error",
+                    );
+                }
+            });
+        });
+
         await CargarDiscapacitado();
     });
 
@@ -238,7 +326,9 @@
         on:click={toggleAgregarZona}
         style="padding: 10px 20px; background-color: #4caf50; color: white; border: none; border-radius: 8px; cursor: pointer;"
     >
-        {modoAgregarZona ? "Cancelar Agregar Zona" : "Agregar Zona Segura"}
+        {modoAgregarZona
+            ? "Cerrar Configuracion Zona Segura"
+            : "Configurar Zona Segura"}
     </button>
 </div>
 
