@@ -302,6 +302,78 @@
             });
         });
 
+        map.on("draw:edited", async (event) => {
+            const layers = event.layers;
+
+            layers.eachLayer(async function (layer) {
+                const idZonaSegura = layer._idZona;
+
+                if (!idZonaSegura) {
+                    console.warn(
+                        "No se encontró el ID de la zona segura editada",
+                    );
+                    return;
+                }
+
+                const center = layer.getLatLng();
+
+                // Pregunta el nuevo nombre con SweetAlert2
+                const { value: nuevoNombre } = await Swal.fire({
+                    title: "Editar nombre de la zona",
+                    input: "text",
+                    inputPlaceholder: "Ej: Zona Escuela",
+                    showCancelButton: true,
+                    confirmButtonText: "Guardar",
+                    cancelButtonText: "Cancelar",
+                    inputValidator: (value) => {
+                        if (!value) return "Debes escribir un nombre.";
+                    },
+                });
+
+                if (!nuevoNombre) return;
+
+                try {
+                    const response = await fetch(
+                        `https://proyectomascotas.onrender.com/update_Zona_Segura/${idZonaSegura}`,
+                        {
+                            method: "PUT",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                                latitud: String(center.lat),
+                                longitud: String(center.lng),
+                                nombre_zona: nuevoNombre,
+                            }),
+                        },
+                    );
+
+                    const result = await response.json();
+
+                    if (response.ok) {
+                        Swal.fire(
+                            "Editado",
+                            "Zona segura actualizada",
+                            "success",
+                        );
+                    } else {
+                        Swal.fire(
+                            "Error",
+                            result.detail || "No se pudo actualizar",
+                            "error",
+                        );
+                    }
+                } catch (error) {
+                    console.error("Error al editar zona:", error);
+                    Swal.fire(
+                        "Error",
+                        "Error al conectar con el servidor",
+                        "error",
+                    );
+                }
+            });
+        });
+
         await CargarDiscapacitado();
     });
 
