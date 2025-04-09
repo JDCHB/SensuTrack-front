@@ -27,10 +27,7 @@
                     <i class="bi bi-cash-coin display-4 icon"></i>
                     <div class="ms-4">
                         <h3 class="fw-bold">Rembolsos</h3>
-                        <p>
-                            Si no estás satisfecho, te devolvemos el dinero sin
-                            preguntas.
-                        </p>
+                        <p>Si no estás satisfecho, te devolvemos el dinero.</p>
                     </div>
                 </div>
             </div>
