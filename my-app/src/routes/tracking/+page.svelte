@@ -14,6 +14,7 @@
     let cargando = true;
     let v_estado = true;
 
+    // ✅ NUEVA FUNCIÓN PARA TOMAR LOS DATOS DEL CIEGO ASIGNADO A UN CUIDADOR DESDE LA BASE DE DATOS
     async function CargarDiscapacitado() {
         try {
             const response = await fetch(
@@ -50,6 +51,7 @@
         }
     }
 
+    // ✅ NUEVA FUNCIÓN PARA MOSTRAR LA UBICACION DEL GPS DESDE LA BASE DE DATOS
     function mostrarUbicaciones() {
         ciegos.forEach((discapacitado) => {
             const {
@@ -227,6 +229,17 @@
 
                         const result = await response.json();
                         if (response.ok) {
+                            // ✅ Asignar el ID de la zona segura al layer para poder eliminarla luego
+                            layer._idZona = result.id;
+
+                            // ✅ Agregar al grupo editable SOLO si se guardó exitosamente
+                            drawnItems.addLayer(layer);
+
+                            // ✅ Añadir el popup
+                            layer
+                                .bindPopup(`Zona Segura: <b>${nombreZona}</b>`)
+                                .openPopup();
+
                             Swal.fire(
                                 "¡Guardado!",
                                 "Zona segura registrada exitosamente",
