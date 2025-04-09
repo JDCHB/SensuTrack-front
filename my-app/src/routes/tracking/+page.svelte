@@ -108,7 +108,7 @@
                 // Asegúrate de que data sea un array
                 if (Array.isArray(data)) {
                     data.forEach((zona) => {
-                        const { nombre_zona, latitud, longitud } = zona;
+                        const { nombre_zona, latitud, longitud, radio } = zona;
 
                         // const circle = L.circle(
                         //     [parseFloat(latitud), parseFloat(longitud)],
@@ -126,7 +126,7 @@
                                 color: "green",
                                 fillColor: "#7CFC00",
                                 fillOpacity: 0.4,
-                                radius: 100,
+                                radius: parseFloat(radio),
                             },
                         );
 
@@ -221,6 +221,7 @@
                                     nombre_zona: nombreZona,
                                     latitud: String(center.lat),
                                     longitud: String(center.lng),
+                                    radio: layer.getRadius?.() || 100,
                                     id_discapacitado: parseInt(idDiscapacitado),
                                     estado: Boolean(v_estado),
                                 }),
@@ -356,6 +357,7 @@
                             body: JSON.stringify({
                                 latitud: String(center.lat),
                                 longitud: String(center.lng),
+                                radio: layer.getRadius?.() || 100,
                                 nombre_zona: nuevoNombre,
                             }),
                         },
