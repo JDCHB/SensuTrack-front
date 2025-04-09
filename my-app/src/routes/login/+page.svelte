@@ -6,6 +6,7 @@
   let v_usuario = "";
   let v_password = "";
   let error = null;
+  let showPassword = false;
 
   // Referencias a los contenedores de los loader
   let loginLoader;
@@ -208,20 +209,34 @@
                         />
                       </div>
                     </div>
-                    <div class="d-flex flex-row align-items-center mb-4">
+                    <div
+                      class="d-flex flex-row align-items-center mb-4 position-relative"
+                    >
                       <i class="bi bi-lock fa-lg me-3 fa-fw"></i>
-                      <div
-                        data-mdb-input-init
-                        class="form-outline flex-fill mb-0"
-                      >
+                      <div class="form-outline flex-fill mb-0">
                         <input
-                          type="password"
+                          type={showPassword ? "text" : "password"}
                           id="contraseña"
-                          class="form-control form-control-lg"
+                          class="form-control form-control-lg pe-5"
                           bind:value={v_password}
                           placeholder="Contraseña"
                           required
                         />
+                        <button
+                          type="button"
+                          aria-label={showPassword
+                            ? "Ocultar contraseña"
+                            : "Mostrar contraseña"}
+                          on:click={() => (showPassword = !showPassword)}
+                          class="btn btn-link p-0 m-0"
+                          style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%);"
+                        >
+                          <i
+                            class={showPassword
+                              ? "bi bi-eye-slash"
+                              : "bi bi-eye"}
+                          ></i>
+                        </button>
                       </div>
                     </div>
 
