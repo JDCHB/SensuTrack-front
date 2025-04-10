@@ -16,6 +16,9 @@
 <Promociones></Promociones>
 
 <Servicios></Servicios>
+
 <Banner></Banner>
+
 <Footer></Footer>
+
 <ChatBot></ChatBot>

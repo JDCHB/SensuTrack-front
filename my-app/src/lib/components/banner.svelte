@@ -25,9 +25,9 @@
                     </div>
                     <div class="card-body text-center">
                         <h4 class="card-title">Rastreo en Tiempo Real</h4>
-                        <p class="card-text">
-                            Siempre sabrás la ubicación exacta de la persona
-                            ciega, donde sea que esté.
+                        <p class="card-text text-muted">
+                            Conoce en todo momento la ubicación exacta de la
+                            persona, brindando mayor seguridad y tranquilidad.
                         </p>
                     </div>
                 </div>
@@ -40,9 +40,9 @@
                     </div>
                     <div class="card-body text-center">
                         <h4 class="card-title">Batería de Larga Duración</h4>
-                        <p class="card-text">
-                            Hasta 7 días de autonomía para que no tengas que
-                            preocuparte por la carga.
+                        <p class="card-text text-muted">
+                            Hasta 7 días de funcionamiento continuo para que no
+                            tengas que preocuparte por cargarlo constantemente.
                         </p>
                     </div>
                 </div>
@@ -54,10 +54,11 @@
                         <i class="fas fa-tint fa-1x"></i>
                     </div>
                     <div class="card-body text-center">
-                        <h4 class="card-title">Resistente al Agua</h4>
-                        <p class="card-text">
-                            Perfecto para todos los climas, la persona estará
-                            segura bajo la lluvia.
+                        <h4 class="card-title">Resistencia al Agua</h4>
+                        <p class="card-text text-muted">
+                            Ideal para cualquier clima. El dispositivo continúa
+                            funcionando incluso bajo la lluvia o en condiciones
+                            húmedas.
                         </p>
                     </div>
                 </div>
@@ -72,15 +73,19 @@
 >
     <div class="container position-relative z-index-2">
         <h2 class="display-4 font-weight-bold mb-4">
-            ¡Mantén a la persona ciega segura en todo momento!
+            ¡Seguridad y tranquilidad, estés donde estés!
         </h2>
         <p class="lead mb-4">
-            Nuestro GPS te ayuda a rastrear a la persona ciega en tiempo real y
-            asegurar su seguridad durante sus desplazamientos. Si no estás
-            completamente satisfecho con tu GPS, te devolvemos tu dinero en 30
-            días. ¡Compra con total confianza y sin riesgos!. ¡Compra ahora!
+            SensuTrack permite monitorear en tiempo real a personas ciegas,
+            enviando alertas si se alejan de zonas seguras. Garantiza su
+            bienestar mientras te brinda total confianza y control.
+            <br /><br />
+            ¿No estás satisfecho? Te devolvemos tu dinero en los primeros 30 días.
+            ¡Compra sin riesgos!
         </p>
-        <a href="login" class="btn btn-warning btn-lg btn-cta">Compra Ahora</a>
+        <a href="/login" class="btn btn-warning btn-lg btn-cta rounded-pill"
+            >Compra Ahora</a
+        >
     </div>
     <div class="banner-image position-absolute top-0 left-0 w-100 h-100"></div>
 </section>
