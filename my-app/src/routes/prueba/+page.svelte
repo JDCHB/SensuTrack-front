@@ -2,6 +2,7 @@
     let expandido = false;
     let activeSection = "X"; // valor por defecto
     import RegistroUSUAdmin from "../../lib/components/Admin/RegistroUsu.svelte";
+    import Reportes from "../../lib/components/Admin/Reportes.svelte";
 
     let registerLoader;
 
@@ -22,7 +23,8 @@
     }
 
     function logout() {
-        // Tu lógica de logout
+        localStorage.clear();
+        window.location.href = "/login";
     }
 
     // Acciones disponibles
@@ -162,7 +164,7 @@
                 </div>
             </div>
         {:else if activeSection === "reportes"}
-            <h1>Reportes</h1>
+            <Reportes></Reportes>
         {:else if activeSection === "registro_gps"}
             <h1>Registrar GPS</h1>
         {:else if activeSection === "tabla_usuarios"}
