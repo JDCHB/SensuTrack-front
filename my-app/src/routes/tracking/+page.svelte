@@ -410,48 +410,118 @@
 
 <h2>Ubicación del GPS</h2>
 
-<div style="text-align: center; margin-bottom: 10px;">
-    <button
-        on:click={toggleAgregarZona}
-        style="padding: 10px 20px; background-color: #4caf50; color: white; border: none; border-radius: 8px; cursor: pointer;"
-    >
+<div class="boton-container">
+    <button on:click={toggleAgregarZona} class="zona-btn">
         {modoAgregarZona
-            ? "Cerrar Configuracion Zona Segura"
+            ? "Cerrar Configuración de Zona Segura"
             : "Configurar Zona Segura"}
     </button>
 </div>
 
 {#if error}
-    <p style="text-align:center; color: red;">Error: {error}</p>
+    <p class="error-msg">Error: {error}</p>
 {:else if cargando}
-    <p style="text-align:center; font-style: italic;">
-        Cargando ubicaciones...
-    </p>
+    <p class="loading-msg">Cargando ubicaciones...</p>
 {/if}
 
-<div class="map-container" id="map" style="height: 500px;"></div>
+<div class="map-container">
+    <div id="map"></div>
+</div>
 
 <style>
-    #map {
-        height: 100%;
-        border-radius: 15px;
-        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-    }
-
-    .map-container {
-        max-width: 800px;
-        margin: 30px auto;
-        padding: 10px;
-        border-radius: 15px;
-        background: linear-gradient(to bottom, #f5f7fa, #e3e9f3);
-        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
-    }
-
+    /* Tipografía y título */
     h2 {
+        margin-top: 2%;
         text-align: center;
-        color: #4a90e2;
-        font-family: "Arial", sans-serif;
+        color: #2c3e50;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 28px;
+        font-weight: 600;
         margin-bottom: 20px;
+        padding: 0 10px;
+    }
+
+    /* Botón responsive */
+    .boton-container {
+        text-align: center;
+        margin-bottom: 20px;
+        padding: 0 10px;
+    }
+
+    .zona-btn {
+        padding: 12px 24px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: bold;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        cursor: pointer;
+        transition:
+            background-color 0.3s ease,
+            transform 0.2s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .zona-btn:hover {
+        background-color: #45a049;
+        transform: translateY(-2px);
+    }
+
+    /* Mensajes */
+    .error-msg,
+    .loading-msg {
+        text-align: center;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 16px;
+        margin-top: 10px;
+        padding: 0 10px;
+    }
+
+    .error-msg {
+        color: red;
+    }
+
+    .loading-msg {
+        font-style: italic;
+        color: #666;
+    }
+
+    /* Contenedor del mapa */
+    .map-container {
+        max-width: 900px;
+        margin: 0 auto 30px;
+        padding: 10px;
+        border-radius: 20px;
+        background: #ffffff;
+        box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.12);
+        border: 1px solid #ddd;
+    }
+
+    #map {
+        height: 500px;
+        width: 100%;
+        border-radius: 15px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    /* Responsive para pantallas pequeñas */
+    @media (max-width: 600px) {
+        h2 {
+            font-size: 22px;
+        }
+
+        .zona-btn {
+            font-size: 14px;
+            padding: 10px 20px;
+        }
+
+        #map {
+            height: 350px;
+        }
     }
 </style>
