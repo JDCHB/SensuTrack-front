@@ -1,11 +1,12 @@
 <script>
-    let expandido = false;
-    let activeSection = "X"; // valor por defecto
     import RegistroUSUAdmin from "../../lib/components/Admin/RegistroUsu.svelte";
     import Reportes from "../../lib/components/Admin/Reportes.svelte";
     import RegistroGPS from "../../lib/components/Admin/RegistroGPS.svelte";
     import TablaUsuarios from "../../lib/components/Admin/TablaUsuarios.svelte";
+    import TablaCiegos from "../../lib/components/Admin/TablaCiegos.svelte";
 
+    let expandido = false;
+    let activeSection = "X"; // valor por defecto
     let registerLoader;
 
     function showLoader() {
@@ -188,7 +189,7 @@
         {:else if activeSection === "tabla_usuarios"}
             <TablaUsuarios></TablaUsuarios>
         {:else if activeSection === "tabla_ciegos"}
-            <h1>Tabla de Personas Ciegas</h1>
+            <TablaCiegos></TablaCiegos>
         {:else if activeSection === "registro_roles"}
             <h1>Registrar Roles</h1>
         {:else if activeSection === "registro_modulos"}
