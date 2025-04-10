@@ -3,6 +3,7 @@
     let activeSection = "X"; // valor por defecto
     import RegistroUSUAdmin from "../../lib/components/Admin/RegistroUsu.svelte";
     import Reportes from "../../lib/components/Admin/Reportes.svelte";
+    import RegistroGPS from "../../lib/components/Admin/RegistroGPS.svelte";
 
     let registerLoader;
 
@@ -166,7 +167,23 @@
         {:else if activeSection === "reportes"}
             <Reportes></Reportes>
         {:else if activeSection === "registro_gps"}
-            <h1>Registrar GPS</h1>
+            <RegistroGPS on:showLoader={showLoader} on:hideLoader={hideLoader}
+            ></RegistroGPS>
+
+            <div class="loader-container" bind:this={registerLoader}>
+                <div class="loader-text">
+                    <span>S</span>
+                    <span>e</span>
+                    <span>n</span>
+                    <span>s</span>
+                    <span>u</span>
+                    <span>T</span>
+                    <span>r</span>
+                    <span>a</span>
+                    <span>c</span>
+                    <span>k</span>
+                </div>
+            </div>
         {:else if activeSection === "tabla_usuarios"}
             <h1>Tabla de Usuarios</h1>
         {:else if activeSection === "tabla_ciegos"}
