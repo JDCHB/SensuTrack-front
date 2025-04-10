@@ -5,9 +5,10 @@
                 <div class="secction-header">
                     <h2 class="display-4 text-primary">Información General</h2>
                     <p class="lead text-muted">
-                        Descubre las características y beneficios que hacen de
-                        nuestros dispositivos GPS la opción ideal para personas
-                        ciegas.
+                        Conoce las funciones clave que hacen de <strong
+                            >SensuTrack</strong
+                        > una herramienta esencial para mejorar la seguridad y autonomía
+                        de personas ciegas en su día a día.
                     </p>
                 </div>
             </div>
@@ -22,61 +23,65 @@
                             Rastreo en Tiempo Real
                         </h3>
                         <p class="card-text text-muted">
-                            Mantén un seguimiento preciso de la ubicación en
-                            tiempo real, permitiendole moverse con confianza y
-                            seguridad en cualquier entorno.
+                            Visualiza en el mapa la ubicación exacta de la
+                            persona en todo momento. Gracias a la tecnología GPS
+                            integrada, puedes monitorear su recorrido con total
+                            precisión y tranquilidad.
                         </p>
                         <a
                             href="/login"
                             class="btn btn-outline-primary mt-3 rounded-pill"
-                            >Leer más</a
                         >
+                            Leer más
+                        </a>
                     </div>
                 </div>
             </div>
 
-            <!-- Card 2: Asignaciones -->
+            <!-- Card 2: Zonas Seguras -->
             <div class="col-12 col-md-4 mb-3">
                 <div class="card text-center shadow-lg border-0 rounded-3">
                     <div class="card-img-top bg-car2"></div>
                     <div class="card-body">
                         <h3 class="card-title text-primary">
-                            Asignaciones Inteligentes
+                            Zonas Seguras Inteligentes
                         </h3>
                         <p class="card-text text-muted">
-                            Personaliza rutas y recibe alertas si se desvía de
-                            áreas predefinidas, garantizando su seguridad y
-                            orientación en todo momento. ¡Seguridad y control al
-                            alcance de tu mano!.
+                            Crea zonas seguras personalizadas y recibe alertas
+                            instantáneas cuando la persona salga de estos
+                            espacios definidos, ayudando a prevenir situaciones
+                            de riesgo.
                         </p>
                         <a
                             href="/login"
                             class="btn btn-outline-primary mt-3 rounded-pill"
-                            >Leer más</a
                         >
+                            Leer más
+                        </a>
                     </div>
                 </div>
             </div>
 
-            <!-- Card 3: Para Todas las Necesidades -->
+            <!-- Card 3: Accesibilidad y Adaptabilidad -->
             <div class="col-12 col-md-4 mb-3">
                 <div class="card text-center shadow-lg border-0 rounded-3">
                     <div class="card-img-top bg-car3"></div>
                     <div class="card-body">
                         <h3 class="card-title text-primary">
-                            Para Todas las Necesidades
+                            Accesibilidad y Adaptabilidad
                         </h3>
                         <p class="card-text text-muted">
-                            Nuestros dispositivos GPS están diseñados para
-                            adaptarse a las necesidades de personas ciegas,
-                            ofreciendo soluciones personalizadas para cada
-                            situación.
+                            SensuTrack se adapta a diversas necesidades. Ya sea
+                            en casa o en exteriores, ofrece soporte inteligente
+                            para mejorar la orientación, autonomía y seguridad
+                            de las personas ciegas.
                         </p>
                         <a
                             href="/login"
                             class="btn btn-outline-primary mt-3 rounded-pill"
-                            >Leer más</a
                         >
+                            Leer más
+                        </a>
                     </div>
                 </div>
             </div>
