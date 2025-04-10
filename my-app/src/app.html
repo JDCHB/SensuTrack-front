@@ -113,12 +113,12 @@
 
 		}
 */
-		if (todos == "Token expirado" & pagina_v != "/" & pagina_v != "/login" & pagina_v != "/Registro_User" & pagina_v != "/Cambio_Clave" & pagina_v != "/prueba" & pagina_v != "/formulario_completar" & pagina_v != "/Admin_reportes") {
+		if (todos == "Token expirado" & pagina_v != "/" & pagina_v != "/login" & pagina_v != "/Registro_User" & pagina_v != "/Cambio_Clave" & pagina_v != "/prueba" & pagina_v != "/formulario_completar" & pagina_v != "/Admin_reportes" & pagina_v != "/Admin_Tabla_Ciegos") {
 			console.log("Redirigiendo por token expirado")
 			localStorage.clear();
 			window.location.href = "/login";
 
-		} else if (todos == "Token inválido" & pagina_v != "/" & pagina_v != "/login" & pagina_v != "/Registro_User" & pagina_v != "/Cambio_Clave" & pagina_v != "/prueba" & pagina_v != "/formulario_completar" & pagina_v != "/Admin_reportes") {
+		} else if (todos == "Token inválido" & pagina_v != "/" & pagina_v != "/login" & pagina_v != "/Registro_User" & pagina_v != "/Cambio_Clave" & pagina_v != "/prueba" & pagina_v != "/formulario_completar" & pagina_v != "/Admin_reportes" & pagina_v != "/Admin_Tabla_Ciegos") {
 			console.log("Redirigiendo por token inválido")
 			localStorage.clear();
 			window.location.href = "/login";

@@ -4,6 +4,7 @@
     import RegistroUSUAdmin from "../../lib/components/Admin/RegistroUsu.svelte";
     import Reportes from "../../lib/components/Admin/Reportes.svelte";
     import RegistroGPS from "../../lib/components/Admin/RegistroGPS.svelte";
+    import TablaUsuarios from "../../lib/components/Admin/TablaUsuarios.svelte";
 
     let registerLoader;
 
@@ -185,7 +186,7 @@
                 </div>
             </div>
         {:else if activeSection === "tabla_usuarios"}
-            <h1>Tabla de Usuarios</h1>
+            <TablaUsuarios></TablaUsuarios>
         {:else if activeSection === "tabla_ciegos"}
             <h1>Tabla de Personas Ciegas</h1>
         {:else if activeSection === "registro_roles"}
