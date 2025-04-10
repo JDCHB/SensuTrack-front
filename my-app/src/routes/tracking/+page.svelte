@@ -93,7 +93,7 @@
             marker.bindPopup(`
                 <b>${nombre_discapacitado}</b><br>
                 Latitud: ${latitud}, Longitud: ${longitud}<br>
-                CollarGPS: ${numero_serie}<br>
+                GPS: ${numero_serie}<br>
                 Nivel de Batería: ${nivel_bateria}%
             `);
 
@@ -168,7 +168,8 @@
                     // ✅ Agregar al grupo editable para que sea eliminable
                     drawnItems.addLayer(circle);
 
-                    circle.bindPopup(`Zona Segura: <b>${nombre_zona}</b>`);
+                    circle.bindPopup(`Zona Segura: <b>${nombre_zona}</b><br>
+                    Radio: <b>${radio} metros</b>`);
                 });
             }
         } catch (e) {
