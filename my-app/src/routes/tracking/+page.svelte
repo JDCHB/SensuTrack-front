@@ -450,7 +450,7 @@
 
     .zona-btn {
         padding: 12px 24px;
-        background-color: #4caf50;
+        background-color: #114dda;
         color: white;
         border: none;
         border-radius: 12px;
