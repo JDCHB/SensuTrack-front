@@ -5,18 +5,33 @@
 
     let map;
     let drawControl;
-    let drawnItems = new L.FeatureGroup();
+    let drawnItems;
     let ciegos = [];
     let zonas_Seguras = [];
     let error = null;
     let modoAgregarZona = false;
-    // let modoEliminarZona = false;
     let cargando = true;
     let v_estado = true;
+
+    // Función para obtener datos del usuario de forma segura
+    function getUserData() {
+        try {
+            const userData = localStorage.getItem("user_data");
+            return userData ? JSON.parse(userData) : null;
+        } catch (e) {
+            console.error("Error al leer user_data:", e);
+            return null;
+        }
+    }
 
     // ✅ NUEVA FUNCIÓN PARA TOMAR LOS DATOS DEL CIEGO ASIGNADO A UN CUIDADOR DESDE LA BASE DE DATOS
     async function CargarDiscapacitado() {
         try {
+            const userData = getUserData();
+            if (!userData?.id) {
+                throw new Error("No se encontraron datos de usuario válidos");
+            }
+
             const response = await fetch(
                 "https://proyectomascotas.onrender.com/Ciegos_Map",
                 {
@@ -25,34 +40,46 @@
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                        user_id: JSON.parse(localStorage.getItem("user_data"))
-                            .id,
+                        user_id: userData.id,
                     }),
                 },
             );
-            const data = await response.json();
-            if (response.ok) {
-                ciegos = data.resultado;
-                mostrarUbicaciones();
-                cargando = false;
 
-                // ✅ Cargar zona segura del primer discapacitado
-                if (ciegos.length > 0) {
-                    await CargarZonaSegura(ciegos[0].id);
-                }
-
-                console.log(data.resultado);
-            } else {
-                console.error("Error al obtener datos:", data);
+            if (!response.ok) {
+                throw new Error(`Error HTTP: ${response.status}`);
             }
+
+            const data = await response.json();
+            ciegos = data.resultado || [];
+            mostrarUbicaciones();
+            cargando = false;
+
+            // ✅ Cargar zona segura del primer discapacitado
+            if (ciegos.length > 0) {
+                await CargarZonaSegura(ciegos[0].id);
+            }
+
+            console.log("Datos cargados:", data.resultado);
         } catch (e) {
+            console.error("Error en CargarDiscapacitado:", e);
             error = e.message;
-            alert("Error en la solicitud: " + error);
+            cargando = false;
+            alert("Error al cargar datos: " + e.message);
         }
     }
 
     // ✅ NUEVA FUNCIÓN PARA MOSTRAR LA UBICACION DEL GPS DESDE LA BASE DE DATOS
     function mostrarUbicaciones() {
+        if (!map) return;
+
+        // Limpiar marcadores existentes
+        if (drawnItems) {
+            drawnItems.clearLayers();
+        } else {
+            drawnItems = new L.FeatureGroup();
+            map.addLayer(drawnItems);
+        }
+
         ciegos.forEach((discapacitado) => {
             const {
                 nombre_discapacitado,
@@ -98,53 +125,51 @@
     // ✅ NUEVA FUNCIÓN PARA MOSTRAR ZONA SEGURA DESDE LA BASE DE DATOS
     async function CargarZonaSegura(idDiscapacitado) {
         try {
+            if (!idDiscapacitado) return;
+
             const response = await fetch(
                 `https://proyectomascotas.onrender.com/get_Zona_Segura/${idDiscapacitado}`,
             );
 
+            if (!response.ok) {
+                console.warn(
+                    "No hay zona segura registrada o error en la respuesta",
+                );
+                return;
+            }
+
             const data = await response.json();
 
-            if (response.ok) {
-                // Asegúrate de que data sea un array
-                if (Array.isArray(data)) {
-                    data.forEach((zona) => {
-                        const { nombre_zona, latitud, longitud, radio } = zona;
+            if (Array.isArray(data)) {
+                data.forEach((zona) => {
+                    const { nombre_zona, latitud, longitud, radio } = zona;
 
-                        // const circle = L.circle(
-                        //     [parseFloat(latitud), parseFloat(longitud)],
-                        //     {
-                        //         color: "green",
-                        //         fillColor: "#7CFC00",
-                        //         fillOpacity: 0.4,
-                        //         radius: 100,
-                        //     },
-                        // ).addTo(map);
+                    // const circle = L.circle(
+                    //     [parseFloat(latitud), parseFloat(longitud)],
+                    //     {
+                    //         color: "green",
+                    //         fillColor: "#7CFC00",
+                    //         fillOpacity: 0.4,
+                    //         radius: 100,
+                    //     },
+                    // ).addTo(map);
 
-                        const circle = L.circle(
-                            [parseFloat(latitud), parseFloat(longitud)],
-                            {
-                                color: "green",
-                                fillColor: "#7CFC00",
-                                fillOpacity: 0.4,
-                                radius: parseFloat(radio),
-                            },
-                        );
-
-                        // ✅ Asignar ID al círculo para poder eliminarlo
-                        circle._idZona = zona.id;
-
-                        // ✅ Agregar al grupo editable para que sea eliminable
-                        drawnItems.addLayer(circle);
-
-                        circle.bindPopup(`Zona Segura: <b>${nombre_zona}</b>`);
-                    });
-                } else {
-                    console.warn(
-                        "La respuesta no contiene una lista de zonas.",
+                    const circle = L.circle(
+                        [parseFloat(latitud), parseFloat(longitud)],
+                        {
+                            color: "green",
+                            fillColor: "#7CFC00",
+                            fillOpacity: 0.4,
+                            radius: parseFloat(radio),
+                        },
                     );
-                }
-            } else {
-                console.warn("No hay zona segura registrada:", data.detail);
+                    // ✅ Asignar ID al círculo para poder eliminarlo
+                    circle._idZona = zona.id;
+                    // ✅ Agregar al grupo editable para que sea eliminable
+                    drawnItems.addLayer(circle);
+
+                    circle.bindPopup(`Zona Segura: <b>${nombre_zona}</b>`);
+                });
             }
         } catch (e) {
             console.error("Error al cargar la zona segura:", e);
@@ -152,35 +177,73 @@
     }
 
     onMount(async () => {
-        await tick(); // ✅ Esto ya no lanza error
+        try {
+            // Esperar a que todo esté listo
+            await tick();
 
-        map = L.map("map").setView([10.9639, -74.7964], 13);
+            // Verificar que las dependencias estén cargadas
+            if (!window.L || !window.Swal) {
+                await new Promise((resolve) => {
+                    const checkDeps = () => {
+                        if (window.L && window.Swal) resolve();
+                        else setTimeout(checkDeps, 100);
+                    };
+                    checkDeps();
+                });
+            }
 
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            attribution: "&copy; OpenStreetMap contributors",
-        }).addTo(map);
+            // Verificar que el elemento del mapa exista
+            if (!document.getElementById("map")) {
+                throw new Error("Elemento del mapa no encontrado");
+            }
 
-        map.addLayer(drawnItems);
+            // Inicializar el mapa
+            map = L.map("map").setView([10.9639, -74.7964], 13);
+            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                attribution: "&copy; OpenStreetMap contributors",
+            }).addTo(map);
 
-        drawControl = new L.Control.Draw({
-            draw: {
-                polygon: false,
-                polyline: false,
-                rectangle: false,
-                marker: false,
-                circlemarker: false,
-                circle: {
-                    shapeOptions: {
-                        color: "green",
-                        fillColor: "#7CFC00",
-                        fillOpacity: 0.4,
+            // Inicializar drawnItems si no existe
+            if (!drawnItems) {
+                drawnItems = new L.FeatureGroup();
+                map.addLayer(drawnItems);
+            }
+
+            // Configurar controles de dibujo
+            drawControl = new L.Control.Draw({
+                draw: {
+                    polygon: false,
+                    polyline: false,
+                    rectangle: false,
+                    marker: false,
+                    circlemarker: false,
+                    circle: {
+                        shapeOptions: {
+                            color: "green",
+                            fillColor: "#7CFC00",
+                            fillOpacity: 0.4,
+                        },
                     },
                 },
-            },
-            edit: {
-                featureGroup: drawnItems,
-            },
-        });
+                edit: {
+                    featureGroup: drawnItems,
+                },
+            });
+
+            // Configurar eventos del mapa
+            configurarEventosMapa();
+
+            // Cargar datos iniciales
+            await CargarDiscapacitado();
+        } catch (e) {
+            console.error("Error en onMount:", e);
+            error = e.message;
+            cargando = false;
+        }
+    });
+
+    function configurarEventosMapa() {
+        if (!map) return;
 
         map.on("draw:created", async (event) => {
             if (!modoAgregarZona) {
@@ -189,171 +252,125 @@
             }
 
             const layer = event.layer;
-            drawnItems.addLayer(layer);
             const center = layer.getLatLng();
 
-            const { value: nombreZona } = await Swal.fire({
-                title: "Nombre de la Zona Segura",
-                input: "text",
-                inputLabel: "Ingresa el nombre de esta zona",
-                inputPlaceholder: "Ej: Zona Norte, Patio Principal...",
-                showCancelButton: true,
-                confirmButtonText: "Guardar",
-            });
+            try {
+                const { value: nombreZona } = await Swal.fire({
+                    title: "Nombre de la Zona Segura",
+                    input: "text",
+                    inputLabel: "Ingresa el nombre de esta zona",
+                    inputPlaceholder: "Ej: Zona Norte, Patio Principal...",
+                    showCancelButton: true,
+                    confirmButtonText: "Guardar",
+                });
 
-            if (nombreZona) {
+                if (!nombreZona) {
+                    map.removeLayer(layer);
+                    return;
+                }
+
+                const idDiscapacitado = ciegos.length > 0 ? ciegos[0].id : null;
+                if (!idDiscapacitado) {
+                    throw new Error(
+                        "No se encontró un ID de discapacitado válido",
+                    );
+                }
+
+                const response = await fetch(
+                    "https://proyectomascotas.onrender.com/create_Zona_Segura",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            nombre_zona: nombreZona,
+                            latitud: String(center.lat),
+                            longitud: String(center.lng),
+                            radio: layer.getRadius?.() || 100,
+                            id_discapacitado: parseInt(idDiscapacitado),
+                            estado: Boolean(v_estado),
+                        }),
+                    },
+                );
+
+                const result = await response.json();
+                if (!response.ok) {
+                    throw new Error(
+                        result.detail || "Error al guardar la zona",
+                    );
+                }
+
+                layer._idZona = result.id;
+                drawnItems.addLayer(layer);
                 layer
                     .bindPopup(`Zona Segura: <b>${nombreZona}</b>`)
                     .openPopup();
 
-                const idDiscapacitado = ciegos.length > 0 ? ciegos[0].id : null;
-
-                if (idDiscapacitado) {
-                    try {
-                        const response = await fetch(
-                            "https://proyectomascotas.onrender.com/create_Zona_Segura",
-                            {
-                                method: "POST",
-                                headers: {
-                                    "Content-Type": "application/json",
-                                },
-                                body: JSON.stringify({
-                                    nombre_zona: nombreZona,
-                                    latitud: String(center.lat),
-                                    longitud: String(center.lng),
-                                    radio: layer.getRadius?.() || 100,
-                                    id_discapacitado: parseInt(idDiscapacitado),
-                                    estado: Boolean(v_estado),
-                                }),
-                            },
-                        );
-
-                        const result = await response.json();
-                        if (response.ok) {
-                            // ✅ Asignar el ID de la zona segura al layer para poder eliminarla luego
-                            layer._idZona = result.id;
-
-                            // ✅ Agregar al grupo editable SOLO si se guardó exitosamente
-                            drawnItems.addLayer(layer);
-
-                            // ✅ Añadir el popup
-                            layer
-                                .bindPopup(`Zona Segura: <b>${nombreZona}</b>`)
-                                .openPopup();
-
-                            Swal.fire(
-                                "¡Guardado!",
-                                "Zona segura registrada exitosamente",
-                                "success",
-                            );
-                            console.log("Zona segura guardada:", result);
-                        } else {
-                            throw new Error(
-                                result.detail || "Error al guardar la zona",
-                            );
-                        }
-                    } catch (e) {
-                        console.error("Error al guardar zona segura:", e);
-                        Swal.fire("Error", e.message, "error");
-                    }
-                } else {
-                    Swal.fire(
-                        "Error",
-                        "No se encontró un ID de discapacitado válido",
-                        "error",
-                    );
-                }
-            } else {
+                Swal.fire(
+                    "¡Guardado!",
+                    "Zona segura registrada exitosamente",
+                    "success",
+                );
+            } catch (e) {
+                console.error("Error al crear zona segura:", e);
                 map.removeLayer(layer);
+                Swal.fire("Error", e.message, "error");
             }
         });
 
         map.on("draw:deleted", async (event) => {
             const layers = event.layers;
-
-            layers.eachLayer(async function (layer) {
-                const idZonaSegura = layer._idZona;
-
-                if (!idZonaSegura) {
-                    console.warn("No se encontró el ID de la zona segura");
-                    return;
-                }
-
+            layers.eachLayer(async (layer) => {
                 try {
+                    const idZonaSegura = layer._idZona;
+                    if (!idZonaSegura) return;
+
                     const response = await fetch(
                         `https://proyectomascotas.onrender.com/delete_Zona_Segura/${idZonaSegura}`,
-                        {
-                            method: "DELETE",
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                        },
+                        { method: "DELETE" },
                     );
 
-                    const result = await response.json();
-
-                    if (response.ok) {
-                        Swal.fire(
-                            "Eliminada",
-                            "Zona segura eliminada exitosamente",
-                            "success",
-                        );
-                    } else {
-                        Swal.fire(
-                            "Error",
-                            result.detail || "No se pudo eliminar",
-                            "error",
-                        );
+                    if (!response.ok) {
+                        throw new Error("No se pudo eliminar la zona");
                     }
-                } catch (error) {
-                    console.error("Error al eliminar zona:", error);
+
                     Swal.fire(
-                        "Error",
-                        "Error al conectar con el servidor",
-                        "error",
+                        "Eliminada",
+                        "Zona segura eliminada exitosamente",
+                        "success",
                     );
+                } catch (e) {
+                    console.error("Error al eliminar zona:", e);
+                    Swal.fire("Error", e.message, "error");
                 }
             });
         });
 
         map.on("draw:edited", async (event) => {
             const layers = event.layers;
-
-            layers.eachLayer(async function (layer) {
-                const idZonaSegura = layer._idZona;
-
-                if (!idZonaSegura) {
-                    console.warn(
-                        "No se encontró el ID de la zona segura editada",
-                    );
-                    return;
-                }
-
-                const center = layer.getLatLng();
-
-                // Pregunta el nuevo nombre con SweetAlert2
-                const { value: nuevoNombre } = await Swal.fire({
-                    title: "Editar nombre de la zona",
-                    input: "text",
-                    inputPlaceholder: "Ej: Zona Escuela",
-                    showCancelButton: true,
-                    confirmButtonText: "Guardar",
-                    cancelButtonText: "Cancelar",
-                    inputValidator: (value) => {
-                        if (!value) return "Debes escribir un nombre.";
-                    },
-                });
-
-                if (!nuevoNombre) return;
-
+            layers.eachLayer(async (layer) => {
                 try {
+                    const idZonaSegura = layer._idZona;
+                    if (!idZonaSegura) return;
+
+                    const { value: nuevoNombre } = await Swal.fire({
+                        title: "Editar nombre de la zona",
+                        input: "text",
+                        inputPlaceholder: "Ej: Zona Escuela",
+                        showCancelButton: true,
+                        inputValidator: (value) =>
+                            value ? null : "Debes escribir un nombre.",
+                    });
+
+                    if (!nuevoNombre) return;
+
+                    const center = layer.getLatLng();
                     const response = await fetch(
                         `https://proyectomascotas.onrender.com/update_Zona_Segura/${idZonaSegura}`,
                         {
                             method: "PUT",
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
+                            headers: { "Content-Type": "application/json" },
                             body: JSON.stringify({
                                 latitud: String(center.lat),
                                 longitud: String(center.lng),
@@ -363,38 +380,23 @@
                         },
                     );
 
-                    const result = await response.json();
-
-                    if (response.ok) {
-                        Swal.fire(
-                            "Editado",
-                            "Zona segura actualizada",
-                            "success",
-                        );
-                    } else {
-                        Swal.fire(
-                            "Error",
-                            result.detail || "No se pudo actualizar",
-                            "error",
-                        );
+                    if (!response.ok) {
+                        throw new Error("No se pudo actualizar la zona");
                     }
-                } catch (error) {
-                    console.error("Error al editar zona:", error);
-                    Swal.fire(
-                        "Error",
-                        "Error al conectar con el servidor",
-                        "error",
-                    );
+
+                    Swal.fire("Editado", "Zona segura actualizada", "success");
+                } catch (e) {
+                    console.error("Error al editar zona:", e);
+                    Swal.fire("Error", e.message, "error");
                 }
             });
         });
-
-        await CargarDiscapacitado();
-    });
+    }
 
     function toggleAgregarZona() {
-        modoAgregarZona = !modoAgregarZona;
+        if (!map) return;
 
+        modoAgregarZona = !modoAgregarZona;
         if (modoAgregarZona) {
             map.addControl(drawControl);
         } else {
@@ -419,7 +421,9 @@
     </button>
 </div>
 
-{#if cargando}
+{#if error}
+    <p style="text-align:center; color: red;">Error: {error}</p>
+{:else if cargando}
     <p style="text-align:center; font-style: italic;">
         Cargando ubicaciones...
     </p>
