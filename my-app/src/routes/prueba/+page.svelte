@@ -8,6 +8,7 @@
     import RegistroModulos from "$lib/components/Admin/RegistroModulos.svelte";
     import PowerBi from "$lib/components/Admin/PowerBI.svelte";
     import HistorialUbi from "$lib/components/Admin/HistorialUbi.svelte";
+    import ModuloxRol from "$lib/components/Admin/ModuloxRol.svelte";
 
     let expandido = false;
     let activeSection = "X"; // valor por defecto
@@ -234,7 +235,7 @@
                 </div>
             </div>
         {:else if activeSection === "modulos_por_rol"}
-            <h1>Asignar Módulo por Rol</h1>
+            <ModuloxRol></ModuloxRol>
         {:else if activeSection === "tablero"}
             <PowerBi></PowerBi>
         {:else if activeSection === "historial_ubicaciones"}
