@@ -159,6 +159,8 @@
             console.log(todos);
             document.getElementById("nombre").value = data.nombre;
             document.getElementById("descripcion").value = data.descripcion;
+            document.getElementById("ubicacion").value = data.ubicacion;
+            document.getElementById("estilo").value = data.estilo;
             console.log("verificando el estado: " + data.estado);
             const estado_v = data.estado ? "1" : "0"; //condicion ? valorSiVerdadero : valorSiFalso
             document.getElementById("estado").value = estado_v;
@@ -169,6 +171,12 @@
 
             const v_edit_descripcion = document.getElementById("descripcion");
             v_edit_descripcion.removeAttribute("readonly");
+
+            const v_edit_ubicacion = document.getElementById("ubicacion");
+            v_edit_ubicacion.removeAttribute("readonly");
+
+            const v_edit_estilo = document.getElementById("estilo");
+            v_edit_estilo.removeAttribute("readonly");
 
             const v_edit_estado = document.getElementById("estado");
             v_edit_estado.removeAttribute("readonly");
@@ -183,6 +191,8 @@
         console.log(vid);
         let v_nombre = document.getElementById("nombre").value;
         let v_descripcion = document.getElementById("descripcion").value;
+        let v_ubicacion = document.getElementById("ubicacion").value;
+        let v_estilo = document.getElementById("estilo").value;
         let vestado = document.getElementById("estado").value;
 
         console.log("ID DE ESTADO ENVIADO A LA BASE DE DATOS ES " + vestado);
@@ -200,6 +210,8 @@
                     body: JSON.stringify({
                         nombre: v_nombre,
                         descripcion: v_descripcion,
+                        ubicacion: v_ubicacion,
+                        estilo: v_estilo,
                         estado: vestado,
                     }),
                 },
@@ -555,6 +567,38 @@
                         type="text"
                         placeholder="Descripcion del Modulo"
                         id="descripcion"
+                        style="border: none; width: 55%;"
+                        readonly
+                    />
+                </div>
+            </div>
+
+            <div class="row pt-3">
+                <div class="col-lg-2">
+                    <p class="card-text"><b>Ubicación:</b></p>
+                </div>
+
+                <div class="col-lg-10">
+                    <input
+                        type="text"
+                        placeholder="Descripcion del Modulo"
+                        id="ubicacion"
+                        style="border: none; width: 55%;"
+                        readonly
+                    />
+                </div>
+            </div>
+
+            <div class="row pt-3">
+                <div class="col-lg-2">
+                    <p class="card-text"><b>Estilo:</b></p>
+                </div>
+
+                <div class="col-lg-10">
+                    <input
+                        type="text"
+                        placeholder="Descripcion del Modulo"
+                        id="estilo"
                         style="border: none; width: 55%;"
                         readonly
                     />
