@@ -5,6 +5,9 @@
     import TablaUsuarios from "../../lib/components/Admin/TablaUsuarios.svelte";
     import TablaCiegos from "../../lib/components/Admin/TablaCiegos.svelte";
     import RegistrarRoles from "../../lib/components/Admin/RegistroRoles.svelte";
+    import RegistroModulos from "$lib/components/Admin/RegistroModulos.svelte";
+    import PowerBi from "$lib/components/Admin/PowerBI.svelte";
+    import HistorialUbi from "$lib/components/Admin/HistorialUbi.svelte";
 
     let expandido = false;
     let activeSection = "X"; // valor por defecto
@@ -212,13 +215,30 @@
                 </div>
             </div>
         {:else if activeSection === "registro_modulos"}
-            <h1>Registrar Módulos</h1>
+            <RegistroModulos
+                on:showLoader={showLoader}
+                on:hideLoader={hideLoader}
+            ></RegistroModulos>
+            <div class="loader-container" bind:this={registerLoader}>
+                <div class="loader-text">
+                    <span>S</span>
+                    <span>e</span>
+                    <span>n</span>
+                    <span>s</span>
+                    <span>u</span>
+                    <span>T</span>
+                    <span>r</span>
+                    <span>a</span>
+                    <span>c</span>
+                    <span>k</span>
+                </div>
+            </div>
         {:else if activeSection === "modulos_por_rol"}
             <h1>Asignar Módulo por Rol</h1>
         {:else if activeSection === "tablero"}
-            <h1>Tablero PowerBI</h1>
+            <PowerBi></PowerBi>
         {:else if activeSection === "historial_ubicaciones"}
-            <h1>Historial de Ubicaciones</h1>
+            <HistorialUbi></HistorialUbi>
         {/if}
     </main>
 </div>
