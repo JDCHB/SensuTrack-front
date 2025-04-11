@@ -4,6 +4,7 @@
     import RegistroGPS from "../../lib/components/Admin/RegistroGPS.svelte";
     import TablaUsuarios from "../../lib/components/Admin/TablaUsuarios.svelte";
     import TablaCiegos from "../../lib/components/Admin/TablaCiegos.svelte";
+    import RegistrarRoles from "../../lib/components/Admin/RegistroRoles.svelte";
 
     let expandido = false;
     let activeSection = "X"; // valor por defecto
@@ -191,7 +192,25 @@
         {:else if activeSection === "tabla_ciegos"}
             <TablaCiegos></TablaCiegos>
         {:else if activeSection === "registro_roles"}
-            <h1>Registrar Roles</h1>
+            <RegistrarRoles
+                on:showLoader={showLoader}
+                on:hideLoader={hideLoader}
+            ></RegistrarRoles>
+
+            <div class="loader-container" bind:this={registerLoader}>
+                <div class="loader-text">
+                    <span>S</span>
+                    <span>e</span>
+                    <span>n</span>
+                    <span>s</span>
+                    <span>u</span>
+                    <span>T</span>
+                    <span>r</span>
+                    <span>a</span>
+                    <span>c</span>
+                    <span>k</span>
+                </div>
+            </div>
         {:else if activeSection === "registro_modulos"}
             <h1>Registrar Módulos</h1>
         {:else if activeSection === "modulos_por_rol"}
