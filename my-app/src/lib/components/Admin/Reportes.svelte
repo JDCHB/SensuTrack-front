@@ -103,40 +103,39 @@
     }
 </script>
 
-<div class="container" style="margin-top: 2%;">
-    <div class="text-center pt-1 fs-3">
-        <p class="fw-bold text-primary">Reportes</p>
+<div class="container my-4 p-4 bg-white rounded shadow-lg">
+    <h2 class="text-center text-primary fw-bold mb-4">Reportes</h2>
+
+    <div class="mb-4">
+        <select class="form-select form-select-lg" id="opcion" required>
+            <option value="1">Discapacitados</option>
+            <option value="2">Usuarios</option>
+            <option value="3">Otro</option>
+        </select>
     </div>
 
-    <div class="row g-2">
-        <div class="col-xl-1"></div>
-        <div class="col-xl-10 text-center fs-3 py-5">
-            <select
-                class="form-select form-select-lg mb-3"
-                id="opcion"
-                required
+    <div class="row row-cols-1 row-cols-md-2 g-3 mb-4">
+        <div>
+            <label for="desde_ciegos" class="form-label fw-semibold"
+                >Desde:</label
             >
-                <option value="1">Discapacitados</option>
-                <option value="2">Usuarios</option>
-                <option value="3">Otro</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="row mb-4">
-        <div class="col-xl-6 text-end">
-            Desde:
             <input type="date" id="desde_ciegos" class="form-control" />
         </div>
-        <div class="col-xl-6">
-            Hasta:
+        <div>
+            <label for="hasta_ciegos" class="form-label fw-semibold"
+                >Hasta:</label
+            >
             <input type="date" id="hasta_ciegos" class="form-control" />
         </div>
     </div>
 
-    <div class="row justify-content-center">
-        <button type="button" class="btn btn-primary btn-lg" on:click={generar}>
-            <i class="fas fa-file-alt"></i> Generar Reporte
+    <div class="text-center mb-4">
+        <button
+            type="button"
+            class="btn btn-primary btn-lg px-4"
+            on:click={generar}
+        >
+            <i class="fas fa-file-alt me-2"></i> Generar Reporte
         </button>
     </div>
 </div>
@@ -144,7 +143,7 @@
 <!-- Mostrar Datos -->
 <div class="container py-4" id="MostrarReporte">
     {#if loading}
-        <div class="progress" style="height: 5px; margin-top: 20px;">
+        <div class="progress" style="height: 5px;">
             <div
                 class="progress-bar progress-bar-striped progress-bar-animated"
                 role="progressbar"
@@ -157,10 +156,12 @@
     {:else if error}
         <p class="text-danger text-center">Error: {error}</p>
     {:else if mostrarReporte}
-        <h2 class="mb-4 text-center">Discapacitados Registrados</h2>
-        <div class="overflow-x-auto">
-            <table class="table table-bordered table-striped table-responsive">
-                <thead>
+        <h3 class="mb-4 text-center text-secondary">
+            Discapacitados Registrados
+        </h3>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="table-light text-center">
                     <tr>
                         <th>Id</th>
                         <th>Nombre</th>
@@ -187,8 +188,8 @@
             </table>
         </div>
         <div class="text-center mt-4">
-            <button class="btn btn-success" on:click={exportarPDF}>
-                <i class="fas fa-download"></i> Exportar como PDF
+            <button class="btn btn-success btn-lg px-4" on:click={exportarPDF}>
+                <i class="fas fa-download me-2"></i> Exportar como PDF
             </button>
         </div>
     {/if}
@@ -196,85 +197,36 @@
 
 <style>
     .container {
-        max-width: 900px;
-        margin: auto;
-        padding: 30px;
-        background-color: #fff;
-        border-radius: 12px;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease;
+        max-width: 960px;
     }
 
-    .row {
-        margin-bottom: 20px;
-    }
-
-    input,
-    select,
-    button {
-        border-radius: 10px;
-        transition: all 0.3s ease;
-    }
-
-    input:focus,
-    select:focus,
-    button:focus {
-        outline: none;
-        box-shadow: 0 0 5px 3px #5a9bff;
-    }
-
-    button {
-        background-color: #5a9bff;
-        color: white;
-        border: none;
-        padding: 12px 20px;
-        cursor: pointer;
-        font-size: 1.1rem;
-        font-weight: bold;
-    }
-
-    button:hover {
-        background-color: #4b86e3;
-    }
-
-    button:active {
-        background-color: #3e75c7;
+    label {
+        font-weight: 500;
     }
 
     table {
-        width: 100%;
-        border-collapse: collapse;
+        font-size: 0.95rem;
     }
 
-    th,
-    td {
-        padding: 15px;
-        text-align: center;
-    }
-
-    th {
-        background-color: #f4f5f7;
-        color: #333;
-        font-weight: bold;
-    }
-
-    tr:nth-child(even) {
-        background-color: #f9f9f9;
-    }
-
-    tr:hover {
-        background-color: #e2e6ea;
-    }
-
-    .progress {
-        height: 5px;
-        margin-top: 20px;
+    button:focus {
+        box-shadow: 0 0 0 0.25rem rgba(90, 155, 255, 0.5);
     }
 
     #MostrarReporte {
-        background-color: #f1f3f7;
-        padding: 30px;
-        border-radius: 8px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        background-color: #f8f9fb;
+        border-radius: 12px;
+        margin-top: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    @media (max-width: 576px) {
+        h2,
+        h3 {
+            font-size: 1.4rem;
+        }
+
+        .btn {
+            font-size: 0.9rem;
+        }
     }
 </style>
