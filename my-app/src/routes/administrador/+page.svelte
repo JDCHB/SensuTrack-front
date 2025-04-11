@@ -53,7 +53,7 @@
         activeSection = "tabla_usuarios";
     }
     function mostrarTablaCiegos() {
-        activeSection = "tabla_ciegos";
+        activeSection = "tabla_discapacitados";
     }
     function mostrarRegistroRoles() {
         activeSection = "registro_roles";
@@ -111,7 +111,7 @@
             </button>
             <button on:click={mostrarTablaCiegos}>
                 <i class="bi bi-table"></i>
-                {#if expandido}<span>Tabla Ciegos</span>{/if}
+                {#if expandido}<span>Tabla Discapacitados</span>{/if}
             </button>
             <button on:click={mostrarRegistroRoles}>
                 <i class="bi bi-person-badge"></i>
@@ -193,7 +193,7 @@
             </div>
         {:else if activeSection === "tabla_usuarios"}
             <TablaUsuarios></TablaUsuarios>
-        {:else if activeSection === "tabla_ciegos"}
+        {:else if activeSection === "tabla_discapacitados"}
             <TablaCiegos></TablaCiegos>
         {:else if activeSection === "registro_roles"}
             <RegistrarRoles
