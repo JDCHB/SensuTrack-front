@@ -117,6 +117,15 @@
                 `${nombre_discapacitado} se encuentra en esta área.`,
             );
 
+            circle.on("click", (e) => {
+                if (!circle._editable) {
+                    e.target.closePopup(); // opcional
+                    e.originalEvent.stopPropagation(); // 🔒 evita selección para edición
+                }
+            });
+
+            circle._editable = false; // 🚫 No permitir edición ni eliminación
+
             // ✅ Añadir al grupo editable
             drawnItems.addLayer(circle);
         });
@@ -167,6 +176,8 @@
                     circle._idZona = zona.id;
                     // ✅ Agregar al grupo editable para que sea eliminable
                     drawnItems.addLayer(circle);
+
+                    circle._editable = true; // ✅ Esta sí se puede editar o eliminar
 
                     circle.bindPopup(`Zona Segura: <b>${nombre_zona}</b><br>
                     Radio: <b>${radio} metros</b>`);
@@ -308,11 +319,15 @@
                     .bindPopup(`Zona Segura: <b>${nombreZona}</b>`)
                     .openPopup();
 
-                Swal.fire(
-                    "¡Guardado!",
-                    "Zona segura registrada exitosamente",
-                    "success",
-                );
+                Swal.fire({
+                    title: "¡Guardado!",
+                    text: "Zona segura registrada exitosamente",
+                    icon: "success",
+                    timer: 3000, // la alerta se cierra automáticamente después de 2 segundos
+                    showConfirmButton: false,
+                }).then(() => {
+                    location.reload();
+                });
             } catch (e) {
                 console.error("Error al crear zona segura:", e);
                 map.removeLayer(layer);
@@ -323,6 +338,11 @@
         map.on("draw:deleted", async (event) => {
             const layers = event.layers;
             layers.eachLayer(async (layer) => {
+                if (!layer._editable) {
+                    // 🚫 Evitar eliminar si no es editable
+                    drawnItems.addLayer(layer); // Volver a agregar al mapa
+                    return;
+                }
                 try {
                     const idZonaSegura = layer._idZona;
                     if (!idZonaSegura) return;
@@ -336,11 +356,15 @@
                         throw new Error("No se pudo eliminar la zona");
                     }
 
-                    Swal.fire(
-                        "Eliminada",
-                        "Zona segura eliminada exitosamente",
-                        "success",
-                    );
+                    Swal.fire({
+                        title: "Eliminado!",
+                        text: "Zona segura eliminada exitosamente",
+                        icon: "success",
+                        timer: 3000, // la alerta se cierra automáticamente después de 2 segundos
+                        showConfirmButton: false,
+                    }).then(() => {
+                        location.reload();
+                    });
                 } catch (e) {
                     console.error("Error al eliminar zona:", e);
                     Swal.fire("Error", e.message, "error");
@@ -351,6 +375,9 @@
         map.on("draw:edited", async (event) => {
             const layers = event.layers;
             layers.eachLayer(async (layer) => {
+                if (!layer._editable) {
+                    return; // 🚫 Ignorar edición si no es editable
+                }
                 try {
                     const idZonaSegura = layer._idZona;
                     if (!idZonaSegura) return;
@@ -385,7 +412,15 @@
                         throw new Error("No se pudo actualizar la zona");
                     }
 
-                    Swal.fire("Editado", "Zona segura actualizada", "success");
+                    Swal.fire({
+                        title: "Editado!",
+                        text: "Zona segura editada exitosamente",
+                        icon: "success",
+                        timer: 3000, // la alerta se cierra automáticamente después de 2 segundos
+                        showConfirmButton: false,
+                    }).then(() => {
+                        location.reload();
+                    });
                 } catch (e) {
                     console.error("Error al editar zona:", e);
                     Swal.fire("Error", e.message, "error");
