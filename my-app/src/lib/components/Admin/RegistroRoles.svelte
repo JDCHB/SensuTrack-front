@@ -75,6 +75,7 @@
                             title: "custom-title", // Clase personalizada para el título
                         },
                     });
+                    location.reload();
                 } else {
                     alert("Error en el registro");
                 }
