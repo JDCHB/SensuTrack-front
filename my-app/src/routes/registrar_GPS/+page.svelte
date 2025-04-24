@@ -105,7 +105,7 @@
                         Registrar Discapacitado
                     </h3>
                     <p class="text-muted">
-                        Completa los detalles del nuevo usuario.
+                        Completa los detalles del formulario.
                     </p>
                 </div>
 
