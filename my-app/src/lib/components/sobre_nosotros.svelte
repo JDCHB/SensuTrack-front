@@ -34,22 +34,12 @@
     </div>
 
     <div class="my-4">
-        <h2 class="text-primary fw-bold">Accesibilidad y Diseño</h2>
-        <p class="fs-5">
-            En <span class="fw-bold">SensuTrack</span>, entendemos las
-            necesidades de las personas ciegas. Diseñamos herramientas
-            accesibles con retroalimentación auditiva y táctil, asegurando una
-            experiencia inclusiva y cómoda para todos.
-        </p>
-    </div>
-
-    <div class="my-4">
         <h2 class="text-primary fw-bold">Compromiso con la Comunidad</h2>
         <p class="fs-5">
             SensuTrack es un proyecto desarrollado con dedicación y esfuerzo por
-            un estudiante apasionado por la tecnología y su impacto social.
+            estudiantes apasionados por la tecnología y su impacto social.
             Creemos en marcar la diferencia con herramientas que realmente
-            apoyen la independencia y movilidad de las personas ciegas. Cada
+            apoyen la independencia y movilidad de las personas ciegas, cada
             paso dado en este proyecto refleja nuestro compromiso con quienes
             más lo necesitan.
         </p>
