@@ -36,9 +36,6 @@
     }
 
     // Acciones disponibles
-    function mostrarConfirmacionUser() {
-        window.location.href = "/usuario";
-    }
     function mostrarConfirmacionRegistroUsuario() {
         activeSection = "registro_usuario";
     }
@@ -89,10 +86,6 @@
         </div>
 
         <nav>
-            <button on:click={mostrarConfirmacionUser}>
-                <i class="bi bi-person-video"></i>
-                {#if expandido}<span>Vista de Usuario</span>{/if}
-            </button>
             <button on:click={mostrarConfirmacionRegistroUsuario}>
                 <i class="bi bi-person-add"></i>
                 {#if expandido}<span>Registrar Usuario</span>{/if}
@@ -125,14 +118,14 @@
                 <i class="bi bi-shield-lock"></i>
                 {#if expandido}<span>Asignar Módulo</span>{/if}
             </button>
-            <button on:click={mostrarTableroPowerBI}>
+            <!-- <button on:click={mostrarTableroPowerBI}>
                 <i class="bi bi-graph-up"></i>
                 {#if expandido}<span>Tablero</span>{/if}
-            </button>
-            <button on:click={mostrarHistorialUbicaciones}>
+            </button> -->
+            <!-- <button on:click={mostrarHistorialUbicaciones}>
                 <i class="bi bi-map"></i>
                 {#if expandido}<span>Ubicaciones</span>{/if}
-            </button>
+            </button> -->
             <button on:click={logout} class="logout">
                 <i class="bi bi-power"></i>
                 {#if expandido}<span>Cerrar Sesión</span>{/if}
@@ -236,10 +229,10 @@
             </div>
         {:else if activeSection === "modulos_por_rol"}
             <ModuloxRol></ModuloxRol>
-        {:else if activeSection === "tablero"}
-            <PowerBi></PowerBi>
-        {:else if activeSection === "historial_ubicaciones"}
-            <HistorialUbi></HistorialUbi>
+            <!-- {:else if activeSection === "tablero"}
+            <PowerBi></PowerBi> -->
+            <!-- {:else if activeSection === "historial_ubicaciones"}
+            <HistorialUbi></HistorialUbi> -->
         {/if}
     </main>
 </div>
