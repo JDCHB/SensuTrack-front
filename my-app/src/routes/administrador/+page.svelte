@@ -229,8 +229,8 @@
             </div>
         {:else if activeSection === "modulos_por_rol"}
             <ModuloxRol></ModuloxRol>
-            <!-- {:else if activeSection === "tablero"}
-            <PowerBi></PowerBi> -->
+        {:else if activeSection === "tablero"}
+            <PowerBi></PowerBi>
             <!-- {:else if activeSection === "historial_ubicaciones"}
             <HistorialUbi></HistorialUbi> -->
         {/if}
