@@ -70,8 +70,12 @@
             class="d-inline-block align-top rounded-circle"
             alt="PetTracker logo"
         />
-        <span class="ms-2 text-dark fw-bold">SensuTrack</span>
+        <div class="ms-2 d-flex flex-column">
+            <span class="text-dark fw-bold">{usuario.nombre}</span>
+            <span class="text-muted small">SensuTrack</span>
+        </div>
     </a>
+
     <button
         class="navbar-toggler"
         type="button"
