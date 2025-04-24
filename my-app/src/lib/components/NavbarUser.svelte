@@ -97,12 +97,8 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link text-dark fw-bold" href="/tracking">
-                    <i class="bi bi-pin-map"></i> Tracker Now
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark fw-bold" href="/usuario">
-                    <i class="bi bi-gear"></i> Servicios
+                    <i class="bi bi-geo-alt-fill"></i>
+                    Ubicación en vivo
                 </a>
             </li>
 

@@ -1,49 +1,45 @@
 <section class="section-icons">
-    <div class="container">
-        <div class="row">
-            <!-- Envio Gratis -->
-            <div
-                class="col-12 col-md-6 col-lg-4 box-icons"
-                style="padding-left: 5%;"
-            >
-                <div class="d-flex align-items-center">
-                    <i class="bi bi-airplane display-4 icon"></i>
-                    <div class="ms-4">
-                        <h3 class="fw-bold">Envío Gratis</h3>
+    <div class="container" style="margin-left: 8%;">
+        <div class="row justify-content-center text-center">
+            <!-- Envío Accesible -->
+            <div class="col-12 col-md-6 col-lg-4 box-icons">
+                <div class="d-flex align-items-center justify-content-center">
+                    <i class="bi bi-truck display-4 icon"></i>
+                    <div class="ms-4 text-start">
+                        <h3 class="fw-bold">Envío Accesible</h3>
                         <p>
-                            Envíos totalmente gratis a cualquier parte.
-                            ¡Aprovecha ahora!
+                            Entregamos nuestros productos sin costo adicional,
+                            directamente donde los necesites. ¡Comprometidos
+                            contigo!
                         </p>
                     </div>
                 </div>
             </div>
 
-            <!-- Rembolsos -->
-            <div
-                class="col-12 col-md-6 col-lg-4 box-icons"
-                style="padding-left: 5%;"
-            >
-                <div class="d-flex align-items-center">
-                    <i class="bi bi-cash-coin display-4 icon"></i>
-                    <div class="ms-4">
-                        <h3 class="fw-bold">Rembolsos</h3>
-                        <p>Si no estás satisfecho, te devolvemos el dinero.</p>
+            <!-- Apoyo Garantizado -->
+            <div class="col-12 col-md-6 col-lg-4 box-icons">
+                <div class="d-flex align-items-center justify-content-center">
+                    <i class="bi bi-shield-check display-4 icon"></i>
+                    <div class="ms-4 text-start">
+                        <h3 class="fw-bold">Apoyo Garantizado</h3>
+                        <p>
+                            Confía en nuestros servicios. Si algo no cumple tus
+                            expectativas, estamos aquí para ayudarte.
+                        </p>
                     </div>
                 </div>
             </div>
 
             <!-- Gran Regalo -->
-            <div
-                class="col-12 col-md-6 col-lg-4 box-icons"
-                style="padding-left: 5%;"
-            >
-                <div class="d-flex align-items-center">
-                    <i class="bi bi-gift-fill display-4 icon"></i>
-                    <div class="ms-4">
-                        <h3 class="fw-bold">Un Gran Regalo</h3>
+            <div class="col-12 col-md-6 col-lg-4 box-icons">
+                <div class="d-flex align-items-center justify-content-center">
+                    <i class="bi bi-heart-fill display-4 icon"></i>
+                    <div class="ms-4 text-start">
+                        <h3 class="fw-bold">Apoyo con Corazón</h3>
                         <p>
-                            El mejor regalo para tu peludo amigo. ¡Hazlo feliz
-                            hoy!
+                            Una herramienta pensada para mejorar la calidad de
+                            vida de las personas con discapacidad. ¡Tu bienestar
+                            es nuestra prioridad!
                         </p>
                     </div>
                 </div>
