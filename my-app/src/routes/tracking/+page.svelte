@@ -76,7 +76,7 @@
     function mostrarUbicaciones() {
         if (!map) return;
 
-        // Limpiar marcadores existentes
+        // Limpiar marcadores y círculos existentes
         if (drawnItems) {
             drawnItems.clearLayers();
         } else {
@@ -84,7 +84,7 @@
             map.addLayer(drawnItems);
         }
 
-        ciegos.forEach((discapacitado) => {
+        ciegos.forEach((discapacitado, index) => {
             const {
                 nombre_discapacitado,
                 latitud,
@@ -93,24 +93,17 @@
                 nivel_bateria,
             } = discapacitado;
 
-            const marker = L.marker([latitud, longitud]).addTo(map);
+            // ✅ Crear el marcador y añadirlo al grupo drawnItems
+            const marker = L.marker([latitud, longitud]);
             marker.bindPopup(`
-                <b>${nombre_discapacitado}</b><br>
-                Latitud: ${latitud}, Longitud: ${longitud}<br>
-                GPS: ${numero_serie}<br>
-                Nivel de Batería: ${nivel_bateria}%
-            `);
+            <b>${nombre_discapacitado}</b><br>
+            Latitud: ${latitud}, Longitud: ${longitud}<br>
+            GPS: ${numero_serie}<br>
+            Nivel de Batería: ${nivel_bateria}%
+        `);
+            drawnItems.addLayer(marker);
 
-            // const circle = L.circle([latitud, longitud], {
-            //     color: "red",
-            //     fillColor: "#f03",
-            //     fillOpacity: 0.5,
-            //     radius: 100,
-            // }).addTo(map);
-            // circle.bindPopup(
-            //     `${nombre_discapacitado} se encuentra en esta área.`,
-            // );
-
+            // Crear círculo y también añadirlo al grupo drawnItems
             const circle = L.circle([latitud, longitud], {
                 color: "red",
                 fillColor: "#f03",
@@ -123,15 +116,18 @@
 
             circle.on("click", (e) => {
                 if (!circle._editable) {
-                    e.target.closePopup(); // opcional
+                    e.target.closePopup();
                     e.originalEvent.stopPropagation(); // 🔒 evita selección para edición
                 }
             });
 
             circle._editable = false; // 🚫 No permitir edición ni eliminación
-
-            // ✅ Añadir al grupo editable
             drawnItems.addLayer(circle);
+
+            // Centrar el mapa en el primer discapacitado
+            if (index === 0) {
+                map.setView([latitud, longitud], 15);
+            }
         });
     }
 
