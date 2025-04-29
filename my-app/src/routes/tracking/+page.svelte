@@ -45,11 +45,15 @@
                 },
             );
 
+            const data = await response.json(); // <-- leer el cuerpo de la respuesta
+
             if (!response.ok) {
-                throw new Error(`Error HTTP: ${response.status}`);
+                // Mostrar el mensaje personalizado del backend si lo hay
+                const errorMsg =
+                    data.detail || `Error HTTP: ${response.status}`;
+                throw new Error(errorMsg);
             }
 
-            const data = await response.json();
             ciegos = data.resultado || [];
             mostrarUbicaciones();
             cargando = false;
