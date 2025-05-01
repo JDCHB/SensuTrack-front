@@ -52,6 +52,7 @@
             console.log(data);
 
             todos = data.resultado;
+            console.log(todos);
             mostrarReporte = true;
             setTimeout(() => globalThis.$("#myTable").DataTable(), 0);
         } catch (e) {
@@ -91,7 +92,11 @@
             20,
             "Reporte de discapacitados visuales registrados en la página",
         );
-        pdf.autoTable(columns, body, { startY: 30 });
+        pdf.autoTable({
+            columns: columns,
+            body: body,
+            margin: { top: 70 },
+        });
         pdf.save("ReporteDiscapacitados.pdf");
         Swal.fire({
             position: "center",

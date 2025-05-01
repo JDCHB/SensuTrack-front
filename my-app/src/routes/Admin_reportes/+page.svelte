@@ -93,7 +93,11 @@
             20,
             "Reporte de discapacitados visuales registrados en la página",
         );
-        pdf.autoTable(columns, body, { startY: 30 });
+        pdf.autoTable({
+            columns: columns,
+            body: body,
+            margin: { top: 70 },
+        });
         pdf.save("ReporteDiscapacitados.pdf");
         Swal.fire({
             position: "center",
@@ -191,7 +195,7 @@
             </table>
         </div>
         <div class="text-center mt-4">
-            <button class="btn btn-success" on:click={exportarPDF}>
+            <button class="btn btn-success" on:click={exportarPDF()}>
                 <i class="fas fa-download"></i> Exportar como PDF
             </button>
         </div>
