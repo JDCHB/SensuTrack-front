@@ -13,7 +13,7 @@
 <section class="benefits py-5">
     <div class="container">
         <h2 class="text-center mb-5" style="color:#006aff ;">
-            Beneficios del GPS para Personas Ciegas
+            Beneficios del GPS para Personas con Discapacidad Visual
         </h2>
         <div class="row justify-content-center">
             <!-- Beneficio 1: Rastreo en Tiempo Real -->

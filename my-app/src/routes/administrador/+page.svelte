@@ -118,14 +118,14 @@
                 <i class="bi bi-shield-lock"></i>
                 {#if expandido}<span>Asignar Módulo</span>{/if}
             </button>
-            <!-- <button on:click={mostrarTableroPowerBI}>
+            <button on:click={mostrarTableroPowerBI}>
                 <i class="bi bi-graph-up"></i>
                 {#if expandido}<span>Tablero</span>{/if}
-            </button> -->
-            <!-- <button on:click={mostrarHistorialUbicaciones}>
+            </button>
+            <button on:click={mostrarHistorialUbicaciones}>
                 <i class="bi bi-map"></i>
                 {#if expandido}<span>Ubicaciones</span>{/if}
-            </button> -->
+            </button>
             <button on:click={logout} class="logout">
                 <i class="bi bi-power"></i>
                 {#if expandido}<span>Cerrar Sesión</span>{/if}
@@ -231,8 +231,8 @@
             <ModuloxRol></ModuloxRol>
         {:else if activeSection === "tablero"}
             <PowerBi></PowerBi>
-            <!-- {:else if activeSection === "historial_ubicaciones"}
-            <HistorialUbi></HistorialUbi> -->
+        {:else if activeSection === "historial_ubicaciones"}
+            <HistorialUbi></HistorialUbi>
         {/if}
     </main>
 </div>
