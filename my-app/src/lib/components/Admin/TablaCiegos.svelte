@@ -78,6 +78,8 @@
             console.log(todos);
             document.getElementById("nombres").value = data.nombre;
 
+            document.getElementById("documento").value = data.documento;
+
             document.getElementById("genero").value =
                 data.id_genero_discapacitado;
 
@@ -93,6 +95,10 @@
             const v_edit_nombre = document.getElementById("nombres");
             v_edit_nombre.removeAttribute("readonly");
             v_edit_nombre.focus();
+
+            const v_edit_documento = document.getElementById("documento");
+            v_edit_documento.removeAttribute("readonly");
+            v_edit_documento.focus();
 
             const v_edit_genero = document.getElementById("genero");
             v_edit_genero.removeAttribute("readonly");
@@ -112,6 +118,7 @@
     async function actualizar() {
         console.log(vid);
         let vnombre = document.getElementById("nombres").value;
+        let vdocumento = document.getElementById("documento").value;
         let vgenero = document.getElementById("genero").value;
         let vtipoceguera = document.getElementById("tipo_ceguera").value;
         let vestado = document.getElementById("estado").value;
@@ -122,7 +129,7 @@
             console.log("Entra al try de actualzar");
 
             const response = await fetch(
-                `https://proyectomascotas.onrender.com/update_user/${vid}`, // Incluye el user_id en la URL
+                `https://proyectomascotas.onrender.com/update_discapacitadoV/${vid}`, // Incluye el user_id en la URL
                 {
                     method: "PUT",
                     headers: {
@@ -130,8 +137,9 @@
                     },
                     body: JSON.stringify({
                         nombre: vnombre,
-                        genero: vgenero,
-                        tipo_ceguera: vtipoceguera,
+                        documento: vdocumento,
+                        id_genero_discapacitado: vgenero,
+                        id_tipo_ceguera: vtipoceguera,
                         estado: vestado,
                     }),
                 },
@@ -335,6 +343,7 @@
                     <thead class="thead-light text-center">
                         <tr>
                             <th class="px-4 py-2 border">Nombre</th>
+                            <th class="px-4 py-2 border">Documento</th>
                             <th class="px-4 py-2 border">Genero</th>
                             <th class="px-4 py-2 border">Tipo_Ceguera</th>
                             <th class="px-4 py-2 border">Estado</th>
@@ -346,6 +355,7 @@
                         {#each todos as todo}
                             <tr>
                                 <td>{todo.nombre}</td>
+                                <td>{todo.documento}</td>
                                 <td>{todo.genero}</td>
                                 <td>{todo.tipo_ceguera}</td>
                                 <td class="text-center">
@@ -441,6 +451,23 @@
                         id="nombres"
                         class="form-control"
                         placeholder="Nombres"
+                        maxlength="100"
+                        readonly
+                    />
+                </div>
+            </div>
+
+            <!-- Documento -->
+            <div class="mb-3 row">
+                <label for="nombres" class="col-lg-3 col-form-label"
+                    ><b>Documento:</b></label
+                >
+                <div class="col-lg-9">
+                    <input
+                        type="text"
+                        id="documento"
+                        class="form-control"
+                        placeholder="Documento de Identidad"
                         maxlength="100"
                         readonly
                     />
