@@ -62,7 +62,7 @@
             console.log("Entra al try de buscar");
 
             const response = await fetch(
-                `https://proyectomascotas.onrender.com/get_discapacitadoV/${vid}`,
+                `https://proyectomascotas.onrender.com/get_discapacitadoV_Completo/${vid}`,
                 {
                     method: "GET",
                     headers: {
@@ -71,8 +71,22 @@
                 },
             );
             const data = await response.json();
-            console.log(response);
-            console.log(data);
+
+            const response2 = await fetch(
+                `https://proyectomascotas.onrender.com/get_discapacitadoV/${vid}`,
+                {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                },
+            );
+            const data2 = await response2.json();
+
+            console.log("Este es el response del completo: ", response);
+            console.log("Estos son los datos del completo: ", data);
+            console.log("Este es el response del incompleto: ", response2);
+            console.log("Estos son los datos del incompleto: ", data2);
             console.log("Buscando al usuario seleccionado");
             todos = data.nombre;
             console.log(todos);
@@ -80,11 +94,13 @@
 
             document.getElementById("documento").value = data.documento;
 
-            document.getElementById("genero").value =
-                data.id_genero_discapacitado;
+            const genero_v = data2.genero ? "1" : "2"; //condicion ? valorSiVerdadero : valorSiFalso
 
-            document.getElementById("tipo_ceguera").value =
-                data.id_tipo_ceguera;
+            document.getElementById("genero").value = genero_v;
+
+            const tipo_ceguera_v = data2.tipo_ceguera ? "1" : "2"; //condicion ? valorSiVerdadero : valorSiFalso
+
+            document.getElementById("tipo_ceguera").value = tipo_ceguera_v;
 
             console.log("verificando el estado: " + data.estado);
 
@@ -480,13 +496,10 @@
                     ><b>Género:</b></label
                 >
                 <div class="col-lg-9">
-                    <input
-                        type="text"
-                        id="genero"
-                        class="form-control"
-                        placeholder="Género"
-                        readonly
-                    />
+                    <select id="genero" class="form-control">
+                        <option value="1">Masculino</option>
+                        <option value="2">Femenino</option>
+                    </select>
                 </div>
             </div>
 
@@ -496,13 +509,10 @@
                     ><b>Tipo de Ceguera:</b></label
                 >
                 <div class="col-lg-9">
-                    <input
-                        type="text"
-                        id="tipo_ceguera"
-                        class="form-control"
-                        placeholder="Tipo de Ceguera"
-                        readonly
-                    />
+                    <select id="tipo_ceguera" class="form-control">
+                        <option value="1">Ceguera total</option>
+                        <option value="2">Baja visión</option>
+                    </select>
                 </div>
             </div>
 
