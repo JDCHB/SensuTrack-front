@@ -190,73 +190,50 @@
         }
     }
 
-    /*const serviceID = "service_acpug5r";
-    const templateID = "template_bloqueouser";
-    const apikey = "3bmpPn1S0SLhgotWj";*/
+    const serviceID = "service_r884bhj";
+    const templateID = "template_0fzmiop";
+    const apikey = "_i5SKyKzZVH6mFnaE";
 
-    async function desactivar(id /*nombre, email*/) {
+    emailjs.init(apikey);
+
+    async function desactivar(id, nombre, email) {
         let vestado = 0;
-        let vid = id;
         let estadoBooleano = vestado !== 0;
-        //console.log("Correo" + email);
+
         try {
             const response = await fetch(
-                `https://proyectomascotas.onrender.com/update_estado_user/${vid}`,
+                `https://proyectomascotas.onrender.com/update_estado_user/${id}`,
                 {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify({
-                        estado: estadoBooleano, // Envía el valor booleano
-                    }),
+                    body: JSON.stringify({ estado: estadoBooleano }),
                 },
             );
 
             const data = await response.json();
 
             if (response.ok) {
-                const Toast = Swal.mixin({
+                emailjs.send(serviceID, templateID, {
+                    nombre_usuario: nombre,
+                    email: email,
+                    estado: "desactivada",
+                });
+
+                Swal.fire({
                     toast: true,
                     position: "bottom-end",
                     showConfirmButton: false,
                     timer: 3000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.onmouseenter = Swal.stopTimer;
-                        toast.onmouseleave = Swal.resumeTimer;
-                    },
-                });
-                Toast.fire({
                     icon: "error",
                     iconColor: "white",
-                    color: "white",
                     background: "#ff4e4e",
-                    title: "El Usuario a sido desactivado de manera exitosa",
+                    color: "white",
+                    title: "El Usuario ha sido desactivado exitosamente",
                 });
-                //sendEmail()
 
-                /*function sendEmail() {
-                    emailjs.init(apikey);
-                    emailjs
-                        .send(serviceID, templateID, {
-                            nombre: nombre,
-                            email: email,
-                        })
-                        .then((result) => {
-                            console.log("Correo enviado con exito");
-                        })
-                        .catch((error) => {
-                            console.log(
-                                "Error al enviar el correo:",
-                                error.text,
-                            );
-                        });
-                }*/
-
-                setTimeout(() => {
-                    location.reload();
-                }, 3500);
+                setTimeout(() => location.reload(), 3500);
             } else {
                 alert(
                     "Error al desactivar: " + data.message ||
@@ -268,7 +245,7 @@
         }
     }
 
-    async function activar(id) {
+    async function activar(id, nombre, email) {
         let vestado = 1;
         let vid = id;
 
@@ -292,6 +269,12 @@
             const data = await response.json();
 
             if (response.ok) {
+                emailjs.send(serviceID, templateID, {
+                    nombre_usuario: nombre,
+                    email: email,
+                    estado: "activada",
+                });
+
                 const Toast = Swal.mixin({
                     toast: true,
                     position: "bottom-end",
@@ -394,7 +377,11 @@
                                             <button
                                                 class="btn btn-sm btn-outline-danger"
                                                 on:click={() =>
-                                                    desactivar(todo.id)}
+                                                    desactivar(
+                                                        todo.id,
+                                                        todo.nombre,
+                                                        todo.email,
+                                                    )}
                                             >
                                                 <i class="bi bi-lock"></i>
                                                 <span class="d-none d-md-inline"
@@ -405,7 +392,11 @@
                                             <button
                                                 class="btn btn-sm btn-outline-success"
                                                 on:click={() =>
-                                                    activar(todo.id)}
+                                                    activar(
+                                                        todo.id,
+                                                        todo.nombre,
+                                                        todo.email,
+                                                    )}
                                             >
                                                 <i class="bi bi-unlock"></i>
                                                 <span class="d-none d-md-inline"
