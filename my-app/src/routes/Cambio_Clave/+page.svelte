@@ -184,37 +184,39 @@
 <ChatBot></ChatBot>
 <div class="wrapper">
     <div class="container py-5">
-        <div class="text-center">
-            <h2 class="title text-primary">Cambio de Contraseña</h2>
+        <div class="text-center mb-4">
+            <h2 class="title text-primary">🔒 Cambio de Contraseña</h2>
             <p class="lead text-muted">
-                Por favor, ingrese su correo electrónico registrado en el
-                sistema
+                Ingresa tu correo electrónico registrado para restablecer tu
+                contraseña.
             </p>
         </div>
+
         <div class="row justify-content-center">
-            <div class="col-md-6">
-                <label for="correo" class="form-label fw-bold"
-                    >Correo Electrónico</label
-                >
-                <input
-                    type="email"
-                    class="form-control form-control-lg"
-                    placeholder="ejemplo@correo.com"
-                    id="correo"
-                    bind:value={vl_correo}
-                    required
-                />
+            <div class="col-md-10">
+                <div class="form-floating mb-4">
+                    <input
+                        type="email"
+                        class="form-control"
+                        placeholder="ejemplo@correo.com"
+                        id="correo"
+                        bind:value={vl_correo}
+                        required
+                    />
+                    <label for="correo">Correo Electrónico</label>
+                </div>
             </div>
         </div>
-        <div class="text-center mt-4">
+
+        <div class="text-center mt-3">
             <button
                 on:click={buscar_correo}
                 type="button"
-                class="btn btn-primary btn-lg px-4"
+                class="btn btn-lg btn-gradient px-5 shadow"
                 data-bs-toggle="modal"
                 data-bs-target="#staticBackdrop"
             >
-                Enviar
+                Enviar Solicitud
             </button>
         </div>
     </div>
@@ -222,87 +224,75 @@
     <!-- Loader -->
     <div class="loader-container" bind:this={registerLoader}>
         <div class="loader-text">
-            <span>S</span>
-            <span>e</span>
-            <span>n</span>
-            <span>s</span>
-            <span>u</span>
-            <span>T</span>
-            <span>r</span>
-            <span>a</span>
-            <span>c</span>
-            <span>k</span>
+            <span>S</span><span>e</span><span>n</span><span>s</span><span
+                >u</span
+            >
+            <span>T</span><span>r</span><span>a</span><span>c</span><span
+                >k</span
+            >
         </div>
     </div>
 </div>
 
 <style>
     .wrapper {
-        max-width: 600px;
-        margin: 80px auto;
-        padding: 40px;
-        background: #fff;
-        border-radius: 12px;
+        position: relative;
+        max-width: 550px;
+        margin: 100px auto;
+        padding: 50px 40px;
+        background: #ffffff;
+        border-radius: 1rem;
         border: 1px solid #dee2e6;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-        text-align: center;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
+        transition: all 0.3s ease-in-out;
     }
 
-    /* Título */
     .title {
-        font-size: 2rem;
-        font-weight: bold;
+        font-size: 2.2rem;
+        font-weight: 700;
         font-family: "Poppins", sans-serif;
     }
 
-    /* Contenedor para el loader */
-    .loader-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
-        display: none; /* Oculto por defecto */
-        justify-content: center;
-        align-items: center;
-        z-index: 100; /* Asegúrate de que esté encima de otros elementos */
+    .form-control {
+        padding: 1rem;
+        border-radius: 0.75rem;
+        font-size: 1rem;
     }
 
-    /* Contenedor para el loader */
-    .loader-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
-        display: none; /* Oculto por defecto */
-        justify-content: center;
-        align-items: center;
-        z-index: 100; /* Asegúrate de que esté encima de otros elementos */
+    .btn-gradient {
+        background: linear-gradient(90deg, #4f46e5, #3b82f6);
+        color: white;
+        border: none;
+        border-radius: 0.75rem;
+        font-weight: 600;
+        transition: 0.3s ease-in-out;
     }
 
-    /* Contenedor para el loader */
+    .btn-gradient:hover {
+        background: linear-gradient(90deg, #4338ca, #2563eb);
+        transform: translateY(-2px);
+    }
+
     .loader-container {
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(255, 255, 255, 0.85);
         display: none;
         justify-content: center;
         align-items: center;
-        z-index: 100;
+        z-index: 10;
+        border-radius: 1rem;
     }
 
     .loader-text {
         display: flex;
-        font-size: 48px;
+        font-size: 40px;
         font-weight: bold;
         letter-spacing: 5px;
-        color: #007bff; /* Color azul principal */
+        color: #3b82f6;
         animation: fadeIn 1.5s infinite alternate;
     }
 
@@ -349,7 +339,7 @@
             opacity: 0.7;
         }
         50% {
-            transform: translateY(-15px);
+            transform: translateY(-10px);
             opacity: 1;
         }
     }
