@@ -14,6 +14,9 @@
     let activeSection = "X"; // valor por defecto
     let registerLoader;
 
+    const userData = JSON.parse(localStorage.getItem("user_data"));
+    let nombreUsuario = userData?.nombre || "Usuario";
+
     function showLoader() {
         registerLoader.style.display = "flex";
     }
@@ -80,6 +83,9 @@
         <div class="sidebar-header">
             {#if expandido}
                 <h2>Super Admin</h2>
+                <small style="font-size: 0.8rem; color: #cbd5e1;"
+                    >{nombreUsuario}</small
+                >
             {:else}
                 <i class="bi bi-person-circle fs-3"></i>
             {/if}

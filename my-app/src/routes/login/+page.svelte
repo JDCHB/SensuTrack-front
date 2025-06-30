@@ -83,16 +83,18 @@
           let v_nombre = user_data.nombre;
           Swal.fire({
             title: "Inicio de Sesión Exitoso",
-            text: "¡Bienvenido al Sistema de Super Administrador!",
+            text: "¡Bienvenido al Sistema de Super Administrador! " + v_nombre,
             icon: "success",
             confirmButtonText: "OK",
           }).then(() => {
             window.location.href = "/administrador";
           });
         } else if (user_data.id_rol == 2) {
+          todos = user_data;
+          let v_nombre = user_data.nombre;
           Swal.fire({
             title: "Inicio de Sesión Exitoso",
-            text: "¡Bienvenido al Sistema de Usuario!",
+            text: "¡Bienvenido al Sistema de Usuario! " + v_nombre,
             icon: "success",
             confirmButtonText: "OK",
             customClass: {
@@ -103,9 +105,11 @@
             window.location.href = "/usuario";
           });
         } else if (user_data.id_rol == 1) {
+          todos = user_data;
+          let v_nombre = user_data.nombre;
           Swal.fire({
             title: "Inicio de Sesión Exitoso",
-            text: "¡Bienvenido al Sistema de Administrador!",
+            text: "¡Bienvenido al Sistema de Administrador! " + v_nombre,
             icon: "success",
             confirmButtonText: "OK",
             customClass: {
