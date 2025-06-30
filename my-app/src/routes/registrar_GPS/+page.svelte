@@ -5,6 +5,7 @@
     import { onMount } from "svelte";
 
     let v_nombre = "";
+    let v_documento = "";
     let v_genero = "";
     let v_tipo_ceguera = "";
     let v_id_cuidador = "";
@@ -50,6 +51,7 @@
                     },
                     body: JSON.stringify({
                         nombre: v_nombre,
+                        documento: v_documento,
                         id_genero_discapacitado: v_genero,
                         id_tipo_ceguera: v_tipo_ceguera,
                         id_cuidador: v_id_cuidador,
@@ -123,6 +125,23 @@
                             id="nombre"
                             placeholder="Nombre"
                             bind:value={v_nombre}
+                            required
+                        />
+                    </div>
+
+                    <div class="mb-3">
+                        <label
+                            for="nombre"
+                            class="form-label text-primary fw-semibold"
+                        >
+                            Documento
+                        </label>
+                        <input
+                            type="text"
+                            class="form-control shadow-sm"
+                            id="Documento"
+                            placeholder="Documento de Identidad"
+                            bind:value={v_documento}
                             required
                         />
                     </div>
