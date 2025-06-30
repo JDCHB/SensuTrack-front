@@ -1,245 +1,177 @@
 <script>
-    import { onMount, createEventDispatcher } from "svelte";
-    let numero_serie = "";
-    let v_nivel_bateria = 100;
-    let id_ciego_vinculado = "";
-    let v_estado = true;
-    let mensaje = null;
+    import { onMount } from "svelte";
+
+    let todos = {};
+    let loading = true;
     let error = null;
 
-    //ESTOS 3 DE AQUI SON PARA LA TABLA
-    let todos = {};
-    let todos2 = {};
-
     onMount(async () => {
-        const response2 = await fetch(
-            "https://proyectomascotas.onrender.com/get_discapacitadosV_SIN_GPS/",
-        );
-        const data2 = await response2.json();
-        todos2 = data2.resultado;
-        console.log(todos2);
-    });
-
-    const dispatch = createEventDispatcher();
-
-    // Función para manejar el envío del formulario
-    async function RegistrarGPS() {
         try {
-            dispatch("showLoader"); // 🔥 emitir evento personalizado
+            console.log("2");
             const response = await fetch(
-                "https://proyectomascotas.onrender.com/create_gps",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        numero_serie: numero_serie,
-                        nivel_bateria: v_nivel_bateria,
-                        id_ciego_vinculado: parseInt(id_ciego_vinculado),
-                        estado: v_estado,
-                    }),
-                },
+                "https://proyectomascotas.onrender.com/get_discapacitadosV_SIN_VERIFICAR",
             );
-
+            if (!response.ok) throw new Error("Error al cargar los datos");
             const data = await response.json();
-            console.log(data);
-            dispatch("hideLoader"); // 🔥 cuando termina
-            if (response.ok) {
-                mensaje = data.resultado; // Mensaje exitoso
-                error = null; // Limpia el error si lo hubo
-                numero_serie = "";
-                id_ciego_vinculado = "";
-                Swal.fire({
-                    title: "El GPS ha sido Registrado Exitosamente!",
-                    icon: "success",
-                    confirmButtonText: "OK",
-                });
-            } else {
-                swalWithBootstrapButtons.fire({
-                    title: "Parece que ha ocurrido un error",
-                    text: "Revise que todo este correcto porfavor :]",
-                    icon: "error",
-                });
-                throw new Error(data.detail || "Ocurrió un error");
-            }
+            todos = data.resultado;
+            console.log(todos);
+
+            setTimeout(() => {
+                globalThis.$("#myTable").DataTable(); // Para convertrlo en datatable :D
+            }, 0);
         } catch (e) {
             error = e.message;
-            dispatch("hideLoader"); // 🔥 cuando termina
-            mensaje = null; // Limpia el mensaje si hubo un error
+        } finally {
+            loading = false;
+        }
+    });
+
+    const serviceID = "service_r884bhj";
+    const templateID = "template_w6dr1lr"; //REGISTRO RECHAZADO
+    const apikey = "_i5SKyKzZVH6mFnaE";
+
+    async function rechazar(
+        id,
+        nombreDiscapacitado,
+        Usuario_Cuidador,
+        Nombre_Cuidador,
+    ) {
+        const confirmar = confirm(
+            `¿Estás seguro de rechazar la solicitud de ${nombreDiscapacitado}?`,
+        );
+        if (!confirmar) return;
+
+        try {
+            const res = await fetch(
+                `https://proyectomascotas.onrender.com/delete_discapacitadoV/${id}`,
+                { method: "DELETE" },
+            );
+            if (!res.ok) throw new Error("No se pudo rechazar la solicitud");
+
+            await emailjs.send(
+                serviceID,
+                templateID,
+                {
+                    usuario_cuidador: Nombre_Cuidador,
+                    nombre_discapacitado: nombreDiscapacitado,
+                    email: Usuario_Cuidador,
+                },
+                apikey,
+            );
+
+            alert(
+                "Solicitud rechazada correctamente. Se notificó al cuidador.",
+            );
+            location.reload();
+        } catch (err) {
+            console.error("Error al rechazar:", err);
+            alert("Error al rechazar: " + err.message);
         }
     }
 </script>
 
-<div class="wrapper">
-    <div class="title small-title" style="color: dodgerblue;">
-        REGISTRAR GPS
-    </div>
-    <form on:submit|preventDefault={RegistrarGPS} class="class-form">
-        <div class="form-group">
-            <label for="numero_serie">Número de Serie:</label>
-            <span>Registre el Número de Serie del GPS:</span>
-            <input
-                id="numero_serie"
-                type="text"
-                bind:value={numero_serie}
-                class="form__input"
-                placeholder="Ingrese el Serial del GPS"
-                required
-            />
-        </div>
-        <span>Usuarios Discapacitados Resgistrados:</span>
-        <!-- Selector de usuarios discapacitados -->
-        <select
-            id="ciegos"
-            class="form__input"
-            bind:value={id_ciego_vinculado}
-            required
-        >
-            <option value="" disabled selected
-                >Selecciona el Discapacitado que tendra el GPS</option
+<div id="MostrarDiscapacitado">
+    <div class="container py-4 bg-light rounded shadow">
+        <h2 class="text-center mb-4 pb-2 fw-bold">
+            <i class="bi bi-eye-slash-fill me-2 text-primary"></i>
+            Discapacitados por Verificar
+            <i class="bi bi-eye-slash-fill ms-2 text-primary"></i>
+        </h2>
+
+        {#if loading}
+            <div
+                class="d-flex flex-column align-items-center justify-content-center py-5"
             >
-            {#each todos2 as todo}
-                <option value={todo.id}>{todo.nombre}</option>
-            {/each}
-        </select>
+                <div
+                    class="spinner-border text-primary"
+                    style="width: 3rem; height: 3rem;"
+                    role="status"
+                >
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mt-3 text-muted">
+                    Cargando discapacitados por verificar...
+                </p>
+            </div>
+        {:else if error}
+            <div class="alert alert-danger text-center">{error}</div>
+        {:else}
+            <div class="table-responsive">
+                <table
+                    class="table table-hover table-bordered align-middle"
+                    id="myTable"
+                >
+                    <thead class="thead-light text-center">
+                        <tr>
+                            <th class="px-4 py-2 border">Nombre</th>
+                            <th class="px-4 py-2 border">Documento</th>
+                            <th class="px-4 py-2 border">Genero</th>
+                            <th class="px-4 py-2 border">Tipo_Ceguera</th>
+                            <th class="px-4 py-2 border"
+                                >Cuidador Responsable</th
+                            >
+                            <th class="px-4 py-2 border"
+                                >Archivo de Verificación</th
+                            >
+                            <th class="px-4 py-2 border">Opcion</th>
+                        </tr>
+                    </thead>
 
-        <button class="flip-card__btn small-btn">Confirmar</button>
-    </form>
+                    <tbody>
+                        {#each todos as todo}
+                            <tr>
+                                <td>{todo.nombre}</td>
+                                <td>{todo.documento}</td>
+                                <td>{todo.genero}</td>
+                                <td>{todo.tipo_ceguera}</td>
+                                <td>{todo.Usuario_Cuidador}</td>
+                                <td class="text-center">
+                                    <span
+                                        class="badge {todo.estado
+                                            ? 'bg-success'
+                                            : 'bg-danger'}"
+                                    >
+                                        {todo.estado ? "Activo" : "Desactivado"}
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <div
+                                        class="d-flex flex-wrap gap-2 justify-content-center"
+                                    >
+                                        <button
+                                            class="btn btn-sm btn-outline-success d-flex align-items-center gap-1"
+                                            on:click={() =>
+                                                editar(todo.id, todo.nombre)}
+                                        >
+                                            <i class="bi bi-check-circle-fill"
+                                            ></i>
+                                            <span class="d-none d-md-inline"
+                                                >Aceptar</span
+                                            >
+                                        </button>
+
+                                        <button
+                                            class="btn btn-sm btn-outline-danger d-flex align-items-center gap-1"
+                                            on:click={() =>
+                                                rechazar(
+                                                    todo.id,
+                                                    todo.nombre,
+                                                    todo.Usuario_Cuidador,
+                                                    todo.Nombre_Cuidador,
+                                                )}
+                                        >
+                                            <i class="bi bi-x-circle-fill"></i>
+                                            <span class="d-none d-md-inline"
+                                                >Rechazar</span
+                                            >
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        {/each}
+                    </tbody>
+                </table>
+            </div>
+        {/if}
+    </div>
 </div>
-
-<style>
-    /* Contenedor principal */
-    .wrapper {
-        width: 100%;
-        max-width: 700px;
-        margin: 60px auto;
-        padding: 40px;
-        background-color: #fff;
-        border-radius: 15px;
-        border: 1px solid #e2e6e9;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        background-image: linear-gradient(135deg, #f3f4f8, #ffffff);
-        position: relative;
-        overflow: hidden;
-    }
-
-    /* Título */
-    .title {
-        font-size: 2.5em;
-        font-weight: bold;
-        color: #4b4f58;
-        text-align: center;
-        margin-bottom: 30px;
-        font-family: "Roboto", sans-serif;
-        letter-spacing: -0.5px;
-    }
-
-    /* Subtítulo */
-    .small-title {
-        font-size: 1.6em;
-        color: #6c757d;
-        text-align: center;
-        font-family: "Roboto", sans-serif;
-        margin-bottom: 20px;
-    }
-
-    /* Estilos generales del formulario */
-    .class-form {
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-    }
-
-    /* Estilo de los inputs */
-    .form__input {
-        padding: 12px 15px;
-        font-size: 1em;
-        width: 100%;
-        border: 1px solid #ced4da;
-        border-radius: 8px;
-        background: #f8f9fa;
-        transition: 0.3s ease-in-out;
-    }
-
-    /* Estilo de los inputs al hacer foco */
-    .form__input:focus {
-        outline: none;
-        border-color: #17a2b8;
-        background-color: #ffffff;
-        box-shadow: 0 0 8px rgba(23, 162, 184, 0.5);
-    }
-
-    /* Placeholder en los inputs */
-    .form__input::placeholder {
-        color: #9b9b9b;
-        font-size: 1.1em;
-    }
-
-    /* Botón de acción */
-    .flip-card__btn {
-        padding: 16px 24px;
-        background-color: #17a2b8; /* Azul fresco */
-        color: white;
-        font-size: 1.15em;
-        font-weight: bold;
-        text-transform: uppercase;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        transition:
-            background-color 0.3s ease-in-out,
-            transform 0.3s ease;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-        width: 100%;
-        letter-spacing: 0.5px;
-    }
-
-    /* Hover para el botón */
-    .flip-card__btn:hover {
-        background-color: #138496;
-        transform: translateY(-4px);
-    }
-
-    /* Efecto al hacer clic */
-    .flip-card__btn:active {
-        transform: translateY(2px);
-    }
-
-    /* Estilo para el fondo del formulario */
-    .wrapper {
-        background-color: #fafafa;
-        background-image: radial-gradient(circle, #f3f4f8, #ffffff);
-    }
-
-    /* Bordes y sombras sutiles para los inputs */
-    .form__input {
-        border: 1px solid #d0d4db;
-        box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Foco en los inputs */
-    .form__input:focus {
-        box-shadow: 0 0 10px rgba(23, 162, 184, 0.5);
-    }
-
-    /* Diseño responsivo */
-    @media screen and (max-width: 600px) {
-        .wrapper {
-            padding: 20px;
-        }
-
-        .title {
-            font-size: 1.8em;
-        }
-
-        .form__input {
-            padding: 12px;
-        }
-
-        .flip-card__btn {
-            font-size: 1em;
-            padding: 14px 20px;
-        }
-    }
-</style>

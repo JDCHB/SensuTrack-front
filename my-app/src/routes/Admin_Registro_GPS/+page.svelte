@@ -1,6 +1,5 @@
 <script>
-    import NavbarAD from "$lib/components/NavbarAD.svelte";
-    import { onMount } from "svelte";
+    import { onMount, createEventDispatcher } from "svelte";
     let numero_serie = "";
     let v_nivel_bateria = 100;
     let id_ciego_vinculado = "";
@@ -21,28 +20,12 @@
         console.log(todos2);
     });
 
-    // Referencias a los contenedores de los loader
-    let registerLoader;
-
-    // Función para mostrar el loader
-    // Función para mostrar el loader
-    function showLoader(loader) {
-        if (loader) {
-            loader.style.display = "flex";
-        }
-    }
-
-    // Función para ocultar el loader
-    function hideLoader(loader) {
-        if (loader) {
-            loader.style.display = "none";
-        }
-    }
+    const dispatch = createEventDispatcher();
 
     // Función para manejar el envío del formulario
     async function RegistrarGPS() {
         try {
-            showLoader(registerLoader);
+            dispatch("showLoader"); // 🔥 emitir evento personalizado
             const response = await fetch(
                 "https://proyectomascotas.onrender.com/create_gps",
                 {
@@ -61,7 +44,7 @@
 
             const data = await response.json();
             console.log(data);
-            hideLoader(registerLoader);
+            dispatch("hideLoader"); // 🔥 cuando termina
             if (response.ok) {
                 mensaje = data.resultado; // Mensaje exitoso
                 error = null; // Limpia el error si lo hubo
@@ -81,13 +64,12 @@
                 throw new Error(data.detail || "Ocurrió un error");
             }
         } catch (e) {
-            mensaje = null; // Limpia el mensaje si hubo un error
             error = e.message;
+            dispatch("hideLoader"); // 🔥 cuando termina
+            mensaje = null; // Limpia el mensaje si hubo un error
         }
     }
 </script>
-
-<NavbarAD></NavbarAD>
 
 <div class="wrapper">
     <div class="title small-title" style="color: dodgerblue;">
@@ -124,132 +106,9 @@
 
         <button class="flip-card__btn small-btn">Confirmar</button>
     </form>
-
-    <div class="loader-container" bind:this={registerLoader}>
-        <div class="loader-text">
-            <span>S</span>
-            <span>e</span>
-            <span>n</span>
-            <span>s</span>
-            <span>u</span>
-            <span>T</span>
-            <span>r</span>
-            <span>a</span>
-            <span>c</span>
-            <span>k</span>
-        </div>
-    </div>
 </div>
 
 <style>
-    /* Contenedor para el loader */
-    .loader-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
-        display: none; /* Oculto por defecto */
-        justify-content: center;
-        align-items: center;
-        z-index: 100; /* Asegúrate de que esté encima de otros elementos */
-    }
-
-    /* Contenedor para el loader */
-    .loader-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
-        display: none; /* Oculto por defecto */
-        justify-content: center;
-        align-items: center;
-        z-index: 100; /* Asegúrate de que esté encima de otros elementos */
-    }
-
-    /* Contenedor para el loader */
-    .loader-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(255, 255, 255, 0.9);
-        display: none;
-        justify-content: center;
-        align-items: center;
-        z-index: 100;
-    }
-
-    .loader-text {
-        display: flex;
-        font-size: 48px;
-        font-weight: bold;
-        letter-spacing: 5px;
-        color: #007bff; /* Color azul principal */
-        animation: fadeIn 1.5s infinite alternate;
-    }
-
-    .loader-text span {
-        animation: bounce 1.5s infinite ease-in-out;
-        animation-delay: calc(0.1s * var(--i));
-    }
-
-    .loader-text span:nth-child(1) {
-        --i: 1;
-    }
-    .loader-text span:nth-child(2) {
-        --i: 2;
-    }
-    .loader-text span:nth-child(3) {
-        --i: 3;
-    }
-    .loader-text span:nth-child(4) {
-        --i: 4;
-    }
-    .loader-text span:nth-child(5) {
-        --i: 5;
-    }
-    .loader-text span:nth-child(6) {
-        --i: 6;
-    }
-    .loader-text span:nth-child(7) {
-        --i: 7;
-    }
-    .loader-text span:nth-child(8) {
-        --i: 8;
-    }
-    .loader-text span:nth-child(9) {
-        --i: 9;
-    }
-    .loader-text span:nth-child(10) {
-        --i: 10;
-    }
-
-    @keyframes bounce {
-        0%,
-        100% {
-            transform: translateY(0);
-            opacity: 0.7;
-        }
-        50% {
-            transform: translateY(-15px);
-            opacity: 1;
-        }
-    }
-
-    @keyframes fadeIn {
-        0% {
-            opacity: 0.7;
-        }
-        100% {
-            opacity: 1;
-        }
-    }
-
     /* Contenedor principal */
     .wrapper {
         width: 100%;
