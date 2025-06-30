@@ -15,6 +15,132 @@
     let v_estado = true;
     let error = null;
 
+    // EMAILJS
+    let verificado = false;
+    let codigoGenerado = "";
+    let codigoIngresado = "";
+    const serviceID = "service_j9bousa";
+    const templateID = "template_e735fno";
+    const apikey = "dFD1OdFitzwQblEX0";
+
+    //Can change 7 to 2 for longer results.
+    function generarCodigoVerificacion() {
+        return Math.random().toString(36).slice(2, 8).toUpperCase();
+    }
+
+    async function enviarCodigoEmail(correo, codigo) {
+        const templateParams = {
+            email: correo,
+            r: codigo,
+        };
+
+        try {
+            await emailjs.send(serviceID, templateID, templateParams, apikey);
+            return true;
+        } catch (error) {
+            console.error("Error al enviar correo:", error);
+            return false;
+        }
+    }
+
+    async function verificarCorreoAntesDeRegistrar() {
+        console.log("Correo ingresado:", v_email);
+
+        Confirmar_Contraseña = document.getElementById(
+            "Confirmar_Contraseña",
+        ).value;
+
+        if (Confirmar_Contraseña === v_password) {
+            codigoGenerado = generarCodigoVerificacion();
+
+            const enviado = await enviarCodigoEmail(v_email, codigoGenerado);
+
+            if (!enviado) {
+                Swal.fire(
+                    "Error",
+                    "No se pudo enviar el correo de verificación",
+                    "error",
+                );
+                return;
+            }
+
+            while (!verificado) {
+                const {
+                    value: codigoUsuario,
+                    isConfirmed,
+                    isDismissed,
+                } = await Swal.fire({
+                    title: "🔐 Verificación de Correo",
+                    text: "Ingresa el código de 6 caracteres que fue enviado a tu correo.",
+                    input: "text",
+                    icon: "info",
+                    showCancelButton: true,
+                    confirmButtonText: "✅ Verificar",
+                    cancelButtonText: "❌ Cancelar",
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    inputAttributes: {
+                        maxlength: 6,
+                        autocapitalize: "off",
+                        spellcheck: "false",
+                        placeholder: "CÓDIGO EN MAYÚSCULAS",
+                    },
+                    customClass: {
+                        popup: "swal-popup",
+                        title: "custom-title",
+                        input: "swal-input",
+                        confirmButton: "swal-confirm-btn",
+                        cancelButton: "swal-cancel-btn",
+                    },
+                    allowOutsideClick: false,
+                    showLoaderOnConfirm: true,
+                    preConfirm: (input) => {
+                        if (!input) {
+                            Swal.showValidationMessage(
+                                "⚠️ Debes ingresar un código.",
+                            );
+                        }
+                    },
+                });
+
+                if (isDismissed) {
+                    Swal.fire(
+                        "Verificación cancelada",
+                        "No se completó el registro",
+                        "info",
+                    );
+                    return;
+                }
+
+                if (codigoUsuario === codigoGenerado.toString()) {
+                    verificado = true;
+                    await Swal.fire(
+                        "¡Código correcto!",
+                        "Tu correo ha sido verificado",
+                        "success",
+                    );
+                    RegisterUser();
+                } else {
+                    await Swal.fire(
+                        "Código incorrecto",
+                        "Intenta nuevamente",
+                        "error",
+                    );
+                }
+            }
+        } else {
+            Swal.fire({
+                title: "Parece que ha ocurrido un error",
+                text: "No son iguales las contraseñas, porfavor intente de nuevo :]",
+                icon: "error",
+                customClass: {
+                    popup: "swal-popup", // Clase para personalizar el popup de la alerta
+                    title: "custom-title", // Clase personalizada para el título
+                },
+            });
+        }
+    }
+
     // Referencias a los contenedores de los loader
     let registerLoader;
 
@@ -56,92 +182,83 @@
             return;
         }
 
-        Confirmar_Contraseña = document.getElementById(
-            "Confirmar_Contraseña",
-        ).value;
-
-        if (Confirmar_Contraseña === v_password) {
-            try {
-                // Muestra el cuadro de confirmación antes de proceder con el registro
-                const result = await Swal.fire({
-                    title: "¿Estás seguro?",
-                    text: "¡Desea registrarse a SensuTrack!?",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Sí, registrarse!",
-                    customClass: {
-                        popup: "swal-popup", // Clase para personalizar el popup de la alerta
-                        title: "custom-title", // Clase personalizada para el título
-                    },
-                });
-                // Si el usuario confirma, continuamos con el registro
-                if (result.isConfirmed) {
-                    showLoader(registerLoader); // Mostrar loader al comenzar el registro
-                    const response = await fetch(
-                        "https://proyectomascotas.onrender.com/create_user",
-                        {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify({
-                                email: v_email,
-                                password: v_password,
-                                nombre: v_nombre,
-                                apellido: v_apellido,
-                                documento: v_documento,
-                                telefono: v_telefono,
-                                id_rol: v_rol,
-                                estado: v_estado,
-                            }),
-                        },
-                    );
-
-                    const data = await response.json();
-                    console.log(data);
-
-                    hideLoader(registerLoader); // Ocultar loader al terminar el registro
-
-                    if (response.ok) {
-                        grecaptcha.reset(); // Restablece el CAPTCHA después de una respuesta exitosa
-                        Swal.fire({
-                            title: "¡Registrado!,¡Bienvenido " + v_nombre + "!",
-                            icon: "success",
-                            customClass: {
-                                popup: "swal-popup", // Clase para personalizar el popup de la alerta
-                                title: "custom-title", // Clase personalizada para el título
-                            },
-                        });
-                    } else {
-                        alert("Error en el registro");
-                    }
-                } else {
-                    Swal.fire({
-                        title: "REGISTRO CANCELADO",
-                        icon: "error",
-                        customClass: {
-                            popup: "swal-popup", // Clase para personalizar el popup de la alerta
-                            title: "custom-title", // Clase personalizada para el título
-                        },
-                    });
-                }
-            } catch (e) {
-                error = e.message;
-                hideLoader(registerLoader); // Ocultar loader si ocurre algun error
-                alert("Error en la solicitud: " + error);
-            }
-        } else {
-            Swal.fire({
-                title: "Parece que ha ocurrido un error",
-                text: "No son iguales las contraseñas, porfavor intente de nuevo :]",
-                icon: "error",
+        try {
+            // Muestra el cuadro de confirmación antes de proceder con el registro
+            const result = await Swal.fire({
+                title: "¿Estás seguro?",
+                text: "¡Desea registrarse a SensuTrack!?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Sí, registrarse!",
                 customClass: {
                     popup: "swal-popup", // Clase para personalizar el popup de la alerta
                     title: "custom-title", // Clase personalizada para el título
                 },
             });
+            // Si el usuario confirma, continuamos con el registro
+            if (result.isConfirmed) {
+                showLoader(registerLoader); // Mostrar loader al comenzar el registro
+                const response = await fetch(
+                    "https://proyectomascotas.onrender.com/create_user",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            email: v_email,
+                            password: v_password,
+                            nombre: v_nombre,
+                            apellido: v_apellido,
+                            documento: v_documento,
+                            telefono: v_telefono,
+                            id_rol: v_rol,
+                            estado: v_estado,
+                        }),
+                    },
+                );
+
+                const data = await response.json();
+                console.log(data);
+
+                hideLoader(registerLoader); // Ocultar loader al terminar el registro
+
+                if (response.ok) {
+                    grecaptcha.reset(); // Restablece el CAPTCHA después de una respuesta exitosa
+
+                    await Swal.fire({
+                        title: "¡Registrado! ¡Bienvenido " + v_nombre + "!",
+                        icon: "success",
+                        timer: 4000,
+                        timerProgressBar: true,
+                        showConfirmButton: false,
+                        customClass: {
+                            popup: "swal-popup",
+                            title: "custom-title",
+                        },
+                        didClose: () => {
+                            window.location.href = "/login"; // Cambia esta ruta si tu login está en otra
+                        },
+                    });
+                } else {
+                    alert("Error en el registro");
+                }
+            } else {
+                Swal.fire({
+                    title: "REGISTRO CANCELADO",
+                    icon: "error",
+                    customClass: {
+                        popup: "swal-popup", // Clase para personalizar el popup de la alerta
+                        title: "custom-title", // Clase personalizada para el título
+                    },
+                });
+            }
+        } catch (e) {
+            error = e.message;
+            hideLoader(registerLoader); // Ocultar loader si ocurre algun error
+            alert("Error en la solicitud: " + error);
         }
     }
 </script>
@@ -173,7 +290,7 @@
                                     </p>
 
                                     <form
-                                        on:submit|preventDefault={RegisterUser}
+                                        on:submit|preventDefault={verificarCorreoAntesDeRegistrar}
                                         class="mx-1 mx-md-4"
                                     >
                                         <div
