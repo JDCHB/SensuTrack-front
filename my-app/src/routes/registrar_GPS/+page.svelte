@@ -97,17 +97,19 @@
 <main class="container py-5" style="margin-bottom: 50px;">
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-8 col-sm-10">
-            <div class="card shadow-lg p-4 rounded bg-light">
+            <div class="card shadow-lg p-4 rounded-4 bg-white border-0">
                 <div class="text-center mb-4">
-                    <i
-                        class="bi bi-paw-fill text-primary"
-                        style="font-size: 48px;"
-                    ></i>
+                    <img
+                        src="/logo.jpg"
+                        alt="Logo"
+                        class="img-fluid rounded-circle border border-2"
+                        style="width: 80px; height: 80px; object-fit: cover;"
+                    />
                     <h3 class="text-primary mt-3 fw-bold">
-                        Registrar Discapacitado
+                        Registrar Persona con Discapacidad Visual
                     </h3>
                     <p class="text-muted">
-                        Completa los detalles del formulario.
+                        Por favor, completa los campos requeridos.
                     </p>
                 </div>
 
@@ -115,15 +117,14 @@
                     <div class="mb-3">
                         <label
                             for="nombre"
-                            class="form-label text-primary fw-semibold"
+                            class="form-label fw-semibold text-secondary"
+                            >Nombre Completo</label
                         >
-                            Nombre del Discapacitado
-                        </label>
                         <input
                             type="text"
-                            class="form-control shadow-sm"
                             id="nombre"
-                            placeholder="Nombre"
+                            class="form-control form-control-lg shadow-sm"
+                            placeholder="Ej: Juan Pérez"
                             bind:value={v_nombre}
                             required
                         />
@@ -131,16 +132,15 @@
 
                     <div class="mb-3">
                         <label
-                            for="nombre"
-                            class="form-label text-primary fw-semibold"
+                            for="documento"
+                            class="form-label fw-semibold text-secondary"
+                            >Documento de Identidad</label
                         >
-                            Documento
-                        </label>
                         <input
                             type="text"
-                            class="form-control shadow-sm"
-                            id="Documento"
-                            placeholder="Documento de Identidad"
+                            id="documento"
+                            class="form-control form-control-lg shadow-sm"
+                            placeholder="Ej: 1234567890"
                             bind:value={v_documento}
                             required
                         />
@@ -149,18 +149,17 @@
                     <div class="mb-3">
                         <label
                             for="genero"
-                            class="form-label text-primary fw-semibold"
+                            class="form-label fw-semibold text-secondary"
+                            >Género</label
                         >
-                            Género
-                        </label>
                         <select
-                            class="form-select shadow-sm"
                             id="genero"
+                            class="form-select form-select-lg shadow-sm"
                             bind:value={v_genero}
                             required
                         >
                             <option value="" disabled selected
-                                >Seleccionar género</option
+                                >Seleccionar</option
                             >
                             <option value="1">Masculino</option>
                             <option value="2">Femenino</option>
@@ -169,20 +168,19 @@
 
                     <div class="mb-3">
                         <label
-                            for="tipo_mascota"
-                            class="form-label text-primary fw-semibold"
+                            for="tipo_ceguera"
+                            class="form-label fw-semibold text-secondary"
+                            >Tipo de Ceguera</label
                         >
-                            Tipo de Ceguera
-                        </label>
                         <select
-                            class="form-select shadow-sm"
-                            id="tipo_mascota"
+                            id="tipo_ceguera"
+                            class="form-select form-select-lg shadow-sm"
                             bind:value={v_tipo_ceguera}
                             required
                         >
-                            <option value="" disabled selected>
-                                Seleccione el tipo de ceguera
-                            </option>
+                            <option value="" disabled selected
+                                >Seleccionar</option
+                            >
                             <option value="1">Ceguera Total</option>
                             <option value="2">Ceguera Parcial</option>
                         </select>
@@ -190,9 +188,9 @@
 
                     <button
                         type="submit"
-                        class="btn btn-primary w-100 mt-4 shadow-sm rounded-pill"
+                        class="btn btn-primary w-100 mt-4 py-3 fs-5 shadow rounded-pill"
                     >
-                        🐶 Registrar 🐱
+                        Registrar
                     </button>
 
                     <!-- Loader -->
@@ -200,10 +198,10 @@
                         <div class="loader-text">
                             <span>S</span><span>e</span><span>n</span><span
                                 >s</span
-                            ><span>u</span>
-                            <span>T</span><span>r</span><span>a</span><span
-                                >c</span
-                            ><span>k</span>
+                            >
+                            <span>u</span><span>T</span><span>r</span><span
+                                >a</span
+                            ><span>c</span><span>k</span>
                         </div>
                     </div>
                 </form>
@@ -212,42 +210,36 @@
     </div>
 </main>
 
-<Footer></Footer>
+<Footer />
 
-<!-- Estilos CSS -->
 <style>
     .card {
-        background-color: #ffe9d6;
-        border-radius: 15px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .card .form-label {
-        color: #0079fa;
+        background-color: #ffffff;
+        border-radius: 1rem;
     }
 
     .btn-primary {
-        background-color: #0079fa;
-        border-color: #0079fa;
+        background-color: #0d6efd;
+        border-color: #0d6efd;
         font-weight: 600;
         text-transform: uppercase;
     }
 
     .btn-primary:hover {
-        background-color: #005f89;
-        border-color: #005f89;
+        background-color: #0b5ed7;
+        border-color: #0a58ca;
     }
 
     .form-control,
     .form-select {
-        border-radius: 10px;
+        border-radius: 0.75rem;
         box-shadow: none;
     }
 
     .form-control:focus,
     .form-select:focus {
-        border-color: #0079fa;
-        box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
     }
 
     .loader-container {
@@ -268,7 +260,7 @@
         font-size: 36px;
         font-weight: bold;
         letter-spacing: 5px;
-        color: #007bff;
+        color: #0d6efd;
         animation: fadeIn 1.5s infinite alternate;
     }
 
@@ -277,7 +269,7 @@
         animation-delay: calc(0.1s * var(--i));
     }
 
-    .loader-text span:nth-child(n) {
+    .loader-text span:nth-child(1) {
         --i: 1;
     }
     .loader-text span:nth-child(2) {
@@ -326,18 +318,6 @@
         }
         100% {
             opacity: 1;
-        }
-    }
-
-    /* Responsive optimización para celulares */
-    @media (max-width: 576px) {
-        .card {
-            padding: 1.5rem;
-        }
-
-        .loader-text {
-            font-size: 28px;
-            letter-spacing: 3px;
         }
     }
 </style>
