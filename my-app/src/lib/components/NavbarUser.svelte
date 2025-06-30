@@ -77,28 +77,28 @@
     }
 </script>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light py-3">
+<nav class="navbar navbar-expand-lg navbar-light bg-light py-3 mb-4">
     <a
-        class="navbar-brand d-flex align-items-center"
+        class="navbar-brand d-flex align-items-center gap-2"
         data-bs-toggle="modal"
         data-bs-target="#Perfil_Usuario"
         href="#"
     >
         <img
             src="/logo.jpg"
-            width="56"
-            height="60"
-            class="d-inline-block align-top rounded-circle"
-            alt="PetTracker logo"
+            width="50"
+            height="50"
+            class="rounded-circle shadow-sm"
+            alt="Logo SensuTrack"
         />
-        <div class="ms-2 d-flex flex-column">
-            <span class="text-dark fw-bold">{usuario.nombre}</span>
-            <span class="text-muted small">SensuTrack</span>
+        <div class="d-flex flex-column">
+            <span class="fw-bold text-dark">{usuario.nombre}</span>
+            <small class="text-muted">SensuTrack</small>
         </div>
     </a>
 
     <button
-        class="navbar-toggler"
+        class="navbar-toggler border-0"
         type="button"
         data-bs-toggle="collapse"
         data-bs-target="#navbarNav"
@@ -106,46 +106,54 @@
         aria-expanded="false"
         aria-label="Toggle navigation"
     >
-        <span class="navbar-toggler-icon"></span>
+        <i class="bi bi-list fs-2 text-primary"></i>
     </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link text-dark fw-bold" href="/usuario">
-                    <i class="bi bi-house"></i> Inicio
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark fw-bold" href="/registrar_GPS">
-                    <i class="bi bi-house-door"></i> Registrar GPS
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark fw-bold" href="/tracking">
-                    <i class="bi bi-geo-alt-fill"></i>
-                    Ubicación en vivo
-                </a>
-            </li>
 
-            <!-- Dropdown para Usuario -->
+    <div
+        class="collapse navbar-collapse justify-content-end mt-2 mt-lg-0"
+        id="navbarNav"
+    >
+        <ul class="navbar-nav align-items-center gap-2">
+            <li class="nav-item">
+                <a class="nav-link fw-semibold text-dark" href="/usuario">
+                    <i class="bi bi-house-door-fill me-1"></i> Inicio
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link fw-semibold text-dark" href="/registrar_GPS">
+                    <i class="bi bi-plus-circle me-1"></i> Registrar GPS
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link fw-semibold text-dark" href="/tracking">
+                    <i class="bi bi-geo-alt-fill me-1"></i> Ubicación en Vivo
+                </a>
+            </li>
             <li class="nav-item dropdown">
                 <a
-                    class="nav-link dropdown-toggle text-black fw-bold"
-                    href="#!"
+                    class="nav-link dropdown-toggle fw-semibold text-dark"
+                    href="#"
                     id="navbarDropdown"
                     role="button"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
+                    data-bs-toggle="dropdown"
                     aria-expanded="false"
                 >
-                    Usuario
+                    <i class="bi bi-person-circle me-1"></i> Usuario
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <!-- Opción para Cerrar sesión -->
-                    <a class="dropdown-item" href="#!" on:click={logout}
-                        >Cerrar sesión</a
-                    >
-                </div>
+                <ul
+                    class="dropdown-menu dropdown-menu-end rounded-3 shadow-sm"
+                    aria-labelledby="navbarDropdown"
+                >
+                    <li>
+                        <a
+                            class="dropdown-item text-danger"
+                            href="#"
+                            on:click={logout}
+                        >
+                            <i class="bi bi-box-arrow-right me-1"></i> Cerrar sesión
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul>
     </div>
@@ -388,54 +396,77 @@
         transform: rotateY(180deg);
     }
 
-    /* Navbar Styling */
     .navbar {
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave para el navbar */
-        border-radius: 10px; /* Bordes redondeados */
+        backdrop-filter: blur(8px); /* efecto glass suave */
+        background-color: rgba(
+            255,
+            255,
+            255,
+            0.95
+        ); /* fondo blanco semitransparente */
+        transition: all 0.3s ease;
+        z-index: 1000;
+        border: none;
     }
 
     .navbar-brand img {
-        border-radius: 50%; /* Logo redondeado */
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil al logo */
+        transition: transform 0.3s ease;
+    }
+    .navbar-brand img:hover {
+        transform: scale(1.05);
     }
 
     .navbar-nav .nav-link {
-        transition: all 0.3s ease; /* Efecto de transición suave en los enlaces */
-        padding: 8px 20px; /* Espaciado adecuado entre los enlaces */
-        font-size: 16px; /* Tamaño de fuente moderado */
+        transition: all 0.3s ease;
+        padding: 8px 14px;
+        border-radius: 6px;
     }
-
     .navbar-nav .nav-link:hover {
-        color: #0079fa !important; /* Color de hover */
-        text-decoration: underline; /* Subrayado en hover */
-        transform: scale(1.1); /* Efecto de agrandado en hover */
+        color: #0d6efd !important;
+        background-color: rgba(13, 110, 253, 0.1);
+        text-decoration: none;
     }
 
     .navbar-toggler {
-        border: 1px solid #0079fa; /* Contorno anaranjado para el botón */
+        background-color: transparent;
+        border: none;
+        outline: none;
+    }
+
+    .dropdown-menu {
+        min-width: 180px;
+        border: none;
+        padding: 10px 0;
+        animation: fadeIn 0.2s ease-in-out;
+    }
+    .dropdown-menu .dropdown-item {
+        transition: background-color 0.2s ease;
+        padding: 10px 20px;
+    }
+    .dropdown-menu .dropdown-item:hover {
+        background-color: #f1f3f5;
         border-radius: 5px;
     }
 
-    .navbar-toggler-icon {
-        background-color: #0079fa; /* Icono anaranjado para el menú */
-    }
-
-    .nav-item i {
-        margin-right: 8px; /* Espaciado entre el icono y el texto */
-    }
-
-    /* Estilos para la responsividad */
-    @media (max-width: 991px) {
-        .navbar-brand {
-            text-align: center; /* Centrar el logo en pantallas pequeñas */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-5px);
         }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 
+    /* Responsive */
+    @media (max-width: 991px) {
         .navbar-nav {
             text-align: center;
+            gap: 10px;
         }
-
-        .navbar-nav .nav-item {
-            margin-bottom: 15px; /* Espaciado vertical entre los elementos en móviles */
+        .navbar-brand {
+            margin-bottom: 10px;
         }
     }
 </style>
