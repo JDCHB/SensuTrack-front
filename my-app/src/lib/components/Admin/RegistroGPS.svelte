@@ -103,10 +103,16 @@
                 >
                     <thead class="thead-light text-center">
                         <tr>
-                            <th class="px-4 py-2 border">Nombre</th>
-                            <th class="px-4 py-2 border">Documento</th>
-                            <th class="px-4 py-2 border">Genero</th>
-                            <th class="px-4 py-2 border">Tipo_Ceguera</th>
+                            <th class="px-4 py-2 border"
+                                >Nombre del Discapacitado</th
+                            >
+                            <th class="px-4 py-2 border"
+                                >Documento del Discapacitado</th
+                            >
+                            <th class="px-4 py-2 border"
+                                >Genero del Discapacitado</th
+                            >
+                            <th class="px-4 py-2 border">Tipo de Ceguera</th>
                             <th class="px-4 py-2 border"
                                 >Cuidador Responsable</th
                             >
