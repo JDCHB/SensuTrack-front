@@ -35,13 +35,31 @@
         nombreDiscapacitado,
         Usuario_Cuidador,
         Nombre_Cuidador,
+        documento,
     ) {
-        const confirmar = confirm(
-            `¿Estás seguro de rechazar la solicitud de ${nombreDiscapacitado}?`,
-        );
-        if (!confirmar) return;
+        const confirmar = await Swal.fire({
+            title: `¿Rechazar solicitud de ${Nombre_Cuidador}?`,
+            text: "Esta acción eliminará al discapacitado no verificado y notificará al cuidador.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#6c757d",
+            confirmButtonText: "Sí, rechazar",
+            cancelButtonText: "Cancelar",
+        });
+
+        if (!confirmar.isConfirmed) return;
 
         try {
+            Swal.fire({
+                title: "Procesando...",
+                text: "Rechazando solicitud y enviando notificación",
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                },
+            });
+
             const res = await fetch(
                 `https://proyectomascotas.onrender.com/delete_discapacitadoV/${id}`,
                 { method: "DELETE" },
@@ -55,17 +73,28 @@
                     usuario_cuidador: Nombre_Cuidador,
                     nombre_discapacitado: nombreDiscapacitado,
                     email: Usuario_Cuidador,
+                    documento_discapacitado: documento,
                 },
                 apikey,
             );
 
-            alert(
-                "Solicitud rechazada correctamente. Se notificó al cuidador.",
-            );
-            location.reload();
+            Swal.fire({
+                icon: "success",
+                title: "Solicitud rechazada",
+                text: `Se notificó al cuidador ${Nombre_Cuidador}.`,
+                confirmButtonColor: "#198754",
+                confirmButtonText: "Aceptar",
+            }).then(() => {
+                location.reload();
+            });
         } catch (err) {
             console.error("Error al rechazar:", err);
-            alert("Error al rechazar: " + err.message);
+            Swal.fire({
+                icon: "error",
+                title: "Error al rechazar",
+                text: err.message,
+                confirmButtonColor: "#d33",
+            });
         }
     }
 </script>
@@ -164,6 +193,7 @@
                                                     todo.nombre,
                                                     todo.Usuario_Cuidador,
                                                     todo.Nombre_Cuidador,
+                                                    todo.documento,
                                                 )}
                                         >
                                             <i class="bi bi-x-circle-fill"></i>
