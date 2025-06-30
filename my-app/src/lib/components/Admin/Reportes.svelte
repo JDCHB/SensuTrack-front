@@ -8,21 +8,19 @@
     let fecha_de = "";
     let fecha_hasta = "";
     let mostrarReporte = false;
+    let mostrarPDF = false;
+    let pdfUrl = "";
 
     async function generar() {
         try {
             loading = true;
             mostrarReporte = false;
+            mostrarPDF = false;
             error = null;
 
             opcion = document.getElementById("opcion").value;
             fecha_de = document.getElementById("desde_ciegos").value;
             fecha_hasta = document.getElementById("hasta_ciegos").value;
-
-            console.log({
-                fecha1: fecha_de,
-                fecha2: fecha_hasta,
-            });
 
             if (!fecha_de || !fecha_hasta) {
                 Swal.fire({
@@ -49,10 +47,8 @@
 
             if (!response.ok) throw new Error("Error al cargar los datos");
             const data = await response.json();
-            console.log(data);
 
             todos = data.resultado;
-            console.log(todos);
             mostrarReporte = true;
             setTimeout(() => globalThis.$("#myTable").DataTable(), 0);
         } catch (e) {
@@ -84,7 +80,7 @@
             todo.tipo_ceguera,
             todo.nombre_cuidador,
             todo.fecha,
-            todo.estado,
+            todo.estado ? "Activo" : "Inactivo",
         ]);
 
         pdf.text(
@@ -97,47 +93,60 @@
             body: body,
             margin: { top: 70 },
         });
-        pdf.save("ReporteDiscapacitados.pdf");
+
+        const blob = pdf.output("blob");
+        pdfUrl = URL.createObjectURL(blob);
+        mostrarReporte = false;
+        mostrarPDF = true;
+
         Swal.fire({
             position: "center",
             icon: "success",
-            title: "Se exportó de manera exitosa",
+            title: "Vista previa generada con éxito",
             showConfirmButton: false,
             timer: 1500,
         });
     }
 </script>
 
-<div class="container my-4 p-4 bg-white rounded shadow-lg">
-    <h2 class="text-center text-primary fw-bold mb-4">Reportes</h2>
+<div class="report-panel container bg-white rounded-4 shadow p-5 my-5">
+    <h2 class="text-center fw-bold text-primary mb-5">
+        <i class="fas fa-chart-bar me-2"></i>Generación de Reportes
+    </h2>
 
-    <div class="mb-4">
-        <select class="form-select form-select-lg" id="opcion" required>
-            <option value="1">Discapacitados</option>
-            <option value="2">Usuarios</option>
-            <option value="3">Otro</option>
-        </select>
+    <!-- Filtros -->
+    <div class="row g-4 align-items-end">
+        <div class="col-md-4">
+            <label for="opcion" class="form-label">Seleccionar tipo:</label>
+            <select id="opcion" class="form-select form-select-lg" required>
+                <option value="1">Personas con discapacidad visual</option>
+                <option value="2">Usuarios del sistema</option>
+                <option value="3">Otro</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="desde_ciegos" class="form-label">Desde:</label>
+            <input
+                type="date"
+                id="desde_ciegos"
+                class="form-control form-control-lg"
+            />
+        </div>
+        <div class="col-md-4">
+            <label for="hasta_ciegos" class="form-label">Hasta:</label>
+            <input
+                type="date"
+                id="hasta_ciegos"
+                class="form-control form-control-lg"
+            />
+        </div>
     </div>
 
-    <div class="row row-cols-1 row-cols-md-2 g-3 mb-4">
-        <div>
-            <label for="desde_ciegos" class="form-label fw-semibold"
-                >Desde:</label
-            >
-            <input type="date" id="desde_ciegos" class="form-control" />
-        </div>
-        <div>
-            <label for="hasta_ciegos" class="form-label fw-semibold"
-                >Hasta:</label
-            >
-            <input type="date" id="hasta_ciegos" class="form-control" />
-        </div>
-    </div>
-
-    <div class="text-center mb-4">
+    <!-- Botón generar -->
+    <div class="text-center mt-5">
         <button
             type="button"
-            class="btn btn-primary btn-lg px-4"
+            class="btn btn-primary btn-lg px-5"
             on:click={generar}
         >
             <i class="fas fa-file-alt me-2"></i> Generar Reporte
@@ -145,93 +154,88 @@
     </div>
 </div>
 
-<!-- Mostrar Datos -->
-<div class="container py-4" id="MostrarReporte">
+<!-- Sección de resultados -->
+<div
+    class="container mt-5 p-4 rounded-4 bg-light shadow-sm"
+    id="MostrarReporte"
+>
     {#if loading}
-        <div class="progress" style="height: 5px;">
+        <div class="progress" style="height: 6px;">
             <div
-                class="progress-bar progress-bar-striped progress-bar-animated"
+                class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
                 role="progressbar"
-                aria-valuenow="100"
-                aria-valuemin="0"
-                aria-valuemax="100"
                 style="width: 100%"
             ></div>
         </div>
     {:else if error}
-        <p class="text-danger text-center">Error: {error}</p>
-    {:else if mostrarReporte}
-        <h3 class="mb-4 text-center text-secondary">
-            Discapacitados Registrados
-        </h3>
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped">
-                <thead class="table-light text-center">
-                    <tr>
-                        <th>Id</th>
-                        <th>Nombre</th>
-                        <th>Género</th>
-                        <th>Tipo de Ceguera</th>
-                        <th>Cuidador</th>
-                        <th>Fecha y Hora</th>
-                        <th>Estado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {#each todos as todo}
-                        <tr>
-                            <td>{todo.id}</td>
-                            <td>{todo.nombre}</td>
-                            <td>{todo.genero}</td>
-                            <td>{todo.tipo_ceguera}</td>
-                            <td>{todo.nombre_cuidador}</td>
-                            <td>{todo.fecha}</td>
-                            <td>{todo.estado ? "Activo" : "Inactivo"}</td>
-                        </tr>
-                    {/each}
-                </tbody>
-            </table>
+        <div class="alert alert-danger text-center mb-0" role="alert">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            {error}
         </div>
-        <div class="text-center mt-4">
-            <button class="btn btn-success btn-lg px-4" on:click={exportarPDF}>
-                <i class="fas fa-download me-2"></i> Exportar como PDF
+    {:else if mostrarReporte}
+        <div class="text-center">
+            <button
+                class="btn btn-outline-success btn-lg px-5 mt-3"
+                on:click={exportarPDF}
+            >
+                <i class="fas fa-eye me-2"></i> Ver PDF
             </button>
+        </div>
+    {:else if mostrarPDF}
+        <div class="text-center">
+            <h4 class="mb-4 text-secondary">Vista previa del reporte</h4>
+            <iframe
+                src={pdfUrl}
+                title="Vista previa del PDF"
+                class="report-frame"
+            ></iframe>
+            <div class="mt-4">
+                <a
+                    href={pdfUrl}
+                    download="ReporteDiscapacitados.pdf"
+                    class="btn btn-success btn-lg px-5"
+                >
+                    <i class="fas fa-download me-2"></i> Descargar PDF
+                </a>
+            </div>
         </div>
     {/if}
 </div>
 
 <style>
-    .container {
-        max-width: 960px;
+    .report-panel {
+        border: 1px solid #e0e0e0;
     }
 
-    label {
+    .form-label {
         font-weight: 500;
+        color: #374151;
     }
 
-    table {
-        font-size: 0.95rem;
+    .report-frame {
+        width: 100%;
+        height: 600px;
+        border: 1px solid #ced4da;
+        border-radius: 0.75rem;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.04);
+    }
+
+    @media (max-width: 768px) {
+        .report-frame {
+            height: 400px;
+        }
     }
 
     button:focus {
-        box-shadow: 0 0 0 0.25rem rgba(90, 155, 255, 0.5);
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.3);
     }
 
-    #MostrarReporte {
-        background-color: #f8f9fb;
-        border-radius: 12px;
-        margin-top: 30px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    .btn-outline-success {
+        border-width: 2px;
     }
 
-    @media (max-width: 576px) {
-        h2,
-        h3 {
-            font-size: 1.4rem;
-        }
-
-        .btn {
-            font-size: 0.9rem;
-        }
+    h2,
+    h4 {
+        font-family: "Segoe UI", Roboto, sans-serif;
     }
 </style>
