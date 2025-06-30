@@ -14,8 +14,16 @@
     let activeSection = "X"; // valor por defecto
     let registerLoader;
 
-    const userData = JSON.parse(localStorage.getItem("user_data"));
-    let nombreUsuario = userData?.nombre || "Usuario";
+    let nombreUsuario = (() => {
+        try {
+            return (
+                JSON.parse(localStorage.getItem("user_data"))?.nombre ||
+                "Usuario"
+            );
+        } catch {
+            return "Usuario";
+        }
+    })();
 
     function showLoader() {
         registerLoader.style.display = "flex";
