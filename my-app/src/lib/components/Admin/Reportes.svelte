@@ -7,14 +7,12 @@
     let opcion;
     let fecha_de = "";
     let fecha_hasta = "";
-    let mostrarReporte = false;
     let mostrarPDF = false;
     let pdfUrl = "";
 
     async function generar() {
         try {
             loading = true;
-            mostrarReporte = false;
             mostrarPDF = false;
             error = null;
 
@@ -46,11 +44,11 @@
             );
 
             if (!response.ok) throw new Error("Error al cargar los datos");
-            const data = await response.json();
 
+            const data = await response.json();
             todos = data.resultado;
-            mostrarReporte = true;
-            setTimeout(() => globalThis.$("#myTable").DataTable(), 0);
+
+            exportarPDF();
         } catch (e) {
             error = e.message;
             console.error("Error al generar reporte:", e);
@@ -96,7 +94,6 @@
 
         const blob = pdf.output("blob");
         pdfUrl = URL.createObjectURL(blob);
-        mostrarReporte = false;
         mostrarPDF = true;
 
         Swal.fire({
@@ -109,12 +106,12 @@
     }
 </script>
 
+<!-- Panel de filtros -->
 <div class="report-panel container bg-white rounded-4 shadow p-5 my-5">
     <h2 class="text-center fw-bold text-primary mb-5">
         <i class="fas fa-chart-bar me-2"></i>Generación de Reportes
     </h2>
 
-    <!-- Filtros -->
     <div class="row g-4 align-items-end">
         <div class="col-md-4">
             <label for="opcion" class="form-label">Seleccionar tipo:</label>
@@ -142,7 +139,6 @@
         </div>
     </div>
 
-    <!-- Botón generar -->
     <div class="text-center mt-5">
         <button
             type="button"
@@ -154,7 +150,7 @@
     </div>
 </div>
 
-<!-- Sección de resultados -->
+<!-- Resultados -->
 <div
     class="container mt-5 p-4 rounded-4 bg-light shadow-sm"
     id="MostrarReporte"
@@ -171,15 +167,6 @@
         <div class="alert alert-danger text-center mb-0" role="alert">
             <i class="fas fa-exclamation-triangle me-2"></i>
             {error}
-        </div>
-    {:else if mostrarReporte}
-        <div class="text-center">
-            <button
-                class="btn btn-outline-success btn-lg px-5 mt-3"
-                on:click={exportarPDF}
-            >
-                <i class="fas fa-eye me-2"></i> Ver PDF
-            </button>
         </div>
     {:else if mostrarPDF}
         <div class="text-center">
@@ -228,10 +215,6 @@
 
     button:focus {
         box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.3);
-    }
-
-    .btn-outline-success {
-        border-width: 2px;
     }
 
     h2,
