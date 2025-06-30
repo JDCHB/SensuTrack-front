@@ -1,5 +1,6 @@
 <script>
     import Navbar from "../../lib/components/Navbar.svelte";
+    import Footer from "$lib/components/footer.svelte";
     import ChatBot from "$lib/components/ChatBot.svelte";
     import { onMount } from "svelte";
 
@@ -267,7 +268,7 @@
 <ChatBot></ChatBot>
 <section
     class="vh-100 pt-5"
-    style="background-color: #eee; padding-bottom: 60%; "
+    style="background-color: #eee; padding-bottom: 70%; "
 >
     <div
         class="wrapper d-flex align-items-center justify-content-center vh-100"
@@ -672,6 +673,7 @@
         </div>
     </div>
 </section>
+<Footer></Footer>
 
 <style>
     /* Estilos para el loader de la cara de un perrito */

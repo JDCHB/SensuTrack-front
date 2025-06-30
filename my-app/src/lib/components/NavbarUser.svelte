@@ -3,6 +3,7 @@
 
     let v_id = "";
     let usuario = "";
+    let discapacitado = "";
     let error = "";
     let loading = true;
 
@@ -32,9 +33,19 @@
                 return;
             }
 
-            // AHORA BUSQUEMOS LOS DATOS DEL USUARIO
+            // Solicitud al backend
             const response = await fetch(
                 `https://proyectomascotas.onrender.com/get_user/${v_id}`,
+                {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                },
+            );
+
+            const response2 = await fetch(
+                `https://proyectomascotas.onrender.com/get_discapacitadoV_Usuario/${v_id}`,
                 {
                     method: "GET",
                     headers: {
@@ -47,13 +58,23 @@
                 throw new Error("Error al obtener los datos del usuario");
             }
 
+            if (!response2.ok) {
+                throw new Error("Error al obtener los datos del discapacitado");
+            }
+
             usuario = await response.json();
+            discapacitado = await response2.json();
         } catch (e) {
             error = e.message;
         } finally {
             loading = false;
         }
     });
+
+    let flipped = false;
+    function toggleCard() {
+        flipped = !flipped;
+    }
 </script>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light py-3">
@@ -146,113 +167,173 @@
     aria-labelledby="Perfil_UsuarioLabel"
     aria-hidden="true"
 >
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <!-- Encabezado del modal -->
-            <div class="modal-header bg-primary text-white">
-                <h1 class="modal-title fs-5" id="Perfil_UsuarioLabel">
-                    Perfil de Usuario
-                </h1>
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+            <!-- Encabezado -->
+            <div
+                class="modal-header text-white p-4 rounded-top-4"
+                style="background: linear-gradient(135deg, #4e54c8, #8f94fb);"
+            >
+                <div class="d-flex align-items-center gap-3">
+                    <i class="bi bi-person-circle fs-1"></i>
+                    <div>
+                        <h4
+                            class="modal-title m-0 fw-bold"
+                            id="Perfil_UsuarioLabel"
+                        >
+                            {#if flipped}Datos del Discapacitado{:else}Perfil de
+                                Usuario{/if}
+                        </h4>
+                        <small class="text-white-50"
+                            >{#if flipped}Información de la persona asociada{:else}Datos
+                                personales del usuario actual{/if}</small
+                        >
+                    </div>
+                </div>
                 <button
                     type="button"
                     class="btn-close btn-close-white"
                     data-bs-dismiss="modal"
-                    aria-label="Close"
+                    aria-label="Cerrar"
                 ></button>
             </div>
 
-            <!-- Cuerpo del modal -->
-            <div class="modal-body">
-                {#if loading}
-                    <div class="text-center">
-                        <div class="spinner-border text-primary" role="status">
-                            <span class="visually-hidden">Cargando....</span>
+            <!-- Cuerpo de la carta -->
+            <div class="modal-body bg-light p-4">
+                <div class="flip-card-container" class:flipped>
+                    <div class="flip-card">
+                        <!-- Cara frontal: Usuario -->
+                        <div class="card-face card-front">
+                            {#if loading}
+                                <p class="text-center">Cargando...</p>
+                            {:else}
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="" class="form-label"
+                                            >Nombre</label
+                                        >
+                                        <input
+                                            class="form-control"
+                                            readonly
+                                            bind:value={usuario.nombre}
+                                        />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="" class="form-label"
+                                            >Apellido</label
+                                        >
+                                        <input
+                                            class="form-control"
+                                            readonly
+                                            bind:value={usuario.apellido}
+                                        />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="" class="form-label"
+                                            >Correo</label
+                                        >
+                                        <input
+                                            class="form-control"
+                                            readonly
+                                            bind:value={usuario.email}
+                                        />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="" class="form-label"
+                                            >Documento</label
+                                        >
+                                        <input
+                                            class="form-control"
+                                            readonly
+                                            bind:value={usuario.documento}
+                                        />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="" class="form-label"
+                                            >Teléfono</label
+                                        >
+                                        <input
+                                            class="form-control"
+                                            readonly
+                                            bind:value={usuario.telefono}
+                                        />
+                                    </div>
+                                </div>
+                            {/if}
                         </div>
-                        <p class="mt-2">Cargando datos del perfil....</p>
-                    </div>
-                {:else}
-                    <div class="mb-3">
-                        <label for="v_nombre" class="form-label fw-bold"
-                            >Nombre</label
-                        >
-                        <input
-                            type="text"
-                            id="v_nombre"
-                            class="form-control"
-                            bind:value={usuario.nombre}
-                            readonly
-                        />
-                    </div>
 
-                    <!-- Apellido -->
-                    <div class="mb-3">
-                        <label for="v_apellido" class="form-label fw-bold"
-                            >Apellido</label
-                        >
-                        <input
-                            type="text"
-                            id="v_apellido"
-                            class="form-control"
-                            bind:value={usuario.apellido}
-                            readonly
-                        />
+                        <!-- Cara trasera: Discapacitado -->
+                        <div class="card-face card-back">
+                            {#if loading}
+                                <p class="text-center">Cargando...</p>
+                            {:else}
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="" class="form-label"
+                                            >Nombre</label
+                                        >
+                                        <input
+                                            class="form-control"
+                                            readonly
+                                            bind:value={discapacitado.nombre}
+                                        />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="" class="form-label"
+                                            >Documento</label
+                                        >
+                                        <input
+                                            class="form-control"
+                                            readonly
+                                            bind:value={discapacitado.documento}
+                                        />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="" class="form-label"
+                                            >Tipo de Ceguera</label
+                                        >
+                                        <input
+                                            class="form-control"
+                                            readonly
+                                            bind:value={
+                                                discapacitado.tipo_ceguera
+                                            }
+                                        />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="" class="form-label"
+                                            >Genero</label
+                                        >
+                                        <input
+                                            class="form-control"
+                                            readonly
+                                            bind:value={discapacitado.genero}
+                                        />
+                                    </div>
+                                </div>
+                            {/if}
+                        </div>
                     </div>
-
-                    <!-- Correo -->
-                    <div class="mb-3">
-                        <label for="v_correo" class="form-label fw-bold"
-                            >Correo</label
-                        >
-                        <input
-                            type="text"
-                            id="v_correo"
-                            class="form-control"
-                            bind:value={usuario.email}
-                            readonly
-                        />
-                    </div>
-
-                    <!-- Documento -->
-                    <div class="mb-3">
-                        <label for="v_documento" class="form-label fw-bold"
-                            >Documento</label
-                        >
-                        <input
-                            type="text"
-                            id="v_documento"
-                            class="form-control"
-                            bind:value={usuario.documento}
-                            readonly
-                        />
-                    </div>
-
-                    <!-- Teléfono -->
-                    <div class="mb-3">
-                        <label for="v_telefono" class="form-label fw-bold"
-                            >Teléfono</label
-                        >
-                        <input
-                            type="text"
-                            id="v_telefono"
-                            class="form-control"
-                            bind:value={usuario.telefono}
-                            readonly
-                        />
-                    </div>
-                {/if}
+                </div>
             </div>
 
-            <!-- Pie del modal -->
-            <div class="modal-footer">
+            <!-- Pie -->
+            <div
+                class="modal-footer bg-white rounded-bottom-4 border-0 px-4 py-3"
+            >
                 <button
                     type="button"
                     class="btn btn-secondary"
+                    on:click={toggleCard}
+                >
+                    {#if flipped}Ver Usuario{:else}Ver Discapacitado{/if}
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-outline-secondary"
                     data-bs-dismiss="modal"
                 >
                     Cerrar
-                </button>
-                <button type="button" class="btn btn-primary">
-                    Guardar Cambios
                 </button>
             </div>
         </div>
@@ -261,6 +342,52 @@
 
 <!-- Estilos CSS -->
 <style>
+    /* Modal Carta */
+    /* Contenedor principal */
+    .flip-card-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        perspective: 1500px;
+        min-height: 320px;
+    }
+
+    /* Tarjeta que rota */
+    .flip-card {
+        width: 100%;
+        height: 100%;
+        transition: transform 0.8s;
+        transform-style: preserve-3d;
+        position: relative;
+    }
+
+    /* Aplicar rotación */
+    .flip-card-container.flipped .flip-card {
+        transform: rotateY(180deg);
+    }
+
+    /* Cada cara de la tarjeta */
+    .card-face {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        backface-visibility: hidden;
+        padding: 15px 0;
+        transition: opacity 0.4s;
+    }
+
+    /* Frente visible por defecto */
+    .card-front {
+        z-index: 2;
+    }
+
+    /* Parte trasera girada */
+    .card-back {
+        transform: rotateY(180deg);
+    }
+
     /* Navbar Styling */
     .navbar {
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave para el navbar */
