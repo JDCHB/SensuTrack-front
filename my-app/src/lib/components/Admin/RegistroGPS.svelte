@@ -239,7 +239,7 @@
                     <div class="modal-header">
                         <h5 class="modal-title">Vista previa del documento</h5>
                         <button
-                            aria-label=""
+                            aria-label="A"
                             type="button"
                             class="btn-close"
                             on:click={cerrarModalPDF}
