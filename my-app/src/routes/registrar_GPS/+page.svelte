@@ -42,6 +42,14 @@
     async function RegisterDiscapacitadoV() {
         try {
             showLoader(registerLoader);
+
+            // 1. Subir el archivo y obtener la URL
+            const urlDocumento = await subirArchivo(v_nombre);
+            if (!urlDocumento) {
+                throw new Error("No se pudo subir el archivo de verificación.");
+            }
+
+            // 2. Hacer el POST incluyendo la URL
             const response = await fetch(
                 "https://proyectomascotas.onrender.com/create_discapacitadoV",
                 {
@@ -56,22 +64,21 @@
                         id_tipo_ceguera: v_tipo_ceguera,
                         id_cuidador: v_id_cuidador,
                         estado: v_estado,
+                        documento_verificacion: urlDocumento,
                     }),
                 },
             );
 
             const data = await response.json();
-            console.log(data);
-
             hideLoader(registerLoader);
 
             if (response.ok) {
                 Swal.fire({
-                    title: "Discapacitado Registrado Exitosamente!",
-                    text: "¡Le damos la bienvenida a la familia!",
+                    title: "Peticion de Registro enviada exitosamente!!",
+                    text: "Se le notificara por correo si se acepta o rechaza la solicitud",
                     icon: "success",
                     confirmButtonText: "OK",
-                    background: "white", // Fondo blanco
+                    background: "white",
                     color: "black",
                 });
             } else {
@@ -79,7 +86,7 @@
                     title: "Registro Cancelado",
                     icon: "error",
                     confirmButtonText: "OK",
-                    background: "white", // Fondo blanco
+                    background: "white",
                     color: "black",
                 });
             }
@@ -87,6 +94,54 @@
             error = e.message;
             hideLoader(registerLoader);
             alert("Error en la solicitud: " + error);
+        }
+    }
+
+    // PARA SUBIR LOS DOCUMENTOS
+    let archivoSeleccionado = null;
+
+    function handleArchivo(event) {
+        archivoSeleccionado = event.target.files[0];
+    }
+
+    async function subirArchivo(nombreDiscapacitado) {
+        if (!archivoSeleccionado) {
+            alert("Por favor selecciona un archivo.");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", archivoSeleccionado);
+        formData.append("upload_preset", "verificaciones"); // Nombre correcto sin espacios
+        formData.append(
+            "public_id",
+            `verificaciones/${nombreDiscapacitado.trim().toLowerCase().replace(/\s+/g, "_")}_${Date.now()}`,
+        );
+
+        try {
+            const res = await fetch(
+                "https://api.cloudinary.com/v1_1/dxntrfmrh/raw/upload",
+                {
+                    method: "POST",
+                    body: formData,
+                },
+            );
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                console.error("❌ Error Cloudinary:", data);
+                throw new Error(
+                    data.error?.message ||
+                        "Error desconocido al subir archivo.",
+                );
+            }
+
+            console.log("✅ Archivo subido correctamente:", data.secure_url);
+            return data.secure_url;
+        } catch (error) {
+            console.error("❌ Error al subir archivo:", error);
+            alert("Ocurrió un error al subir el archivo.");
         }
     }
 </script>
@@ -143,6 +198,18 @@
                             placeholder="Ej: 1234567890"
                             bind:value={v_documento}
                             required
+                        />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="archivo" class="form-label"
+                            >Documento de Verificación</label
+                        >
+                        <input
+                            class="form-control"
+                            type="file"
+                            id="archivo"
+                            on:change={handleArchivo}
                         />
                     </div>
 
