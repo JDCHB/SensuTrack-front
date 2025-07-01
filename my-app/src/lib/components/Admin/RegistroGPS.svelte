@@ -97,6 +97,16 @@
             });
         }
     }
+
+    let pdfUrl = null;
+
+    function mostrarModalPDF(url) {
+        pdfUrl = url;
+    }
+
+    function cerrarModalPDF() {
+        pdfUrl = null;
+    }
 </script>
 
 <div id="MostrarDiscapacitado">
@@ -139,7 +149,7 @@
                                 >Documento del Discapacitado</th
                             >
                             <th class="px-4 py-2 border"
-                                >Genero del Discapacitado</th
+                                >Género del Discapacitado</th
                             >
                             <th class="px-4 py-2 border">Tipo de Ceguera</th>
                             <th class="px-4 py-2 border"
@@ -148,10 +158,9 @@
                             <th class="px-4 py-2 border"
                                 >Archivo de Verificación</th
                             >
-                            <th class="px-4 py-2 border">Opcion</th>
+                            <th class="px-4 py-2 border">Opción</th>
                         </tr>
                     </thead>
-
                     <tbody>
                         {#each todos as todo}
                             <tr>
@@ -160,14 +169,22 @@
                                 <td>{todo.genero}</td>
                                 <td>{todo.tipo_ceguera}</td>
                                 <td>{todo.Usuario_Cuidador}</td>
-                                <td class="text-center">
-                                    <span
-                                        class="badge {todo.estado
-                                            ? 'bg-success'
-                                            : 'bg-danger'}"
-                                    >
-                                        {todo.estado ? "Activo" : "Desactivado"}
-                                    </span>
+                                <td>
+                                    {#if todo.documento_verificacion}
+                                        <button
+                                            class="btn btn-outline-primary btn-sm"
+                                            on:click={() =>
+                                                mostrarModalPDF(
+                                                    todo.documento_verificacion,
+                                                )}
+                                        >
+                                            Ver Documento
+                                        </button>
+                                    {:else}
+                                        <span class="text-muted"
+                                            >No disponible</span
+                                        >
+                                    {/if}
                                 </td>
                                 <td class="text-center">
                                     <div
@@ -210,4 +227,35 @@
             </div>
         {/if}
     </div>
+
+    {#if pdfUrl}
+        <div
+            class="modal fade show d-block"
+            tabindex="-1"
+            style="background-color: rgba(0,0,0,0.6);"
+        >
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Vista previa del documento</h5>
+                        <button
+                            aria-label=""
+                            type="button"
+                            class="btn-close"
+                            on:click={cerrarModalPDF}
+                        ></button>
+                    </div>
+                    <div class="modal-body">
+                        <iframe
+                            title=""
+                            src={pdfUrl}
+                            width="100%"
+                            height="600px"
+                            style="border: none;"
+                        ></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {/if}
 </div>

@@ -4,6 +4,8 @@
     import Footer from "../../lib/components/footer.svelte";
     import { onMount } from "svelte";
 
+    import { createClient } from "@supabase/supabase-js"; //PARA SUPABASE
+
     let v_nombre = "";
     let v_documento = "";
     let v_genero = "";
@@ -44,7 +46,7 @@
             showLoader(registerLoader);
 
             // 1. Subir el archivo y obtener la URL
-            const urlDocumento = await subirArchivo(v_nombre);
+            const urlDocumento = await subirPDF(v_nombre, archivoSeleccionado);
             if (!urlDocumento) {
                 throw new Error("No se pudo subir el archivo de verificación.");
             }
@@ -104,45 +106,30 @@
         archivoSeleccionado = event.target.files[0];
     }
 
-    async function subirArchivo(nombreDiscapacitado) {
-        if (!archivoSeleccionado) {
-            alert("Por favor selecciona un archivo.");
-            return;
+    // Configura tu Supabase
+    const supabaseUrl = "https://htrhxtphbszurzztjbim.supabase.co";
+    const supabaseKey =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh0cmh4dHBoYnN6dXJ6enRqYmltIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEzMzYyMjAsImV4cCI6MjA2NjkxMjIyMH0.PfXvci3rJHAfTj9ZKfH5LEygs2E4De75xxojfgZU6_E"; // La anon pública
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
+    async function subirPDF(nombreDiscapacitado, archivo) {
+        const nombreArchivo = `${nombreDiscapacitado.toLowerCase().replace(/\s+/g, "_")}_${Date.now()}.pdf`;
+
+        const { data, error } = await supabase.storage
+            .from("verificaciones") // tu bucket
+            .upload(nombreArchivo, archivo, {
+                contentType: "application/pdf",
+                upsert: true,
+            });
+
+        if (error) {
+            console.error("Error al subir:", error.message);
+            return null;
         }
 
-        const formData = new FormData();
-        formData.append("file", archivoSeleccionado);
-        formData.append("upload_preset", "verificaciones"); // Nombre correcto sin espacios
-        formData.append(
-            "public_id",
-            `verificaciones/${nombreDiscapacitado.trim().toLowerCase().replace(/\s+/g, "_")}_${Date.now()}`,
-        );
-
-        try {
-            const res = await fetch(
-                "https://api.cloudinary.com/v1_1/dxntrfmrh/raw/upload",
-                {
-                    method: "POST",
-                    body: formData,
-                },
-            );
-
-            const data = await res.json();
-
-            if (!res.ok) {
-                console.error("❌ Error Cloudinary:", data);
-                throw new Error(
-                    data.error?.message ||
-                        "Error desconocido al subir archivo.",
-                );
-            }
-
-            console.log("✅ Archivo subido correctamente:", data.secure_url);
-            return data.secure_url;
-        } catch (error) {
-            console.error("❌ Error al subir archivo:", error);
-            alert("Ocurrió un error al subir el archivo.");
-        }
+        const urlPublica = `${supabaseUrl}/storage/v1/object/public/verificaciones/${nombreArchivo}`;
+        console.log("✅ URL del archivo:", urlPublica);
+        return urlPublica;
     }
 </script>
 
