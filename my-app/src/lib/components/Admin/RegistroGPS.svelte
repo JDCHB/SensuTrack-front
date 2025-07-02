@@ -98,6 +98,10 @@
         }
     }
 
+    const serviceID2 = "service_sn9rsbj";
+    const templateID2 = "template_wj891mo"; //REGISTRO RECHAZADO
+    const apikey2 = "0HqykyND9qAnGl1Va";
+
     let pdfUrl = null;
 
     function mostrarModalPDF(url) {
