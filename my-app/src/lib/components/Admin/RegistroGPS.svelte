@@ -17,7 +17,7 @@
             console.log(todos);
 
             setTimeout(() => {
-                globalThis.$("#myTable").DataTable(); // Para convertrlo en datatable :D
+                globalThis.$("#myTable").DataTable();
             }, 0);
         } catch (e) {
             error = e.message;
@@ -99,8 +99,94 @@
     }
 
     const serviceID2 = "service_sn9rsbj";
-    const templateID2 = "template_wj891mo"; //REGISTRO RECHAZADO
+    const templateID2 = "template_wj891mo"; //REGISTRO ACEPTADO
     const apikey2 = "0HqykyND9qAnGl1Va";
+
+    async function aceptar(
+        id,
+        nombreDiscapacitado,
+        Usuario_Cuidador,
+        Nombre_Cuidador,
+        documento,
+    ) {
+        const confirmar = await Swal.fire({
+            title: `¿Aceptar solicitud de ${Nombre_Cuidador}?`,
+            text: "Se registrará el discapacitado y se enviará un correo con sus credenciales.",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#198754",
+            cancelButtonColor: "#6c757d",
+            confirmButtonText: "Sí, aceptar",
+            cancelButtonText: "Cancelar",
+        });
+
+        if (!confirmar.isConfirmed) return;
+
+        try {
+            Swal.fire({
+                title: "Procesando...",
+                text: "Registrando y enviando credenciales al cuidador",
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                },
+            });
+
+            const ultimos4 = documento.slice(-4);
+
+            const res = await fetch(
+                "https://proyectomascotas.onrender.com/create_gps",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        usuario: nombreDiscapacitado,
+                        password: ultimos4,
+                        id_ciego_vinculado: id,
+                        estado: true,
+                    }),
+                },
+            );
+
+            if (!res.ok)
+                throw new Error(
+                    "No se pudo registrar el GPS del discapacitado",
+                );
+
+            await emailjs.send(
+                serviceID2,
+                templateID2,
+                {
+                    email: Usuario_Cuidador,
+                    usuario_cuidador: Nombre_Cuidador,
+                    nombre_discapacitado: nombreDiscapacitado,
+                    documento_discapacitado: documento,
+                    ultimos4_documento: ultimos4,
+                },
+                apikey2,
+            );
+
+            Swal.fire({
+                icon: "success",
+                title: "Solicitud aceptada",
+                text: `Se enviaron las credenciales al cuidador ${Nombre_Cuidador}.`,
+                confirmButtonColor: "#198754",
+                confirmButtonText: "Aceptar",
+            }).then(() => {
+                location.reload();
+            });
+        } catch (err) {
+            console.error("Error al aceptar:", err);
+            Swal.fire({
+                icon: "error",
+                title: "Error al aceptar",
+                text: err.message,
+                confirmButtonColor: "#d33",
+            });
+        }
+    }
 
     let pdfUrl = null;
 
@@ -197,7 +283,13 @@
                                         <button
                                             class="btn btn-sm btn-outline-success d-flex align-items-center gap-1"
                                             on:click={() =>
-                                                editar(todo.id, todo.nombre)}
+                                                aceptar(
+                                                    todo.id,
+                                                    todo.nombre,
+                                                    todo.Usuario_Cuidador,
+                                                    todo.Nombre_Cuidador,
+                                                    todo.documento,
+                                                )}
                                         >
                                             <i class="bi bi-check-circle-fill"
                                             ></i>
