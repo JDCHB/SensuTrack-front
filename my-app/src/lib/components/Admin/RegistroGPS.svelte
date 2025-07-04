@@ -132,7 +132,10 @@
                 },
             });
 
-            const ultimos4 = documento.slice(-4);
+            const usuarioDiscapacitado = nombreDiscapacitado
+                .toLowerCase()
+                .replace(/\s+/g, "_");
+            const passwordDiscapacitado = documento.slice(-4);
 
             const res = await fetch(
                 "https://proyectomascotas.onrender.com/create_gps",
@@ -142,8 +145,8 @@
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                        usuario: nombreDiscapacitado,
-                        password: ultimos4,
+                        usuario: usuarioDiscapacitado,
+                        password: passwordDiscapacitado,
                         id_ciego_vinculado: id,
                         estado: true,
                     }),
@@ -163,7 +166,8 @@
                     usuario_cuidador: Nombre_Cuidador,
                     nombre_discapacitado: nombreDiscapacitado,
                     documento_discapacitado: documento,
-                    ultimos4_documento: ultimos4,
+                    Usuario_Discapacitado: usuarioDiscapacitado,
+                    Password_Discapacitado: passwordDiscapacitado,
                 },
                 apikey2,
             );
