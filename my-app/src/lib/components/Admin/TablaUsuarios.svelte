@@ -314,6 +314,7 @@
             class="text-center mb-4 pb-2 border-bottom border-3 border-primary fw-bold"
         >
             <i class="bi bi-people-fill me-2"></i>USUARIOS
+            <i class="bi bi-people-fill me-2"></i>
         </h2>
 
         {#if loading}
