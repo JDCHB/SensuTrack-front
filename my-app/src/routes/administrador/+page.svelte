@@ -356,25 +356,31 @@
         display: flex;
         height: 100vh;
         overflow: hidden;
+        background-color: #f3f4f6;
     }
 
     .sidebar {
         height: 100vh;
-        background-color: #1f2937;
+        background: rgba(31, 41, 55, 0.95); /* azul oscuro */
+        backdrop-filter: blur(4px);
         color: #f9fafb;
         width: 70px;
-        transition: width 0.3s ease;
-        overflow-y: auto; /* <-- scroll vertical cuando sea necesario */
+        transition:
+            width 0.25s ease-in-out,
+            box-shadow 0.25s ease-in-out;
+        overflow-y: auto;
         overflow-x: hidden;
         display: flex;
         flex-direction: column;
         align-items: stretch;
         padding: 1rem 0.5rem;
-        border-right: 1px solid #374151;
+        border-right: 1px solid rgba(55, 65, 81, 0.5);
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
     }
 
     .sidebar:hover {
         width: 240px;
+        box-shadow: 4px 0 12px rgba(0, 0, 0, 0.15);
     }
 
     .sidebar-header {
@@ -382,6 +388,10 @@
         margin-bottom: 1rem;
         font-weight: bold;
         color: #60a5fa;
+        font-size: 1.05rem;
+        letter-spacing: 0.5px;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid rgba(96, 165, 250, 0.2);
     }
 
     /* Scrollbar moderno para el sidebar */
@@ -445,20 +455,23 @@
         color: #fef2f2;
     }
 
+    /* FONDO */
+
     .content {
         flex: 1;
         padding: 2rem;
-        background: #eeaeca;
-        background: radial-gradient(
-            circle,
-            rgba(238, 174, 202, 1) 0%,
-            rgba(148, 187, 233, 1) 100%
+        background: linear-gradient(
+            135deg,
+            #f1f5f9 0%,
+            #cbd5e1 50%,
+            #94a3b8 100%
         );
         overflow-y: auto;
     }
 
     .content h1 {
-        color: #111827;
+        color: #1e293b; /* Azul gris oscuro */
+        font-weight: 700;
     }
 
     /* VISTA ADMIN AL ENTRAR*/
