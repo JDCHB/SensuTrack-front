@@ -1,7 +1,7 @@
 <div class="admin-container">
     <div class="admin-card">
         <div class="card-header">
-            <h2>📊 Panel de Estadísticas</h2>
+            <h2>📊 Panel de Estadísticas 📊</h2>
         </div>
         <div class="card-body">
             <div class="iframe-container">

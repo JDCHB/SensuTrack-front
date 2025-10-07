@@ -132,10 +132,10 @@
                 <i class="bi bi-shield-lock"></i>
                 {#if expandido}<span>Asignar Módulo</span>{/if}
             </button>
-            <button on:click={mostrarTableroPowerBI}>
+            <!-- <button on:click={mostrarTableroPowerBI}>
                 <i class="bi bi-graph-up"></i>
                 {#if expandido}<span>Tablero</span>{/if}
-            </button>
+            </button> -->
             <button on:click={mostrarHistorialUbicaciones}>
                 <i class="bi bi-map"></i>
                 {#if expandido}<span>Ubicaciones</span>{/if}
