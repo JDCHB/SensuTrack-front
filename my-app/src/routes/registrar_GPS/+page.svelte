@@ -14,6 +14,11 @@
     let v_estado = true;
     let error = null;
 
+    //MODAL
+    let showModal = false;
+    let paso = 1;
+    const totalPasos = 5;
+
     onMount(() => {
         let miStorage = window.localStorage;
         const storedUser = JSON.parse(miStorage.getItem("user_data"));
@@ -22,7 +27,21 @@
             v_id_cuidador = id_p;
             console.log("Propietario", v_id_cuidador);
         }
+        showModal = true;
     });
+
+    function siguiente() {
+        if (paso < totalPasos) paso++;
+    }
+
+    function anterior() {
+        if (paso > 1) paso--;
+    }
+
+    function cerrar() {
+        showModal = false;
+        paso = 1;
+    }
 
     // Referencias a los contenedores de los loader
     let registerLoader;
@@ -135,6 +154,142 @@
 
 <NavbarUser></NavbarUser>
 <ChatBot></ChatBot>
+
+{#if showModal}
+    <div
+        class="modal fade show d-block"
+        tabindex="-1"
+        style="background: rgba(0,0,0,0.6); backdrop-filter: blur(3px);"
+    >
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div
+                class="modal-content border-0 shadow-lg rounded-5 tutorial-modal animate-modal"
+            >
+                <!-- HEADER -->
+                <div
+                    class="modal-header border-0 py-3 px-4 text-white position-relative"
+                >
+                    <h4 class="modal-title fw-bold text-center w-100 m-0">
+                        🧭 Guía de Registro 🧭
+                    </h4>
+                    <button
+                        type="button"
+                        class="btn-close btn-close-white position-absolute end-0 me-3"
+                        on:click={cerrar}
+                        aria-label="Cerrar guía de registro"
+                    ></button>
+                </div>
+
+                <!-- BODY -->
+                <div class="modal-body px-5 pb-4">
+                    <div class="text-center mb-4">
+                        {#if paso === 1}
+                            <i
+                                class="bi bi-person-bounding-box display-4 text-primary"
+                            ></i>
+                        {:else if paso === 2}
+                            <i
+                                class="bi bi-credit-card-2-front-fill display-4 text-primary"
+                            ></i>
+                        {:else if paso === 3}
+                            <i
+                                class="bi bi-file-earmark-check-fill display-4 text-primary"
+                            ></i>
+                        {:else if paso === 4}
+                            <i
+                                class="bi bi-gender-ambiguous display-4 text-primary"
+                            ></i>
+                        {:else if paso === 5}
+                            <i class="bi bi-eye-fill display-4 text-primary"
+                            ></i>
+                        {/if}
+                    </div>
+
+                    <div class="text-center">
+                        {#if paso === 1}
+                            <h5 class="fw-bold mb-2 text-primary">
+                                Paso 1: Nombre Completo
+                            </h5>
+                            <p class="text-muted">
+                                Ingresa el nombre completo del discapacitado,
+                                tal como aparece en su documento de identidad.
+                            </p>
+                        {:else if paso === 2}
+                            <h5 class="fw-bold mb-2 text-primary">
+                                Paso 2: Documento de Identidad
+                            </h5>
+                            <p class="text-muted">
+                                Escribe el número sin puntos ni comas.
+                            </p>
+                        {:else if paso === 3}
+                            <h5 class="fw-bold mb-2 text-primary">
+                                Paso 3: Documento de Verificación
+                            </h5>
+                            <p class="text-muted">
+                                Sube un documento médico o constancia oficial
+                                que certifique la discapacidad visual.
+                            </p>
+                        {:else if paso === 4}
+                            <h5 class="fw-bold mb-2 text-primary">
+                                Paso 4: Género
+                            </h5>
+                            <p class="text-muted">
+                                Selecciona el género de la persona registrada.
+                            </p>
+                        {:else if paso === 5}
+                            <h5 class="fw-bold mb-2 text-primary">
+                                Paso 5: Tipo de Ceguera
+                            </h5>
+                            <p class="text-muted">
+                                Elige entre <strong>ceguera total</strong> o
+                                <strong>ceguera parcial</strong> según corresponda.
+                            </p>
+                        {/if}
+                    </div>
+                </div>
+
+                <!-- FOOTER -->
+                <div
+                    class="modal-footer border-0 d-flex justify-content-between px-5 pb-4"
+                >
+                    <button
+                        class="btn btn-outline-primary rounded-pill px-4"
+                        on:click={anterior}
+                        disabled={paso === 1}
+                    >
+                        ⬅️ Anterior
+                    </button>
+
+                    {#if paso < totalPasos}
+                        <button
+                            class="btn btn-primary rounded-pill px-4 shadow-sm"
+                            on:click={siguiente}
+                        >
+                            Siguiente ➡️
+                        </button>
+                    {:else}
+                        <button
+                            class="btn btn-success rounded-pill px-4 shadow-sm"
+                            on:click={cerrar}
+                        >
+                            ¡Entendido!
+                        </button>
+                    {/if}
+                </div>
+
+                <!-- PROGRESS -->
+                <div class="progress" style="height: 8px;">
+                    <div
+                        class="progress-bar bg-primary"
+                        role="progressbar"
+                        style="width: {(paso / totalPasos) *
+                            100}%; transition: width 0.4s ease;"
+                    ></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{/if}
 
 <main class="container py-5" style="margin-bottom: 50px;">
     <div class="row justify-content-center">
@@ -267,6 +422,46 @@
 <Footer />
 
 <style>
+    .tutorial-modal {
+        background: #ffffff;
+        overflow: hidden;
+    }
+
+    .modal-header {
+        background: linear-gradient(135deg, #007bff, #6610f2);
+        border-top-left-radius: 1.5rem;
+        border-top-right-radius: 1.5rem;
+    }
+
+    .animate-modal {
+        animation: fadeInUp 0.4s ease;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            transform: translateY(40px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .btn {
+        font-weight: 500;
+    }
+
+    .btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .progress-bar {
+        border-bottom-left-radius: 1.5rem;
+        border-bottom-right-radius: 1.5rem;
+    }
+
     .card {
         background-color: #ffffff;
         border-radius: 1rem;
